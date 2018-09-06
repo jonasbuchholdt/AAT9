@@ -1,0 +1,50 @@
+\section{Digital Signal Processor Choice}
+
+The chosen component is the \gls{dsp} for numerous reasons that are going to be presented in the following subsections.
+
+\subsection{Advantage of the \gls{dsp} over the FPGA}
+
+Some of the  reasons of choosing a \gls{dsp} over an FPGA in this project are:
+ 
+\begin{itemize}
+
+\item  The simplicity of designing with a \gls{dsp} due to the availability of all the simple functionalities in a micro-controller \citep{eetimes}. 
+
+\item A \gls{dsp} is designed to perform signal processing tasks unlike the FPGA which purpose of creation was not related to signal processing but to program circuits \citep{eetimes}. 
+
+\item A \gls{dsp} is more suitable in terms of cost/performance, when the application has less than 3000 \gls{mmac} per second, which means that it is better for low demanding applications \citep{eetimes}. 
+
+\item FPGA's lack integrated DAC and ADC \citep{eetimes}. 
+
+\item The \gls{dsp}'s are more power efficient than the FPGA's which can be important if the effect is to be used on the move on battery power \citep{rtcmag}. 
+
+\item A \gls{dsp} can be optimal if there are many operations that are repeated \citep{eetimes} \citep{hunteng}. 
+
+\end{itemize}
+
+\subsection{Advantage of the \gls{dsp} over the Raspberry Pi}
+
+Some of the  reasons of choosing a \gls{dsp} over a Raspberry Pi in this project are:
+ 
+\begin{itemize}
+
+\item \gls{dsp}'s are much faster for integer and floating mathematical calculations. \gls{dsp}'s are designed to compute large and complex operations that are repetitive which makes it more suitable for this project \citep{diffbet} \citep{esp_simone}.   
+
+\item A micro-controller, such as a Raspberry Pi, has many different features that are not going to be used in the project \citep{diffbet} \citep{esp_simone}. 
+
+\item In general, a \gls{dsp} is faster than a micro-controller, for signal processing, because it involves specialized units like multipliers \citep{diffbet2}. 
+
+\item A micro-controller is usually used for control applications and not signal processing even if it can work \citep{tex_dsp}.
+
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+

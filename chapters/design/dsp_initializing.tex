@@ -1,0 +1,55 @@
+\label{ch:disinit}
+In this chapter the \gls{dsp} initializing will be described. This include \gls{adc}, \gls{dac} and sound in and out. All the \gls{dsp} initializing will be written in C and the audio in and out will be written in assembly \citep{slaa557}. 
+
+\section{Sample Frequency}
+In this section the sample frequency will be designed and initialized to the \gls{dsp} in C. 
+On the TMS320C5515 eZdsp there is a \gls{dsp} with an external stereo \gls{adc} and \gls{dac} TLV320AIC3204 Ultra Low Power Stereo Audio Codec \citep{TLV320AIC3204}. The initializing is done by writing the initializing code on the \gls{dsp} and afterwards transfer the data through an $I^2C$ connection. The audio data is afterwards transferred with an $I^2S$ connection between the \gls{dsp} and the TLV320AIC3204 chip.
+The following \autoref{code:dsp_reset} is made to reset the TLV320AIC3204 chip.
+
+\includeCode{aic3204_init.c}{c}{12}{13}{The \gls{adc}/\gls{dac} reset code}{code:dsp_reset}{code/design/}
+
+Afterwards the clock shall be designed and initialized. According to \citep{slaa557} the initializing with \SI{44.1}{\kilo\hertz} shall be initialized as following \autoref{tab:fs_clk} with a clock in the converters of \SI{12}{\mega\hertz}
+
+\begin{table}[]
+\centering
+\caption{tab:fs_clk}
+\label{tab:fs_clk}
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+\multicolumn{6}{|l|}{$f_s=44.1kHz$}           \\ \hline
+MCLK (MHz) & PLLP & PLLR & PLLJ & PLLD & MADC \\ \hline
+12         & 0x0091    & 0x0091    & 0x0007    & 0x0230  & 0x0082    \\ \hline
+NADC       & AOSR & MDAC & NDAC & DOSR &      \\ \hline
+0x0088          & 0x0080  & 0x0083    & 0x0085    & 0x0080  &      \\ \hline
+\end{tabular}
+\end{table}
+
+
+The TLV320AIC3204 chip is then initialized with the C code  \autoref{code:dsp_init}.
+\includeCode{aic3204_init.c}{c}{25}{37}{The \gls{adc}/\gls{dac} reset code}{code:dsp_init}{code/design/}
+
+\section{Sound in and out}
+In this section the $I^2S$ connection will be initialized and used as connection between the \gls{dsp} and the audio stereo chip. The spectrum digital stereoloop start code \citep{stereoloop} already use the $I^2S$ connection as default audio transfer between the \gls{dsp} and the audio stereo chip. So the only thing needed when initializing, is starting up the $I^2S$ connection. The startup code is as in \autoref{code:i2s_init}
+\includeCode{aic3204_init.c}{c}{66}{71}{The start up of $I^2S$ connection}{code:i2s_init}{code/design/}
+
+After the $I^2S$ connection is started up, the audio in and audio out will be designed in assembly for efficiency. The following \autoref{code:audio_in} is designed to load audio data into a register, so it is possible to work with the audio data. 
+\includeCode{sound_in.asm}{assembly}{1}{11}{Reading the \gls{adc} data}{code:audio_in}{code/design/}
+
+After the audio data is processed, the audio data is written to the \gls{dac} as following \autoref{code:audio_out}.
+\includeCode{sound_out.asm}{assembly}{1}{11}{Writing data to the \gls{dac}}{code:audio_out}{code/design/}
+
+\section{Circular Buffer}
+
+The circular buffer is needed in different effects like flanger and chorus. Coding it in assembly can drastically optimize real-time signal possessing. \\
+
+The code is presented in \autoref{code:buffer_asm}. The first lines are used for initialization. The main data page as well as the circular buffer address are initialized in line 5. In line 7, it is chosen from which address the buffer memory should start. Then, the size of the buffer is chosen in line 9 and the pointer position in line 10. The fact that the pointer is circular needs to be indicated which is done in line 11, it means that after the fourth value of the buffer it will go back to the first one.\\
+
+The remaining lines are an example of the buffer usage, line 12 and 13 are for loading something in the buffer and the rest is to take a value from the buffer. 
+
+
+\includeCode{buffer.asm}{assembly}{1}{18}{Circular Buffer in Assembly code}{code:buffer_asm}{code/design/}
+
+
+
+
+

@@ -1,0 +1,358 @@
+\section{Design of the Wah-Wah Effect}
+
+
+%\subsection{Choice of the Bandpass Filter}
+%
+%The block diagram of the wah-wah effect has been presented in the analysis and is shown again below in  \autoref{fig:wah_diag_2}:
+%
+%\begin{figure} [htbp]
+%	\centering
+%	\begin{picture}(0,0)%
+%	\includegraphics{wah_diag.pdf}%
+%	\end{picture}%
+%	\setlength{\unitlength}{4144sp}%
+%	%
+%	\begingroup\makeatletter\ifx\SetFigFont\undefined%
+%	\gdef\SetFigFont#1#2#3#4#5{%
+%		\reset@font\fontsize{#1}{#2pt}%
+%		\fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+%		\selectfont}%
+%	\fi\endgroup%
+%	\begin{picture}(6999,1770)(2689,-2233)
+%	\put(6841,-1591){\textit{Wah-Wah Gain}}%
+%	\put(5626,-2041){$Filter$}%
+%	\put(6136,-1186){\textit{LFO or Pedal}}%
+%	\put(2746,-646){$Input$}%
+%	\put(8686,-646){$Output$}%
+%	\put(5626,-1816){$Bandpass-$}%
+%	\put(5986,-646){$Gain$}%
+%	\end{picture}%
+%	\caption{Block diagram of the wah-wah effect}
+%	\label{fig:wah_diag_2}
+%\end{figure}
+%
+%Different types of filters can be implemented using the first and second order allpass filters. In the case of the wah-wah, it can be inferred from \autoref{fig:wah_diag_2} that a bandpass filter is needed as a part of the feedforward loop. 
+%
+%With a first order allpass filter, it is possible to design a circuit to make lowpass- and highpass- filters, but not bandpass- or bandreject- filters. Thus, the focus will be on the second order allpass filter, since a second order allpass filter can be used to obtain the bandpass filter, which is needed. \autoref{fig:wah_allpass} shows the block diagram of the second order allpass filter.
+%
+%\begin{figure} [htbp]
+%	\centering
+%	\begin{picture}(0,0)%
+%	\includegraphics{wah_allpass.pdf}%
+%	\end{picture}%
+%	\setlength{\unitlength}{3947sp}%
+%	%
+%	\begingroup\makeatletter\ifx\SetFigFont\undefined%
+%	\gdef\SetFigFont#1#2#3#4#5{%
+%		\reset@font\fontsize{#1}{#2pt}%
+%		\fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+%		\selectfont}%
+%	\fi\endgroup%
+%	\begin{picture}(7524,5424)(1411,-5923)
+%	\put(3001,-2236){-c}%
+%
+%	\put(3526,-1036){T}%
+%
+%	\put(5626,-1036){T}%
+%
+%	\put(5626,-5536){T}%
+%	
+%	\put(3526,-5536){T}%
+%	
+%	\put(8551,-3436){y(n)}%
+%	
+%	\put(1426,-1036){x(n)}%
+%	
+%	\put(4426,-811){x(n-1)}%
+%	
+%	\put(6451,-811){x(n-2)}%
+%	
+%	\put(2251,-5686){y(n-2)}%
+%	
+%	\put(4426,-5761){y(n-1)}%
+%	
+%	\put(7201,-2236){1}%
+%	
+%	\put(3001,-4636){c}%
+%	
+%	\put(5101,-4636){-d(1-c)}%
+%	
+%	\put(5101,-2236){d(1-c)}%
+%	
+%	\end{picture}%
+%	\caption{Block diagram for a second-order allpass filter \citep{DAFX}}
+%	\label{fig:wah_allpass}
+%\end{figure}
+%
+%The transfer function in Z-domain can be inferred from \autoref{fig:wah_allpass} :
+%
+%\begin{equation} \label{wah_z_equation}
+%		A(z) = \frac{-c+d(1-c)z^{-1}+z^{-2}}{1+d(1-c)z^{-1}-cz^{-2}}
+%		\end{equation}
+%		
+%where:
+%
+%\begin{equation}
+%	c = \frac{tan(\pi f_{b}/f_{s})-1}{tan(\pi f_{b}/f_{s})+1}
+%	\end{equation}
+%
+%and
+%
+%\begin{equation}
+%	d = -cos(2\pi f_{c}/f_{s})
+%	\end{equation}
+%
+%$f_{s}$ represents the sampling frequency, $f_{c}$ the cutoff frequency and $f_{b}$ the ??. The factor $d$ grants control over the cutoff frequency while the factor $c$ permits the change in bandwidth. \\
+%
+%From the \autoref{wah_z_equation}, it is possible to obtain the equation in the discrete time-domain that can then be used for digital implementation which includes Matlab simulations and so on. 
+%\begin{equation}\label{wah_eq_1}
+%	y(n) = -cx(n) + d(1-c)x(n-1) + x(n-2) - d(1-c)y(n-1) + cy(n-2)  
+%\end{equation}
+%
+%
+%Using the allpass filter presented above, it is possible to create a bandpass filter by simply summing the input signal with the one coming from the allpass filter, a block diagram that illustrates the design for a better understanding is in \autoref{fig:wah_bandpass}:
+%
+%\begin{figure} [htbp]
+%	\centering
+%	\begin{picture}(0,0)%
+%	\includegraphics{wah_bandpass.pdf}%
+%	\end{picture}%
+%	\setlength{\unitlength}{3947sp}%
+%	%
+%	\begingroup\makeatletter\ifx\SetFigFont\undefined%
+%	\gdef\SetFigFont#1#2#3#4#5{%
+%		\reset@font\fontsize{#1}{#2pt}%
+%		\fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+%		\selectfont}%
+%	\fi\endgroup%
+%	\begin{picture}(5199,1257)(3136,-2923)
+%	\put(5926,-2011){\textit{y(n)}}%
+%	
+%	\put(5176,-2236){\textit{A(z)}}%
+%	
+%	\put(7051,-1861){\textit{1/2}}%
+%	
+%	\put(3050,-2236){$x_{b}(n)$}%
+%	
+%	\put(7951,-2236){$y_{b}(n)$}%
+%	
+%	\put(4276,-2011){\textit{x(n)}}%
+%	
+%	
+%	\end{picture}%
+%	
+%	\caption{Block diagram for a second-order bandpass filter \citep{DAFX}}
+%	\label{fig:wah_bandpass}
+%\end{figure}
+%
+%From \autoref{fig:wah_bandpass}, the transfer function of the bandpass filter is then:
+%
+%\begin{equation}
+% 	H(z) = 1/2 (1 + A(z))
+%\end{equation}
+%
+%The discrete time equation can also be inferred:
+%
+%\begin{equation}\label{wah_eq_2}
+%		y_{b} = \frac{1}{2} (x(n) + y(n))
+%\end{equation}
+%
+%since $y(n)$ is known from \autoref{wah_eq_1}, \autoref{wah_eq_2} can be re-written as :
+%
+%\begin{equation}
+%			y_{b}(n) = \frac{1}{2} ((1-c)x(n) + d(1-c)x(n-1) + x(n-2) - d(1-c)y(n-1) + cy(n-2) )
+%\end{equation}
+%%%\setlength{\unitlength}{1973sp}% un scaled 3947sp
+%%%	\includegraphics[width=1\textwidth]{wah_bandpass_second.pdf}%
+%
+%		
+
+\subsection{Bandpass filter using Chamberlin}
+
+\autoref{fig:wah_bandpass_second} shows the general topology of the Chamberlin state variable filter.
+
+\begin{figure} [htbp]
+	\centering
+		\begin{picture}(0,0)%
+		\includegraphics[width=1\textwidth]{wah_bandpass_second.pdf}%
+		\end{picture}%
+		\setlength{\unitlength}{1973sp}% un scaled 3947sp
+		%
+		\begingroup\makeatletter\ifx\SetFigFont\undefined%
+		\gdef\SetFigFont#1#2#3#4#5{%
+			\reset@font\fontsize{#1}{#2pt}%
+			\fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+			\selectfont}%
+		\fi\endgroup%
+		\begin{picture}(13761,4974)(139,-5173)
+		\put(4551,-4361){q}%
+		
+		\put(6001,-2786){$z^{-1}$}%
+		
+		\put(10951,-3986){$z^{-1}$}%
+		
+		\put(3226,-1036){Highpass}%
+		
+		\put(6076,-1486){Bandpass}%
+		
+		\put(12976,-2686){Lowpass}%
+		
+		\put(12901,-1036){Bandreject}%
+		
+		\put(1426,-3136){-}%
+		
+		\put(826,-3136){-}%
+		
+		\put(2751,-2786){f}%
+		
+		\put(7876,-2786){f}%
+		
+		\end{picture}%
+	
+	\caption{Block diagram the Chamberlin state variable filter topology \citep{}}
+	\label{fig:wah_bandpass_second}
+\end{figure}
+
+This topology can be used to obtain a bandpass filter with a variable center frequency. 
+
+The factor $f$ that is shown on \autoref{fig:wah_bandpass_second} is the frequency control coefficient defined as in the following equation:
+
+\begin{equation}
+      f = 2 \cdot sin(\frac{\pi \cdot f_{c}}{f_{s}})
+\end{equation}
+
+The factor $q$ is defined as the inverse of the Q-factor.
+
+\begin{equation}
+			q = \frac{1}{Q}
+\end{equation}
+
+The minimum value for the Q-factor is normally 0.5 while the maximum value of the frequency control coefficient $f$ is 1. 
+
+The Chamberlin topology has different advantages; it lets the user control the center frequency and the Q-factor by controlling the previously stated characteristic coefficients. The range of the working frequencies can be changed easily by changing the gain values. Thus it is this topology that is going to be used due to its easy application. \\
+
+The complexity of one sample calculation using this filter is five additions and three multiplications according to the book \textit{Musical Applications of Microprocessors}. 
+
+The equations that give the output values of the filters are the following:
+
+\begin{equation}
+   			y_{1}[n] = y_{1}[n-1] + f \cdot y_{2}[n-1]
+\end{equation}
+
+\begin{equation}
+            y_{3}[n] = x[n]  - y_{1}[n]   - q \cdot y_{2}[n-1]
+\end{equation}
+
+\begin{equation}
+           y_{2}[n] = f \cdot y_{3}[n] + y_{2}[n-1]
+\end{equation}
+
+Where $y_{1}$ is the lowpass output, $y_{2}$ the bandpass output and $y_{3}$ the highpass output. \\
+the Q-factor $q$ can also be defined as the double of the damping ratio. \\
+
+The Wah-Wah effect output is then the sum of the bandpass filter and the direct input. Those two values can be multiplied by a certain gain. \\
+
+
+The bandwidth of the bandpass filter should not exceed the value of the difference between the maximum and minimum center frequency area. 
+
+
+The user can choose how fast the center frequency area is changing, represented by the value 'change' in the Matlab code.  
+
+The effect here in the matlab simulation is an Auto-Wah, meaning that the center frequency is changing automatically following a triangular wave. 
+
+The smaller the 'change' value is, the more triangular waves will occur in a given amount of time.  
+
+\subsection{Matlab Simulation}
+
+Using the equations found in the previous subsection, it is possible to implement the effect digitally. 
+
+\begin{lstlisting}[language=Matlab, caption= Matlab code for wah-wah effect]
+
+%% Wah-Wah Effect 
+
+clear all;
+filename = 'guitartune.wav'; 
+%The filename is inserted here, should be in the same directory as the
+%codefile.
+[input, fs] = audioread(filename);
+%input samples and sample rate are extracted from the file.
+input = input / (max(abs(input)));
+%the input is rescaled in order to have values between -1 and 1.
+
+
+%Varitations of the center frequency of the bandpass filter:
+
+minomega0 = 500;
+maxomega0 = 3000;
+yb = (1:1:length(input));
+yl = (1:1:length(input));
+yh = (1:1:length(input));
+output = (1:1:length(input));
+%Auto-Wah Frequency, how fast does the bandpass filter travels through the
+%spectrum
+
+autofreq = 150;
+
+fb = 200 * 2 * pi / fs;
+
+if fb >  (maxomega0 - mixomega0)
+error('Chosen bandwidth very big')
+end
+
+%Divide by the sampling frequency to pass from changes per second to
+%changes per sample
+
+change = autofreq / fs;
+
+%Create a table that contains all the values of the center frequency
+
+Fc = minomega0:change:maxomega0;
+
+
+%Q = Fc/fb %the Qfactor
+
+q = 2*0.05;
+
+if length(Fc) < length(input)
+ while(length(Fc) < length(x) )
+ 	Fc= [ Fc (maxomega0:-change:minomega0) ];
+ 	Fc= [ Fc (minomega0:change:maxomega0) ];
+ end
+else 
+ if length (Fc) > length(input)
+  Fc = Fc(1:length(input));
+ end
+end
+
+f = 2 * sin((pi * Fc)/fs);
+
+g1 = 0.7;
+g2 = 2;
+
+yl(1) = 0;
+yh(1) = input(1);
+yb(1) = f(1) * yh(1);
+
+for i=2:1:length(input)
+ yl(i) = yl(i-1) + f(i) * yb(i-1);
+ yh(i) = input(i) - yl(i) - q * yb(i-1);
+ yb(i) = f(i) * yh(i) + yb(i-1);
+ output(i) = g1*input(i) + g2*yb(i);
+end
+
+output = output / (max(abs(output)));
+
+audiowrite('wahwah_out.wav',output,fs);
+
+
+plot(input,'r') %plotting the input samples in blue on the same fig.
+
+
+hold on
+grid
+plot(output,'b') %plotting the output samples in red.
+
+\end{lstlisting}
+
+sources:
+http://www.earlevel.com/main/2003/03/02/the-digital-state-variable-filter/ and the slides (to be added after)

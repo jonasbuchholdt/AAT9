@@ -1,0 +1,34 @@
+\chapter{Optimization: Implementation}\label{ax:opt_imp}
+In this appendix, technical details to the optimization task described in \autoref{ch:optimization} will be presented. This will mainly be done by the disclosure of code.
+\section*{Materials}
+The following materials are used:
+\begin{itemize}
+\item MATLAB 2018b on Debian 9 (Stretch)
+\end{itemize}
+
+\section{Population initialization}\label{axs:pop_init}
+\includeCode{pop_init.m}{matlab}{1}{31}{Population initialization function}{code:pop_init}{./code/optimization/genetic/}
+
+\section{Fitness evaluation}\label{axs:fitness}
+\includeCode{tricenter.m}{matlab}{1}{18}{Offset calculator}{code:tricenter}{./code/optimization/genetic/}
+
+\includeCode{fitness_pcor.m}{matlab}{1}{126}{Fitness function}{code:fitness_pcor}{./code/optimization/genetic/}
+
+\includeCode{fit_pargen.m}{matlab}{1}{57}{Correction parameter calculator}{code:fit_pargen}{./code/optimization/genetic/}
+
+\includeCode{quickfit.m}{matlab}{1}{94}{Quick fitness function}{code:quickfit}{./code/optimization/genetic/}
+
+\section{Parent selection}\label{axs:parents}
+\includeCode{par_choose.m}{matlab}{1}{55}{Parent selection function}{code:par_choose}{./code/optimization/genetic/}
+
+\section{Generating new individuals}\label{axs:offspring}
+\includeCode{offspring.m}{matlab}{1}{45}{Offspring function}{code:offspring}{./code/optimization/genetic/}
+
+\section{Mutation}\label{axs:mutation}
+\includeCode{offspring.m}{matlab}{1}{41}{Mutation function}{code:mutation}{./code/optimization/genetic/}
+
+\section{Generation step}\label{axs:gen_step}
+\includeCode{gen_step.m}{matlab}{1}{53}{Generation step function}{code:gen_step}{./code/optimization/genetic/}
+
+\section{Optimization Routine}\label{axs:opt_routine}
+\includeCode{gen_runner_03.m}{matlab}{1}{62}{Optimization Routine}{code:gen_runner}{./code/optimization/genetic/}

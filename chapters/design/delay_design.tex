@@ -1,0 +1,657 @@
+\section{Design of the Delay and \gls{reverb} Effect}\label{sec:reverb_develop}
+In this section, the delay and the \gls{reverb} will be designed to fit into a \gls{dsp}, which means that a discrete block diagram is obtained and afterwards the differential equations to implement in the \gls{dsp} will be made. The effects will be simulated in MATLAB and then the assembly code will be developed and implemented. 
+
+
+\subsection{Obtaining the Differential Equation}
+The Delay effect is a simpler version of the \gls{reverb} effect and therefore they will be presented and designed in the same section. The block diagram presented in \autoref{sec:reverberation} \autoref{fig:reverb_block} is changed so it fits into a direct form 1 and 2 construction.
+A way to design a \gls{reverb}, which imitates the natural reverberation of a room, is with a serial connection of two blocks. The first block is a parallel connection of \gls{lpcf}, and the second block is a serial connection of allpass filters \citep{natural_sounding_revorb}. 
+The \gls{lpcf} is used because the room acoustic characteristics are acting as a low pass filter. All low frequency signals will stay longer in the room than the high frequency \citep{rfi}. The \gls{reverb} needs to have at least 1000 echo per second, and this can be obtained with six \gls{lpcf} filters in parallel, and followed by two all pass filters in serial \citep{DAFX}. Otherwise, if there was not two all pass filters, it would require 40 \gls{lpcf} to make 1000 echo per second \citep{natural_sounding_revorb}. The all pass filter in \autoref{fig:reverb_block_des} is in direct form 2 because of the delay length. The delay effect and some of the \gls{reverb} effect are shown in \autoref{fig:reverb_block_des}. The \gls{reverb} effect is both the one in red and black while the delay is only the red block. 
+
+\newpage
+
+\begin{figure} [htbp]
+ \centering
+\begin{picture}(0,0)%
+\includegraphics{reverb_diag_des.pdf}%
+\end{picture}%
+\setlength{\unitlength}{4144sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(5832,1599)(-1319,-1288)
+\put(3601,209){$x[n]$}%
+\put(2656,-106){\color[rgb]{1,0,0}$w_8[n]$}%
+\put(1711,-421){$\Sigma$}%
+\put(721,-916){$z^{-d_7}$}%
+\put( 91,-421){$\Sigma$}%
+\put(1261,-196){$-\alpha$}%
+\put(2251,-421){\color[rgb]{1,0,0}$\Sigma$}%
+\put(2881,-916){\color[rgb]{1,0,0}$z^{-d_8}$}%
+\put(271,-1006){$\alpha$}%
+\put(2431,-1006){\color[rgb]{1,0,0}$\alpha$}%
+\put(3871,-421){\color[rgb]{1,0,0}$\Sigma$}%
+\put(3421,-196){\color[rgb]{1,0,0}$-\alpha$}%
+\put(-449,-421){$\Sigma$}%
+\put(-224,-106){$x_7[n]$}%
+\put(1936,-106){\color[rgb]{1,0,0}$x_8[n]$}%
+\put(4276,-106){\color[rgb]{1,0,0}$y[n]$}%
+\put(-1304,-151){LPCF}%
+\put(-1304,-421){filter in}%
+\put(-1304,-646){Parallel}%
+\end{picture}%
+
+  \caption{The figure shows some of a block diagram of a \gls{reverb} (black and red) and the delay unit (red).}
+  \label{fig:reverb_block_des}
+\end{figure}
+
+From \autoref{fig:reverb_block_des}, the following differential equations \autoref{eq:delay_eq_sub} for the delay can be derived for the delay effect, where the index 8 is omitted since the delay effect only is the red all pass filter, $x[n] = x_8[n]$ and $w[n] = w_8[n]$.
+
+\begin{subequations}\label{eq:delay_eq_sub}
+\begin{equation}\label{eq:delay_eq_in}
+       w[n] = \alpha \cdot w[n-d] + x[n] 
+    \end{equation}
+\begin{equation}\label{eq:delay_eq}
+       y[n] = - \alpha \cdot w[n] + w[n-d]
+    \end{equation}
+ \end{subequations}
+		
+		
+
+The \gls{reverb} unit is more advanced than the delay unit and before the differential equations can be derived, some calculations are needed. The \gls{reverb} unit calculations are based on an article \citep{natural_sounding_revorb} which explain the design parametric for a Schroeder \gls{reverb} processor unit. From \citep{natural_sounding_revorb} the \gls{reverb} time is defined by \autoref{eq:reverb_defined}.
+
+
+
+\begin{equation}
+\label{eq:reverb_defined}
+		T = \frac{60}{-20 \cdot log(\alpha)} \cdot \tau
+\end{equation}
+
+    \startexplain
+\explain{$60$ is the \gls{reverb} attenuation in \si{\decibel}}{\si{\decibel}}
+\explain{$\tau$ is the delay time}{\si{\second}}
+\explain{$T$ is \gls{reverb} time, which is the time it takes for a signal to be attenuated \SI{60}{\decibel}}{\si{\second}}
+\explain{$-20 \cdot log10(\alpha)$ is the attenuation in the feedback loop for each round}{\si{\decibel}}
+    \stopexplain
+
+Both the positive and negative gain $\alpha$ are defined to be 0.708  \citep{natural_sounding_revorb} and the total \gls{reverb} echo density shall at least be 1000 echo per second. In \autoref{eq:reverb_defined_tal_res} it can be obtained that $\tau$ shall be $\frac{1}{20}$ of $T$, with $T$= \SI{1}{\second}.
+
+
+\begin{subequations}
+\begin{equation}\label{eq:reverb_defined_tal}
+       T = \frac{60}{-20 \cdot log10(0.708)} \cdot \tau
+       \addunit{\si{\second}}
+    \end{equation}
+\centering
+$\Updownarrow$
+\begin{equation}\label{eq:reverb_defined_tal_res}
+        \tau = \frac{1}{20} T
+        \addunit{\si{\second}}
+    \end{equation}
+ \end{subequations}
+
+\autoref{eq:reverb_defined_tal_res} then shows that $\tau$ is \SI{50}{\milli\second} with a total \gls{reverb} time $T$ of \SI{1}{second}. This gives an echo density of 20 echoes per second for each of the \gls{lpcf}, but if all the filters have the same delay time, some echoes will interfere. To avoid interference each filter delay time is chosen to its own prime number, which is shorter than \SI{50}{\milli\second}. The chosen delay prime numbers are as in \autoref{tab:reverb_delay}, six for the \gls{lpcf}s and two for the the allpass filter, so it is possible to design a Moorer \gls{reverb} unit \citep{DAFX}. 
+
+\begin{table}[htbp]
+\centering
+\caption{The chosen delay prime numbers}
+\label{tab:reverb_delay}
+\begin{tabular}{llllll}
+$d_1$ & = & 19 & $d_5$ & = & 37 \\ 
+$d_2$ & = & 23 & $d_6$ & = & 41 \\
+$d_3$ & = & 29 & $d_7$ & = & 17 \\
+$d_4$ & = & 31 & $d_8$ & = & 13
+\end{tabular}
+\end{table}
+
+%The same applies in the chose of \autoref{tab:reverb_bgain}.
+%Each \gls{lpcf} filter is also attenuated by a defined gain which is shown in \autoref{tab:reverb_bgain}
+%
+%\begin{table}[htbp]
+%\centering
+%\caption{The chosen gain in \gls{lpcf}}
+%\label{tab:reverb_bgain}
+%\begin{tabular}{lll}
+%$b_1$ & = & 1 \\
+%$b_2$ & = & 0.9 \\
+%$b_3$ & = & 0.8 \\
+%$b_4$ & = & 0.7 \\
+%$b_5$ & = & 0.6 \\
+%$b_6$ & = & 0.5 
+%\end{tabular}
+%\end{table}
+
+
+The \gls{reverb} unit requires 1000 echoes per second \citep{natural_sounding_revorb}. To achieve a natural \gls{reverb} sound, multiple all pass filter delay units have to be connected in serial after the six \gls{lpcf} in parallel. It is defined by \citep{natural_sounding_revorb} that two all pass filters are required to make a natural \gls{reverb} sound.
+To calculate the approximate number of echoes in one second from six \gls{lpcf}, the following calculations are made. The total numbers of echoes above \SI{-60}{\decibel} are added together from each \gls{lpcf} filter because each \gls{lpcf} has its own prime number. The result is maximum $6 \cdot 20 = 260$ echoes per second. The reason of this is that each \gls{lpcf} makes 20 echoes that are above \SI{-60}{\decibel}. The number of echoes from the six \gls{lpcf}'s is different from the number of outputs from the six \gls{lpcf}'s, because a direct input is sent through each \gls{lpcf}, which is not counted as an echo. These six direct inputs arrives at the same time, so they are counted as one output. The number of outputs from each \gls{lpcf} is therefore 21, and the maximum number of outputs from the six parallel \gls{lpcf}'s is $6 \cdot 20 + 1 = 261$.  In \autoref{fig:reverb_block_design} it is seen that each \gls{lpcf} is followed by an individual gain called $b_1$ to $b_6$. These gain values are chosen as in \autoref{tab:reverb_bgain}
+
+\begin{table}[htbp]
+\centering
+\caption{The chosen gain in \gls{lpcf}}
+\label{tab:reverb_bgain}
+\begin{tabular}{lll}
+$b_1$ & = & 1 \\
+$b_2$ & = & 0.9 \\
+$b_3$ & = & 0.8 \\
+$b_4$ & = & 0.7 \\
+$b_5$ & = & 0.6 \\
+$b_6$ & = & 0.5 
+\end{tabular}
+\end{table}
+
+This means that only the \gls{lpcf} with $b = 1$ will produce 20 echoes above \SI{-60}{\decibel}. The \gls{lpcf}s where $b$ is less than one will therefore reach the \SI{-60}{\decibel} limit faster, and will therefore produce less echoes above \SI{-60}{\decibel}.
+As seen in \autoref{fig:reverb_block_design} the output of the six \gls{lpcf} is then sent through two allpass filters. The number of echoes after the first allpass filter can be found from a simulation in MATLAB. The simulation is done with a serial connection of only one \gls{lpcf} and one allpass filter. It is then checked how many outputs of the allpass filter above \SI{-60}{\decibel} the circuit will produce.  
+This simulation is done six times, where the gain of the \gls{lpcf} is changed each time. The first simulation e.g. is when $b = b_1$. Here it is seen that 210 outputs will be produced, before the \SI{-60}{\decibel} limit is reached. The number 210 is found from that when an input is sent to the \gls{lpcf}, the \gls{lpcf} will produce 21 outputs above \SI{-60}{\decibel}. Then when the first output of the \gls{lpcf} is made as the input to the allpass filter, the allpass filter will produce 20 outputs. The second output from the \gls{lpcf} will produce 19 outputs from the allpass filter. It appears that the number of outputs from a single \gls{lpcf} and a single allpass filter can be expressed as in \autoref{eq:rev_out_gen}.
+
+\begin{equation}\label{eq:rev_out_gen}
+        y = \sum_{x=1}^{m} x
+        \addunit{\si{1}}
+    \end{equation} 
+    
+    \startexplain
+\explain{$y$ is the total number of outputs from a single \gls{lpcf} and a single allpass filter}{\si{1}}
+\explain{$m$ is the maximum number of outputs from the allpass filter, with a single output from the \gls{lpcf}, as the input}{\si{1}}
+\explain{$x$ is the input to the all pass filter}{\si{1}}
+    \stopexplain
+
+$m$ in \autoref{eq:rev_out_gen} changes as the \gls{lpcf} gain, $b$, changes. For $m = 20 \big|_{b=b_1}$, $m = 19 \big|_{b=b_2 \ and \ b=b_3}$, $m = 18 \big|_{b=b_4 \ and \ b=b_5}$, and $m = 17 \big|_{b=b_6}$.  
+The total number of outputs from the six \gls{lpcf} in parallel, followed by an allpass filter in serial, can then be found as in \autoref{eq:reverb_echo_plus_direct}.
+
+\begin{subequations}\label{eq:reverb_echo_plus_direct}
+\begin{equation}\label{eq:reverb_ser}
+      \text{Echo} + \text{direct sound} = \sum_{x=1}^{20} x + \sum_{x=1}^{19} x + \sum_{x=1}^{19} x + \sum_{x=1}^{18} x+ \sum_{x=1}^{18} x+ \sum_{x=1}^{17} x -5
+    \end{equation}
+\centering
+$\Updownarrow$
+\begin{equation}\label{eq:reverb_seriel}
+        \text{Echo} + \text{direct sound}= 1080
+        \addunit{\si{1}}
+    \end{equation}
+ \end{subequations}
+
+The subtraction of five in \autoref{eq:reverb_ser} is, as mentioned earlier, because each \gls{lpcf} sends through a direct input, which arrives at the same time at the output of the \gls{lpcf}, and is therefore counted as one output.
+The second allpass filter in \autoref{fig:reverb_block_design} is set to have nearly the same parameters as the first allpass filter. There are only a few requirements for the second allpass filter, because the number of echoes is already higher than 1000. Therefore the only requirements for the second allpass filter is that it has to be an allpass filter and it must not decrease the number of echoes. This is fulfilled by copying the first allpass filter and make a shorter delay. 
+    
+%
+%\includeCode{echo_1_all_pass.m}{matlab}{6}{23}{The reverb echo calcul6ation matlab code}{code:reverb_cal}{code/design/}
+
+%The output plot from the \gls{reverb} code where the input is guided through the upper \gls{lpcf} and afterwards through the first all pass filter is as following \autoref{fig:reverbcal_plot}. This plot shows only one echo from the all pass filter the blue line and the output of this pulse from the first all pass filter, the red line.
+%
+%\begin{figure}[htbp]
+%	\centering
+%	\includegraphics[width=0.9\textwidth]{reverbcal}
+%	\caption{The plot shows the direct sound plus 19 echo }
+%	\label{fig:reverbcal_plot}
+%\end{figure}
+
+%Form the MATLAB script \autoref{code:reverb_cal} the formula of calculation echo after the first all pass filter is as following \autoref{eq:reverb_ser}. The $-5$ is included because only one of the direct sound is taken to acound in the formula.
+
+In \citep{DAFX} Moorer suggests adding an early reflection network before the six \gls{lpcf}s. The early reflection network is a simple multi tap \gls{fir} filter constellation. Moorer also suggests making the \gls{lpcf} feedback gain as a variable, so the user can change the room size and damping. To design the \gls{lpcf} filter the standard comb filter needs to be changed  \citep{LPCFfd}. The standard comb filter have the following transfer function \autoref{eq:comb_filter}.
+
+\begin{equation}\label{eq:comb_filter}
+H(z)=\frac{1}{1-c \cdot z^{-d}}
+\end{equation}
+
+    \startexplain
+\explain{$c$ is the amplification of the combs }{\si{1}}
+    \stopexplain
+
+To change the comb filter characteristics, so the magnitude in the high frequency is lower than the magnitude in the low frequency, $c$ needs to be changed to a low pass filter. In the frequency domain, the low pass filter have the following transfer function \autoref{eq:comb_filter_freq}. 
+
+\begin{equation}\label{eq:comb_filter_freq}
+	G(s) = f \cdot \frac{\omega_{0}}{s+w_{0}}
+\end{equation}
+
+\autoref{eq:s2z} will be used in order to pass from $s-domain$ to the $z-domain$ using the backward-Euler method:
+
+\begin{equation}\label{eq:s2z}
+	s = \frac{1-z^{-1}}{T}
+\end{equation}
+
+Where:
+
+$T$ is the sampling time, the inverse of the sampling frequency $f_{s}$. \\
+
+By inserting \autoref{eq:s2z} into \autoref{eq:comb_filter_freq}, \autoref{eq:s2z2} is obtained:
+
+\begin{equation}\label{eq:s2z2}
+	G(z) = f \cdot \frac{\omega_{0}}{\frac{1 - z^{-1}}{T} + \omega_{0}}
+\end{equation}
+
+Which can be rewritten as in \autoref{eq:s2z3}:
+
+\begin{equation}\label{eq:s2z3}
+	G(z) = f \cdot \frac{\frac{\omega_{0} \cdot T}{1 + \omega_{0} \cdot T}}{1 - \frac{1}{1+ \omega_{0} \cdot T} \cdot z^{-1}}
+\end{equation}
+
+The numerator is an expression containing only constants which will be represented by $b$. The same goes for the coefficient of $z^{-1}$ in the denominator which will be represented by $a$. \autoref{eq:before_final} is then obtained:
+
+\begin{equation}\label{eq:before_final}
+	G(z) = f \cdot \frac{b}{1 - a \cdot z^{-1}}
+\end{equation}
+
+It is seen that adding $a$ and $b$ gives 1, therefore the following relation in \autoref{eq:b_and_a} between $a$ and $b$ can be inferred:
+
+\begin{equation}\label{eq:b_and_a}
+	b = 1 - a
+\end{equation} 
+
+\autoref{eq:before_final} can be re-written as in \autoref{eq:comb_filter_lp}:
+
+\begin{equation}\label{eq:comb_filter_lp}
+G(z)=f \frac{1-a}{1-a \cdot z^{-1}}
+\end{equation}
+  
+Recalling \autoref{eq:comb_filter} and replacing $c$ by $G(z)$ from \autoref{eq:comb_filter_lp}, the final transfer function of the \gls{lpcf} is as in \autoref{eq:comb_filter_lp_final}.
+
+ \begin{equation}\label{eq:comb_filter_lp_final}
+H(z)= \frac{Y(z)}{X(z)} =\frac{1}{1-f \frac{1-a}{1-a \cdot z^{-1}} \cdot z^{-d}}
+\end{equation}
+
+When replacing $a$ by $L_D$, the following \autoref{eq:reverb_eq_eks} shows the differential equation for the first \gls{lpcf}. 
+
+    \begin{equation}\label{eq:reverb_eq_eks}
+        x_2[n] = x_1[n] - L_D \cdot x_1[n-1] + L_D \cdot x_2[n-1] + f \cdot (1-L_D) \cdot x_2[n-d_1]
+    \end{equation}
+    
+    \startexplain
+\explain{$f$ is defining the room size}{\si{1}}
+\explain{$L_D$ is the damping factor}{\si{1}}
+    \stopexplain
+
+$f$ is found as described in \autoref{eq:reverb_eq_f}, where scaleroom is used to scale the room size by the user \citep{LPCFfd}.
+
+\begin{subequations}\label{eq:reverb_eq_f}
+\begin{equation}\label{eq:reverb_eq_f1}
+    f = \text{roomsize} = \text{initialroom} \cdot \text{scaleroom} + \text{offsetroom}
+    \end{equation}
+\centering
+%$\Updownarrow$
+\begin{equation}\label{eq:reverb_eq_f2}
+    f = 0.5 \cdot \text{scaleroom} + 0.7
+    \end{equation}
+ \end{subequations}   
+   
+The $L_D$ is defining the room damping, and the equation for $L_D$ is as in \autoref{eq:reverb_eq_L_D}, where scaledamp is used to scale the room damping by the user \citep{LPCFfd}.    
+
+\begin{subequations}\label{eq:reverb_eq_L_D}
+\begin{equation}\label{eq:reverb_eq_L_D1}
+    L_D = \text{damp} = \text{initialdamp} \cdot \text{scaledamp}
+    \end{equation}
+\centering
+%$\Updownarrow$
+\begin{equation}\label{eq:reverb_eq_L_D2}
+    L_D = 0.5 \cdot \text{scaledamp}
+    \end{equation}
+ \end{subequations} 
+    
+\newpage
+The transfer function in \autoref{eq:reverb_eq_eks} is plotted in MATLAB with a sweep from \SI{16}{\hertz} to \SI{20}{\kilo\hertz} as the input. The output of the \gls{lpcf} is shown in \autoref{fig:lpcf_sweep}, where the red signal is the input and the blue signal is the output.
+
+\begin{figure}[htbp!]
+	\centering
+	\includegraphics[width=1\textwidth]{lpcf_sweep}
+	\caption{The plot shows the result for a sweep from \SI{16}{\hertz} to \SI{20}{\kilo\hertz} of the \gls{lpcf}}
+	\label{fig:lpcf_sweep}
+\end{figure}
+
+
+   The following \autoref{fig:reverb_block_design} shows the block diagram of the \gls{reverb} unit, where $g = f \cdot (1-L_D)$.
+
+
+
+\begin{figure} [htbp!]
+ \centering
+\begin{picture}(0,0)%
+\includegraphics{reverb_serial_des.pdf}%
+\end{picture}%
+\setlength{\unitlength}{3646sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(6819,10935)(-3656,-5764)
+\put(541,-1681){$w_9[n]$}%
+\put(1711,-421){$\Sigma$}%
+\put(721,-916){$z^{-d_7}$}%
+\put( 91,-421){$\Sigma$}%
+\put(1261,-196){$-\alpha$}%
+\put(271,-1006){$\alpha$}%
+\put(-449,-421){$\Sigma$}%
+\put(-224,-106){$x_8[n]$}%
+\put( 91,-1861){$\Sigma$}%
+\put(1711,-1861){$\Sigma$}%
+\put(271,-2446){$\alpha$}%
+\put(721,-2356){$z^{-d_8}$}%
+\put(1261,-1636){$-\alpha$}%
+\put(2701,-1636){$y[n]$}%
+\put(2431,-1861){$\Sigma$}%
+\put(-764,-2941){$b_5$}%
+\put(-764,-4741){$b_6$}%
+\put(-764,-1141){$b_4$}%
+\put(-764,659){$b_3$}%
+\put(-764,2459){$b_2$}%
+\put(-764,4259){$b_1$}%
+\put(-2519,4079){$\Sigma$}%
+\put(-1844,4394){$z^{-d_1}$}%
+\put(-1394,4259){$x_2[n]$}%
+\put(-3374,3764){$z^{-1}$}%
+\put(-1844,3764){$z^{-1}$}%
+\put(-2204,4889){$g$}%
+\put(-2519,2279){$\Sigma$}%
+\put(-1394,2459){$x_3[n]$}%
+\put(-1844,2594){$z^{-d_2}$}%
+\put(-1844,1964){$z^{-1}$}%
+\put(-3374,1964){$z^{-1}$}%
+\put(-2204,3089){$g$}%
+\put(-1844,794){$z^{-d_3}$}%
+\put(-1394,659){$x_4[n]$}%
+\put(-1844,164){$z^{-1}$}%
+\put(-2519,479){$\Sigma$}%
+\put(-3374,164){$z^{-1}$}%
+\put(-2204,1289){$g$}%
+\put(-2519,-1321){$\Sigma$}%
+\put(-1844,-1006){$z^{-d_4}$}%
+\put(-1394,-1141){$x_5[n]$}%
+\put(-1844,-1636){$z^{-1}$}%
+\put(-3374,-1636){$z^{-1}$}%
+\put(-2204,-511){$g$}%
+\put(-2519,-3121){$\Sigma$}%
+\put(-1844,-3436){$z^{-1}$}%
+\put(-1844,-2806){$z^{-d_5}$}%
+\put(-3374,-3436){$z^{-1}$}%
+\put(-2204,-2311){$g$}%
+\put(-1394,-2941){$x_6[n]$}%
+\put(-2519,-4921){$\Sigma$}%
+\put(-1844,-5236){$z^{-1}$}%
+\put(-1844,-4606){$z^{-d_6}$}%
+\put(-1394,-4741){$x_7[n]$}%
+\put(-3374,-5236){$z^{-1}$}%
+\put(-2204,-4111){$g$}%
+\put(-2249,3674){$L_D$}%
+\put(-2249,1874){$L_D$}%
+\put(-2249, 74){$L_D$}%
+\put(-2249,-1726){$L_D$}%
+\put(-2249,-3526){$L_D$}%
+\put(-2249,-5326){$L_D$}%
+\put(-2789,-3886){$-L_D$}%
+\put(-2789,-2086){$-L_D$}%
+\put(-2789,-286){$-L_D$}%
+\put(-2789,1514){$-L_D$}%
+\put(-2789,-5686){$-L_D$}%
+\put(-2789,3314){$-L_D$}%
+\put(1936,-196){$x_9[n]$}%
+\put(1126,4349){$z^{-ed_3}$}%
+\put(1846,4349){$z^{-ed_4}$}%
+\put(1261,3854){$\Sigma$}%
+\put(406,4349){$z^{-ed_2}$}%
+\put(1981,3854){$\Sigma$}%
+\put(541,3854){$\Sigma$}%
+\put(-359,4349){$z^{-ed_1}$}%
+\put(-899,4889){$x[n]$}%
+\put(2566,3854){$x_1[n]$}%
+\put(541,-241){$w_8[n]$}%
+\put(-44,3719){$Dry$}%
+\put(-314,4889){$Wet$}%
+\end{picture}%
+  \caption{Block diagram of the \gls{reverb} unit.}
+  \label{fig:reverb_block_design}
+\end{figure}
+
+
+\newpage
+
+The differential equation for the \gls{reverb} can be written in 12 parts as follows in \autoref{eq:reverb_eq} where the $WET$ and $DRY$ customizations are omitted, only inserted in the implementation part.
+
+\begin{subequations}\label{eq:reverb_eq}
+\begin{equation}\label{eq:reverb_eq_ed}
+		x_1[n] = x[n]+x[n-ed_1]+x[n-ed_2]+x[n-ed_3]+x[n-ed_4]
+    \end{equation}    
+    
+\begin{equation}\label{eq:reverb_eq_iir1w}
+    x_2[n] = x_1[n] + L_D \cdot x_1[n-1] + L_D \cdot x_2[n-1] + f \cdot (1-L_D) \cdot x_2[n-d_1]
+    \end{equation}
+\begin{equation}\label{eq:reverb_eq_iir2w}
+    x_3[n] = x_1[n] + L_D \cdot x_1[n-1] + L_D \cdot x_3[n-1] + f \cdot (1-L_D) \cdot x_3[n-d_2]
+    \end{equation}    
+\begin{equation}\label{eq:reverb_eq_iir3w}
+    x_4[n] = x_1[n] + L_D \cdot x_1[n-1] + L_D \cdot x_4[n-1] + f \cdot (1-L_D) \cdot x_4[n-d_3]
+    \end{equation}    
+\begin{equation}\label{eq:reverb_eq_iir4w}
+    x_5[n] = x_1[n] + L_D \cdot x_1[n-1] + L_D \cdot x_5[n-1] + f \cdot (1-L_D) \cdot x_5[n-d_4]
+    \end{equation}   
+\begin{equation}\label{eq:reverb_eq_iir5w}
+    x_6[n] = x_1[n] + L_D \cdot x_1[n-1] + L_D \cdot x_6[n-1] + f \cdot (1-L_D) \cdot x_6[n-d_5]
+    \end{equation}    
+\begin{equation}\label{eq:reverb_eq_iir6w}
+    x_7[n] = x_1[n] + L_D \cdot x_1[n-1] + L_D \cdot x_7[n-1] + f \cdot (1-L_D) \cdot x_7[n-d_6]
+    \end{equation}
+    
+\begin{equation}\label{eq:reverb_eq_iirto}
+    \begin{array}[b]{r}
+      x_8[n] = x_2[n] \cdot b_1+x_3[n] \cdot b_2+x_4[n] \cdot b_3\\
++x_5[n] \cdot b_4+x_6[n] \cdot b_5+x_7[n] \cdot b_6
+    \end{array}
+    \end{equation}
+    
+    \begin{equation}\label{eq:reverb_eq_ap1}
+w_8[n] = \alpha \cdot w_8[n-d_7] + x_8[n] 
+    \end{equation}
+\begin{equation}\label{eq:reverb_eq_ap12}
+x_9[n] = - \alpha \cdot w_8[n] + w_8[n-d_7]
+    \end{equation}
+    
+    \begin{equation}\label{eq:reverb_eq_ap2}
+w_9[n] = \alpha \cdot w_9[n-d_8] + x_9[n] 
+    \end{equation}
+    \begin{equation}\label{eq:reverb_eq_ap22}
+y[n] = - \alpha \cdot w_9[n] + w_9[n-d_8] + x_1[n]
+    \end{equation}
+\end{subequations}
+
+\subsection{Matlab Simulation}
+This section will simulate the \gls{reverb} effect equations, which is developed in above \autoref{sec:reverb_develop}. The simulation is made in MATLAB and the code is attached in \autoref{app:reverb}. The simulation is made to avoid mistake before the assembly code is developed, because assembly is a time consuming development process. MATLAB is easy to use and mistakes can be observed graphically by plotting the output.
+
+The simulation uses audioread to get the samples from a soundfile, a response to one sine wave is generated in MATLAB. The audioread and all user changeable settings are done as in \autoref{code:reverb_delay_startup}.
+ 
+\includeCode{reverb.m}{matlab}{6}{14}{The reverb simulation matlab code}{code:reverb_delay_startup}{code/design/}
+
+
+A response to one sine wave in the \gls{reverb}  effect gives the following result \autoref{fig:delay_plot}. The MATLAB simulation code is included in \autoref{app:reverb} \autoref{code:reverb_sim}.
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{reverb}
+	\caption{The plot shows the simulated impulse response of the \gls{reverb} effect}
+	\label{fig:reverb_plot}
+\end{figure}
+
+A response one sine wave in the delay effect gives the following result \autoref{fig:reverb_plot}. The MATLAB simulation code is included in \autoref{app:reverb} \autoref{code:delay_sim}.
+
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=1\textwidth]{delay}
+	\caption{The plot shows the simulated impulse response of the delay effect}
+	\label{fig:delay_plot}
+\end{figure}
+
+
+
+
+
+\newpage
+\subsection{implementation}
+This section is to present the design in assembly code, where the implementation techniques are very important to do the program as efficient as possible. The delay for example can be done in several ways where either the data is moved or the pointer is moved, but if it is the data which is moved and there is 1000 data samples, it will require 1000 clock cycles because each data sample needs to be moved alone. If the pointer is moved it will only require one cycle for moving the input pointer and one cycle to move the output pointer, so the delay will be designed as a ring buffer where the input- and output- pointer is moved. 
+The \gls{cpu} of the \gls{dsp} has tow circular data buffers size register and one coefficient buffers size register, where buffer register BK03 will be used to long delay samples and register BK47 will be used to short delay and coefficients together with BKC. The data buffers size will be made to fit the \gls{reverb} effect and flanger, therefore the needed buffer size is calculated in this section. To avoid long unused buffers, the delay effect will be designed with the same buffer as \gls{reverb} thus they will use the same length, which have the maximum length of \SI{41}{\milli\second}. To get a longer delay time in delay effect, buffer BK03 needs to be reinitialized every time switching between \gls{reverb} and delay effect. 
+
+
+\subsection{implementation of \gls{reverb}}
+ First the time between two samples needs to be calculated, and the calculation is done as in \autoref{eq:sample_time}
+
+    \begin{equation}\label{eq:sample_time}
+T_s=\frac{1}{f_s} = \frac{1}{\SI{44100}{\hertz}} = 22.7\micro \addunit{\SI{}{\second}}
+    \end{equation}
+
+\startexplain
+\explain{$T_s$ is the sampling time}{\si{\second}}
+\explain{$f_s$ is the sampling frequency}{\si{\hertz}}
+    \stopexplain
+
+
+According to \autoref{tab:reverb_delay} the longest delay time is \SI{41}{\milli\second} and as calculated in \autoref{eq:sample_time} the time between samples is \SI{22.7}{\micro\second}. To calculate the number of needed samples in the buffer is done by following \autoref{eq:sample_number}
+
+\begin{equation} \label{eq:sample_number}
+\text{number of samples}=\frac{\text{delay time}}{T_s}+1 = 
+1807    \addunit{1}
+\end{equation}
+
+
+Converted to hex, the data buffers size register shall have a size of 0x70F and the memory overall view will be as follows \autoref{fig:reverb_mem_map}
+
+\begin{figure}[htbp]
+	\centering
+\begin{picture}(0,0)%
+\includegraphics{Reverb_mem.pdf}%
+\end{picture}%
+\setlength{\unitlength}{4144sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(6147,8124)(6241,-7498)
+\put(9631,-4471){Coeff}%
+\put(8101,389){0x0000}%
+\put(8101,-646){0x070E}%
+\put(8101,-961){0x070F}%
+\put(8101,-1996){0x0E1D}%
+\put(8101,-2311){0x0E1E}%
+\put(8101,-3346){0x152C}%
+\put(8101,-3661){0x152D}%
+\put(8101,-4696){0x1C3B}%
+\put(8101,-5011){0x1C3C}%
+\put(8101,-6046){0x234A}%
+\put(8101,-6361){0x234B}%
+\put(8101,-7396){0x2A59}%
+\put(11476,389){0x2A5A}%
+\put(11476,-646){0x3168}%
+\put(11476,-961){0x3169}%
+\put(11476,-1996){0x3877}%
+\put(11476,-2311){0x3878}%
+\put(11476,-3346){0x3F86}%
+\put(11476,-3661){0x3F87}%
+\put(11476,-4336){0x3F96}%
+\put(11476,-4696){0x3FA5}%
+\put(11476,-4021){0x3F95}%
+\put(9496,-3796){All Pass}%
+\put(9811,-2806){Pre}%
+\put(9496,-781){All Pass}%
+\put(6256,-3526){LPCF}%
+\end{picture}%
+	\caption{The plot shows the result for the \autoref{code:reverb_sim}}
+	\label{fig:reverb_mem_map}
+\end{figure}
+
+\newpage
+After the allocation of memory, all the coefficients need to be calculated to a hex number that can be used in assembly. It is chosen that the separator between the decimal and the integer part (,) of the coefficients always is placed as follows (shown in red) \autoref{fig:coeff_bit}. 
+
+\begin{figure}[htbp]
+	\centering
+\begin{picture}(0,0)%
+\includegraphics{coeff_bit.pdf}%
+\end{picture}%
+\setlength{\unitlength}{4144sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(3624,274)(6064,352)
+\put(6121,434){S}%
+\put(7651,434){14 Fraction bit}%
+\put(6346,434){X}%
+\put(6481,389){\makebox(0,0)[lb]{\smash{{\SetFigFont{14}{16.8}{\rmdefault}{\mddefault}{\updefault}{\color[rgb]{1,0,0},}%
+}}}}
+\end{picture}%
+	\caption{The figure shows the sign, integer and fraction part}
+	\label{fig:coeff_bit}
+\end{figure}
+
+
+Because the separator is situated in the front of bit 14 from LSB, the coefficient is allowed to be between 0 and <2 in decimal. The coefficient is therefore multiplied by $2^{14}$ and rounded up to get an integer implementable in assembly and afterwards converted to hex. The coefficients are calculated as in \autoref{eq:coeff_cal}.
+
+    \begin{equation}\label{eq:coeff_cal}
+\text{usable coeff} = \lceil\text{coeff} \cdot 2^{14}\rceil
+    \end{equation}
+
+The calculated coefficients for the \gls{reverb} are placed in the BK47 data buffer register with a memory offset of 0x3F98 and are shown in \autoref{code:reverb_coeff}
+
+\includeCode{main_buffer.asm}{assembly}{31}{46}{The \gls{reverb} FIR filter}{code:reverb_coeff}{code/design/}
+
+
+\subsection{Reverb Assembly Code}
+The reverb implementation in Assembly is done by being inspired from the differential equation in \autoref{eq:reverb_eq}. The assembly code is in the file \textit{reverb.asm} and stored in a ZIP file. In the following, each subsection will represent either a subroutine or a macro routine of the reverb assembly implementation. 
+
+\subsection{The \textit{reverb_pre} Subroutine}
+Here the subroutine for the \gls{fir} filters, \autoref{code:reverb_FIR_coeff}, will be described.
+
+\includeCode{reverb.asm}{assembly}{20}{30}{The reverb_pre subroutine code}{code:reverb_FIR_coeff}{code/design/}
+
+Since the same buffer is used for all the effects and for different purposes in the same effect, the address of the buffer that contains the needed coefficients and data for this subroutine is set in the first two lines, the $X[N-ed_{n}]$ buffer and the $X_1[N]$ buffer. This subroutine is used to compute the pre \gls{reverb}. The idea in the code is to point on different parts of $X_1[N]$ which contains values of $X[N-ed_n]$, the more the pointer has a lower negative number, the bigger the delay. Different values at the pre-calculated delays $ed1$, $ed2$, $ed3$ and $ed4$ are added together to give $X_{1}[N]$ and then stored in the memory area of  *AR5. \\
+
+\subsection{The \textit{reverb_lpcf} Subroutine}
+Here the subroutine for the \gls{lpcf}, \autoref{code:reverb_lpcf_coeff}, will be described.
+
+\includeCode{reverb.asm}{assembly}{68}{79}{The reverb_\gls{lpcf} subroutine code}{code:reverb_lpcf_coeff}{code/design/}
+
+This subroutine is responsible for computing the equations of the 6 comb filters. The first part which can be seen in the ZIP file name reverb.asm is reserved for calculating the different coefficients needed in the calculations, $L_D$ and $g$. The beginning of the macro command marks the end of coefficients calculations and the beginning of the equations processing. The choice of a macro implementation here comes after observing big similarities between the six comb filters. The only differences lie in the $b_{i}$ gains, $x_{i}$ memory and $d_{i}$ delay values. This is why they are macro entries. The macro is simply the computation of the equations \ref{eq:reverb_eq_iir1w} to \ref{eq:reverb_eq_iir6w}. The circular buffer AR0 is the one that contains the values of $x_{i}$. AR4 and CDP are the pointers which contains the coefficients and gains values.
+After the macro section, it is called with the different comb filter settings in a row. 
+
+\subsection{The \textit{reverb_allpass} Subroutine} \label{imp:reverb_allpass}
+Here the subroutine for the allpass, \autoref{code:reverb_allpass_coeff}, will be described.
+
+\includeCode{reverb.asm}{assembly}{98}{109}{The reverb allpass code}{code:reverb_allpass_coeff}{code/design/}
+The subroutine is the one that takes into account the final part of the \gls{reverb} effect which is the two all-pass filters. It also involves the use of a macro as the previous section since the two all-pass filters have considerable resemblance. Again, *AR0 is used as a buffer pointer for the $x_{i}$ values and *AR4 for the coefficients and the delay values. The other registers and accumulators are used for temporary purposes.
+Last but not least, the data is moved to T2 that plays the role of the output. 
+Another crucial step is to move the pointer of the AR0 buffer so that in the next iteration the values are not overwritten but inserted in a new slot.\\
+The full assembly code of the reverb can be found in the ZIP file under the name of $reverb.asm$. 
+
+\subsection{Implementation of Delay}
+As shown in \autoref{fig:reverb_block_des} delay is a copy of the \gls{reverb} all pass filter and is implemented as  in \autoref{imp:reverb_allpass} but without macros. \gls{reverb} and delay can only run at the same time with a maximum of \SI{41}{\milli\second} delay because of the required reinitializing of data buffer register size for longer delays. The coefficient for the delay is in the same memory area as \gls{reverb} and situated at the last used buffer slot. The data buffer size register shall then have a size of 0x70F and the memory overall view will be as follows \autoref{fig:delay_mem_map}. 
+
+\begin{figure}[htbp]
+	\centering
+\begin{picture}(0,0)%
+\includegraphics{delay_mem.pdf}%
+\end{picture}%
+\setlength{\unitlength}{4144sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(2907,2634)(9481,-3448)
+\put(9496,-2806){Delay}%
+\put(11476,-1051){0x3F98}%
+\put(11476,-1411){0x3FA8}%
+\put(9496,-1186){Coeff}%
+\put(11476,-2311){0x477B}%
+\put(11476,-3346){0x4E89}%
+\end{picture}%
+	\caption{The figure shows the memory map of the delay}
+	\label{fig:delay_mem_map}
+\end{figure}
+
+The full assembly code of the delay can be found in the ZIP file under the name of $delay.asm$. 
+

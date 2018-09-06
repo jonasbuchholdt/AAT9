@@ -1,0 +1,33 @@
+\section{Test of the converters}
+In this part, all the requirements related to the converters will be tested if they are fulfilled. 
+
+
+\subsection{Test of \autoref{req:ADC_resolution}}
+According to \autoref{req:ADC_resolution}, the \gls{adc} must have a resolution of at least 10 bits. In \autoref{sec:dsp_description} it is seen that the TMS320C5515 eZdsp development board has an \gls{adc} with a resolution of \SI{92}{\decibel} (16-bits). Thus the requirement is fulfilled.  
+
+\subsection{Test of \autoref{req:ADC_Fs}}
+According to \autoref{req:ADC_Fs}, the \gls{adc} must have a sampling frequency of at least \SI{8.8}{\kilo\hertz}. In \autoref{sec:dsp_description} it is seen that the TMS320C5515 eZdsp development board has an \gls{adc} with a sampling frequency, which can be set from \SI{8}{\kilo\hertz} to \SI{192}{\kilo\hertz}. Thus the requirement is fulfilled.
+
+\subsection{Test of \autoref{req:DAC_resolution}}
+According to \autoref{req:ADC_resolution}, the \gls{dac} must have a resolution of at least 10 bits. In \autoref{sec:dsp_description} it is seen that the TMS320C5515 eZdsp development board has a \gls{dac} with a resolution of \SI{100}{\decibel} (17-bits). Thus the requirement is fulfilled.  
+
+\subsection{Test of \autoref{req:DAC_Fs}}
+According to \autoref{req:ADC_Fs}, the \gls{adc} must have a sampling frequency of at least \SI{8.8}{\kilo\hertz}. In \autoref{sec:dsp_description} it is seen that the TMS320C5515 eZdsp development board has a \gls{dac} with a sampling frequency, which can be set from \SI{8}{\kilo\hertz} to \SI{192}{\kilo\hertz}. Thus the requirement is fulfilled.
+ 
+\subsection{Test review of the converter}
+In this subsection, a short review will be shown of the converter test.
+
+\begin{table}[H]
+\centering
+\caption{Recap of the requirements fulfilments for the converter test}
+\label{test_of_converter_table}
+\begin{tabular}{|l|l|}
+\hline
+\rowcolor[HTML]{9B9B9B} 
+\textbf{Requirement} & \textbf{Fulfilment State} \\ \hline
+\textbf{\ref{req:ADC_resolution}}    & \cmark                     \\ \hline
+\textbf{\ref{req:ADC_Fs}}    & \cmark                     \\ \hline
+\textbf{\ref{req:DAC_resolution}}    & \cmark                      \\ \hline
+\textbf{\ref{req:DAC_Fs}}    & \cmark                      \\ \hline
+\end{tabular}
+\end{table}

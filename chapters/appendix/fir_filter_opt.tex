@@ -1,0 +1,18 @@
+\chapter{Optimization or \gls{fir} filter}\label{ax:opt_imp_filter}
+Optimizing the \gls{fir} beamforming filter is done with the genetic algorithm in \autoref{ax:opt_imp} with slightly modification. To optimize the \gls{fir} filter the cost function code, the mutation code is changed, and there is added crossover in Offspring function \autoref{code:offspring}.
+
+
+\section*{Materials}
+The following materials are used:
+\begin{itemize}
+\item MATLAB 2017b
+\end{itemize}
+
+The following code shows only the changed part of the algorithm.
+
+
+\section{Mutation}
+\includeCode{offspring.m}{matlab}{15}{71}{Mutation function}{code:offspring_filter}{./code/filter/genetic_streamlined/}
+
+\section{Fitness}
+\includeCode{fit_quick.m}{matlab}{17}{61}{Mutation function}{code:fit_filter}{./code/filter/genetic_streamlined/}

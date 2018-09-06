@@ -1,0 +1,69 @@
+\chapter{Speaker measuring manual} \label{appendix:measuring_manual}
+In this appendix the polar response measurement software will be briefly explained. The goal of this software is to measure the polar response and calculate transfer functions of any loudspeaker in a free field environment with calibrated measuring equipment. During the measurement of the polar response, impulse responses are measured with a specified degree step size all around the speaker. E.g. if the step is one degree, the loudspeaker will be turned 1 degree for every  impulse response measurement, until \SI{360}{\degree} is achieved.
+
+\section*{Materials and setup}
+To measure the polar response of a loud speaker, the following materials are used:
+\begin{itemize}
+\item Outline ET 250-3D (Turntable)
+\begin{itemize}[noitemsep]
+\item AAU-number: -
+\item Serial number: REIBO012
+\end{itemize}
+\item RME FIREFACE ucx (Soundcard)
+\begin{itemize}[noitemsep]
+\item AAU-number: 108230
+\item Serial number: 23811948
+\end{itemize}
+\item Pioneer A-616 with a gain of \SI{44}{\decibel} (amplifier)
+\begin{itemize}[noitemsep]
+\item AAU-number: B4-109-C-8
+\item Serial number: HJ9404841S
+\end{itemize}
+\item Microphone with preamp
+\item MATLAB 2017b (PC - Software)
+\item Ethernet cable 
+\item \gls{bandk} connector to XLR
+\item Jack to Phone cable
+\item XLR speaker cable
+\item speaker stand
+\end{itemize}
+
+%\begin{figure}[htbp!]
+%\centering
+%\def\svgwidth{\columnwidth}
+%\input{figures/appendix/guitar_frequency_test.pdf_tex}
+%\caption{Setup for measuring frequency area on a guitar.}
+%		\label{fig:appendix:test}
+%\end{figure}
+
+\section*{Calibration procedure}
+
+
+\begin{enumerate}
+\item The materials are set up as in \autoref{appendix:calibration}.
+\item NOTE! The calibration shall be done in the same order as the following description.
+\item The sound card is calibrated according to the first step in \autoref{appendix:calibration}   
+\item The microphone is calibrated according to the second step in \autoref{appendix:calibration}
+\end{enumerate}
+
+\section*{Test procedure}
+
+
+\begin{enumerate}
+\item The materials are set up as in \autoref{fig:measurement_setup}.
+\item The turn degree step is chosen and the turntable control software \autoref{appendix:turntable} is used.  
+\item  All of the transfer function are stored in complex values together with the impulse responses.
+\end{enumerate}
+
+
+%\begin{figure}[htbp!]
+%	\centering
+	%	\includegraphics[width=1\textwidth]{guitar_low_E_neck.pdf}
+		%\caption{Measurement of the low E note on the neck pickup.}
+%		\label{fig:appendix:low_E_neck}
+%\end{figure}
+
+\section*{The MATLAB function}
+
+\includeCode{transfer_measure.m}{matlab}{1}{55}{The polar response measurement software}{code:transfer_measure}{./code/acoustics_center_002_02_2018/}
+
