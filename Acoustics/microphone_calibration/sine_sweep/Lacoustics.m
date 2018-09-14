@@ -13,7 +13,7 @@ switch cmd
         save('calibration.mat','calibration','-append');        
 
      
-     case 'ir'
+     case 'test'
         flower= 20;                             % lower frequency border for sweep      [Hz]
         fupper=22000;                           % upper frequency border for sweep      [Hz]
         ts= 1;                                  % length of sweep                        [s]
@@ -22,7 +22,7 @@ switch cmd
         incal=0.1;                          
         outcal=0.1;                             
         player=SynchronizedPlaybackAcquirer;    % initializing I-O via soundcard
-        [fs,impulse_response,irtime,tf,faxis]=IRmeas_fft_rme(ts,tw,flower,fupper,playgain,player);
+        [fs,impulse_response,irtime,tf,faxis]=IRmeas_fft_womics(ts,tw,flower,fupper,playgain,player);
         t_axis = irtime;
         t_result = impulse_response;
         f_axis = faxis;

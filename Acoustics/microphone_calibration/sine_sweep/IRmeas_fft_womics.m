@@ -71,14 +71,8 @@ function [fs,ir,irtime,tf,faxis]=IRmeas_fft_soundcard(ts,tw,flower,fupper,gainle
             leng = length(dataOut);
             y = y(1:leng);            
             
-            y_max = max(y)
-            
-            calibration = struct;
-            
-            %load('calibration.mat')
-            calibration.preamp_gain=y_max;
-            
-            save('calibration.mat','calibration');
+         
+          
             
             dataOut_f=fft(dataOut);
             y_f=fft(y);

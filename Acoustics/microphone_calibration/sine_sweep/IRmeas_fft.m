@@ -75,8 +75,8 @@ function [fs,ir,irtime,tf,faxis]=IRmeas_fft(ts,tw,flower,fupper,gainlevel,player
             y=y*(calibration.preamp_gain)/(calibration.mic_sensitivity);
             %y=y*(rms(y(7733:51840))/MICROPHONE_calibration);
             
-            dataOut_f=fft(dataOut);
-            y_f=fft(y);
+            dataOut_f =fft(dataOut);
+            y_f       =fft(y);
             
             irEstimate = real(ifft(y_f./dataOut_f));
             
