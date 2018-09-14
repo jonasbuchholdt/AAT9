@@ -4,7 +4,7 @@ filename = 'testlog_01.csv';
 fs = 48000;                                 % sample rate       [Hz]
 bufferSize = 2048;                          % Buffer size         []
 blength = 3;                                % buffer length      [s]
-tablelines = 20;                             % number of lines that are
+tablelines = 1;                             % number of lines that are
                                             % buffered before writing file
 TL = 1;
 B= 0;
@@ -43,7 +43,7 @@ while toc < 10
     end
     B = ~ B;
     
-    if TL > tablelines
+    if TL >= tablelines
         dlmwrite(filename,logtable,'-append');
         TL = 1;
     end
