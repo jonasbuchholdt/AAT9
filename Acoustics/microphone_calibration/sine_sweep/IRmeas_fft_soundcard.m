@@ -1,4 +1,4 @@
-function [fs,ir,irtime,tf,faxis]=IRmeas_fft(ts,tw,flower,fupper,gainlevel,player)
+function [fs,ir,irtime,tf,faxis]=IRmeas_fft_soundcard(ts,tw,flower,fupper,gainlevel,player)
             % out:  ir          - impulse response      [vector, lin]
             %       irtime      - time axis for IR        [vector, s]
             %       tf          - transfer function      [vector, dB]
@@ -68,27 +68,28 @@ function [fs,ir,irtime,tf,faxis]=IRmeas_fft(ts,tw,flower,fupper,gainlevel,player
             
             y(:,1) = playRecord(player, dataOut);
             
+            leng = length(dataOut);
+            y = y(1:leng);            
+            
+            y_max = max(y)
+            
+            calibration = struct;
+            
+            %load('calibration.mat')
+            calibration.preamp_gain=y_max;
+            
+            save('calibration.mat','calibration');
+            
+            dataOut_f=fft(dataOut);
+            y_f=fft(y);
+            
 
-            load('calibration.mat')
-            
-            
-            y=y*(calibration.preamp_gain)/(calibration.mic_sensitivity);
-            %y=y*(rms(y(7733:51840))/MICROPHONE_calibration);
-            
-            dataOut_f =fft(dataOut);
-            y_f       =fft(y);
             
             irEstimate = real(ifft(y_f./dataOut_f));
             
             irEstimate = circshift(irEstimate,-3159);% rme= 3159 edirol=3295
-            irEstimate=irEstimate;%*(1/MICROPHONE_calibration);
-            
             ir = irEstimate;
-            
-            
-            
             irtime = [1:length(irEstimate)]./fs;
-            
             
             irEstimate_distortion_less = irEstimate(1:length(irEstimate)/2);
             
