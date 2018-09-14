@@ -10,7 +10,7 @@ classdef SynchronizedPlaybackAcquirer < handle
     
     properties (SetAccess = protected)
         % These properties are read-only for now
-        PlayerNumChannels = 1;
+        PlayerNumChannels = 3;
         RecorderNumChannels = 1;
     end
     

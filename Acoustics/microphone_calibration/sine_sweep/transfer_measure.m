@@ -1,9 +1,3 @@
-%% Impulse response of sound card
-clear all
-gain = -18;
-cmd = 'ir'
-[x_axis,result] = Lacoustics(cmd,gain);
-plot(result)
 
 %% Calibrate the soundcard
 clear all
@@ -20,13 +14,18 @@ grid on
 axis([20 20000 0 20])
 xlabel('Frequency [Hz]')
 ylabel('[dB]')
+clear calibration
 
 %% Calibrate the microphone
 clear all
 cmd = 'cali_mic'
 gain = 0;
-[x_axis,result] = Lacoustics(cmd,gain);
+Lacoustics(cmd,gain);
+
+%% Show calibration of microphone
 load('calibration.mat')
+calibration.mic_sensitivity
+clear calibration
 
 %% Make impulse response
 clear all

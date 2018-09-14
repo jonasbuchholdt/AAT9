@@ -11,8 +11,7 @@ switch cmd
         load('calibration.mat')
         calibration.mic_sensitivity = add;        
         save('calibration.mat','calibration','-append');        
-        f_result = y;
-        f_axis = y;
+
      
      case 'ir'
         flower= 20;                             % lower frequency border for sweep      [Hz]
@@ -24,14 +23,15 @@ switch cmd
         outcal=0.1;                             
         player=SynchronizedPlaybackAcquirer;    % initializing I-O via soundcard
         [fs,impulse_response,irtime,tf,faxis]=IRmeas_fft_rme(ts,tw,flower,fupper,playgain,player);
-        axis = irtime;
-        result = impulse_response;
+        t_axis = irtime;
+        t_result = impulse_response;
+        f_axis = faxis;
+        f_result = tf;
        
     case 'transfer'
         [faxis, transfer_function, irtime, impulse_response] = Tranfer_function(gain);
-        load('calibration.mat')
-        calibration.transfer_function = transfer_function;        
-        save('calibration.mat','calibration','-append');
-        axis = faxis;
-        result = transfer_function;
+        f_axis = faxis;
+        f_result = transfer_function;
+        t_axis = irtime;
+        t_result = impulse_response;
 end

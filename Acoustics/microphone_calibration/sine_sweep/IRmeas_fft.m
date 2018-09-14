@@ -1,4 +1,4 @@
-function [fs,dataOut,irtime,tf,faxis]=IRmeas_fft(ts,tw,flower,fupper,gainlevel,player)
+function [fs,ir,irtime,tf,faxis]=IRmeas_fft(ts,tw,flower,fupper,gainlevel,player)
             % out:  ir          - impulse response      [vector, lin]
             %       irtime      - time axis for IR        [vector, s]
             %       tf          - transfer function      [vector, dB]
@@ -80,7 +80,7 @@ function [fs,dataOut,irtime,tf,faxis]=IRmeas_fft(ts,tw,flower,fupper,gainlevel,p
             
             irEstimate = real(ifft(y_f./dataOut_f));
             
-            irEstimate = circshift(irEstimate,-3295);% rme= 3159 edirol=3295
+            irEstimate = circshift(irEstimate,-3159);% rme= 3159 edirol=3295
             irEstimate=irEstimate;%*(1/MICROPHONE_calibration);
             
             ir = irEstimate;

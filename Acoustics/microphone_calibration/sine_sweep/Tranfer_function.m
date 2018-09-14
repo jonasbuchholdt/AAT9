@@ -2,7 +2,7 @@ function [faxis, transfer_function, irtime, impulse_response] = Tranfer_function
 %%
 flower= 20;                             % lower frequency border for sweep      [Hz]
 fupper=22000;                           % upper frequency border for sweep      [Hz]
-ts= 1;                                  % length of sweep                        [s]
+ts= 10;                                  % length of sweep                        [s]
 tw= 1;                                  % est. length of IR                      [s]
 playgain=gain;                            % gain for sweep playback               [dB]
 
@@ -18,7 +18,7 @@ outcal=0.1;                             % Output Calibration: What digital
                                        
 
 player=SynchronizedPlaybackAcquirer;    % initializing I-O via soundcard
-[fs,impulse_response,irtime,tf,faxis]=IRmeas_fft(ts,tw,flower,fupper,playgain,player);
+[fs,impulse_response,irtime,tf,faxis]=IRmeas_fft_beamforming(ts,tw,flower,fupper,playgain,player);
 load('calibration.mat');
 transfer_function = tf./calibration.preamp_transfer_function;
 end
