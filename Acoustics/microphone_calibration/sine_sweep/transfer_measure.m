@@ -29,28 +29,27 @@ Lacoustics(cmd,gain);
 
 %% Show calibration of microphone
 load('calibration.mat')
-calibration.mic_sensitivity
+p0 = 20*10^(-6);
+fs = 48000; 
+blength = 3;
+soundcard = audioDeviceReader('SampleRate',fs,'SamplesPerFrame',2048);          % setting up audio object
+buffer = zeros(blength * fs, 1);            % initializing audio buffer
+tic;
+while toc < 10
+    audioin = soundcard()/calibration.mic_sensitivity;                  % fetch samples from soundcard
+    buffer = [buffer(2049:end); audioin];   % update buffer
+end
+out = 20*log10(rms(buffer)*sqrt(2)/p0)
 clear calibration
 
-fs = 48000;                                 % sample rate       [Hz]
-blength = 3;                                % buffer length      [s]
-
-soundcard = audioDeviceReader(fs);          % setting up audio object
-%soundcard.Driver(ASIO)                    % choosing audio driver
-soundcard.SamplesPerFrame = fs/8;           % setting up framesize for
-                                            % fast sound weighting
-buffer = zeros(blength * fs, 1);            % initializing audio buffer
-RMS = [];                                   % initializing log variable
-logtable = table(RMS);                      % initilizing log table
-tic;
-while toc < 4
-    audioin = soundcard()/calibration.mic_sensitivity;                  % fetch samples from soundcard
-    buffer = [buffer(6001:end); audioin];   % update buffer
-    RMS = dummy(buffer);
-    logtable = [logtable; table(RMS)]
-end
 
 
+%% sound meter
+fs = 48000; 
+[L_pF,L_pS] = OneThirdOctaveAnalyser(0.125,1,buffer(1:48000*2),fs);
+bar(L_pS)
+hold on
+bar(L_pF)
 
 %% Make impulse response
 clear all
@@ -69,8 +68,3 @@ axis([20 20000 60 140])
 xlabel('Frequency [Hz]')
 ylabel('Pressure [Pa]')
 
-
-%% function
-function out = dummy(in)
-    out = rms(in)*sqrt(2);
-end
