@@ -32,6 +32,26 @@ load('calibration.mat')
 calibration.mic_sensitivity
 clear calibration
 
+fs = 48000;                                 % sample rate       [Hz]
+blength = 3;                                % buffer length      [s]
+
+soundcard = audioDeviceReader(fs);          % setting up audio object
+%soundcard.Driver(ASIO)                    % choosing audio driver
+soundcard.SamplesPerFrame = fs/8;           % setting up framesize for
+                                            % fast sound weighting
+buffer = zeros(blength * fs, 1);            % initializing audio buffer
+RMS = [];                                   % initializing log variable
+logtable = table(RMS);                      % initilizing log table
+tic;
+while toc < 4
+    audioin = soundcard()/calibration.mic_sensitivity;                  % fetch samples from soundcard
+    buffer = [buffer(6001:end); audioin];   % update buffer
+    RMS = dummy(buffer);
+    logtable = [logtable; table(RMS)]
+end
+
+
+
 %% Make impulse response
 clear all
 cmd = 'transfer'
@@ -48,3 +68,9 @@ grid on
 axis([20 20000 60 140])
 xlabel('Frequency [Hz]')
 ylabel('Pressure [Pa]')
+
+
+%% function
+function out = dummy(in)
+    out = rms(in)*sqrt(2);
+end

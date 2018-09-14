@@ -11,7 +11,7 @@ p0 = 20*10^(-6);
 p = abcfilt(input,'a');
 %p = sig2;
 figure(1)
-%% linear 
+%% time linear 
 for i = 1:1:length(sig1)/tau
 a=tau*(i-1)+1;
 b=a+tau-1;
