@@ -5,7 +5,7 @@ fs = 48000;                                 % sample rate       [Hz]
 bufferSize = 2048;                          % Buffer size         []
 blength = 3;                                % buffer length      [s]
 tablelines = 25;                            % number of lines that are
-                                            % buffered before writing file
+[Nfc,oneThirdOctaveFilterBank] = OneThirdOctaveAnalyserInit(fs);                                           % buffered before writing file
 TL = 1;
 B= 0;
 B=logical(B);
@@ -37,7 +37,7 @@ while nr<200
     nr = nr+1;                              % update number of runs counter
     if B & (nr > (fs*blength/bufferSize))
         tic
-        [F,S] = OneThirdOctaveAnalyser(0.125,1,buffer,fs);
+        [F,S] = OneThirdOctaveAnalyser(0.125,1,buffer,oneThirdOctaveFilterBank,Nfc,fs);
         times(nr)=toc-times(nr-1);
         logtable(TL,3:33) = F;
         logtable(TL,34:64) = S;
