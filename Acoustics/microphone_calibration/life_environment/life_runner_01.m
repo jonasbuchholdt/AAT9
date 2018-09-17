@@ -35,7 +35,7 @@ while nr<200
     audioin = soundcard();                  % fetch samples from soundcard
     buffer = [buffer(2049:end); audioin];   % update buffer
     nr = nr+1;                              % update number of runs counter
-    if B & (nr > (fs*blength/bufferSize))
+    if B && (nr > (fs*blength/bufferSize))
         tic
         [F,S] = OneThirdOctaveAnalyser(0.125,1,buffer,oneThirdOctaveFilterBank,Nfc,fs);
         times(nr)=toc-times(nr-1);
