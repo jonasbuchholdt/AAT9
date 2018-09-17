@@ -6,7 +6,7 @@ bufferSize = 2048;                          % Buffer size         []
 blength = 3;                                % buffer length      [s]
 tablelines = 1;                             % number of lines that are
                                             % buffered before writing file
-TL = 1;
+TL = 5;
 B= 0;
 B=logical(B);
 nr=0;                                       % number of loops runs
@@ -40,13 +40,14 @@ while toc < 10
         logtable(TL,3:33) = F;
         logtable(TL,34:64) = S;
         TL = TL + 1;
+        if TL >= tablelines
+            dlmwrite(filename,logtable,'-append');
+            TL = 1;
+        end
     end
     B = ~ B;
     
-    if TL >= tablelines
-        dlmwrite(filename,logtable,'-append');
-        TL = 1;
-    end
+
 end
 
 close all
