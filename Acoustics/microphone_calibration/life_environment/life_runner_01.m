@@ -3,7 +3,7 @@ clear all
 filename = 'testlog_01.csv';
 fs = 48000;                                 % sample rate       [Hz]
 bufferSize = 2048;                          % Buffer size         []
-blength = 3;                                % buffer length      [s]
+blength = 2;                                % buffer length      [s]
 tablelines = 25;                            % number of lines that are
 [Nfc,oneThirdOctaveFilterBank] = OneThirdOctaveAnalyserInit(fs);                                           % buffered before writing file
 TL = 1;
