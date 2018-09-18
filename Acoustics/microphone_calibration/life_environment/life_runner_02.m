@@ -3,13 +3,16 @@ clear all
 filename = 'testlog_01.csv';
 fs = 48000;                                 % sample rate       [Hz]
 bufferSize = 2048;                          % Buffer size         []
-blength = 2;                                % buffer length      [s]
+blength = 1;                                % buffer length      [s]
 tablelines = 25;                            % number of lines that are
 [Nfc,oneThirdOctaveFilterBank] = OneThirdOctaveAnalyserInit(fs);                                           % buffered before writing file
 TL = 1;
 B= 0;
 B=logical(B);
 nr=0;                                       % number of loops runs
+bpo = 3;                                    % bands per octave
+flims = [19,20001];                         % Frequency Limits
+opts = {'FrequencyLimits',flims,'BandsPerOctave',bpo};
 
 %soundcard = audioDeviceReader('Driver','ASIO','SampleRate',fs,'SamplesPerFrame',bufferSize);          % setting up audio object
 soundcard = audioDeviceReader('SampleRate',fs,'SamplesPerFrame',bufferSize);          % setting up audio object
