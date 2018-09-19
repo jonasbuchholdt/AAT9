@@ -4,7 +4,7 @@ infilename = 'test_recording.wav';
 outfilename = 'testlog_01.csv';
 fs = 48000;                                 % sample rate       [Hz]
 bufferSize = 6000;                          % Buffer size         []
-blength = 3;                                % buffer length      [s]
+blength = 2;                                % buffer length      [s]
 tablelines = 100;                            % number of lines that are
 [Nfc,oneThirdOctaveFilterBank] = OneThirdOctaveAnalyserInit(fs);                                           % buffered before writing file
 TL = 1;
@@ -14,7 +14,7 @@ nr=0;                                       % number of loops runs
 
 %soundcard = audioDeviceReader('Driver','ASIO','SampleRate',fs,'SamplesPerFrame',bufferSize);          % setting up audio object
 %soundcard = audioDeviceReader('SampleRate',fs,'SamplesPerFrame',bufferSize);          % setting up audio object
-soundcard = dsp.AudioFileRead(
+soundcard = dsp.AudioFileReader('Filename',infilename,'SamplesPerFrame',bufferSize)
 
 buffer = zeros(blength * fs, 1);            % initializing audio buffer
 
@@ -40,8 +40,8 @@ while nr<200
         tic
         [F,S] = OneThirdOctaveAnalyser(0.125,1,buffer,oneThirdOctaveFilterBank,Nfc,fs);
         times(nr)=toc-times(nr-1);
-        logtable(TL,3:33) = F;
-        logtable(TL,34:64) = S;
+        logtable(TL,3:33) = round(F,2);
+        logtable(TL,34:64) = round(S,2);
         if TL >= tablelines
             dlmwrite(outfilename,logtable,'-append');
             TL = 1;
