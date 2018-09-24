@@ -1,0 +1,2 @@
+function [out] = quickcal(filename)
+audio = audioread(filename)
