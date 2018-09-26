@@ -1,7 +1,7 @@
 clear all
 calibrationfilename = '18_09_24_calibration.wav';
 infilename = '18_09_24_group.wav';
-outfilename = 'B2_107.csv';
+outfilename = 'check_123.csv';
 fs = 48000;                                 % sample rate       [Hz]
 bufferSize = 6000;                          % Buffer size         []
 blength = 1;                              % buffer length      [s]
