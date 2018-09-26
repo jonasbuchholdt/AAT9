@@ -55,7 +55,8 @@ datetick('x', 'HH:MM')
 grid minor
 ylim([35 87])
 xlim([timestr(st_s+100) timestr(end_s-100)])
-legend({'Time signal','P10','P50','P90'})
+lgd = legend({'Time signal','P10','P50','P90'})
+title(lgd,'Flex room');
 xlabel('Time [HH:MM]')
 ylabel('Level [dBA]')
 set(gca,'fontsize',14)
@@ -71,7 +72,9 @@ datetick('x', 'HH:MM')
 grid minor
 ylim([35 87])
 xlim([timestr(st_s+100) timestr(end_s-100)])
-legend({'Time signal','P10','P50','P90'})
+lgd = legend({'Time signal','P10','P50','P90'})
+title(lgd,'B3-107');
+
 xlabel('Time [HH:MM]')
 ylabel('Level [dBA]')
 set(gca,'fontsize',14)
