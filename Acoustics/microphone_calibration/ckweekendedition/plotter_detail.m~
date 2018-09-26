@@ -15,12 +15,17 @@ smallroomC = 20*log10(sum(10.^(((data_small(:,4:34))+C_w)/20),2));
 
 bigroomA = 20*log10(sum(10.^(((data_big_mod(:,4:34))+A_w)/20),2));
 bigroomC = 20*log10(sum(10.^(((data_big_mod(:,4:34))+C_w)/20),2));
+bigroomZ = 20*log10(sum(10.^(((data_big_mod(:,4:34)))/20),2));
 
-
-plot(timestr,smallroomA)
+plot(timestr(80000:82400),data_big_mod(80000:82400,2))
 hold on
-plot(timestr,bigroomA)
+plot(timestr(80000:82400),bigroomZ(80000:82400))
+plot(timestr(80000:82400),bigroomA(80000:82400))
+plot(timestr(80000:82400),bigroomC(80000:82400))
 datetick('x', 'HH:MM')
 grid minor
 axis tight
 ylim ([30 110])
+legend('Zog','Zsum','A - weighted','C - weighted')
+
+error = data_big_mod(80000:82400,2) - bigroomZ(80000:82400);
