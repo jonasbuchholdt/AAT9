@@ -17,11 +17,71 @@ bigroomA = 10*log10(sum(10.^(((data_big_mod(:,4:34))+A_w)/10),2));
 bigroomC = 10*log10(sum(10.^(((data_big_mod(:,4:34))+C_w)/10),2));
 bigroomZ = 10*log10(sum(10.^(((data_big_mod(:,4:34)))/10),2));
 
+st_s=2.46e4;
+end_s=1.428e5;
+p10_b=[zeros(st_s-1,1); ones(end_s-st_s,1); zeros((size(data_small,1)-end_s+1),1)];
+p50_b=p10_b;
+p90_b=p10_b;
+p10_s=p10_b;
+p50_s=p10_b;
+p90_s=p10_b;
+
+p10_b=p10_b*prctile(bigroomA((st_s:end_s),1) ,10);
+p50_b=p50_b*prctile(bigroomA((st_s:end_s),1) ,50);
+p90_b=p90_b*prctile(bigroomA((st_s:end_s),1) ,90);
+
+p10_s=p10_s*prctile(smallroomA((st_s:end_s),1) ,10);
+p50_s=p50_s*prctile(smallroomA((st_s:end_s),1) ,50);
+p90_s=p90_s*prctile(smallroomA((st_s:end_s),1) ,90);
+
+figure(1)
+plot(timestr,smallroomA)
+hold on
+plot(timestr,bigroomA)
+hold off
+datetick('x', 'HH:MM')
+grid minor
+axis tight
+ylim ([30 110])
+
+figure(2)
+plot(timestr,bigroomA)
+hold on
+plot(timestr,p10_b,'k','LineWidth',2)
+plot(timestr,p50_b,'r','LineWidth',2)
+plot(timestr,p90_b,'g','LineWidth',2)
+hold off
+datetick('x', 'HH:MM')
+grid minor
+ylim([35 87])
+xlim([timestr(st_s+100) timestr(end_s-100)])
+legend({'Time signal','P10','P50','P90'})
+xlabel('Time [HH:MM]')
+ylabel('Level [dBA]')
+set(gca,'fontsize',14)
+
+figure(3)
+plot(timestr,smallroomA)
+hold on
+plot(timestr,p10_s,'k','LineWidth',2)
+plot(timestr,p50_s,'r','LineWidth',2)
+plot(timestr,p90_s,'g','LineWidth',2)
+hold off
+datetick('x', 'HH:MM')
+grid minor
+ylim([35 87])
+xlim([timestr(st_s+100) timestr(end_s-100)])
+legend({'Time signal','P10','P50','P90'})
+xlabel('Time [HH:MM]')
+ylabel('Level [dBA]')
+set(gca,'fontsize',14)
+
+figure(4)
 plot(timestr(80000:81200),data_big_mod(80000:81200,2))
 hold on
-
 plot(timestr(80000:81200),bigroomA(80000:81200))
 plot(timestr(80000:81200),bigroomC(80000:81200))
+hold off
 datetick('x', 'HH:MM')
 grid minor
 axis tight
