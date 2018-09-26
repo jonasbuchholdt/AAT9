@@ -7,9 +7,19 @@ data_big_mod = [zeros(24000,65); data_big; zeros((size(data_small,1)-24000-size(
 %%
 timestr = datetime('08/14/2017 08:40:00.00000', 'InputFormat', 'MM/dd/yyyy HH:mm:ss.SSSSS')+ seconds((0:length(data_small)-1)./8);
 
-plot(timestr,data_small(:,2))
+A_w = [-50.5 -44.7 -39.4 -34.6 -30.2 -26.2 -22.5 -19.1 -16.1 -13.4 -10.9 -8.6 -6.6 -4.8 -3.2 -1.9 -0.8 0 0.6 1.0 1.2 1.3 1.2 1.0 0.5 -0.1 -1.1 -2.5 -4.3 -6.6 -9.3]; 
+C_w = [-6.2 -4.4 -3.0 -2.0 -1.3 -0.8 -0.5 -0.3 -0.2 -0.1 0 0 0 0 0 0 0 0 0 -0.1 -0.2 -0.3 -0.5 -0.8 -1.3 -2.0 -3.0 -4.4 -6.2 -8.5 -11.2];
+
+smallroomA = 20*log10(sum(10.^(((data_small(:,4:34))+A_w)/20),2));
+smallroomC = 20*log10(sum(10.^(((data_small(:,4:34))+C_w)/20),2));
+
+bigroomA = 20*log10(sum(10.^(((data_big_mod(:,4:34))+A_w)/20),2));
+bigroomC = 20*log10(sum(10.^(((data_big_mod(:,4:34))+C_w)/20),2));
+
+
+plot(timestr,smallroomA)
 hold on
-plot(timestr,data_big_mod(:,2))
+plot(timestr,bigroomA)
 datetick('x', 'HH:MM')
 grid minor
 axis tight
