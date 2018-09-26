@@ -1,7 +1,7 @@
 clear all
-calibrationfilename = 'cal_flexgroup.wav';
-infilename = 'grupperum.wav';
-outfilename = 'flex_analysis.csv';
+calibrationfilename = '18_09_24_calibration.wav';
+infilename = '18_09_24_group.wav';
+outfilename = 'B2_107.csv';
 fs = 48000;                                 % sample rate       [Hz]
 bufferSize = 6000;                          % Buffer size         []
 blength = 1;                              % buffer length      [s]
@@ -35,7 +35,7 @@ cell2csv(outfilename,headline)
 while ~isDone(soundcard)
     audioin = soundcard();                  % fetch samples from soundcard
     buffer = [buffer(bufferSize+1:end); audioin];   % update buffer
-    nr = nr+1;                              % update number of runs counter
+    nr = nr+1                              % update number of runs counter
     if (nr > (fs*blength/bufferSize))
         %tic
         [F,S,gesF,gesS] = third_run(buffer*cal_factor,oneThirdOctaveFilterBank,timefilter,timepar);
