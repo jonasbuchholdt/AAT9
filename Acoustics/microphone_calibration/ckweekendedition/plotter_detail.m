@@ -90,5 +90,7 @@ grid minor
 axis tight
 ylim ([44 84])
 legend('Z -weighted','A - weighted','C - weighted')
-
+xlabel('Time [HH:MM]')
+ylabel('Level [dB]')
+set(gca,'FontSize',14)
 error = data_big_mod(80000:81200,2) - bigroomZ(80000:81200,1);
