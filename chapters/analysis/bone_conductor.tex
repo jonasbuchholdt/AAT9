@@ -27,7 +27,7 @@ The \autoref{eq:res_b71} explain well that ether the mass has to be bigger or th
 
 
 \subsection{B81}
-The Radioear Corporation B81 is building on the \gls{best} principle. The \gls{best} is an optimised variable reluctance type transducer designed founded by the author of \citep{the_balanced_2003}. The idea of the \gls{best} principle is to cancel the static force because then the suspension can be made more compliance so less stiff. The benefit is that is that the mass does not have to be raised and the distortion in the low frequency is lowered with a factor of at least 10. It also make the frequency response wider in the low frequency because the resonance frequency can be lowered with the same mass. To accomplished that a counterbalance of the static force has to be introduced in the design. The counterbalance is made by introducing a second air gab in the design. The following \autoref{fig:r_b81} shows a inside cross-section cut for the B81.
+The Radioear Corporation B81 is building on the \gls{best} principle. The \gls{best} is an optimised variable reluctance type transducer designed founded by the author of \citep{the_balanced_2003}. The idea of the \gls{best} principle is to cancel the static force, because then the suspension can be made more compliance so less stiff. The benefit is that the mass does not have to be raised and the distortion in the low frequency is lowered with a factor of at least 10. It also make the frequency response wider in the low frequency area, because the resonance frequency can be lowered with the same mass. To accomplished that a counterbalance of the static force has to be introduced in the design. The counterbalance is made by introducing a second air gab in the design. The following \autoref{fig:r_b81} shows a inside cross-section cut for the B81.
 
  \begin{figure}[H]
 	\centering
@@ -36,7 +36,32 @@ The Radioear Corporation B81 is building on the \gls{best} principle. The \gls{b
 		\label{fig:r_b81}
 \end{figure}
 
-The design of the B81 transducer is a slightly modified \gls{best} transducer, which adapt for \gls{bc} purposes. The \gls{best} principle was original made for implant \gls{bc} and therefore the B81 transducer had more freedom for size and power consumption. Therefore the \gls{best} in the B81 is made with 4 constant magnetic magnets instead of one in the original design. Some external air gab is introduced which stabilise the static magnetic flux and make it independent of the position of the bobbin arms in the air gabs. 
+The design of the B81 transducer is a slightly modified \gls{best} transducer, which adapt for \gls{bc} purposes, where external air gab is introduced which stabilise the static magnetic flux and make it independent of the position of the bobbin arms in the air gabs and lower the distortion.  The \gls{best} principle was original made for implant \gls{bc} and therefore the B81 transducer had more freedom for size and power consumption. The following \autoref{fig:bc_frequency_range} compare the \gls{bc} B71 with the new \gls{bc} B81.
 
 
-https://pdfs.semanticscholar.org/9407/bf610cf2fc32835a5ca07dcce3d4b4b08599.pdf?_ga=2.147405172.291536821.1537166972-1605440078.1536836079
+\begin{figure}[H]
+\centering
+\begin{subfigure}[htbp]{0.48\textwidth}
+		\includegraphics[width=1\textwidth]{bc_frequency_range}
+		\caption{The figure compare the frequency range for the B81 and B71  \citep{the_balanced_2003}.}
+		\label{fig:bc_frequency_range}
+\end{subfigure}\hspace{10pt}
+\begin{subfigure}[htbp]{0.48\textwidth}
+		\includegraphics[width=1\textwidth]{bc_distortion}
+		\caption{The figure compare the distortion for the B81 and B71  \citep{the_balanced_2003}.}
+		\label{fig:bc_distortion}
+\end{subfigure} 
+\caption{The figurs compare the  B81 and B71}
+\label{fig:bc_frequency_distortion}
+\end{figure}
+
+
+
+The figure \autoref{fig:bc_frequency_distortion} shows that the frequency range for the B81 is improved but importers for this project, the distortion is lowered significantly in the frequency area of interest \autoref{speech_in_comm}. The only suffering part of the B81 is that the improvement decrees in the high frequency and is not better than the B71 above \SI{3}{\kilo\hertz}. The B81 is a feasible choose for \GLS{bc} in communication distortion wise but the frequency range towards high frequency is not wide enough. For good speech intelligibility the frequency range was founded to be from \SI{355}{\hertz} up to \SI{5.68}{\kilo\hertz}  \autoref{speech_in_comm}, but the B81 sufferes in frequency range from \SI{2}{\kilo\hertz} where the \si{\newton\per\volt} is decreased more that \SI{20}{\decibel}.
+
+
+
+
+
+
+
