@@ -12,6 +12,8 @@ C_w = [-6.2 -4.4 -3.0 -2.0 -1.3 -0.8 -0.5 -0.3 -0.2 -0.1 0 0 0 0 0 0 0 0 0 -0.1 
 
 smallroomA = 10*log10(sum(10.^(((data_small(:,4:34))+A_w)/10),2));
 smallroomC = 10*log10(sum(10.^(((data_small(:,4:34))+C_w)/10),2));
+smallroomZ = 10*log10(sum(10.^(((data_small(:,4:34)))/10),2));
+smallroomAslow = 10*log10(sum(10.^(((data_small(:,35:65))+A_w)/10),2));
 
 bigroomA = 10*log10(sum(10.^(((data_big_mod(:,4:34))+A_w)/10),2));
 bigroomC = 10*log10(sum(10.^(((data_big_mod(:,4:34))+C_w)/10),2));
@@ -34,6 +36,14 @@ p10_s=p10_s*prctile(smallroomA((st_s:end_s),1) ,10);
 p50_s=p50_s*prctile(smallroomA((st_s:end_s),1) ,50);
 p90_s=p90_s*prctile(smallroomA((st_s:end_s),1) ,90);
 
+LZEQ_flex = 10*log10((1/length(bigroomZ(2.46*10^4:1.428*10^5)))*sum(10.^((bigroomZ(2.46*10^4:1.428*10^5)./10))))
+LAEQ_flex = 10*log10((1/length(bigroomZ(2.46*10^4:1.428*10^5)))*sum(10.^((bigroomA(2.46*10^4:1.428*10^5)./10))))
+LCEQ_flex = 10*log10((1/length(bigroomZ(2.46*10^4:1.428*10^5)))*sum(10.^((bigroomC(2.46*10^4:1.428*10^5)./10))))
+
+LZEQ_small = 10*log10((1/length(bigroomZ(2.46*10^4:1.428*10^5)))*sum(10.^((smallroomZ(2.46*10^4:1.428*10^5)./10))))
+LAEQ_small = 10*log10((1/length(bigroomZ(2.46*10^4:1.428*10^5)))*sum(10.^((smallroomA(2.46*10^4:1.428*10^5)./10))))
+LCEQ_small = 10*log10((1/length(bigroomZ(2.46*10^4:1.428*10^5)))*sum(10.^((smallroomC(2.46*10^4:1.428*10^5)./10))))
+
 figure(1)
 plot(timestr,smallroomA)
 hold on
@@ -55,7 +65,7 @@ datetick('x', 'HH:MM')
 grid minor
 ylim([35 87])
 xlim([timestr(st_s+100) timestr(end_s-100)])
-lgd = legend({'Time signal','P10','P50','P90'})
+lgd = legend({'Level over time','P10','P50','P90'})
 title(lgd,'Flex room');
 xlabel('Time [HH:MM]')
 ylabel('Level [dBA]')
@@ -72,7 +82,7 @@ datetick('x', 'HH:MM')
 grid minor
 ylim([35 87])
 xlim([timestr(st_s+100) timestr(end_s-100)])
-lgd = legend({'Time signal','P10','P50','P90'})
+lgd = legend({'Level over time','P10','P50','P90'})
 title(lgd,'B3-107');
 
 xlabel('Time [HH:MM]')
@@ -80,17 +90,16 @@ ylabel('Level [dBA]')
 set(gca,'fontsize',14)
 
 figure(4)
-plot(timestr(80000:81200),data_big_mod(80000:81200,2))
+plot(timestr(80000:80480),smallroomA(80000:80480))
 hold on
-plot(timestr(80000:81200),bigroomA(80000:81200))
-plot(timestr(80000:81200),bigroomC(80000:81200))
+plot(timestr(80000:80480),smallroomAslow(80000:80480))
 hold off
-datetick('x', 'HH:MM')
+datetick('x', 'HH:MM:SS')
 grid minor
 axis tight
-ylim ([44 84])
-legend('Z -weighted','A - weighted','C - weighted')
-xlabel('Time [HH:MM]')
+ylim ([35 75])
+legend('Fast','Slow')
+xlabel('Time [HH:MM:SS]')
 ylabel('Level [dB]')
 set(gca,'FontSize',14)
 error = data_big_mod(80000:81200,2) - bigroomZ(80000:81200,1);
