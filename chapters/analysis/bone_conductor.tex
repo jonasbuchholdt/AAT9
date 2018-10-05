@@ -1,8 +1,8 @@
-\section{Existing bone conductor}
-The chose for a \gls{bc} require knowledge of existing \gls{bc} and vibrators of possible \gls{bc} for the purpose of this project. Therefore this section will analyse the most common \gls{bc} for hearing damage test and analyse different kind of vibrators founded by research. 
+\section{Existing \gls{bc} transducers}
+One of the key factors for the purpose of this project is choosing a transducer that fits correctly with the objective pursued (testing if intelligibility can be improved with \gls{bc}. Therefore, knowledge about the available transducers at the moment is needed.The chose for a \gls{bc} require knowledge of existing \gls{bc} and vibrators of possible \gls{bc} for the purpose of this project. This section contains an analysis of the most common \gls{bc} transducers used for hearing damage assessment, as well as different kind of vibrators and actuators found during the research phase. 
 
 \subsection{B71}
-One of the most widely used \gls{bc} is the Radioear Corporation B71, which build on the electromagnetic transducers of the variable reluctance type. The benefit for using such type of transducer is that the transducer have a wide frequency response, high impedance and efficiency in a small size packed. The principle of the variable reluctance type is that it function according to the horseshoe magnet principle. This principle means that there is a small air gab between the yoke, which is attached to the outer plastic cabinet of the B71, and the armature which basically is the permanent magnet. \citep{the_balanced_2003}. The force in the air gap, between the yoke and the armature can be changed by generate a magnetic field in the coil which make the armature to move. This force change and movement will make vibration and vibrate accordingly to the input signal. To transfer acoustic signal to the skull, the transducer is required to be pressed to the skull with a minimum force of \SI{5}{\newton}. At hearing test the transducer shall be pressed against the mastoid area behind the ear with the earlier mentioned force. The following \autoref{fig:r_b71} shows a inside cross-section cut for the B71.
+One of the most widely used \gls{bc} transducers is the Radioear Corporation B71, which belongs to the electromagnetic transducers of the variable reluctance type. The benefit of using such type of transducer is that it has a wide frequency response, high impedance and efficiency, all within a small size. The principle of the variable reluctance type is that it functions according to the horseshoe magnet principle. This principle means that there is a small air gap between the yoke, which is attached to the outer plastic cabinet of the B71, and the armature which is basically the permanent magnet \citep{the_balanced_2003}. The force in the air gap, between the yoke and the armature can be changed by generating a magnetic field in the coil, which makes the armature to move. This force changes and movements will generate vibrations corresponding to an input signal. In order to transfer acoustic signal to the skull, the transducer is required to be pressed to it with a minimum force of \SI{5}{\newton}. At hearing tests, the transducer should be pressed against the mastoid area behind the ear with the previously mentioned force. The following \autoref{fig:r_b71} shows an inside cross-section cut of the B71.
 
  \begin{figure}[H]
 	\centering
@@ -11,7 +11,7 @@ One of the most widely used \gls{bc} is the Radioear Corporation B71, which buil
 		\label{fig:r_b71}
 \end{figure}
 
-The design of the B71 have limits which make it poor for music and communication use. The transducer have high distortion in frequency below \SI{1}{\kilo\hertz} and goes to approximate \SI{61}{\percent} distortion at \SI{250}{\hertz}. Furthermore the transducer have poor frequency response. The first-order analysis of the electromagnetic circuit is explained in this article \autoref{fig:r_b71}. The conclusion for this kind of magnetic circuit is that it require a high static magnetic force and therefore a stiff suspension to avoid collapse of the air gap. A transducer is normally designed such that the resonance frequency of the transducer lays slightly above the lowest frequency for the transducer. With respect to the resonance formula of the circuit for B71, only the mass of the counterweight for the transducer or the stiffness for the suspension can be changed to get a better low frequency response. The formula is as following \autoref{eq:res_b71} \autoref{fig:r_b71}.
+The design of the B71 has limits which makes it not optimal for music and communications use. The transducer has high distortion in frequencies below \SI{1}{\kilo\hertz} and reaches approximately \SI{61}{\percent} distortion at \SI{250}{\hertz}. Furthermore, it has a poor frequency response. The first-order analysis of the electromagnetic circuit is explained in this article \autoref{fig:r_b71}. The conclusion for this kind of magnetic circuit is that it requires a high static magnetic force and therefore a stiff suspension to avoid the air gap collapsing. A transducer is normally designed such that its resonance frequency lays slightly above the lowest frequency in its dynamic range. With respect to the resonance formula of the circuit for B71, only the mass of the counterweight for the transducer or the stiffness for the suspension can be changed to get a better low frequency response. The formula is as following \autoref{eq:res_b71} \autoref{fig:r_b71}.
 
 \begin{equation}\label{eq:res_b71}
 f_r=\frac{1}{2 \pi \sqrt{m C}}
@@ -23,11 +23,11 @@ f_r=\frac{1}{2 \pi \sqrt{m C}}
         \explain{$C$ is the compliance of the suspension}{\si{.(\newton\per\meter)^{-1}}}
     \stopexplain
 
-The \autoref{eq:res_b71} explain well that ether the mass has to be bigger or the compliance have to be higher. By doing the compliance higher the stiffness suffer and the air gab can not be maintained and therefore only the mass can be changed. Raising the mass of the counterweight makes the transducer bigger and the weight will rise. To avoid a bigger and more heavy design, the Radioear Corporation B81 have been designed and will be explained next. 
+The \autoref{eq:res_b71} explains well that either the mass or the compliance need to increase in order to achieve so. By increasing the compliance, the stiffness suffers and the air gap cannot be maintained, and therefore, only the mass can be changed. Increasing the mass of the counterweight makes the transducer bigger and also affects its weight. None of this options would correctly fit with the purpose of the transducer itself, so in order to avoid a bigger and heavier design, the Radioear Corporation B81 has been designed and will be explained next. 
 
 
 \subsection{B81}
-The Radioear Corporation B81 is building on the \gls{best} principle. The \gls{best} is an optimised variable reluctance type transducer designed founded by the author of \citep{the_balanced_2003}. The idea of the \gls{best} principle is to cancel the static force, because then the suspension can be made more compliance so less stiff. The benefit is that the mass does not have to be raised and the distortion in the low frequency is lowered with a factor of at least 10. It also make the frequency response wider in the low frequency area, because the resonance frequency can be lowered with the same mass. To accomplished that a counterbalance of the static force has to be introduced in the design. The counterbalance is made by introducing a second air gab in the design. The following \autoref{fig:r_b81} shows a inside cross-section cut for the B81.
+The Radioear Corporation B81 is built following the \gls{best} principle. The \gls{best} is an optimised variable reluctance type of transducer designed by the author of \citep{the_balanced_2003}. The idea of the \gls{best} principle is to cancel the static force, because then the suspension's compliance can be increased, reducing the stiffness. The benefit of this design is that the mass does not have to be increased and the distortion in the low frequency range is lowered by a factor of at least 10. It also makes the frequency response wider in the low frequency area, because the resonance frequency can be lowered with the same mass, thus avoiding the issues B71 presented. In order to accomplish this, a counterbalance for the static force has to be introduced in the system. The counterbalance is obtained by introducing a second air gap in the design. The following \autoref{fig:r_b81} shows a inside cross-section cut of the B81.
 
  \begin{figure}[H]
 	\centering
@@ -36,28 +36,28 @@ The Radioear Corporation B81 is building on the \gls{best} principle. The \gls{b
 		\label{fig:r_b81}
 \end{figure}
 
-The design of the B81 transducer is a slightly modified \gls{best} transducer, which adapt for \gls{bc} purposes, where external air gab is introduced which stabilise the static magnetic flux and make it independent of the position of the bobbin arms in the air gabs and lower the distortion.  The \gls{best} principle was original made for implant \gls{bc} and therefore the B81 transducer had more freedom for size and power consumption. The following \autoref{fig:bc_frequency_range} compare the \gls{bc} B71 with the new \gls{bc} B81.
+The design of the B81 transducer is a slightly modified \gls{best} transducer, adapted for \gls{bc} purposes, where an external air gap is introduced in order to stabilise the static magnetic flux and make it independent of the position of the bobbin arms in the air gaps, thus lowering the distortion.  The \gls{best} principle was originally developed for \gls{bc} implants and therefore the B81 transducer has more freedom in terms of size and power consumption. The following \autoref{fig:bc_frequency_range} compares the two \gls{bc} transducers mentioned so far, B71 and B81.
 
 
 \begin{figure}[H]
 \centering
 \begin{subfigure}[htbp]{0.48\textwidth}
 		\includegraphics[width=1\textwidth]{bc_frequency_range}
-		\caption{The figure compare the frequency range for the B81 and B71  \citep{the_balanced_2003}.}
+		\caption{The figure compares the frequency range for the B81 and B71 transducers \citep{the_balanced_2003}.}
 		\label{fig:bc_frequency_range}
 \end{subfigure}\hspace{10pt}
 \begin{subfigure}[htbp]{0.48\textwidth}
 		\includegraphics[width=1\textwidth]{bc_distortion}
-		\caption{The figure compare the distortion for the B81 and B71  \citep{the_balanced_2003}.}
+		\caption{The figure compares the distortion of the B81 and B71 transducers \citep{the_balanced_2003}.}
 		\label{fig:bc_distortion}
 \end{subfigure} 
-\caption{The figurs compare the  B81 and B71}
+\caption{The figures display different comparisons between B71 and B81 characteristics}
 \label{fig:bc_frequency_distortion}
 \end{figure}
 
 
 
-The figure \autoref{fig:bc_frequency_distortion} shows that the frequency range for the B81 is improved but importers for this project, the distortion is lowered significantly in the frequency area of interest \autoref{speech_in_comm}. The only suffering part of the B81 is that the improvement decrees in the high frequency and is not better than the B71 above \SI{3}{\kilo\hertz}. The B81 is a feasible choose for \GLS{bc} in communication distortion wise but the frequency range towards high frequency is not wide enough. For good speech intelligibility the frequency range was founded to be from \SI{355}{\hertz} up to \SI{5.68}{\kilo\hertz}  \autoref{speech_in_comm}, but the B81 sufferes in frequency range from \SI{2}{\kilo\hertz} where the \si{\newton\per\volt} is decreased more that \SI{20}{\decibel}.
+The figures in \autoref{fig:bc_frequency_distortion} show that the frequency range for the B81 is improved, and furthermore of importance for this project, the distortion is lowered significantly in the frequency area of interest \autoref{speech_in_comm}. The only drawback of the B81 is that the improvement decreases in the high frequency range and does not have a better response than the B71 above \SI{3}{\kilo\hertz}. The B81 transducer is a feasible choose for \GLS{bc} in communications distortion-wisea, but the frequency range towards high frequencies is not wide enough. For good speech intelligibility the frequency range was found to be from \SI{355}{\hertz} up to \SI{5.68}{\kilo\hertz}  \autoref{speech_in_comm}, but the B81 suffers in the frequency range from \SI{2}{\kilo\hertz} where the \si{\newton\per\volt} relation decreases more than \SI{20}{\decibel}.
 
 
 
