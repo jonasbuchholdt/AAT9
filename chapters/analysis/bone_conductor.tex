@@ -40,24 +40,36 @@ The design of the B81 transducer is a slightly modified \gls{best} transducer, a
 
 
 \begin{figure}[H]
-\centering
-\begin{subfigure}[htbp]{0.48\textwidth}
-		\includegraphics[width=1\textwidth]{bc_frequency_range}
-		\caption{The figure compares the frequency range for a \gls{best} and B71 transducers \citep{the_balanced_2003}.}
-		\label{fig:bc_frequency_range}
-\end{subfigure}\hspace{10pt}
-\begin{subfigure}[htbp]{0.48\textwidth}
-		\includegraphics[width=1\textwidth]{bc_distortion}
-		\caption{The figure compares the distortion of the B81 and a \gls{best} transducers \citep{the_balanced_2003}.}
-		\label{fig:bc_distortion}
-\end{subfigure} 
-\caption{The figures display different comparisons between B71 and a \gls{best} characteristics}
-\label{fig:bc_frequency_distortion}
+	\centering
+		\includegraphics[width=1\textwidth]{reb_frequency_range}
+		\caption{The figure A compares the frequency range for the B81 (red graph) and B71 (blue graph) transducers. The figure B compares the distortion of the  B81 (red graph) and B71 (blue graph) transducers. The last transducer (black graph) which represent the \gls{bc} KH70 is not analysed in this project since the transducer is a legacy product}
+		\label{fig:bc_frequency_distortion}
 \end{figure}
 
+%\begin{figure}[H]
+%\centering
+%\begin{subfigure}[htbp]{0.48\textwidth}
+%		\includegraphics[width=1\textwidth]{bc_frequency_range}
+%		\caption{The figure compares the frequency range for a \gls{best} and B71 transducers \citep{the_balanced_2003}.}
+%		\label{fig:bc_frequency_range}
+%\end{subfigure}\hspace{10pt}
+%\begin{subfigure}[htbp]{0.48\textwidth}
+%		\includegraphics[width=1\textwidth]{bc_distortion}
+%		\caption{The figure compares the distortion of the B81 and a \gls{best} transducers \citep{the_balanced_2003}.}
+%		\label{fig:bc_distortion}
+%\end{subfigure} 
+%\caption{The figures display different comparisons between B71 and a \gls{best} characteristics}
+%\label{fig:bc_frequency_distortion}
+%\end{figure}
 
 
-The figures in \autoref{fig:bc_frequency_distortion} show that the frequency range for the B81 is improved, and furthermore of importance for this project, the distortion is lowered significantly in the frequency area of interest \autoref{speech_in_comm}. The only drawback of the B81 is that the improvement decreases in the high frequency range and does not have a better response than the B71 above \SI{3}{\kilo\hertz}. The B81 transducer is a feasible choose for \GLS{bc} in communications distortion-wisea, but the frequency range towards high frequencies is not wide enough. For good speech intelligibility the frequency range was found to be from \SI{355}{\hertz} up to \SI{5.68}{\kilo\hertz}  \autoref{speech_in_comm}, but the B81 suffers in the frequency range from \SI{2}{\kilo\hertz} where the \si{\newton\per\volt} relation decreases more than \SI{20}{\decibel}.
+
+The figures in \autoref{fig:bc_frequency_distortion} show that the frequency range for the B81 is improved because the distortion is lowered significantly in the frequency area of interest \autoref{speech_in_comm}. The only drawback of the B81 is that the distortion improvement decreases in the high frequency range and the frequency response is not significant improved compare to the B71. 
+
+
+\section{Conclusion}
+
+For good speech intelligibility the frequency range was found to be from \SI{355}{\hertz} up to \SI{5.68}{\kilo\hertz}  \autoref{speech_in_comm}, where the B81 suffers a bit in the frequency range from \SI{2}{\kilo\hertz} where the \si{\newton\per\volt} relation decreases more than \SI{20}{\decibel}.  The B81 transducer is a feasible choose over B71 for \gls{bc} in communications distortion-wise.
 
 
 
