@@ -68,3 +68,22 @@ axis([20 20000 60 140])
 xlabel('Frequency [Hz]')
 ylabel('Pressure [Pa]')
 
+
+
+%% make reverb calculation
+clear all
+cmd = 'transfer'
+gain = -18;
+[f_axis,f_result,t_axis,t_result] = Lacoustics(cmd,gain);
+
+t_reverb = flip(t_result).^2;
+
+Q = trapz(t_reverb)
+
+
+
+
+
+
+
+
