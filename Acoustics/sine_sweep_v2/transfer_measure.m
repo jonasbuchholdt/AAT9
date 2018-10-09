@@ -129,25 +129,25 @@ end
 load('impulse.mat');
 load('impulse_axis.mat')
 
-
-test = (t_result).^2;
 interval = 3000;
-testt = test(end/2-interval:end/2+interval);
-resu = rms(testt)
+
+
+sqrt_impulse = (t_result).^2;
+mid = sqrt_impulse(end/2-interval:end/2+interval);
+noise_floor = rms(mid);
 
 b = 1;
-for i=3001:3000:length(test)
-    i
-    testte = test(i-interval:i+interval);
-    out = rms(testte)
+for i=interval+1:interval:length(sqrt_impulse)
+    part = sqrt_impulse(i-interval:i+interval);
+    impulse_level = rms(part);
     b = b+1;
-    if out <= resu
+    if impulse_level <= noise_floor
         break
     end
 end
 
 
-N = i
+N = i-interval-1;
 
 
 for i=1:Nfc
@@ -158,8 +158,8 @@ output = oneOctaveFilterBank{i}(t_result);
 t_reverb = (output(1:N)).^2;
 figure(1)
 plot(t_reverb)
-figure(2)
 hold on
+
 
 for t=1:1:length(t_reverb)
 Q(t) = trapz(t_reverb(t:end));
@@ -167,6 +167,7 @@ end
 
 res = 10*log10(Q/max(Q));
 
+figure(2)
 plot(t_axis(1:N),res)
 hold on
 
