@@ -63,7 +63,7 @@ load('offset.mat')
 [f_axis,f_result,t_axis,t_result] = Lacoustics(cmd,gain,offset);
 
 result=20*log10(abs(f_result)/(20*10^-6));
-number = 1;
+number = 6;
 result_mean(:,number) = movmean(result,100);
 impulse(:,number) = t_result;
 figure(1)
@@ -86,7 +86,7 @@ semilogx(f_axis,result_mean)
 
 %% save impulses
 
-save('reverb_impulses.mat','impulse');
+save('reverb_impulses_6.mat','impulse');
 
 %% Mean the test and show result
 
@@ -125,7 +125,7 @@ for i=1:Nfc
         'CenterFrequency', F0(i), 'Bandwidth', BW, 'SampleRate', fs);
 end
 
-load('reverb_impulses.mat');
+load('reverb_impulses_6.mat');
 load('impulse_axis.mat')
 
 
@@ -136,11 +136,11 @@ impulse=filter(b,a,impulse);
 
 interval = 3000;
 
-no = 1;
+no = 6;
 
 sqrt_impulse = (impulse(:,no)).^2;
 mid = sqrt_impulse(end/2-interval:end/2+interval);
-noise_floor = rms(mid);
+noise_floor = rms(mid)*1.01;
 
 b = 1;
 for i=interval+1:interval:length(sqrt_impulse)
@@ -154,7 +154,7 @@ end
 
 
 N = i-interval-1;
-
+%plot(sqrt_impulse)
 
 for i=1:Nfc
 
