@@ -9,8 +9,8 @@ switch cmd
         [fs,y]=irmeas_fft_mic();            
         add = rms(y)*sqrt(2);            
         load('calibration.mat')
-        %calibration.mic_sensitivity = add;
-        calibration.mic_sensitivity = 0.15; 
+        calibration.mic_sensitivity = add;
+        %calibration.mic_sensitivity = 0.15; 
         save('calibration.mat','calibration','-append');        
 
      

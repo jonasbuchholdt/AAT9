@@ -1,8 +1,8 @@
 function [faxis, transfer_function, irtime, impulse_response] = Tranfer_function(gain,offset)
 %%
-flower= 20;                             % lower frequency border for sweep      [Hz]
+flower= 88;                             % lower frequency border for sweep      [Hz]
 fupper=22000;                           % upper frequency border for sweep      [Hz]
-ts= 5;                                  % length of sweep                        [s]
+ts= 10;                                  % length of sweep                        [s]
 tw= 1;                                  % est. length of IR                      [s]
 playgain=gain;                            % gain for sweep playback               [dB]
 

@@ -65,7 +65,7 @@ load('offset.mat')
 result=20*log10(abs(f_result)/(20*10^-6));
 number = 1;
 result_mean(:,number) = movmean(result,100);
-
+impulse(:,number) = t_result;
 figure(1)
 %semilogx(f_axis,result)
 semilogx(f_axis,result_mean)
@@ -78,10 +78,15 @@ ylabel('Level [dB]')
 %% Add more test points 
 number = number+1; % run number
 [f_axis,f_result,t_axis,t_result] = Lacoustics(cmd,gain,offset);
+impulse(:,number) = t_result;
 result=20*log10(abs(f_result)/(20*10^-6));
 result_mean(:,number) = movmean(result,100);
 figure(1)
 semilogx(f_axis,result_mean)
+
+%% save impulses
+
+save('reverb_impulses.mat','impulse');
 
 %% Mean the test and show result
 
@@ -94,7 +99,7 @@ axis([20 20000 40 120])
 xlabel('Frequency [Hz]')
 ylabel('Level [dB]')
 
-%% sound meter
+%% sound meter beta
 fs = 44100; 
 [L_pF,L_pS] = OneThirdOctaveAnalyser(0.125,1,abs(ifft(mean_of_all_run)),fs);
 bar(L_pS)
@@ -103,13 +108,7 @@ bar(L_pF)
 
 
 %% make reverb calculation
-%clear all
-%cmd = 'transfer'
-%gain = -18;
-%[f_axis,f_result,t_axis,t_result] = Lacoustics(cmd,gain);
 clear all
-
-
 fs = 44100;
 BW = '1 octave'; 
 N = 6;
@@ -126,13 +125,20 @@ for i=1:Nfc
         'CenterFrequency', F0(i), 'Bandwidth', BW, 'SampleRate', fs);
 end
 
-load('impulse.mat');
+load('reverb_impulses.mat');
 load('impulse_axis.mat')
+
+
+load('hp.mat');
+[b,a]=sos2tf(SOS,G);
+impulse=filter(b,a,impulse);
+%plot(impulse);
 
 interval = 3000;
 
+no = 1;
 
-sqrt_impulse = (t_result).^2;
+sqrt_impulse = (impulse(:,no)).^2;
 mid = sqrt_impulse(end/2-interval:end/2+interval);
 noise_floor = rms(mid);
 
@@ -152,7 +158,7 @@ N = i-interval-1;
 
 for i=1:Nfc
 
-output = oneOctaveFilterBank{i}(t_result); 
+output = oneOctaveFilterBank{i}(impulse(:,no)); 
 
 
 t_reverb = (output(1:N)).^2;
@@ -188,3 +194,4 @@ stop = sample(1);
 T_30(i) = ((stop-start)*2)/fs
 
 end
+
