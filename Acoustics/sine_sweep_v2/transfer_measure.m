@@ -100,3 +100,90 @@ fs = 44100;
 bar(L_pS)
 hold on
 bar(L_pF)
+
+
+%% make reverb calculation
+%clear all
+%cmd = 'transfer'
+%gain = -18;
+%[f_axis,f_result,t_axis,t_result] = Lacoustics(cmd,gain);
+clear all
+
+
+fs = 44100;
+BW = '1 octave'; 
+N = 6;
+F0 = 1000;
+
+oneOctaveFilter = octaveFilter('FilterOrder', N, ...
+    'CenterFrequency', F0, 'Bandwidth', BW, 'SampleRate', fs);
+F0 = getANSICenterFrequencies(oneOctaveFilter);
+F0(F0<124) = [];
+F0(F0>4001) = [];
+Nfc = length(F0);
+for i=1:Nfc
+    oneOctaveFilterBank{i} = octaveFilter('FilterOrder', N, ...
+        'CenterFrequency', F0(i), 'Bandwidth', BW, 'SampleRate', fs);
+end
+
+load('impulse.mat');
+load('impulse_axis.mat')
+
+
+test = (t_result).^2;
+interval = 3000;
+testt = test(end/2-interval:end/2+interval);
+resu = rms(testt)
+
+b = 1;
+for i=3001:3000:length(test)
+    i
+    testte = test(i-interval:i+interval);
+    out = rms(testte)
+    b = b+1;
+    if out <= resu
+        break
+    end
+end
+
+
+N = i
+
+
+for i=1:Nfc
+
+output = oneOctaveFilterBank{i}(t_result); 
+
+
+t_reverb = (output(1:N)).^2;
+figure(1)
+plot(t_reverb)
+figure(2)
+hold on
+
+for t=1:1:length(t_reverb)
+Q(t) = trapz(t_reverb(t:end));
+end
+
+res = 10*log10(Q/max(Q));
+
+plot(t_axis(1:N),res)
+hold on
+
+sample = find(res < -5.001);
+start = sample(1);
+
+sample = find(res < -25.001);
+stop = sample(1);
+
+T_20(i) = ((stop-start)*3)/44100
+
+sample = find(res < -5.001);
+start = sample(1);
+
+sample = find(res < -35.001);
+stop = sample(1);
+
+T_30(i) = ((stop-start)*2)/fs
+
+end
