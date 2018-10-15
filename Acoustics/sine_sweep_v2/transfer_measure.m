@@ -125,7 +125,7 @@ for i=1:Nfc
         'CenterFrequency', F0(i), 'Bandwidth', BW, 'SampleRate', fs);
 end
 
-load('reverb_impulses_6.mat');
+load('reverb_impulses_4.mat');
 load('impulse_axis.mat')
 
 
@@ -136,7 +136,8 @@ impulse=filter(b,a,impulse);
 
 interval = 3000;
 
-no = 6;
+
+for no = 4:4
 
 sqrt_impulse = (impulse(:,no)).^2;
 mid = sqrt_impulse(end/2-interval:end/2+interval);
@@ -153,45 +154,46 @@ for i=interval+1:interval:length(sqrt_impulse)
 end
 
 
-N = i-interval-1;
-%plot(sqrt_impulse)
+N = 18000;%i-interval-1;
 
 for i=1:Nfc
 
 output = oneOctaveFilterBank{i}(impulse(:,no)); 
 
-
 t_reverb = (output(1:N)).^2;
-figure(1)
-plot(t_reverb)
-hold on
-
 
 for t=1:1:length(t_reverb)
 Q(t) = trapz(t_reverb(t:end));
 end
 
 res = 10*log10(Q/max(Q));
+no
 
-figure(2)
-plot(t_axis(1:N),res)
-hold on
+T_20_sample = res(length(find(res >= -5)):length(res)-length(find(res <= -25)));
+T_20_time   = t_axis(length(find(res >= -5)):length(res)-length(find(res <= -25)));
+p           = polyfit(T_20_time,T_20_sample,1);
+result      = polyval(p,t_axis(1:length(res)-length(find(res <= -25))));
+T_20_ls     = length(t_axis(length(find(result >= -10)):length(result)-length(find(result <= -20))))*6;
+T_20(no,i)  = round(T_20_ls/fs,2);
 
-sample = find(res < -5.001);
-start = sample(1);
+T_30_sample = res(length(find(res >= -5)):length(res)-length(find(res <= -35)));
+T_30_time   = t_axis(length(find(res >= -5)):length(res)-length(find(res <= -35)));
+p           = polyfit(T_30_time,T_30_sample,1);
+result      = polyval(p,t_axis(1:length(res)-length(find(res <= -35))));
+T_30_ls     = length(t_axis(length(find(result >= -10)):length(result)-length(find(result <= -20))))*6;
+T_30(no,i)  = round(T_30_ls/fs,2);
 
-sample = find(res < -25.001);
-stop = sample(1);
 
-T_20(i) = ((stop-start)*3)/44100
+% xlabel('Time [s]')
+% ylabel('Relative Level [dB]')
+% 
+% 
+% lgd = legend('125 Hz','250 Hz','500 Hz','1000 Hz','2000 Hz','4000 Hz');
+% title(lgd,'B5-105');
+% set(gca,'fontsize',14)
+% 
+% grid on
 
-sample = find(res < -5.001);
-start = sample(1);
-
-sample = find(res < -35.001);
-stop = sample(1);
-
-T_30(i) = ((stop-start)*2)/fs
 
 end
-
+end
