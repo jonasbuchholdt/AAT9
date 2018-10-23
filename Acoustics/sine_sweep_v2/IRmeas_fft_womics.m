@@ -1,4 +1,4 @@
-function [fs,irEstimate_distortion_less,irtime,tf,faxis]=IRmeas_fft_soundcard(ts,tw,flower,fupper,gainlevel,player,offset)
+function [fs,irEstimate_distortion_less,irtime,tf,faxis]=IRmeas_fft_soundcard(ts,frequencyRange,gainlevel,player,offset)
             % out:  ir          - impulse response      [vector, lin]
             %       irtime      - time axis for IR        [vector, s]
             %       tf          - transfer function      [vector, dB]
@@ -33,7 +33,7 @@ function [fs,irEstimate_distortion_less,irtime,tf,faxis]=IRmeas_fft_soundcard(ts
             % Set up swept sine using chirp function
             t = 0:1/fs:ts - (1/fs);
 
-            x = chirp(t,flower,ts,fupper,'logarithmic');
+            x = chirp(t,frequencyRange(1),ts,frequencyRange(2),'logarithmic');
             
             % apply gain scaling to form test signal x
             x = gainLin * x;
