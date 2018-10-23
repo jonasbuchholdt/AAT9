@@ -159,7 +159,7 @@ for i=1:Nfc
         'CenterFrequency', F0(i), 'Bandwidth', BW, 'SampleRate', fs);
 end
 
-load('reverb_impulses_absorption_without_sp2.mat');
+load('reverb_impulses_absorption_without_sp3.mat');
 load('t_axis.mat')
 figure(1)
 plot(impulse);
