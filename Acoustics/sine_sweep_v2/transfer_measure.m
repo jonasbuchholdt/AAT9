@@ -7,7 +7,8 @@ save('offset.mat','offset');
 cmd = 'test'
 inputChannel = [1 2];
 frequencyRange = [20 20000];
-[f_axis,f_result,t_axis,t_result] = Lacoustics(cmd,gain,offset,inputChannel,frequencyRange);
+weepTime = 10;
+[f_axis,f_result,t_axis,t_result] = Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,weepTime);
 plot(t_result)
 
 %% Calibrate the soundcard
@@ -17,7 +18,8 @@ load('offset.mat')
 cmd = 'cali_soundcard'
 inputChannel = [1 2];
 frequencyRange = [20 20000];
-Lacoustics(cmd,gain,offset,inputChannel,frequencyRange);
+weepTime = 10;
+Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,weepTime);
 
 %% Show calibration of soundcard
 clear all
@@ -26,7 +28,8 @@ load('offset.mat')
 cmd = 'test'
 inputChannel = [1 2];
 frequencyRange = [20 20000];
-[f_axis,f_result,t_axis,t_result] = Lacoustics(cmd,gain,offset,inputChannel,frequencyRange);
+weepTime = 10;
+[f_axis,f_result,t_axis,t_result] = Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,weepTime);
 load('calibration.mat')
 transfer_function = f_result./calibration.preamp_transfer_function;
 result = 20*log10(abs(transfer_function));
@@ -45,7 +48,8 @@ gain = -18;
 load('offset.mat')
 inputChannel = [1 2];
 frequencyRange = [20 20000];
-Lacoustics(cmd,gain,offset,inputChannel,frequencyRange);
+weepTime = 10;
+Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,weepTime);
 
 %% Show calibration of microphone
 load('calibration.mat')
@@ -72,12 +76,17 @@ load('calibration.mat');
 
 inputChannel = [1 2];
 frequencyRange = [20 20000];
-[f_axis,f_result,ir_axis,ir_result] = Lacoustics(cmd,gain,offset,inputChannel,frequencyRange);
+weepTime = 10;
+[f_axis,f_result,ir_axis,ir_result] = Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,weepTime);
 
 irEstimate_distortion_less = ir_result(1:length(ir_result)/2);
 [tf,w] = freqz(irEstimate_distortion_less(:,k),1,20000,fs);
 f_result = tf./calibration.preamp_transfer_function;
 f_axis = w;
+
+load('hp.mat');
+[b,a]=sos2tf(SOS,G);
+ir_result=filter(b,a,ir_result);
 
 result=20*log10(abs(f_result(:,1))/(20*10^-6));
 number = 1;
@@ -97,8 +106,13 @@ figure(2)
 plot(ir_axis,ir_result)
 %% Add more test points 
 number = number+1; % run number
-[f_axis,f_result,t_axis,t_result] = Lacoustics(cmd,gain,offset,inputChannel);
-impulse(:,number) = t_result;
+[f_axis,f_result,ir_axis,ir_result] = Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,weepTime);
+irEstimate_distortion_less = ir_result(1:length(ir_result)/2);
+[tf,w] = freqz(irEstimate_distortion_less(:,k),1,20000,fs);
+f_result = tf./calibration.preamp_transfer_function;
+f_axis = w;
+
+impulse(:,number) = ir_result;
 result=20*log10(abs(f_result)/(20*10^-6));
 result_mean(:,number) = movmean(result,100);
 figure(1)
@@ -145,7 +159,7 @@ for i=1:Nfc
         'CenterFrequency', F0(i), 'Bandwidth', BW, 'SampleRate', fs);
 end
 
-load('reverb_impulses_absorption_without_sp1.mat');
+load('reverb_impulses_absorption_without_sp2.mat');
 load('t_axis.mat')
 figure(1)
 plot(impulse);
