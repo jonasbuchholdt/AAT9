@@ -1,4 +1,4 @@
-function [fs,irEstimate_distortion_less,irtime,tf,faxis]=IRmeas_fft_soundcard(ts,frequencyRange,gainlevel,player,offset)
+function [fs,ir,irtime]=IRmeas_fft_soundcard(ts,frequencyRange,gainlevel,offset,inputChannel)
             % out:  ir          - impulse response      [vector, lin]
             %       irtime      - time axis for IR        [vector, s]
             %       tf          - transfer function      [vector, dB]
@@ -27,8 +27,8 @@ function [fs,irEstimate_distortion_less,irtime,tf,faxis]=IRmeas_fft_soundcard(ts
             gainLin = db2mag(gainlevel);
             %IRDuration = this.MinIRDuration;
             %this.ActualIRDuration = IRDuration;
-            fs = player.SampleRate;
-            
+            %fs = player.SampleRate;
+            fs = 44100;
             
             % Set up swept sine using chirp function
             t = 0:1/fs:ts - (1/fs);
@@ -65,36 +65,48 @@ function [fs,irEstimate_distortion_less,irtime,tf,faxis]=IRmeas_fft_soundcard(ts
             dataOut = [zeros(startSilence,1); x'; zeros(endSilence,1);zeros(506,1)];
             
             % Perform capture
+            audiowrite("sweep.wav",dataOut,fs)
+            L = 1024;
+            fileReader = dsp.AudioFileReader('sweep.wav','SamplesPerFrame',L);
+            fs = fileReader.SampleRate;
+           
+            aPR = audioPlayerRecorder('SampleRate',fs,...               % Sampling Freq.
+                          'RecorderChannelMapping',inputChannel,...  % Input channel(s)
+                          'PlayerChannelMapping',1,... % Output channel(s)
+                          'SupportVariableSize',true,...    % Enable variable buffer size 
+                          'BufferSize',L);                  % Set buffer size
+    
+                      
+                      out = [];                      
+                      while ~isDone(fileReader)
+                          audioToPlay = fileReader();
+                          [audioRecorded,nUnderruns,nOverruns] = aPR(audioToPlay);
+                          out = [out; audioRecorded];
+                          if nUnderruns > 0
+                              fprintf('Audio player queue was underrun by %d samples.\n',nUnderruns);
+                          end
+                          if nOverruns > 0
+                              fprintf('Audio recorder queue was overrun by %d samples.\n',nOverruns);
+                          end
+                      end
+                      release(fileReader);
+                      release(aPR);
             
-            y(:,1) = playRecord(player, dataOut);
             
-            leng = length(dataOut);
-            y = y(1:leng);            
+      
             
-         
-          
+         for k = 1:length(inputChannel)
+            y = out(:,k);
+            y=y(1:length(dataOut));
             
-            dataOut_f=fft(dataOut);
-            y_f=fft(y);
+            dataOut_f =fft(dataOut);
+            y_f       =fft(y);
             
-
-            
-            irEstimate = real(ifft(y_f./dataOut_f));
-            
-            irEstimate = circshift(irEstimate,offset);% rme= 3159 edirol=3295
-            ir = irEstimate;
-            irtime = [1:length(irEstimate)]./fs;
-            
-            irEstimate_distortion_less = irEstimate(1:length(irEstimate)/2);
-            
-            
-            
-            % Calculate response for entire frequency range
-            [freqResp,w] = freqz(irEstimate_distortion_less,1,22000,fs);
-            
-            % Convert complex filt response to magnitude dB.
-            %tf = 20*log10(abs(freqResp));
-            tf = freqResp;
-            faxis = w;
+            irEstimate = real(ifft(y_f./dataOut_f));            
+            irEstimate = circshift(irEstimate,offset);         
+            ir(:,k) = irEstimate;                        
+            irtime = [1:length(irEstimate)]./fs;           
+         end
+ 
             
     end

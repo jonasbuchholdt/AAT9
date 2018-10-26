@@ -1,39 +1,27 @@
 %% Check impulse response offset
-% rme= 3159 edirol=3295
+% rme= 3159 17707 edirol=3295 16070
 clear all
-gain = -18;
-offset = -3997;
+offset = -3290;
 save('offset.mat','offset');
-cmd = 'test'
-inputChannel = [1 2];
-frequencyRange = [20 20000];
-weepTime = 10;
-[f_axis,f_result,t_axis,t_result] = Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,weepTime);
+[fs,calibration,frequencyRange,gain,inputChannel,offset,sweepTime,a,b,cmd] = initial_data('test');
+[f_axis,f_result,t_axis,t_result] = Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,sweepTime);
 plot(t_result)
 
 %% Calibrate the soundcard
 clear all
-gain = -26;
-load('offset.mat')
-cmd = 'cali_soundcard'
-inputChannel = [1 2];
-frequencyRange = [20 20000];
-weepTime = 10;
-Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,weepTime);
+[fs,calibration,frequencyRange,gain,inputChannel,offset,sweepTime,a,b,cmd] = initial_data('cali_soundcard');
+Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,sweepTime);
 
 %% Show calibration of soundcard
 clear all
-gain = -26;
-load('offset.mat')
-cmd = 'test'
-inputChannel = [1 2];
-frequencyRange = [20 20000];
-weepTime = 10;
-[f_axis,f_result,t_axis,t_result] = Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,weepTime);
-load('calibration.mat')
-transfer_function = f_result./calibration.preamp_transfer_function;
-result = 20*log10(abs(transfer_function));
-semilogx(f_axis,result)
+[fs,calibration,frequencyRange,gain,inputChannel,offset,sweepTime,a,b,cmd] = initial_data('test');
+[f_axis,f_result,ir_axis,ir] = Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,sweepTime);
+ir_result=filter(b,a,ir);
+irEstimate_distortion_less = ir_result(1:length(ir_result)/2);
+[tf,w] = freqz(irEstimate_distortion_less,1,frequencyRange(2),fs);
+f_result = tf./calibration.preamp_transfer_function;
+result = 20*log10(abs(f_result));
+semilogx(w,result)
 hold on
 grid on
 axis([20 20000 -1 1])
@@ -43,13 +31,8 @@ clear calibration
 
 %% Calibrate the microphone
 clear all
-cmd = 'cali_mic'
-gain = -18;
-load('offset.mat')
-inputChannel = [1 2];
-frequencyRange = [20 20000];
-weepTime = 10;
-Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,weepTime);
+[fs,calibration,frequencyRange,gain,inputChannel,offset,sweepTime,a,b,cmd] = initial_data('cali_mic');
+Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,sweepTime);
 
 %% Show calibration of microphone
 load('calibration.mat')
@@ -69,54 +52,94 @@ clear calibration
 
 %% Make impulse response in first point 
 clear all
-cmd = 'transfer'
-gain = -18;
-load('offset.mat')
-load('calibration.mat');
-
-inputChannel = [1 2];
-frequencyRange = [20 20000];
-weepTime = 10;
-[f_axis,f_result,ir_axis,ir_result] = Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,weepTime);
-
+[fs,calibration,frequencyRange,gain,inputChannel,offset,sweepTime,a,b,cmd] = initial_data('transfer');
+[f_axis,f_result,ir_axis,ir_result] = Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,sweepTime);
 irEstimate_distortion_less = ir_result(1:length(ir_result)/2);
-[tf,w] = freqz(irEstimate_distortion_less(:,k),1,20000,fs);
+ir=filter(b,a,irEstimate_distortion_less);
+[tf,w] = freqz(ir,1,frequencyRange(2),fs);
 f_result = tf./calibration.preamp_transfer_function;
 f_axis = w;
-
-load('hp.mat');
-[b,a]=sos2tf(SOS,G);
-ir_result=filter(b,a,ir_result);
-
-result=20*log10(abs(f_result(:,1))/(20*10^-6));
+result=20*log10(abs(f_result/(20*10^-6)));
 number = 1;
-result_mean(:,number) = movmean(result,100);
-impulse = ir_result;
+result_mean(:,number) = movmean(result(21:end),100);
+impulse(:,number) = filter(b,a,ir_result);
 
 figure(1)
-%semilogx(f_axis,result)
-semilogx(f_axis,result_mean)
+%semilogx(f_axis(21:end),result(21:end))
+semilogx(f_axis(21:end),result_mean(:,number))
 hold on
 grid on
-axis([20 20000 -0 200])
+grid minor
+axis([20 20000 20 140])
 xlabel('Frequency [Hz]')
 ylabel('Level [dB]')
 
 figure(2)
 plot(ir_axis,ir_result)
+
+
 %% Add more test points 
 number = number+1; % run number
-[f_axis,f_result,ir_axis,ir_result] = Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,weepTime);
+[f_axis,f_result,ir_axis,ir_result] = Lacoustics(cmd,gain,offset,inputChannel,frequencyRange,sweepTime);
+
 irEstimate_distortion_less = ir_result(1:length(ir_result)/2);
-[tf,w] = freqz(irEstimate_distortion_less(:,k),1,20000,fs);
+ir=filter(b,a,irEstimate_distortion_less);
+[tf,w] = freqz(ir,1,frequencyRange(2),fs);
 f_result = tf./calibration.preamp_transfer_function;
 f_axis = w;
-
-impulse(:,number) = ir_result;
 result=20*log10(abs(f_result)/(20*10^-6));
-result_mean(:,number) = movmean(result,100);
+result_mean(:,number) = movmean(result(21:end),100);
 figure(1)
-semilogx(f_axis,result_mean)
+semilogx(f_axis(21:end),result_mean(:,number))
+
+impulse(:,number) = filter(b,a,ir_result);
+
+
+%% One Third octave analysis
+
+ir_mean = mean(impulse,2);
+
+p0 = 20*10^(-6);
+BW = '1/3 octave'; 
+N = 8;
+F0 = 1000;
+load('octave_offset.mat')
+
+oneThirdOctaveFilter = octaveFilter('FilterOrder', N, ...
+    'CenterFrequency', F0, 'Bandwidth', BW, 'SampleRate', fs);
+F0 = getANSICenterFrequencies(oneThirdOctaveFilter);
+F0(F0<16) = [];
+F0(F0>20e3) = [];
+Nfc = length(F0);
+for i=1:Nfc
+    oneThirdOctaveFilterBank{i} = octaveFilter('FilterOrder', N, ...
+        'CenterFrequency', F0(i), 'Bandwidth', BW, 'SampleRate', fs);
+end
+clear oneThirdOctaveFilter
+
+for i=1:Nfc
+    oneThirdOctaveFilter = oneThirdOctaveFilterBank{i};
+    yp(:,i) = oneThirdOctaveFilter(ir_mean*4500);
+end
+L_Aeqthird = 10*log10(1/(length(yp))*trapz(yp.^2/p0^2));
+
+
+% for i = 1:length(L_Aeqthird)-1
+%      off(i) = L_Aeqthird(30) - L_Aeqthird(i);
+% end
+% off(30) = 0;
+
+L_Aeq = L_Aeqthird+off;
+figure(3)
+b = bar(L_Aeq);
+bl = b.BaseLine;
+c = bl.Color;
+bl.BaseValue = 0;
+axis([0 31 20 140])
+grid on
+grid minor
+xlabel('Octave [no]')
+ylabel('Level [dB]')
 
 %% save impulses
 
@@ -132,13 +155,6 @@ grid on
 axis([20 20000 40 120])
 xlabel('Frequency [Hz]')
 ylabel('Level [dB]')
-
-%% sound meter beta
-fs = 44100; 
-[L_pF,L_pS] = OneThirdOctaveAnalyser(0.125,1,abs(ifft(mean_of_all_run)),fs);
-bar(L_pS)
-hold on
-bar(L_pF)
 
 
 %% make reverb calculation
@@ -159,12 +175,12 @@ for i=1:Nfc
         'CenterFrequency', F0(i), 'Bandwidth', BW, 'SampleRate', fs);
 end
 
-load('reverb_impulses_absorption_without_sp3.mat');
+load('reverb_impulses_absorption_without_sp1.mat');
 load('t_axis.mat')
 figure(1)
 plot(impulse);
 
-load('hp.mat');
+load('highPass20.mat');
 [b,a]=sos2tf(SOS,G);
 impulse=filter(b,a,impulse);
 figure(2)
@@ -173,7 +189,7 @@ plot(impulse);
 interval = 3000;
 
 
-for no = 1:6
+for no = 1:1
 sqrt_impulse = (impulse(:,no)).^2;
 mid = sqrt_impulse(end/2-interval:end/2+interval);
 noise_floor = rms(mid)*1.01;
@@ -209,7 +225,7 @@ Q = flip(cumtrapz(flip(t_reverb)))';
 
 res = 10*log10(Q/max(Q));
 figure(3)
-plot(res)
+plot(t_axis(1:length(res)),res)
 hold on
 no
 
@@ -228,16 +244,18 @@ T_30_ls     = length(t_axis(length(find(result >= -10)):length(result)-length(fi
 T_30(no,i)  = round(T_30_ls/fs,2);
 
 
-% xlabel('Time [s]')
-% ylabel('Relative Level [dB]')
-% 
-% 
-% lgd = legend('125 Hz','250 Hz','500 Hz','1000 Hz','2000 Hz','4000 Hz');
-% title(lgd,'B5-105');
-% set(gca,'fontsize',14)
-% 
-% grid on
+
 
 
 end
+ xlabel('Time [s]')
+ ylabel('Relative Level [dB]')
+ set(gca,'Ytick',-150:10:0)
+ 
+ lgd = legend('100 Hz','125 Hz','160 Hz','200 Hz','250 Hz','315 Hz','400 Hz','500 Hz','630 Hz','800 Hz','1000 Hz','1250 Hz','1600 Hz','2000 Hz','2500 Hz','3150 Hz','4000 Hz','5000 Hz');
+ title(lgd,'A3-006');
+ set(gca,'fontsize',14)
+ 
+ grid on
+ grid minor
 end
