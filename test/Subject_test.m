@@ -27,7 +27,7 @@ gainAir = gainAir+diffrence;
 
 
 speech_number = ceil(2*rand);
-speech = ['test_folder/sweep',num2str(speech_number),'.wav']
+speech = ['test_folder/HINTsentence',num2str(speech_number),'.wav']
 play(SNR,level,gainAir,gainBone,speech)
 
 %% play speech on bone, -100 is mute 
