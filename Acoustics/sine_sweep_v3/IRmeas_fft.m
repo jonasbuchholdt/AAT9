@@ -27,8 +27,8 @@ function [fs,ir,irtime]=IRmeas_fft(ts,frequencyRange,gainlevel,offset,inputChann
             gainLin = db2mag(gainlevel);
             %IRDuration = this.MinIRDuration;
             %this.ActualIRDuration = IRDuration;
-            fs = player.SampleRate;
-            
+            %fs = player.SampleRate;
+            fs = 44100;
             
             % Set up swept sine using chirp function
             t = 0:1/fs:ts - (1/fs);
@@ -63,10 +63,11 @@ function [fs,ir,irtime]=IRmeas_fft(ts,frequencyRange,gainlevel,offset,inputChann
             startSilence = ceil(fs/10);
             endSilence = 2*fs;
             dataOut = [zeros(startSilence,1); x'; zeros(endSilence,1);zeros(506,1)];
-            audiowrite("sweep.wav",dataOut,fs)
+            
 
             % Perform capture
-            L = 8192; %1024;
+            audiowrite("sweep.wav",dataOut,fs)
+            L = 1024;
             fileReader = dsp.AudioFileReader('sweep.wav','SamplesPerFrame',L);
             fs = fileReader.SampleRate;
            
@@ -103,7 +104,7 @@ function [fs,ir,irtime]=IRmeas_fft(ts,frequencyRange,gainlevel,offset,inputChann
             y_f       =fft(y);
             
             irEstimate = real(ifft(y_f./dataOut_f));            
-            irEstimate = circshift(irEstimate,offset);% rme= 3159 edirol=3295          
+            irEstimate = circshift(irEstimate,offset);          
             ir(:,k) = irEstimate;                        
             irtime = [1:length(irEstimate)]./fs;           
          end
