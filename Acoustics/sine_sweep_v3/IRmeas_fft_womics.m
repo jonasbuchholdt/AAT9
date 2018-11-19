@@ -1,46 +1,12 @@
-function [fs,ir,irtime]=IRmeas_fft_soundcard(ts,frequencyRange,gainlevel,offset,inputChannel)
-            % out:  ir          - impulse response      [vector, lin]
-            %       irtime      - time axis for IR        [vector, s]
-            %       tf          - transfer function      [vector, dB]
-            %       faxis       - frequency axis for tf  [vector, Hz]
-            %
-            % in:   ts          - sweep duration                  [s]
-            %       tw          - waiting time                    [s]
-            %       gainlevel   - output level (0,...,-inf)      [dB]
-            %       flower      - lower frequency border         [Hz]
-            %       fupper      - upper frequency border         [Hz]
-            %       player      - record/play object from main program
-            %
-            % Function for capturing an impulse response using sine sweep methodology
-            % References:
-            % 1. "Comparison of Different Impulse Response Measurement Techniques" -
-            % Stan Guy-Bart, Embrechts Jean-Jacques, Achambeau Dominique
-            % http://www.montefiore.ulg.ac.be/~stan/ArticleJAES.pdf
-            % 2. "Advancement in Impulse Response Measurements By Sine Sweeps" -
-            % Angelo Farina. AES Paper.
-            % 3. "A Method of Measuring Low-Noise
-            % Acoustical Impulse Responses at0
-            % High Sampling Rates"
-            % https://www.princeton.edu/3D3A/Publications/Tylka_AES137_IRMeasurements-slides.pdf
-            %%
-            % properties
-            gainLin = db2mag(gainlevel);
-            %IRDuration = this.MinIRDuration;
-            %this.ActualIRDuration = IRDuration;
-            %fs = player.SampleRate;
-            fs = 44100;
-            
-            % Set up swept sine using chirp function
-            t = 0:1/fs:ts - (1/fs);
+function [fs,ir,irtime]=IRmeas_fft_soundcard(ts,frequencyRange,gainlevel,offset,inputChannel,fs)
 
+
+            gainLin = db2mag(gainlevel);
+            t = 0:1/fs:ts - (1/fs);
             x = chirp(t,frequencyRange(1),ts,frequencyRange(2),'logarithmic');
             
             % apply gain scaling to form test signal x
-            x = gainLin * x;
-            
-            % Add exponential/sin attenuation to the beginning and end of the excitation
-            % signal in order to minimize the influence of transients.
-            
+            x = gainLin * x;            
             fadeInTime = 0.08;
             fadeInSamps = ceil(fadeInTime * fs); % number of samples over which to fade in/out
             
