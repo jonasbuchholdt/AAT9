@@ -1,0 +1,5 @@
+clear all
+[in,fs] = audioread('daHINTnoise5min.wav');
+load('BP1.mat');
+[b,a] = sos2tf(SOS,G);
+out = filter(b

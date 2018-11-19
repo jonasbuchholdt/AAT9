@@ -2,12 +2,12 @@ clear all
 close all
 
 %% user inputs
-inname = 'audio/noise_free_field_mic.wav';               % path for investigated audio
-calname = 'audio/calibration_free_field_mic.wav';              % path of calibration tone
-logname = '10_30_calibrationlog_sum.csv';                    % name for logfile
-linename = 'ffm_noise';                       % name for the line in log
+inname = 'audio/middle/right_unplugged_speaker.wav';               % path for investigated audio
+calname = 'audio/middle/right_cal.wav';              % path of calibration tone
+logname = '11_01_calibrationlog_middle.csv';                    % name for logfile
+linename = 'r_unplugged_ls';                       % name for the line in log
 
-callevel = 93.85;                              % level of the calibrator
+callevel = 123.55;                              % level of the calibrator
 
 
 %% loading stuff
