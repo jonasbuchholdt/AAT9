@@ -104,7 +104,6 @@ while toc<20
 end
 result = polyval(p,mean(out(7,2:160))); 
 fclose(s)
-
 newton = result/1000*9.81
 %% close
 delete(s)
