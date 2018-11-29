@@ -11,7 +11,7 @@ load('LOS_only_MSM_no_noise.mat')
 TF = mirrorModelParam.TransferFunction;
 
 IR = ifft(TF);                            % computing Impulse Responses
-avgIR = mean(IR.^2,2);                    % averaged and squared IR
+avgIR = mean(abs(IR).^2,2);                    % averaged and squared IR
 
 LOSonly = real(squeeze(avgIR));
 
@@ -21,7 +21,7 @@ load('LOS_plus4comp_MSM_no_noise.mat')
 TF = mirrorModelParam.TransferFunction;
 
 IR = ifft(TF);                            % computing Impulse Responses
-avgIR = mean(IR.^2,2);                    % averaged and squared IR
+avgIR = mean(abs(IR).^2,2);                    % averaged and squared IR
 
 LOS4comp = real(squeeze(avgIR));
 
@@ -32,7 +32,7 @@ load('fullresponse_minusfloorandceiling_MSM_no_noise.mat')
 TF = mirrorModelParam.TransferFunction;
 
 IR = ifft(TF);                            % computing Impulse Responses
-avgIR = mean(IR.^2,2);                    % averaged and squared IR
+avgIR = mean(abs(IR).^2,2);                    % averaged and squared IR
 
 minusfloor = real(squeeze(avgIR));
 
@@ -43,7 +43,7 @@ load('fullresponse_plusfloorandceiling_MSM_no_noise.mat')
 TF = mirrorModelParam.TransferFunction;
 
 IR = ifft(TF);                            % computing Impulse Responses
-avgIR = mean(IR.^2,2);                    % averaged and squared IR
+avgIR = mean(abs(IR).^2,2);                    % averaged and squared IR
 
 fullsim = real(squeeze(avgIR));
 
@@ -54,24 +54,25 @@ load('measDataTrack1Rp5TxPos1To50.mat')
 TF = measData.TransferFunction;
 
 IR = ifft(TF);                            % computing Impulse Responses
-avgIR = mean(IR.^2,2);                    % averaged and squared IR
+avgIR = mean(abs(IR).^2,2);                    % averaged and squared IR
 
 meas = real(squeeze(avgIR));
 
 %% Plots
-N = 1;
+N = 25;
 figure()
-semilogx(LOSonly(:,N))
+loglog(LOSonly(:,N))
 hold on
-semilogx(LOS4comp(:,N))
-semilogx(minusfloor(:,N))
-semilogx(fullsim(:,N))
-semilogx(meas(:,N))
+loglog(LOS4comp(:,N))
+loglog(minusfloor(:,N))
+loglog(fullsim(:,N))
+loglog(meas(:,N))
 hold off
 legend('Sim: LOS','Sim: primary','Sim: w/o floor/ceil','Sim: full','Measurement')
 
 figure()
+loglog(LOSonly(:,1))
 hold on
-for k = 1:50
-    plot(LOSonly(1:20,k))
+for k = 2:50
+    loglog(LOSonly(:,k))
 end

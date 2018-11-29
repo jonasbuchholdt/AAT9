@@ -1,7 +1,7 @@
 clear all
 close all
-%load('LOS_only_MSM_no_noise.mat')
-load('LOS_plus4comp_MSM_no_noise.mat')
+load('LOS_only_MSM_no_noise.mat')
+%load('LOS_plus4comp_MSM_no_noise.mat')
 
 %G = ones(8,1);                  % antenna directionality omnidirectional
 
