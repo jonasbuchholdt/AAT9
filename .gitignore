@@ -12,6 +12,8 @@
 *.cb2
 .*.lb
 
+fullresponse_plusfloorandceiling_MSM_no_noise.mat
+
 ## Intermediate documents:
 *.dvi
 *.xdv
