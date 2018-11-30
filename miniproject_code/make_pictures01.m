@@ -10,7 +10,7 @@ lambda = c/f;           % wavelength             [m]
 
 AntPos = mirrorModelParam.RxAntPosRelative;
 %TF = mirrorModelParam.TransferFunction;
-TF = measData.TransferFunction
+TF = measData.TransferFunction;
 
 
 ArrayRadius = 0.07518/2;
@@ -52,7 +52,7 @@ Q = 12                          % number of averaged measurements
 varn = 0.000000000;            % variance of noise
 noise = sqrt(varn/2)*(randn(size(TF,2),Q)+i*randn(size(TF,2),Q));
 IR = ifft(TF);                            % computing Impulse Responses
-IRmod = squeeze(sum(IR(1:50,:,1:Q),1));
+IRmod = squeeze(sum(IR(1:5,:,1:Q),1));
 
 
 % Calculating and printing SNR
@@ -65,7 +65,7 @@ Rhat = (1/size(IRmod,2)).*(IRmod*IRmod'); % generating spatial covariance matrix
 Rhat = (Rhat+Rhat')/2;                   % Removing imaginary components
 [Vr,~] = eig(Rhat);                      % Eigenvalue Decomposition for Music
 
-M = 1;                                   % Number of Impinging waves
+M = 5;                                   % Number of Impinging waves
 Umusic = Vr(:,1:end-M-1);                % selecting U matrix for Music
 
 fprintf('Rank of covariance matrix: %d \n',rank(Rhat))
@@ -108,12 +108,27 @@ fprintf('True El: %d Bartlett El: %d Capon El: %d Music El: %d \n',round(Desired
 
 
 [AZ,EL] = meshgrid(rad2deg(azrng),rad2deg(elrng));
-figure()
-surf(AZ',EL',10*log10(abs(PBartlett)))
-title('Bartlett')
-figure()
-surf(AZ',EL',10*log10(abs(PCapon)))
-title('Capon')
-figure()
-surf(AZ',EL',10*log10(abs(PMusic)))
-title('MUSIC')
+% figure()
+% surf(AZ',EL',10*log10(abs(PBartlett)))
+% title('Bartlett')
+% figure()
+% surf(AZ',EL',10*log10(abs(PCapon)))
+% title('Capon')
+% figure()
+% surf(AZ',EL',10*log10(abs(PMusic)))
+% title('MUSIC')
+%%
+bgFig = imread('rp5a.jpg') ;
+figure;
+image([180 -180],[0 180],bgFig (:,:,1:3))
+hold on;
+surf (AZ',EL', 10*log10(abs(PMusic)),'FaceAlpha',0.3);
+maxPower = ceil(max(max(10*log10(abs(PMusic))))/5)*5 ;
+caxis([maxPower-20 maxPower])
+cmap = colormap(gca);
+cmap(1,:) = [1,1,1] ;
+set(gcf, 'colormap', cmap ) ;
+shading interp ;
+axis ('equal') ;
+hold off
+view (0, 90) ;
