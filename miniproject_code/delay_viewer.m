@@ -15,6 +15,11 @@ avgIR = mean(abs(IR).^2,2);                    % averaged and squared IR
 
 LOSonly = real(squeeze(avgIR));
 
+IRshortened = IR(1:200,:,:);
+truncTF = fft(IRshortened);
+
+save('shortIRtest.mat','truncTF')
+
 %% Line of Sight and Primary Reflections Simulation
 clear TF IR avgIR
 load('LOS_plus4comp_MSM_no_noise.mat')

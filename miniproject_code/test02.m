@@ -30,7 +30,7 @@ for k = 1:length(elrng)
    erng(2,:,k) = sin(azrng).*sin(elrng(k));
    erng(3,:,k) = cos(azrng);
    for h = 1:L
-       a(h,:,k) = exp(i*(2*pi/lambda))*(erng(:,:,k).'*AntPos(:,L))';
+       a(h,:,k) = exp(i*(2*pi/lambda))*(erng(:,:,k).'*AntPos(:,h))';
    end
 end
 

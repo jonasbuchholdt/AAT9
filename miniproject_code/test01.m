@@ -29,7 +29,7 @@ for k = 1:length(elrng)
    erng(2,:,k) = sin(azrng).*sin(elrng(k));
    erng(3,:,k) = cos(azrng);
    for h = 1:L
-       a(h,:,k) = exp(i*(2*pi/lambda))*(erng(:,:,k).'*AntPos(:,L))';
+       a(h,:,k) = exp(i*(2*pi/lambda))*(erng(:,:,k).'*AntPos(:,h))';
    end
 end
 
@@ -39,7 +39,7 @@ noise = varn*(randn(size(TF,2),size(TF,1))+i*randn(size(TF,2),size(TF,1)));
 TFmod = TF(:,:,u).';
 SNR = 10*log10(mean(rms(TFmod))/mean(rms(noise)))
 TFmod = TFmod + noise;
-Rhat = (1/size(TFmod,1))*(TFmod*(TFmod'));
+Rhat = (1/size(TFmod,2))*(TFmod*(TFmod'));
 
 disp(strcat('Rank of covariance matrix:_',int2str(rank(Rhat))))
 
