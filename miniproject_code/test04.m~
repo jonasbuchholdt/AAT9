@@ -23,7 +23,7 @@ AntPosCal(2,:) = ArrayRadius*(sin(2*pi*(l-1)/L));
 AntPosCal(3,:) = zeros(1,L);
 
 
-azrng = linspace(-pi,pi,180);   % azimuth search space
+azrng = linspace(0,2*pi,180);   % azimuth search space
 elrng = linspace(0,pi/2,90);   % coelevation search space
 
 
@@ -38,7 +38,7 @@ for u = 1:length(azrng)
         erng(2,u,k) = sin(azrng(u)).*sin(elrng(k));
         erng(3,u,k) = cos(elrng(k));
         for h = 1:L
-            a(h,u,k) = exp(i*(2*pi/lambda))*dot(erng(:,u,k),AntPos(:,h));
+            a(h,u,k) = exp(i*(2*pi/lambda)*dot(erng(:,u,k),AntPos(:,h)));
         end
     end
 end
@@ -46,41 +46,60 @@ end
 
 
 for u = 1
-varn = 0.000001;
-noise = varn*(randn(size(TF,2),size(TF,1))+i*randn(size(TF,2),size(TF,1)));
-TFmod = TF(:,:,u).';
+% Generating some noise
+varn = 0.0000000001;            % variance of noise
+noise = sqrt(varn/2)*(randn(size(TF,2),size(TF,1))+i*randn(size(TF,2),size(TF,1)));
+TFmod = TF(:,:,u).'; %Picking one out of 50 TFs, arranging it so that rows
+% correspond to sensors and columns to observation
 
+% Calculating and printing SNR
 SNR = 10*log10(mean(rms(TFmod))/mean(rms(noise)));
 fprintf('SNR: %d \n',round(SNR))
-TFmod = (TFmod + noise);
-Rhat = (1/size(TFmod,1)).*(TFmod*TFmod');
-%Rhat = (1/size(rcsig,1))*(rcsig*rcsig');
+
+
+TFmod = (TFmod + noise);        % adding noise and signal
+Rhat = (1/size(TFmod,2)).*(TFmod*TFmod'); % generating spatial covariance matrix estimate
+Rhat = (Rhat+Rhat')/2;                   % Removing imaginary components
+[Vr,~] = eig(Rhat);                      % Eigenvalue Decomposition for Music
+
+Umusic = Vr(:,1:end-M-1);                % selecting U matrix for Music
+
 fprintf('Rank of covariance matrix: %d \n',rank(Rhat))
 
 
 
 PBartlett = ones(length(azrng),length(elrng));
 PCapon = PBartlett;
+PMusic = PBartlett;
 for h = 1:length(azrng)
 for k = 1:length(elrng)
     PBartlett(h,k) = (a(:,h,k)'*Rhat*a(:,h,k))./(norm(a(:,h,k),2).^4);
     PCapon(h,k) = 1./(a(:,h,k)'*inv(Rhat)*a(:,h,k));
+    PMusic(h,k) = 1./(a'*Umusic*Umusic'*a);
 end
 end
-%a = exp(i*(2*pi/lambda))*(erng(:,:,1).',AntPos(:,1));
-Mmax = max(PBartlett(:));
-CaponMax = max(PCapon(:));
-[row,col] = find(PBartlett == Mmax);
-PBartlett = abs(PBartlett)./abs(Mmax);
-%nPCapon = abs(PCapon)./abs(CaponMax);
 
+% Finding Maxima of Spectra in search range to find DOA estimate
+BartlettMax = max(PBartlett(:));
+CaponMax = max(abs(PCapon(:)));
+MusicMax = max(abs(PCapon(:)));
+[rowb,colb] = find(PBartlett == BartlettMax);
+[rowc,colc] = find(abs(PCapon) == CaponMax);
+[rowm,colm] = find(abs(PMusic) == MusicMax);
+PBartlett = abs(PBartlett)./abs(BartlettMax);
+PCapon = abs(PCapon)./abs(CaponMax);
+PMusic = abs(PMusic)./abs(MusicMax);
 
-MaxAz(u) = mean(rad2deg(azrng(row)));
-MaxEl(u) = mean(rad2deg(azrng(col)));
-DesiredAz = rad2deg(mean(mirrorModelParam.thetaRxAzim(5,:,u)));
+MaxAzB(u) = mean(rad2deg(azrng(rowb)));
+MaxElB(u) = mean(rad2deg(elrng(colb)));
+MaxAzC(u) = mean(rad2deg(azrng(rowc)));
+MaxElC(u) = mean(rad2deg(elrng(colc)));
+MaxAzC(u) = mean(rad2deg(azrng(rowc)));
+MaxElC(u) = mean(rad2deg(elrng(colc)));
+DesiredAz = rad2deg(mean(mirrorModelParam.thetaTxAzim(5,:,u)));
 DesiredEl = rad2deg(mean(mirrorModelParam.phiRxElev(5,:,u)));
-fprintf('True Az: %d Estimated Az: %d \n',round(DesiredAz),round(MaxAz(u)))
-fprintf('True El: %d Estimated El: %d \n',round(DesiredEl),round(MaxEl(u)))
+fprintf('True Az: %d Bartlett Az: %d Capon Az: %d \n',round(DesiredAz),round(MaxAzB(u)),round(MaxAzC(u)))
+fprintf('True El: %d Bartlett El: %d Capon El: %d \n',round(DesiredEl),round(MaxElB(u)),round(MaxElC(u)))
 end
 
 

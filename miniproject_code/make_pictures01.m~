@@ -2,15 +2,15 @@ clear all
 close all
 load('LOS_only_MSM_no_noise.mat')
 %load('LOS_plus4comp_MSM_no_noise.mat')
-
+load('measDataTrack1Rp5TxPos1To50.mat')
 
 f = 5.2e9;              % carrier frequency     [Hz]
 c = 3e8;                % propagation speed    [m/s]
 lambda = c/f;           % wavelength             [m]
 
 AntPos = mirrorModelParam.RxAntPosRelative;
-TF = mirrorModelParam.TransferFunction;
-%TF = measData.TransferFunction
+%TF = mirrorModelParam.TransferFunction;
+TF = measData.TransferFunction
 
 
 ArrayRadius = 0.07518/2;
@@ -45,20 +45,23 @@ end
 
 
 
-for u = 1
+
 % Generating some noise
+Q = 12                          % number of averaged measurements
+
 varn = 0.0000000001;            % variance of noise
-noise = sqrt(varn/2)*(randn(size(TF,2),size(TF,1))+i*randn(size(TF,2),size(TF,1)));
-TFmod = TF(:,:,u).'; %Picking one out of 50 TFs, arranging it so that rows
-% correspond to sensors and columns to observation
+noise = sqrt(varn/2)*(randn(size(TF,2),Q)+i*randn(size(TF,2),Q));
+IR = ifft(TF);                            % computing Impulse Responses
+IRmod = squeeze(sum(IR(1:200,:,1:Q),1));
+
 
 % Calculating and printing SNR
-SNR = 10*log10(mean(rms(TFmod))/mean(rms(noise)));
+SNR = 10*log10(mean(rms(IRmod))/mean(rms(noise)));
 fprintf('SNR: %d \n',round(SNR))
 
 
-TFmod = (TFmod + noise);        % adding noise and signal
-Rhat = (1/size(TFmod,2)).*(TFmod*TFmod'); % generating spatial covariance matrix estimate
+IRmod = (IRmod + noise);        % adding noise and signal
+Rhat = (1/size(IRmod,2)).*(IRmod*IRmod'); % generating spatial covariance matrix estimate
 Rhat = (Rhat+Rhat')/2;                   % Removing imaginary components
 [Vr,~] = eig(Rhat);                      % Eigenvalue Decomposition for Music
 
@@ -91,17 +94,17 @@ PBartlett = abs(PBartlett)./abs(BartlettMax);
 PCapon = abs(PCapon)./abs(CaponMax);
 PMusic = abs(PMusic)./abs(MusicMax);
 
-MaxAzB(u) = mean(rad2deg(azrng(rowb)));
-MaxElB(u) = mean(rad2deg(elrng(colb)));
-MaxAzC(u) = mean(rad2deg(azrng(rowc)));
-MaxElC(u) = mean(rad2deg(elrng(colc)));
-MaxAzM(u) = mean(rad2deg(azrng(rowm)));
-MaxElM(u) = mean(rad2deg(elrng(colm)));
-DesiredAz = rad2deg(mean(mirrorModelParam.thetaTxAzim(5,:,u)));
-DesiredEl = rad2deg(mean(mirrorModelParam.phiRxElev(5,:,u)));
-fprintf('True Az: %d Bartlett Az: %d Capon Az: %d Music Az: %d \n',round(DesiredAz),round(MaxAzB(u)),round(MaxAzC(u)),round(MaxAzM(u)))
-fprintf('True El: %d Bartlett El: %d Capon El: %d Music El: %d \n',round(DesiredEl),round(MaxElB(u)),round(MaxElC(u)),round(MaxElM(u)))
-end
+MaxAzB = mean(rad2deg(azrng(rowb)));
+MaxElB = mean(rad2deg(elrng(colb)));
+MaxAzC = mean(rad2deg(azrng(rowc)));
+MaxElC = mean(rad2deg(elrng(colc)));
+MaxAzM = mean(rad2deg(azrng(rowm)));
+MaxElM = mean(rad2deg(elrng(colm)));
+DesiredAz = rad2deg(mean(mirrorModelParam.thetaTxAzim(5,:,1:Q),'all'));
+DesiredEl = rad2deg(mean(mirrorModelParam.phiRxElev(5,:,1:Q),'all'));
+fprintf('True Az: %d Bartlett Az: %d Capon Az: %d Music Az: %d \n',round(DesiredAz),round(MaxAzB),round(MaxAzC),round(MaxAzM))
+fprintf('True El: %d Bartlett El: %d Capon El: %d Music El: %d \n',round(DesiredEl),round(MaxElB),round(MaxElC),round(MaxElM))
+
 
 
 [AZ,EL] = meshgrid(rad2deg(azrng),rad2deg(elrng));
