@@ -1,17 +1,16 @@
 clear all
 close all
-load('LOS_only_MSM_no_noise.mat')
+%load('LOS_only_MSM_no_noise.mat')
 %load('LOS_plus4comp_MSM_no_noise.mat')
-load('measDataTrack1Rp5TxPos1To50.mat')
-load('CalibrationMatrix.mat')
+load 'fullresponse_minusfloorandceiling_MSM_no_noise.mat'
 
 f = 5.2e9;              % carrier frequency     [Hz]
 c = 3e8;                % propagation speed    [m/s]
 lambda = c/f;           % wavelength             [m]
 
 AntPos = mirrorModelParam.RxAntPosRelative;
-%TF = mirrorModelParam.TransferFunction;
-TF = measData.TransferFunction;
+TF = mirrorModelParam.TransferFunction;
+%TF = measData.TransferFunction
 
 
 ArrayRadius = 0.07518/2;
@@ -41,7 +40,6 @@ for u = 1:length(azrng)
         for h = 1:L
             a(h,u,k) = exp(i*(2*pi/lambda)*dot(erng(:,u,k),AntPos(:,h)));
         end
-        a(:,u,k) = C*a(:,u,k);
     end
 end
 
@@ -49,12 +47,12 @@ end
 
 
 % Generating some noise
-Q = 12                          % number of averaged measurements
+Q = 8                          % number of averaged measurements
 
-varn = 0.000000000;            % variance of noise
+varn = 0.0000000001;            % variance of noise
 noise = sqrt(varn/2)*(randn(size(TF,2),Q)+i*randn(size(TF,2),Q));
 IR = ifft(TF);                            % computing Impulse Responses
-IRmod = squeeze(sum(IR(1:5,:,1:Q),1));
+IRmod = squeeze(sum(IR(1:20,:,1:Q),1));
 
 
 % Calculating and printing SNR
@@ -96,43 +94,37 @@ PBartlett = abs(PBartlett)./abs(BartlettMax);
 PCapon = abs(PCapon)./abs(CaponMax);
 PMusic = abs(PMusic)./abs(MusicMax);
 
+for k = 1:50
+    VectorThing = -mirrorModelParam.RxPos(1:2)+mirrorModelParam.TxPos(1:2,k);
+    MyAngle(k) = rad2deg(angle(VectorThing(1)+i*VectorThing(2)));
+end
+    
+
 MaxAzB = mean(rad2deg(azrng(rowb)));
-MaxElB = mean(rad2deg(elrng(colb)));
+MaxElB = 90 -mean(rad2deg(elrng(colb)));
 MaxAzC = mean(rad2deg(azrng(rowc)));
-MaxElC = mean(rad2deg(elrng(colc)));
+MaxElC = 90 -mean(rad2deg(elrng(colc)));
 MaxAzM = mean(rad2deg(azrng(rowm)));
-MaxElM = mean(rad2deg(elrng(colm)));
-DesiredAz = rad2deg(mean(mirrorModelParam.thetaTxAzim(5,:,1:Q),'all'));
-DesiredEl = rad2deg(mean(mirrorModelParam.phiRxElev(5,:,1:Q),'all'));
-fprintf('True Az: %d Bartlett Az: %d Capon Az: %d Music Az: %d \n',round(DesiredAz),round(MaxAzB),round(MaxAzC),round(MaxAzM))
-fprintf('True El: %d Bartlett El: %d Capon El: %d Music El: %d \n',round(DesiredEl),round(MaxElB),round(MaxElC),round(MaxElM))
+MaxElM = 90 -mean(rad2deg(elrng(colm)));
+DesiredAz = rad2deg(mean(mirrorModelParam.thetaRxAzim(3,:,1:Q),'all'));
+DesiredEl = rad2deg(mean(mirrorModelParam.phiRxElev(3,:,1:Q),'all'));
+CalcAz = mean(MyAngle(1:Q));
+fprintf('Given Az: %d Calc Az: %d Bartlett Az: %d Capon Az: %d Music Az: %d \n',round(DesiredAz), round(CalcAz), round(MaxAzB),round(MaxAzC),round(MaxAzM))
+fprintf('Given El: %d Bartlett El: %d Capon El: %d Music El: %d \n',round(DesiredEl), round(MaxElB),round(MaxElC),round(MaxElM))
 
-
-
-[AZ,EL] = meshgrid(rad2deg(azrng),rad2deg(elrng));
-% figure()
-% surf(AZ',EL',10*log10(abs(PBartlett)))
-% title('Bartlett')
-% figure()
-% surf(AZ',EL',10*log10(abs(PCapon)))
-% title('Capon')
-% figure()
-% surf(AZ',EL',10*log10(abs(PMusic)))
-% title('MUSIC')
 %%
-bgFig = imread('rp5a.jpg') ;
-figure;
-image([180 -180],[0 180],bgFig (:,:,1:3))
-hold on;
-%surf (AZ',EL', 10*log10(abs(PMusic)),'FaceAlpha',0.7);
-contour (AZ',EL', 10*log10(abs(PMusic)), 'LineWidth',3);
-
-maxPower = ceil(max(max(10*log10(abs(PMusic))))/5)*5 ;
-caxis([maxPower-30 maxPower])
-cmap = colormap(gca);
-cmap(1,:) = [1,1,1] ;
-set(gcf,'colormap',cmap)
-shading interp ;
-axis ('equal') ;
-hold off
-view (0, 90) ;
+close all
+[AZ,EL] = meshgrid(rad2deg(azrng),rad2deg(elrng));
+[AZ,EL] = meshgrid((azrng),(elrng));
+figure()
+surf(AZ',EL',10*log10(abs(PBartlett)))
+title('Bartlett')
+figure()
+surf(AZ',EL',10*log10(abs(PCapon)))
+title('Capon')
+figure()
+surf(AZ',EL',10*log10(abs(PMusic)))
+title('MUSIC')
+axis tight
+xlabel('Azimuth [Deg]')
+ylabel('Elevation [Deg]')

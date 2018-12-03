@@ -1,7 +1,7 @@
 clear all
 close all
-load('LOS_only_MSM_no_noise.mat')
-%load('LOS_plus4comp_MSM_no_noise.mat')
+%load('LOS_only_MSM_no_noise.mat')
+load('LOS_plus4comp_MSM_no_noise.mat')
 
 
 f = 5.2e9;              % carrier frequency     [Hz]
@@ -23,8 +23,8 @@ AntPosCal(2,:) = ArrayRadius*(sin(2*pi*(l-1)/L));
 AntPosCal(3,:) = zeros(1,L);
 
 
-azrng = linspace(0,2*pi,180);   % azimuth search space
-elrng = linspace(0,pi/2,90);   % coelevation search space
+azrng = linspace(-pi,pi,360);   % azimuth search space
+elrng = linspace(0,pi,180);   % coelevation search space
 
 
 % preallocating matrices for e (impinging direction) and a (steering vectors)
@@ -47,12 +47,12 @@ end
 
 
 % Generating some noise
-Q = 12                          % number of averaged measurements
+Q = 15                          % number of averaged measurements
 
 varn = 0.0000000001;            % variance of noise
 noise = sqrt(varn/2)*(randn(size(TF,2),Q)+i*randn(size(TF,2),Q));
 IR = ifft(TF);                            % computing Impulse Responses
-IRmod = squeeze(sum(IR(1:200,:,1:Q),1));
+IRmod = squeeze(sum(IR(1:200,:,end+1-Q:end),1));
 
 
 % Calculating and printing SNR
@@ -65,7 +65,7 @@ Rhat = (1/size(IRmod,2)).*(IRmod*IRmod'); % generating spatial covariance matrix
 Rhat = (Rhat+Rhat')/2;                   % Removing imaginary components
 [Vr,~] = eig(Rhat);                      % Eigenvalue Decomposition for Music
 
-M = 1;                                   % Number of Impinging waves
+M = 5;                                   % Number of Impinging waves
 Umusic = Vr(:,1:end-M-1);                % selecting U matrix for Music
 
 fprintf('Rank of covariance matrix: %d \n',rank(Rhat))
@@ -94,19 +94,26 @@ PBartlett = abs(PBartlett)./abs(BartlettMax);
 PCapon = abs(PCapon)./abs(CaponMax);
 PMusic = abs(PMusic)./abs(MusicMax);
 
+for k = 1:50
+    VectorThing = -mirrorModelParam.RxPos(1:2)+mirrorModelParam.TxPos(1:2,k);
+    MyAngle(k) = rad2deg(angle(VectorThing(1)+i*VectorThing(2)));
+end
+    
+
 MaxAzB = mean(rad2deg(azrng(rowb)));
-MaxElB = mean(rad2deg(elrng(colb)));
+MaxElB = 90 -mean(rad2deg(elrng(colb)));
 MaxAzC = mean(rad2deg(azrng(rowc)));
-MaxElC = mean(rad2deg(elrng(colc)));
+MaxElC = 90 -mean(rad2deg(elrng(colc)));
 MaxAzM = mean(rad2deg(azrng(rowm)));
-MaxElM = mean(rad2deg(elrng(colm)));
-DesiredAz = rad2deg(mean(mirrorModelParam.thetaTxAzim(5,:,1:Q),'all'));
-DesiredEl = rad2deg(mean(mirrorModelParam.phiRxElev(5,:,1:Q),'all'));
-fprintf('True Az: %d Bartlett Az: %d Capon Az: %d Music Az: %d \n',round(DesiredAz),round(MaxAzB),round(MaxAzC),round(MaxAzM))
-fprintf('True El: %d Bartlett El: %d Capon El: %d Music El: %d \n',round(DesiredEl),round(MaxElB),round(MaxElC),round(MaxElM))
+MaxElM = 90 -mean(rad2deg(elrng(colm)));
+DesiredAz = rad2deg(mean(mirrorModelParam.thetaRxAzim(3,:,end+1-Q:end),'all'));
+DesiredEl = rad2deg(mean(mirrorModelParam.phiRxElev(3,:,end+1-Q:end),'all'));
+CalcAz = mean(MyAngle(end+1-Q:end));
+fprintf('True Az: %d Calc Az: %d Bartlett Az: %d Capon Az: %d Music Az: %d \n',round(DesiredAz), round(CalcAz), round(MaxAzB),round(MaxAzC),round(MaxAzM))
+fprintf('True El: %d Bartlett El: %d Capon El: %d Music El: %d \n',round(DesiredEl), round(MaxElB),round(MaxElC),round(MaxElM))
 
-
-
+%%
+close all
 [AZ,EL] = meshgrid(rad2deg(azrng),rad2deg(elrng));
 figure()
 surf(AZ',EL',10*log10(abs(PBartlett)))
@@ -117,3 +124,6 @@ title('Capon')
 figure()
 surf(AZ',EL',10*log10(abs(PMusic)))
 title('MUSIC')
+axis tight
+xlabel('Azimuth [Deg]')
+ylabel('Elevation [Deg]')
