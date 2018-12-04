@@ -101,8 +101,8 @@ DesiredEl = mean(rad2deg(mean(mirrorModelParam.phiRxElev(:,:,1:Q),2)),3);
 DesiredZ = zeros(length(DesiredAz),1);
 %% Peak finding
 
-PksAz=[159.9,-13.6,-139.9,-121.8];
-PksEl=[28.6,4.5,5.5,5.0];
+PksAz=[101.8,-13.6,-139.9,-121.8];
+PksEl=[0,4.5,5.5,5.0];
 PksZ =zeros(1,4);
 
 %%
@@ -134,25 +134,32 @@ zlim([-50 0])
 set (gca,'Xdir','reverse')
 view([210 50])
 
+
 bgFig = imread('rp5a.jpg') ;
 figure;
-image([180 -180],[0 180],bgFig (:,:,1:3))
+image([180 -180],[90 -90],bgFig (:,:,1:3));
 hold on;
-surf (AZ',EL', 10*log10(abs(PMusic))+50,'FaceAlpha',0.3);
-%contour (AZ',EL', 10*log10(abs(PMusic)), 'LineWidth',3);
-shading interp
+surf(AZ',EL', 10*log10(abs(PMusic))-50,'FaceAlpha',0.3);
+plot3(DesiredAz,DesiredEl,DesiredZ,'rx','LineWidth',2)
 maxPower = ceil(max(max(10*log10(abs(PMusic))))/5)*5 ;
-caxis([maxPower maxPower+50])
+caxis([maxPower-60-50 maxPower-3-50])
 cmap = colormap(gca);
 cmap(1,:) = [1,1,1] ;
-
 set(gcf,'colormap',jet)
-plot3(DesiredAz,90-DesiredEl,DesiredZ,'rx','LineWidth',2)
-
-
-plot3(PksAz,PksEl,PksZ,'go')
-
-axis ('equal') ;
+shading interp;
+axis ('equal');
 hold off
-view (0, 90) ;
-legend('MUSIC Power Contour','Given DOA','Estimated DOA','Location','south')
+view (0, -90);
+xlim([-180 180])
+ylim([-90 90])
+
+%set(gcf,'colormap',jet)
+%plot3(DesiredAz,90-DesiredEl,DesiredZ,'rx','LineWidth',2)
+
+
+%plot3(PksAz,90-PksEl,PksZ,'go')
+% 
+% axis ('equal') ;
+% hold off
+% view (0, 90) ;
+% legend('MUSIC Power Contour','Given DOA','Estimated DOA','Location','south')
