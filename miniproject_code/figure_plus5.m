@@ -47,7 +47,7 @@ end
 
 
 % Generating some noise
-Q = 15                          % number of averaged measurements
+Q = 8;                          % number of averaged measurements
 
 varn = 0.0000000001;            % variance of noise
 noise = sqrt(varn/2)*(randn(size(TF,2),Q)+i*randn(size(TF,2),Q));
@@ -94,19 +94,16 @@ PBartlett = abs(PBartlett)./abs(BartlettMax);
 PCapon = abs(PCapon)./abs(CaponMax);
 PMusic = abs(PMusic)./abs(MusicMax);
 
-for k = 1:50
-    VectorThing = -mirrorModelParam.RxPos(1:2)+mirrorModelParam.TxPos(1:2,k);
-    MyAngle(k) = rad2deg(angle(VectorThing(1)+i*VectorThing(2)));
-end
-    
-
 
 
 DesiredAz = mean(rad2deg(mean(mirrorModelParam.thetaRxAzim(:,:,1:Q),2)),3);
 DesiredEl = mean(rad2deg(mean(mirrorModelParam.phiRxElev(:,:,1:Q),2)),3);
 DesiredZ = zeros(length(DesiredAz),1);
+%% Peak finding
 
-
+PksAz=[159.9,-13.6,-139.9,-121.8];
+PksEl=[28.6,4.5,5.5,5.0];
+PksZ =zeros(1,4);
 
 %%
 close all
@@ -152,11 +149,10 @@ cmap(1,:) = [1,1,1] ;
 set(gcf,'colormap',jet)
 plot3(DesiredAz,90-DesiredEl,DesiredZ,'rx','LineWidth',2)
 
-ix = find(imregionalmax(PMusic));
-hold on
-plot3(AZ(ix),90-EL(ix),PMusic(ix),'go')
+
+plot3(PksAz,90-PksEl,PksZ,'go')
 
 axis ('equal') ;
 hold off
 view (0, 90) ;
-legend('MUSIC Power Contour','Given DOA','Location','south')
+legend('MUSIC Power Contour','Given DOA','Estimated DOA','Location','south')
