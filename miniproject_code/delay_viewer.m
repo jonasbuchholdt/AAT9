@@ -76,3 +76,6 @@ hold off
 legend('Sim: LOS','Sim: primary','Sim: w/o floor/ceil','Sim: full','Measurement')
 xlabel('Samples [1]')
 ylabel('Average Magnitude Squared Impulse Response [1]')
+    set(gca,'fontsize',14)
+    grid on
+    grid minor

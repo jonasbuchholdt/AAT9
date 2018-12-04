@@ -5,9 +5,9 @@ clc
 
 %--------initi------------------
 %load LOS_only_MSM_no_noise.mat
-%load LOS_plus4comp_MSM_no_noise.mat
-load measDataTrack1Rp5TxPos1To50
-posAng = -2*pi*(0:7)/8; %posAng = -2*pi*(0:7)/8;
+load LOS_plus4comp_MSM_no_noise.mat
+%load measDataTrack1Rp5TxPos1To50
+posAng = (-2*pi*(0:7)/8)-pi; %posAng = -2*pi*(0:7)/8;
 radius = 75.18e-3/2;
 Lambda = 3e8/5.2e9;
 z_pos = 1.1;
@@ -15,10 +15,10 @@ M = 5;
 
 %---------impunseResponseR--------
 start = 1
-stop = 5                          % number of averaged measurements
-varn = 0.0000000001;            % variance of noise
-noise = sqrt(varn/2)*(randn(size(measData.TransferFunction,2),stop-start+1)+1j*randn(size(measData.TransferFunction,2),stop-start+1));
-IR = ifft(measData.TransferFunction);                            % computing Impulse Responses
+stop = 8                          % number of averaged measurements
+varn = 0.000000000;            % variance of noise
+noise = sqrt(varn/2)*(randn(size(mirrorModelParam.TransferFunction,2),stop-start+1)+1j*randn(size(mirrorModelParam.TransferFunction,2),stop-start+1));
+IR = ifft(mirrorModelParam.TransferFunction);                            % computing Impulse Responses
 IRmod = squeeze(sum(IR(1:20,:,start:stop),1));
 % Calculating and printing SNR
 SNR = 10*log10(mean(rms(IRmod))/mean(rms(noise)));
@@ -83,7 +83,7 @@ end
 
 %----------plot----------------
 figure(1)
-surf(PhiS,ThetaS,10*log10(Pcarpon/max(max(Pcarpon))))
+surf(PhiS,ThetaS,10*log10(Pmusic/max(max(Pmusic))))
 shading interp
 
 
@@ -233,28 +233,27 @@ hold off
 view (0,90);
 
 %%
-[AZ,EL] = meshgrid(rad2deg(ThetaS),rad2deg(PhiS));
+DesiredAz = mean(rad2deg(mean(mirrorModelParam.thetaRxAzim(:,:,start:stop-start+1),2)),3);
+DesiredEl = mean(rad2deg(mean(mirrorModelParam.phiRxElev(:,:,start:stop-start+1),2)),3);
+DesiredZ = zeros(length(DesiredAz),1);
+[AZ,EL] = meshgrid(rad2deg(ThetaS),rad2deg(PhiS-pi/2));
 bgFig = imread('rp5a.jpg') ;
 figure;
-F = image([180 -180],[0 180],bgFig (:,:,1:3));
+image([180 -180],[90 -90],bgFig (:,:,1:3));
 hold on;
-%image('CData',bgFig,'XData',[0 180],'YData',[180 -180])
-
-S = surf (AZ',EL', 10*log10(abs(Pmusic))+50,'FaceAlpha',0.3);
-
-
-%contour(AZ', EL', 10*log10(abs(Pmusic)), 'LineWidth',3);
-%imadd(S,F)
-
+surf(AZ',EL', 10*log10(abs(Pmusic))-50,'FaceAlpha',0.3);
+plot3(DesiredAz,DesiredEl,DesiredZ,'rx','LineWidth',2)
 maxPower = ceil(max(max(10*log10(abs(Pmusic))))/5)*5 ;
-caxis([maxPower-20+50 maxPower-3+50])
+caxis([maxPower-60-50 maxPower-3-50])
 cmap = colormap(gca);
 cmap(1,:) = [1,1,1] ;
 set(gcf,'colormap',jet)
-shading interp ;
-axis ('equal') ;
+shading interp;
+axis ('equal');
 hold off
-view (0, 90) ;
+view (0, -90);
+xlim([-180 180])
+ylim([-90 90])
 
 %%
 step = pi/(360*10);
