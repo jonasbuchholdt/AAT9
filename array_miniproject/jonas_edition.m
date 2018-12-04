@@ -14,12 +14,12 @@ z_pos = 1.1;
 M = 5;
 
 %---------impunseResponseR--------
-start = 1
-stop = 8                          % number of averaged measurements
+start = 40
+stop = 50                          % number of averaged measurements
 varn = 0.000000000;            % variance of noise
 noise = sqrt(varn/2)*(randn(size(mirrorModelParam.TransferFunction,2),stop-start+1)+1j*randn(size(mirrorModelParam.TransferFunction,2),stop-start+1));
 IR = ifft(mirrorModelParam.TransferFunction);                            % computing Impulse Responses
-IRmod = squeeze(sum(IR(1:20,:,start:stop),1));
+IRmod = squeeze(sum(IR(1:200,:,start:stop),1));
 % Calculating and printing SNR
 SNR = 10*log10(mean(rms(IRmod))/mean(rms(noise)));
 fprintf('SNR: %d \n',round(SNR))
@@ -233,8 +233,8 @@ hold off
 view (0,90);
 
 %%
-DesiredAz = mean(rad2deg(mean(mirrorModelParam.thetaRxAzim(:,:,start:stop-start+1),2)),3);
-DesiredEl = mean(rad2deg(mean(mirrorModelParam.phiRxElev(:,:,start:stop-start+1),2)),3);
+DesiredAz = mean(rad2deg(mean(mirrorModelParam.thetaRxAzim(:,:,start:stop),2)),3);
+DesiredEl = mean(rad2deg(mean(mirrorModelParam.phiRxElev(:,:,start:stop),2)),3);
 DesiredZ = zeros(length(DesiredAz),1);
 [AZ,EL] = meshgrid(rad2deg(ThetaS),rad2deg(PhiS-pi/2));
 bgFig = imread('rp5a.jpg') ;
