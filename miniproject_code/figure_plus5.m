@@ -52,7 +52,7 @@ Q = 15                          % number of averaged measurements
 varn = 0.0000000001;            % variance of noise
 noise = sqrt(varn/2)*(randn(size(TF,2),Q)+i*randn(size(TF,2),Q));
 IR = ifft(TF);                            % computing Impulse Responses
-IRmod = squeeze(sum(IR(1:200,:,end+1-Q:end),1));
+IRmod = squeeze(sum(IR(1:200,:,1:Q),1));
 
 
 % Calculating and printing SNR
@@ -100,30 +100,63 @@ for k = 1:50
 end
     
 
-MaxAzB = mean(rad2deg(azrng(rowb)));
-MaxElB = 90 -mean(rad2deg(elrng(colb)));
-MaxAzC = mean(rad2deg(azrng(rowc)));
-MaxElC = 90 -mean(rad2deg(elrng(colc)));
-MaxAzM = mean(rad2deg(azrng(rowm)));
-MaxElM = 90 -mean(rad2deg(elrng(colm)));
-DesiredAz = rad2deg(mean(mirrorModelParam.thetaRxAzim(3,:,end+1-Q:end),'all'));
-DesiredEl = rad2deg(mean(mirrorModelParam.phiRxElev(3,:,end+1-Q:end),'all'));
-CalcAz = mean(MyAngle(end+1-Q:end));
-fprintf('True Az: %d Calc Az: %d Bartlett Az: %d Capon Az: %d Music Az: %d \n',round(DesiredAz), round(CalcAz), round(MaxAzB),round(MaxAzC),round(MaxAzM))
-fprintf('True El: %d Bartlett El: %d Capon El: %d Music El: %d \n',round(DesiredEl), round(MaxElB),round(MaxElC),round(MaxElM))
+
+
+DesiredAz = mean(rad2deg(mean(mirrorModelParam.thetaRxAzim(:,:,1:Q),2)),3);
+DesiredEl = mean(rad2deg(mean(mirrorModelParam.phiRxElev(:,:,1:Q),2)),3);
+DesiredZ = zeros(length(DesiredAz),1);
+
+
 
 %%
 close all
 [AZ,EL] = meshgrid(rad2deg(azrng),rad2deg(elrng));
+ELsurf = 90-EL;
+
 figure()
-surf(AZ',EL',10*log10(abs(PBartlett)))
-title('Bartlett')
-figure()
-surf(AZ',EL',10*log10(abs(PCapon)))
+surf(AZ',ELsurf',10*log10(abs(PCapon)))
 title('Capon')
+axis tight
+xlabel('Azimuth [Deg]')
+ylabel('Elevation [Deg]')
+zlabel('Normed Power [dB]')
+zlim([-50 0])
+shading interp
+set (gca,'Xdir','reverse')
+view([210 50])
+
 figure()
-surf(AZ',EL',10*log10(abs(PMusic)))
+surf(AZ',ELsurf',10*log10(abs(PMusic)))
 title('MUSIC')
 axis tight
 xlabel('Azimuth [Deg]')
 ylabel('Elevation [Deg]')
+zlabel('Normed Power [dB]')
+shading interp
+zlim([-50 0])
+set (gca,'Xdir','reverse')
+view([210 50])
+
+bgFig = imread('rp5a.jpg') ;
+figure;
+image([180 -180],[0 180],bgFig (:,:,1:3))
+hold on;
+surf (AZ',EL', 10*log10(abs(PMusic))+50,'FaceAlpha',0.3);
+%contour (AZ',EL', 10*log10(abs(PMusic)), 'LineWidth',3);
+shading interp
+maxPower = ceil(max(max(10*log10(abs(PMusic))))/5)*5 ;
+caxis([maxPower maxPower+50])
+cmap = colormap(gca);
+cmap(1,:) = [1,1,1] ;
+
+set(gcf,'colormap',jet)
+plot3(DesiredAz,90-DesiredEl,DesiredZ,'rx','LineWidth',2)
+
+ix = find(imregionalmax(PMusic));
+hold on
+plot3(AZ(ix),90-EL(ix),PMusic(ix),'go')
+
+axis ('equal') ;
+hold off
+view (0, 90) ;
+legend('MUSIC Power Contour','Given DOA','Location','south')
