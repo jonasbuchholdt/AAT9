@@ -1,43 +1,69 @@
-\chapter*{\gls{bc} vs \gls{ac} matching}
-A test was made to design the matching frequency between \gls{bc} and \gls{ac} with only the project writers as test subject. Due to limited time and limited test subject, the matching test is designed to be done with the noise from the \gls{hint} test. While using the noise a problem arise, the transfer function for \gls{bc} and \gls{ac} is not the same. The transfer function differs mostly in the low frequency below \SI{500}{\hertz} and in the high above \SI{2}{\kilo\hertz} and where the \gls{bc} is lower that the \gls{ac}. Therefore the low frequency form the \gls{ac} might work as a masker and the \gls{ac} therefore is higher in level in the frequency of interest. To test this phenomena, the original noise from the \gls{hint} is compared to filtered versions.
+\chapter*{\gls{bc} vs \gls{ac} matching signals}
+A test was made to design the matching frequency between \gls{bc} and \gls{ac}. Due to limited time and limited test subject, the matching test is designed to be done with the noise from the \gls{hint} test. Using the noise from the \gls{hint} test a problem arise, the transfer function for \gls{bc} and \gls{ac} is not the same. The transfer function differs mostly in the low frequency below \SI{500}{\hertz} and in the high above \SI{2}{\kilo\hertz}. Therefore the low frequency form the \gls{ac} might work as a masker and the \gls{ac} therefore is higher in level in the frequency of interest. To test this hypothesis, the original noise from the \gls{hint} is compared to filtered versions. The filtered versions will not only be high pass filtering, but there will be many filtered version such that it is possible to compare different frequency content versus matching between \gls{bc} and \gls{ac}. The following \autoref{apen:test_signals} display all chosen filtered version of the \gls{hint} noise. 
+
+
+\begin{table}[H]
+\caption{Test signal description, All filter is 8th order butterworth filters}
+\begin{tabularx}{\textwidth}{l | X l}
+Matching signal       & Description \\ \hline
+Original signal         & The original unfiltered signal from the \gls{hint} test \citep{hint_2011}.      \\
+Highpass        & The original signal filtered with a highpass filter at \SI{400}{\hertz}.           \\
+Bandpass 1        & The original signal filtered with a bandpass filter from \SI{1}{\kilo\hertz} to \SI{2}{\kilo\hertz}.           \\
+Bandpass 2        & The original signal filtered with a bandpass filter from \SI{1}{\kilo\hertz} to \SI{4}{\kilo\hertz}.          \\
+1/3 octave & The original signal filtered with a 1/3 octave filter centred at \SI{2}{\kilo\hertz}.          \\
+\SI{1}{\kilo\hertz}                  & This signal is playing a \SI{1}{\kilo\hertz} tone.      \\
+\SI{2}{\kilo\hertz}                 & This signal is playing a \SI{2}{\kilo\hertz} tone.          \\
+\SI{4}{\kilo\hertz}                 & This signal is playing a \SI{4}{\kilo\hertz} tone.        
+\end{tabularx}
+\label{apen:test_signals}
+\end{table}
 
 \section*{Materials and setup}
-To measure the .... on a guitar, the following materials are used:
+To match the perceived level from the \gls{bc} vs \gls{ac}, the following materials are used:
 \begin{itemize}
-\item PC
+\item PC with an audio player
+\item RME Fireface UFX
 \item \gls{ac}
 \item \gls{bc}
-\item Afinity
+\item Affinity
 \end{itemize}
 
-%\begin{figure}[htbp!]
-%\centering
-%\def\svgwidth{\columnwidth}
-%\input{figures/appendix/guitar_frequency_test.pdf_tex}
-%\caption{Setup for measuring frequency area on a guitar.}
-%		\label{fig:appendix:test}
-%\end{figure}
+\begin{figure}[H]
+\centering
+\def\svgwidth{\columnwidth}
+\input{figures/appendix/match_test.pdf_t}
+\caption{Setup for match test of \gls{bc} vs \gls{ac}.}
+		\label{fig:appendix:match_meas_system}
+\end{figure}
 
 \section*{Test procedure}
 
 
 \begin{enumerate}
-\item The materials are set up as in \autoref{fig:appendix:test}.
-\item 
-\item  
-\item  
-\item 
-\item 
+\item The materials are set up as in \autoref{fig:appendix:match_meas_system}.
+\item The \gls{bc} is placed on the head according to \autoref{sec:bc_pos} with a rubber hair band.
+\item The \gls{ac} is putted intro the ears.
+\item The Affinity is set to bone_vs_air_matching mode as according to \autoref{} 
+\item The test is started and the test subject shall reply back if the level shall be lower, higher or if it is matching. 
+\item The test will stop after the level convergence to one level. The convergence level is a level that has been matching three times 
 \end{enumerate}
 
 \section*{Results}
 
-%\begin{figure}[htbp!]
-%	\centering
-%		\includegraphics[width=1\textwidth]{guitar_low_E_neck.pdf}
-%		\caption{Measurement of the low E note on the neck pickup.}
-%		\label{fig:appendix:low_E_neck}
-%\end{figure}
+\begin{table}[H]
+\caption{Test result}
+\begin{tabular}{l|lll|ll}
+Matching test in \si{\decibel}       & Subject 1 & Subject 2 & Subject 3 & mean result & standard deviation \\ \hline
+Original signal         & 46        & 45        & 45        & 45.3        & 0.58               \\
+Highpass         & 47        & 44        & 46        & 45.7        & 1.53               \\
+Bandpass 1         & 38        & 40        & 45        & 41          & 3.61               \\
+Bandpass 2        & 41        & 41        & 47        & 43          & 3.46               \\
+1/3 octave & 57        & 50        & 60+       & 55.7        & 5.13               \\
+\SI{1}{\kilo\hertz}                   & 34        & 32        & 36        & 34          & 2                  \\
+\SI{2}{\kilo\hertz}                  & 45        & 51        & 60+       & 52          & 7.55               \\
+\SI{3}{\kilo\hertz}                  & 47        & 49        & 59        & 51.7        &  6.43                 
+\end{tabular}
+\end{table}
 
 On  \autoref{fig:appendix:low_E_neck} it is seen that the lowest significant frequency is around \SI{80}{\hertz} and the highest significant frequency is around \SI{400}{\hertz}, when playing the low E note on the guitar, using the neck pickup.
 
