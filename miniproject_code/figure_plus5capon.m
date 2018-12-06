@@ -101,15 +101,15 @@ DesiredEl = mean(rad2deg(mean(mirrorModelParam.phiRxElev(:,:,1:Q),2)),3);
 DesiredZ = zeros(length(DesiredAz),1);
 %% Peak finding
 
-PksAz=[101.8,-13.6,-139.9,-121.8];
-PksEl=[0,4.5,5.5,5.0];
-PksZ =zeros(1,4);
+PksAz=[-121.8,-140.9,-12.5,105.8,-129.9];
+PksEl=[7.5,4.0,0.5,7.5,6.5];
+PksZ =zeros(1,5);
 
 %%
 close all
 [AZ,EL] = meshgrid(rad2deg(azrng),rad2deg(elrng));
 ELsurf = 90-EL;
-
+EL = 90-EL;
 figure()
 surf(AZ',ELsurf',10*log10(abs(PCapon)))
 title('Capon')
@@ -139,9 +139,10 @@ bgFig = imread('rp5a.jpg') ;
 figure;
 image([180 -180],[90 -90],bgFig (:,:,1:3));
 hold on;
-surf(AZ',EL', 10*log10(abs(PMusic))-50,'FaceAlpha',0.3);
+surf(AZ',EL', 10*log10(abs(PCapon))-50,'FaceAlpha',0.3);
 plot3(DesiredAz,DesiredEl,DesiredZ,'rx','LineWidth',2)
-maxPower = ceil(max(max(10*log10(abs(PMusic))))/5)*5 ;
+plot3(PksAz,PksEl,PksZ,'go')
+maxPower = ceil(max(max(10*log10(abs(PCapon))))/5)*5 ;
 caxis([maxPower-60-50 maxPower-3-50])
 cmap = colormap(gca);
 cmap(1,:) = [1,1,1] ;
@@ -162,4 +163,4 @@ ylim([-90 90])
 % axis ('equal') ;
 % hold off
 % view (0, 90) ;
-% legend('MUSIC Power Contour','Given DOA','Estimated DOA','Location','south')
+ legend('Capon Power','Given DOA','Estimated DOA','Location','south')
