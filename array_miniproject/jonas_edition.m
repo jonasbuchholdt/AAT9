@@ -5,8 +5,11 @@ clc
 
 %--------initi------------------
 %load LOS_only_MSM_no_noise.mat
-load LOS_plus4comp_MSM_no_noise.mat
-%load measDataTrack1Rp5TxPos1To50
+%load LOS_plus4comp_MSM_no_noise.mat
+load measDataTrack1Rp5TxPos1To50
+load fullresponse_plusfloorandceiling_MSM_no_noise
+TF = mirrorModelParam.TransferFunction;
+%TF = measData.TransferFunction;
 posAng = (-2*pi*(0:7)/8)-pi; %posAng = -2*pi*(0:7)/8;
 radius = 75.18e-3/2;
 Lambda = 3e8/5.2e9;
@@ -14,12 +17,12 @@ z_pos = 1.1;
 M = 5;
 
 %---------impunseResponseR--------
-start = 40
-stop = 50                          % number of averaged measurements
+start = 1;
+stop = 15;                          % number of averaged measurements
 varn = 0.000000000;            % variance of noise
-noise = sqrt(varn/2)*(randn(size(mirrorModelParam.TransferFunction,2),stop-start+1)+1j*randn(size(mirrorModelParam.TransferFunction,2),stop-start+1));
-IR = ifft(mirrorModelParam.TransferFunction);                            % computing Impulse Responses
-IRmod = squeeze(sum(IR(1:200,:,start:stop),1));
+noise = sqrt(varn/2)*(randn(size(TF,2),stop-start+1)+1j*randn(size(TF,2),stop-start+1));
+IR = ifft(TF);                            % computing Impulse Responses
+IRmod = squeeze(sum(IR(1:10,:,start:stop),1));
 % Calculating and printing SNR
 SNR = 10*log10(mean(rms(IRmod))/mean(rms(noise)));
 fprintf('SNR: %d \n',round(SNR))
@@ -63,7 +66,7 @@ R_inv = inv(R);
 for ii=1:length(ThetaS)
     for jj=1:length(PhiS)
         an = exp(1j*2*pi/Lambda*radius*(cos(ThetaS(ii)-posAng)*sin(PhiS(jj))+z_pos*cos(PhiS(jj))));
-        Pcarpon(ii,jj)=1./abs(an*R_inv*an');
+        Pcapon(ii,jj)=1./abs(an*R_inv*an');
     end
 end
 
@@ -82,11 +85,31 @@ for ii=1:length(ThetaS)
 end
 
 %----------plot----------------
-figure(1)
-surf(PhiS,ThetaS,10*log10(Pmusic/max(max(Pmusic))))
-shading interp
+% figure(1)
+% surf(PhiS,ThetaS,10*log10(Pmusic/max(max(Pmusic))))
+% shading interp
 
-
+DesiredAz = mean(rad2deg(mean(mirrorModelParam.thetaRxAzim(:,:,start:stop),2)),3);
+DesiredEl = mean(rad2deg(mean(mirrorModelParam.phiRxElev(:,:,start:stop),2)),3);
+DesiredZ = zeros(length(DesiredAz),1);
+[AZ,EL] = meshgrid(rad2deg(ThetaS),rad2deg(PhiS-pi/2));
+bgFig = imread('rp5a.jpg') ;
+figure;
+image([180 -180],[90 -90],bgFig (:,:,1:3));
+hold on;
+surf(AZ',EL', 10*log10(abs(Pcapon))-50,'FaceAlpha',0.3);
+%plot3(DesiredAz,DesiredEl,DesiredZ,'rx','LineWidth',2)
+maxPower = ceil(max(max(10*log10(abs(Pcapon))))/5)*5 ;
+caxis([maxPower-20-50 maxPower-3-50])
+cmap = colormap(gca);
+cmap(1,:) = [1,1,1] ;
+set(gcf,'colormap',jet)
+shading interp;
+axis ('equal');
+hold off
+view (0, -90);
+xlim([-180 180])
+ylim([-90 90])
 
 
 %%

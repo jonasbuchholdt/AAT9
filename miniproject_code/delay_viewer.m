@@ -63,15 +63,23 @@ avgIR = mean(abs(IR).^2,2);                    % averaged and squared IR
 
 meas = real(squeeze(avgIR));
 
+% Mean
+
+LOSonlyM = mean(LOSonly,2);
+LOS4compM = mean(LOS4comp,2);
+minusfloorM = mean(minusfloor,2);
+fullsimM = mean(fullsim,2);
+measM = mean(meas,2);
+
 %% Plots
-N = 25;
+N = 1;
 figure()
-loglog(LOSonly(:,N))
+loglog(LOSonlyM(:,N))
 hold on
-loglog(LOS4comp(:,N))
-loglog(minusfloor(:,N))
-loglog(fullsim(:,N))
-loglog(meas(:,N))
+loglog(LOS4compM(:,N))
+loglog(minusfloorM(:,N))
+loglog(fullsimM(:,N))
+loglog(measM(:,N))
 hold off
 legend('Sim: LOS','Sim: primary','Sim: w/o floor/ceil','Sim: full','Measurement')
 xlabel('Samples [1]')
