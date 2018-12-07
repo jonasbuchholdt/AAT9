@@ -1,0 +1,21 @@
+\section{\gls{bc} probability density function}
+In this section the density for the \gls{bc} level versus \gls{ac} will be analysed. The analysis is done to verify the distribution of both the initial test and the matching part for the \gls{bier} test. This analysis will estimate the \gls{pdf} of the subject data and estimate the distribution such that this small amount of data can be used to estimate the result of the test if there were many more test subject. 
+
+To calculate the \gls{pdf} of the data, the input for the function have to be defined based on the subject data. The input samples for calculating the  \gls{pdf} will be the average \gls{spl} for every subject, and the variance will be calculated based on the average \gls{spl} for every subject. The following \autoref{sec:pdf_of_bc} shows the calculated average and variance.
+
+\begin{table}[H]
+\centering
+\caption{The average and variance.}
+\begin{tabular}{l|ll}
+Matching test                 & $\mu$ & $\sigma^2$ \\ \hline
+Initial                       & 50    & 5.34       \\
+Familiarization of \gls{bier} & 49.48 & 4.604      \\
+\gls{bier}                    & 47.99 & 9.44      
+\end{tabular}}
+\label{sec:pdf_of_bc}
+\end{table}
+
+
+\begin{equation}
+f(x \mid \mu, \sigma^2) = \frac{1}{\sqrt{2 \pi \sigma^2}}e^{-\frac{()x-\mu)^2}{2\sigma^2}}
+\end{equation}
