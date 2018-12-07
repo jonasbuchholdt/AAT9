@@ -1,3 +1,4 @@
+% concomitant
 \section{Introduction}\label{sec:method_intro}
 Assessing intelligibility is an essential component of the project at hand. 
 In \citep[p. 11]{cote_2011}, the author defines intelligibility as \enquote{the ability to extract the content of the speech signal (\dots) from the recognized phonemes}. Phonemes are commonly defined as the smallest distinctive units of speech.
@@ -15,9 +16,11 @@ The prediction approach is unsuitable for the given application, because it reli
 Instead, an assessment based on trials with subjects is more promising.
 The inherent problem with speech intelligibility rating based scales with subjective parameters is, that they rely on assessment of the judges, intead of objective data. This may be an advantage when it comes to making a transmission pleasant to the recipient, in the context of the current project however, it introduces difficulties.
 \citep[Sec. 5.1]{arl_us_army} mentions, that training the listeners has an impact on test results. Also, speech intelligibility ratings can be problematic to compare to speech intelligibility scores from different tests. This complicates comparisons with other studies.
-The most suited approach for this project therefore is a perceptual intelligibility test. There are many test methods, some of which will be described in \autoref{sec:methods}. The test can score the intelligibility based on phonemes, syllables, words, sentences or paragraphs. An overview on how to relate scores from tests with phonemes, words and sentences is given in \citep{olsen_1997}
+The most suited approach for this project therefore is a perceptual intelligibility test. There are many test methods, some of which will be described in \autoref{sec:methods}. The test can score the intelligibility based on phonemes, syllables, words, sentences or paragraphs. An overview on how to relate scores from tests with phonemes, words and sentences is given in \citep{olsen_1997}.
+
 
 \section{Test Methods}\label{sec:methods}
+The following section will outline some perceptual speech intelligibility tests, that have been considered for the project at hand. It is not claimed, that this section will be a comprehensive study of every variant of speech intelligibility test. There are a huge number of different test routines used in different coherencies. The tests, that are mentioned, have been chosen based on their feasibility for the the project at hand.
 
 \subsection{\gls{cat}}\label{ssec:cat}
 The \gls{cat} is a speech intelligibility test, that has been developed specifically in context with military applications. The test items are so called callsigns, which are a combination of 18 selected elements from the International Radiotelephony Spelling Alphabet and seven numerical digits, resulting in a total of 126 test items.
@@ -31,12 +34,15 @@ The limited set of test items is also paralleled by drawbacks. As the test has b
 \subsection{\gls{fst}}\label{ssec:fst}
 optional maybe
 \subsection{\gls{hint}}\label{ssec:hint}
+The \gls{hint} was introduced by \citep{nilsson_95} and has been adapted to Danish by \citep{hint_2011}. 
+
 \subsection{\gls{mrt}}\label{ssec:mrt}
 The \gls{mrt} was originally described in \citep{mrt_63} and has been standardised in \citep{ansi_s2.3}. The goal of developing the test was establishing a reliable, relatively quick way of testing a communication channel with untrained test subjects.
 The test items consist of monosyllabic words, that are grouped into 50 six-word lists. Typically the structure of the words is consonant-vowel-consonant. The words differ either in their onset (e.g. fun, run, sun) or in their ending (e.g. pale, pace, page). 
 These words are embedded into a carrier sentence, e.g. \enquote{Please select the word \dots}. 
 The test subjects are presented one word out of each list and given a multiple choice questionnaire, in which the word lists are used as answering options. 
 Having in mind the project at hand, the formerly described ways of presenting stimuli and recording the responses would allow for a computerised conduct of the test.
-Another advantages reported in \citep[p. 17]{arl_us_army} is a hardly noticable effect of learning when subjects are tested repeatedly.
+Another advantages reported in \citep[p. 17]{arl_us_army} is a hardly noticable effect of learning when subjects are tested repeatedly. These repeated tests might be necessary to cover a range of noise conditions.
 A drawback, reported in the same study, is the imbalancedness of the \gls{mrt} regarding some vowels and consonants. 
+It is also suspected, that a rhyme tests result might not accurately represent the intelligibility of speech in general, because only a limited number of phonemes are what is identified during tested. This is also mentioned in context with the diagnostic rhyme test, which is somewhat similar to the \gls{mrt}, in \citep{greenspan_98}. 
 
