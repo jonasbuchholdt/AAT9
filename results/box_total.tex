@@ -1,0 +1,83 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=6.028in,
+height=4.754in,
+at={(1.011in,0.642in)},
+scale only axis,
+xmin=41.435,
+xmax=53.865,
+xlabel style={font=\color{white!15!black}},
+xlabel={$\text{mean [}\mu\text{]}$},
+ymin=0.5,
+ymax=1.5,
+ytick={1},
+axis background/.style={fill=white},
+xmajorgrids,
+xminorgrids,
+ymajorgrids,
+yminorgrids,
+legend style={legend cell align=left, align=left, draw=white!15!black}
+]
+\addplot [color=black, dashed, forget plot]
+  table[row sep=crcr]{%
+51	1\\
+53.3	1\\
+};
+\addplot [color=black, dashed, forget plot]
+  table[row sep=crcr]{%
+44.8	1\\
+48	1\\
+};
+\addplot [color=black, forget plot]
+  table[row sep=crcr]{%
+53.3	0.9625\\
+53.3	1.0375\\
+};
+\addplot [color=black, forget plot]
+  table[row sep=crcr]{%
+44.8	0.9625\\
+44.8	1.0375\\
+};
+\addplot [color=blue, forget plot]
+  table[row sep=crcr]{%
+48	0.925\\
+51	0.925\\
+51	1.075\\
+48	1.075\\
+48	0.925\\
+};
+\addplot [color=red, forget plot]
+  table[row sep=crcr]{%
+49	0.925\\
+49	1.075\\
+};
+\addplot [color=black, draw=none, mark=+, mark options={solid, red}, forget plot]
+  table[row sep=crcr]{%
+42	1\\
+};
+\end{axis}
+
+\begin{axis}[%
+width=7.778in,
+height=5.833in,
+at={(0in,0in)},
+scale only axis,
+xmin=0,
+xmax=1,
+ymin=0,
+ymax=1,
+axis line style={draw=none},
+ticks=none,
+axis x line*=bottom,
+axis y line*=left,
+legend style={legend cell align=left, align=left, draw=white!15!black}
+]
+\end{axis}
+\end{tikzpicture}%

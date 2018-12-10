@@ -1,9 +1,7 @@
 \section{\gls{bc} probability density function}
 In this section the density for the \gls{bc} level versus \gls{ac} will be analysed. The analysis is done to verify the distribution of both the initial test, the familiarization test and the matching part for the \gls{bier} test. In the end all data will be analysed together because the number of test subject was small. The merge data will be called the Total data.
 
-This analysis will estimate the \gls{pdf} based on the subject data. It is assumed that the the distribution is a Gaussian distribution and therefore the data will be compared to the \gls{pdf} of a Gaussian distribution. The comparing will be done by calculating the mean 
-
- If the hypnotises is correct, it can then be assumed that a greater field test will approximate result in the same direction.
+This analysis will estimate the \gls{pdf} based on the subject data. It is assumed that the the distribution is a Gaussian distribution and therefore the data will be compared to the \gls{pdf} of a Gaussian distribution. The comparing will be done by calculating the \gls{mse} between the subject result and the Gaussian distribution calculated from the subject result mean and variance. The \gls{mse} will be calculated with the MATLAB function \texttt{immse}. In the end the 25 \textsuperscript{th} and 75\textsuperscript{th} percentile will be present. If the hypnotises is correct, it can then be assumed that a greater field test will approximate result in the same direction.
 
 To calculate the \gls{pdf} of the data, the input for the function have to be defined based on the subject data. The input samples for calculating the  \gls{pdf} will be the average \gls{spl} for every subject, and the variance will be calculated based on the average \gls{spl} for every subject. The following \autoref{sec:pdf_of_bc} shows the calculated average and variance. 
 
@@ -38,9 +36,8 @@ The following three figurers display the data from the subject test as a histogr
 		\label{fig:initial_pdf}
 \end{figure}
 
-It can be seen in \autoref{fig:initial_pdf} that the measured data, which is plotted in a the histogram, might be a Gaussian distribution if there had been more test subjects. There is no outlaiers and the highest probability lays close to the highest probability of the Gaussian distribution calculated from the data.
+It can be seen in \autoref{fig:initial_pdf} that the measured data, which is plotted in a the histogram, might be a Gaussian distribution if there had been more test subjects. There is no outliers and the highest probability lays close to the highest probability of the Gaussian distribution calculated from the data. The calculated \gls{mse} between the data and the Gaussian distribution function is $11.835 \cdot 10^{-5}$
 
-mse 1.1835e-04
 
  \begin{figure}[H]
 	\centering
@@ -49,9 +46,8 @@ mse 1.1835e-04
 		\label{fig:fam_pdf}
 \end{figure}
 
-It can be seen in \autoref{fig:fam_pdf} that the measured data, which is plotted in a the histogram, might be a Gaussian distribution if there had been more test subjects. There is no outlaiers and two the highest probability lays close to the highest probability of the Gaussian distribution calculated from the data, but there is also one histogram bar that have high probability but lays at the high end of the test subject data. 
+It can be seen in \autoref{fig:fam_pdf} that the measured data, which is plotted in a the histogram, might be a Gaussian distribution if there had been more test subjects. There is no outliers and two the highest probability lays close to the highest probability of the Gaussian distribution calculated from the data, but there is also one histogram bar that have high probability but lays at the high end of the test subject data. The calculated \gls{mse} between the data and the Gaussian distribution function is $13.311 \cdot 10^{-5}$
 
-mse 1.3325e-04
 
  \begin{figure}[H]
 	\centering
@@ -60,9 +56,9 @@ mse 1.3325e-04
 		\label{fig:bier_pdf}
 \end{figure}
 
-It can be seen in \autoref{fig:bier_pdf} that the measured data for the \gls{bier} test, which is plotted in a the histogram, have the same tendency as in initial test \autoref{fig:fam_pdf} and the familiarization test \autoref{fig:initial_pdf}. The distribution might be a Gaussian distribution if there had been more test subjects. There is no outlaiers and the highest probability lays close to the highest probability of the Gaussian distribution calculated from the data. 
+It can be seen in \autoref{fig:bier_pdf} that the measured data for the \gls{bier} test, which is plotted in a the histogram, have the same tendency as in initial test \autoref{fig:fam_pdf} and the familiarization test \autoref{fig:initial_pdf}. The distribution might be a Gaussian distribution if there had been more test subjects. There is no outliers and the highest probability lays close to the highest probability of the Gaussian distribution calculated from the data. The calculated \gls{mse} between the data and the Gaussian distribution function is $13.339 \cdot 10^{-5}$.
 
-mes 1.3325e-04
+
 
 To include more data in the comparison between test subject and the Gaussian distribution, all present subject data is merged to one data file, where the mean and variance is calculated. The following figure \autoref{fig:total_pdf} shows the merged subject data compared with the Gaussian distribution.
 
@@ -73,6 +69,25 @@ To include more data in the comparison between test subject and the Gaussian dis
 		\label{fig:total_pdf}
 \end{figure}
 
-It can be seen in \autoref{fig:total_pdf} that the measured data for the all subject test together, which is plotted in a the histogram, starts to . The distribution might be a Gaussian distribution if there had been more test subjects. There is no outlaiers and the highest probability lays close to the highest probability of the Gaussian distribution calculated from the data. 
+It can be seen in \autoref{fig:total_pdf} that the measured data for the all subject test together, which is plotted in a the histogram, starts to is converging to a better Gaussian distribution fit. The distribution might be a Gaussian distribution if there had been more test subjects. There is no outliers and the highest probability lays close to the highest probability of the Gaussian distribution calculated from the data. The calculated \gls{mse} between the data and the Gaussian distribution function is $7.7464 \cdot 10^{-5}$.
 
-mse 7.7464e-05
+To present the 25 \textsuperscript{th} and 75 \textsuperscript{th} percentile, the median of the total data and the \SI{99.3}{\percent} coverage a boxplot is calculated and visulized in \autoref{fig:total_box}.
+
+ \begin{figure}[H]
+	\centering
+	\include{chapters/tests/box_total}
+		\caption{The plot shows a box and whisker plot of the data merge of \autoref{apend:matching_in_bier} and \autoref{apend:match_field_init}}
+		\label{fig:total_box}
+\end{figure}
+
+In \autoref{fig:total_box} it can be seen that there is only one outliers from the \SI{99.3}{\percent} coverage, the 25 \textsuperscript{th} percentile lies at \SI{48}{\decibel} and the 75 \textsuperscript{th} percentile lies at \SI{51}{\decibel}.
+
+
+\section{Conclusion}
+It can be concluded that the matching part for the \gls{bier} test might converge to a normal distribution by observing the \gls{mse}. It can also be concluded that with the measured subject the mean \gls{spl} for the \gls{bc} is \SI{49.1}{\decibel} to match the air  and the variance \gls{spl} is \SI{6.82}{\decibel}. The standard deviation of the subject data is \SI{2.61}{\decibel} and the \SI{50}{\percent} of the subject result lies within \SI{48}{\decibel} to \SI{51}{\decibel}.
+
+
+%69.6
+
+
+

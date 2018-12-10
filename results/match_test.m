@@ -60,6 +60,15 @@ histogram(total, length(B),'Normalization','probability');
  legend('BIER','Location','northeast')
  set(gca,'fontsize',12)
 
+ %%
+ figure(5)
+boxplot(total, 'orientation', 'horizontal')
+ xlabel('mean [\mu]')
+ %ylabel('Probability')
+ grid on
+ grid minor
+ %legend('BIER','Location','northeast')
+ set(gca,'fontsize',12)
  
 
  %%
@@ -70,10 +79,10 @@ bier = [51 51 48 48 42 52 46 48.8 44.8 48.3]*10;
 total = [init fam bier];
 
  
-y = zeros(1,1000)
+y = zeros(1,1000);
 for h =1:1000
     for g=1:length(total)
-        if h == totalr(g)
+        if h == total(g)
           y(h) = y(h)+(1/length(total));
         end
     end
@@ -81,8 +90,8 @@ end
  
 plot(y)
 hold on
-plot(corr)
-sum(y)
-sum(corr)
+plot(corr);
+sum(y);
+sum(corr);
 
 err = immse(y,corr)
