@@ -1,5 +1,6 @@
 \chapter*{Calibration analysis of Affinity}
-A test was made to get a view of the Affinity input CD1 and CD2. To decide on the matching between the \gls{ac} and the \gls{bc} is have to be found out if the input CD1 and CD2 is calibrated. With calibrating it means that the input voltage relate to a force output of the \gls{bc}. To test if the Affinity 2.0 is calibrated, the input output voltage relation shall change along the frequency to rich the correct force for every frequency since the transfer function of the \gls{bc} does not match the transfer from the standard ...   
+\label{append:affinity_bc_calibration}
+A test was made to get a view of the Affinity input CD1 and CD2. To decide on the matching between the \gls{ac} and the \gls{bc} it have to be found out if the input CD1 and CD2 is calibrated according to the used \gls{bc} transducer. With calibrating it means that the input voltage relate to a force output of the \gls{bc}. It have been observed in the datasheet for the \gls{bc} that the transducer needs calibration \citep{radioear_b81}. To test if the Affinity 2.0 is calibrated, the input output voltage relation shall change along the frequency to rich the correct force for every frequency since the transfer function of the \gls{bc} does not match the transfer function from the standard 389-3:2016 \citep{iso_389-3}.
 
 \section*{Materials and setup}
 To measure the output voltage for difference frequency input, the following materials are used:
@@ -13,39 +14,55 @@ PC        			 		& Macbook                                   & W89242W966H  			& 
 RME  					& Fireface UFX                             &  23811948 			 	& 108230 \\
 Radioear   				&  B81                            & -   									& - \\
 Affinity     				& 2.0                            				& -   									& -  \\
-Fluke    				& -                           				& -   									& -  \\
+Fluke    				& 37                           				& -   									& 08521  \\
 Analysis software   & MATLAB \textsuperscript{\textregistered} R2018b & -          & -     
 \end{tabular}
 \end{table}
 
-%\begin{figure}[htbp!]
-%\centering
-%\def\svgwidth{\columnwidth}
-%\input{figures/appendix/guitar_frequency_test.pdf_tex}
-%\caption{Setup for measuring frequency area on a guitar.}
-%		\label{fig:appendix:test}
-%\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\def\svgwidth{\columnwidth}
+\input{figures/appendix/affinity_cal_analysis.pdf_t}
+\caption{Setup for measuring frequency response of the CD1/CD2 input of Affinity 2.0}
+		\label{fig:appendix:test_cal_affinity}
+\end{figure}
 
 \section*{Test procedure}
 
 
 \begin{enumerate}
-\item The materials are set up as in \autoref{fig:appendix:test}.
-\item 
-\item  
-\item  
-\item 
-\item 
+\item The materials are set up as in \autoref{fig:appendix:test_cal_affinity}.
+\item The chosen sine tone is \SI{1}{\kilo\hertz}, \SI{2}{\kilo\hertz} and \SI{2}{\kilo\hertz} because they is in the area where the calibration is needed \citep{radioear_b81}.
+\item Compare tone is \SI{250}{\hertz} since this tone does not need to be calibrated \citep{radioear_b81}.
+\item Put the Fluke intro \gls{acv}. 
+\item put the Affinity intro \gls{bc} mode.
+\item  Play the \SI{250}{\hertz} sine tone in CD1 and note the voltage.
+\item  Play  \SI{1}{\kilo\hertz}, \SI{2}{\kilo\hertz} and \SI{2}{\kilo\hertz} sine tone in CD1 and note the voltage with the same \si{\volt} \gls{rms} as with played with \SI{250}{\hertz}.
+\item Compare if there is a difference output voltage for the difference frequency, that correspond to the calibration table in 389-3:2016 \citep{iso_389-3}
+\item repeat with CD2 input.
 \end{enumerate}
 
 \section*{Results}
 
-%\begin{figure}[htbp!]
-%	\centering
-%		\includegraphics[width=1\textwidth]{guitar_low_E_neck.pdf}
-%		\caption{Measurement of the low E note on the neck pickup.}
-%		\label{fig:appendix:low_E_neck}
-%\end{figure}
+\begin{table}[H]
+\caption{Test result}
+\begin{tabular}{l|ll}
+Frequency [\si{\hertz}] & CD1 $V_{rms}$ & CD2 $V_{rms}$ \\ \hline
+250                     & 0.703         & 0.705         \\
+1000                    & 0.701         & 0.702         \\
+2000                    & 0.711         & 0.706         \\
+4000                    & 0.704         & 0.702        
+\end{tabular}
+\label{tab:append_cal_anal_affinity}
+\end{table}
 
-On  \autoref{fig:appendix:low_E_neck} it is seen that the lowest significant frequency is around \SI{80}{\hertz} and the highest significant frequency is around \SI{400}{\hertz}, when playing the low E note on the guitar, using the neck pickup.
+On  \autoref{tab:append_cal_anal_affinity} it is seen that the  \si{\volt}  for every frequency is the approximately the same, and therefore the Affinity is not calibrated on the CD1 and CD2 input.
+
+\section*{Conclusion}
+It can be concluded that the gain on the Affinity does not match the hearing threshold when the input is from CD1 and CD2. Therefore the \gls{bc} versus \gls{ac} matching can not be done with the hearing level \gls{spl} on the Affinity. Another method has to be developed while using the CD inputs on the Affinity.
+
+
+
 
