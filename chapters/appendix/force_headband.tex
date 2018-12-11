@@ -1,8 +1,8 @@
 \chapter*{Force from Bone conductor to the skull}
-To ensure that the \gls{bc} does not excite the comfortable force to the skull, a force test of the \gls{bc} against the head was made. To measure the force from the \gls{bc} a force measuring system was developed and placed at the ear position of the B\&K Head and Torso simulator TYPE 4128. The pressure from the \gls{bc} is tested both with the original holder and a hair rubber band. This is done because the reader of this project felt unconformable force pressure with the original holder. The conformable force range to skull is stated to be \SI{2.5}{\newton} to \SI{5.9}{\newton} \citep{ANSI_S35}
+To ensure that the \gls{bc} transducer excites the skull without causing discomfort to the user and without underperforming, a force test was conducted. To measure the force from the \gls{bc} to the head, a force measuring system was developed and placed at the ear position of a B\&K Head and Torso simulator TYPE 4128. The pressure from the \gls{bc} has been tested both with the original headset and a hair rubber band. The decision to consider a rubberband for placeholding during the experiment was taken since preliminar testing showed that the original headband is uncomfortable to wear for a extended duration. The comfort force range from \gls{bc} transducers to the skull is stated to be \SI{2.5}{\newton} to \SI{5.9}{\newton} \citep{ANSI_S35}.
 
 \section*{Materials and setup}
-To measure the force of the \gls{bc} on the skull, the following materials are used:
+To measure the force of the \gls{bc} on the skull, the following materials were used:
 
 
 \begin{table}[H]
@@ -12,8 +12,8 @@ To measure the force of the \gls{bc} on the skull, the following materials are u
 \begin{tabular}{l|l|l|l l}
 Description         & Model                                                      & Serial-no  & AAU-no \\ \hline
 Processor         & Arduino UNO                                              & 170294662  & -  \\
-strain gauge amplifier     & Analog Devices Eval-cn0216                              & 706609 1631   & - \\
-strain gauge     & -                             & -   & - \\
+Strain gauge amplifier     & Analog Devices Eval-cn0216                              & 706609 1631   & - \\
+Strain gauge     & -                             & -   & - \\
 Weight     & KERN EMB 500-I GN                             & -   & - \\
 Bold and washers    & -                            & -   & - \\
 Head and torso simulator     & B\&K Type 4128                              & 08453-00   & 1407972 \\
@@ -31,15 +31,15 @@ Analysis software   & MATLAB \textsuperscript{\textregistered} R2018b & -       
 \end{figure}
 
 \section*{Calibration procedure}
-To perform the force measurement, a evaluation code example for the Analog devices EVAL-CN0216-ARDZ was loaded intro the Arduino uno. The code write a digital number to the serial bus which correspond to a weight. To match a digital number to a given weight, the system have to be calibrated. A calibration is done as following: 
+To perform the force measurement, an evaluation code example for the Analog devices EVAL-CN0216-ARDZ was loaded intro the Arduino UNO. The code writes a digital number to the serial bus which corresponds to a weight. To match the digital number to a given weight, the system has to be calibrated. The calibration is done as following: 
 
 \begin{enumerate}
 \item The materials are set up as in \autoref{fig:appendix:force_meas_system}.
 \item A serial read is set up in MATLAB, see \autoref{code:serial_read_ard_init}
-\item The strain gauge was placed in water level \autoref{fig:strain_gauge_water}.
-\item  Five weight combination of bold and washers was chosen.
-\item  For every chosen combination, the weight of the bold and washers was measured.
-\item For every chosen combination, the weight of the bold was placed on the strain gauge and the digital number was measured, see \autoref{fig:strain_gauge_weight}. 
+\item The strain gauge was placed in water level \autoref{fig:strain_gauge_water}, since the sensor needs to be perpendicular to the force.
+\item  Five weight combinations of bolt and washers were chosen.
+\item  For every chosen combination, the weight of the bolt and washers was measured with a scale.
+\item The same bolt was placed on the strain gauge and the digital number was measured, see \autoref{fig:strain_gauge_weight}, thus relating the sensor output and the scaled weight. 
 \item For every chosen combination, the measurement was done over \SI{30}{second} and the mean was calculated, see \autoref{code:serial_read_ard}. The corresponding mean number to weight is shown in \autoref{apend:cal_result}
 \end{enumerate}
 
@@ -47,15 +47,15 @@ To perform the force measurement, a evaluation code example for the Analog devic
 \centering
 \begin{subfigure}[htbp]{0.45\textwidth}
 		\includegraphics[width=1\textwidth]{IMG_0864}
-		\caption{The water level check position of the strain gauge}
+		\caption{Water level check position of the strain gauge}
 		\label{fig:strain_gauge_water}
 \end{subfigure}\vspace{10pt}
 \begin{subfigure}[htbp]{0.45\textwidth}
 		\includegraphics[width=1\textwidth]{IMG_0865}
-		\caption{The position of the weight on the strain gauge}
+		\caption{Position of the weight on the strain gauge}
 		\label{fig:strain_gauge_weight}
 \end{subfigure} \hspace{10pt}
-\caption{The placement of the weight for calibration}
+\caption{Placement of the weight for calibration}
 \label{fig:bc_holder}
 \end{figure}
 
@@ -72,7 +72,7 @@ The result is as following \autoref{apend:cal_result}
 
 \begin{table}[H]
 \centering
-\caption{The mean read out of a specified weight}
+\caption{Mean read out of a specified weight}
 \label{apend:cal_result}
 \begin{tabular}{l|l}
 Weight \si{\gram} & Arduino read out \\ \hline
@@ -84,7 +84,7 @@ Weight \si{\gram} & Arduino read out \\ \hline
 \end{tabular}
 \end{table}
 
-The calibration points in \autoref{apend:cal_result} is used in the MATLAB function \texttt{polyfit} with linear least square fitting. The output is two coefficient which can be used in the MATLAB function \texttt{polyval} along with the read out for the weight measurement. 
+The calibration points in \autoref{apend:cal_result} are used in the MATLAB function \texttt{polyfit} with linear least square fitting. The output is two coefficients which can be used in the MATLAB function \texttt{polyval} along with the read out for the weight measurement. 
 
 
 \section*{Test procedure}
@@ -92,12 +92,12 @@ The calibration points in \autoref{apend:cal_result} is used in the MATLAB funct
 
 \begin{enumerate}
 \item The materials are set up as in \autoref{fig:appendix:force_meas_system}.
-\item The hair band is putted on the head of the B\&k type 4128 with the \gls{bc} such that the \gls{bc} press on the strain gauge, see \autoref{fig:bc_hair_band}
+\item The hair band is placed on the head of the B\&k type 4128 with the \gls{bc} such that the \gls{bc} presses on the strain gauge, see \autoref{fig:bc_hair_band}
 \item The force is measured, see \autoref{code:serial_read_ard_cal}.
-\item The rubber hair band and the \gls{bc} is removed form the head and putted on again
-\item Do force measurement again.
-\item  Repeat ten times and calculate the mean.
-\item  The test is repeated with the original \gls{bc} metal holder, see \autoref{fig:bc_metal_holder}.
+\item The rubber hair band and the \gls{bc} are removed from the head and put on again
+\item Repeat force measurement.
+\item  Go through steps 2 to 5 ten times and calculate the mean.
+\item  The test is repeated with the original \gls{bc} metal holder as depicted in \autoref{fig:bc_metal_holder}.
 \end{enumerate}
 
 
@@ -106,15 +106,15 @@ The calibration points in \autoref{apend:cal_result} is used in the MATLAB funct
 \centering
 \begin{subfigure}[htbp]{0.33\textwidth}
 		\includegraphics[width=1\textwidth]{IMG_0871}
-		\caption{The position of the \gls{bc} with hair band}
+		\caption{Position of the \gls{bc} with hair band}
 		\label{fig:bc_hair_band}
 \end{subfigure}\vspace{10pt}
 \begin{subfigure}[htbp]{0.60\textwidth}
 		\includegraphics[width=1\textwidth]{IMG_0874}
-		\caption{The position of the \gls{bc} with the original metal holder for Radioear B81}
+		\caption{Position of the \gls{bc} with the original metal holder for Radioear B81}
 		\label{fig:bc_metal_holder}
 \end{subfigure} \hspace{10pt}
-\caption{The placement of the \gls{bc} for force test}
+\caption{Placement of the \gls{bc} for force test}
 \label{fig:bc_holder}
 \end{figure}
 
@@ -129,7 +129,7 @@ The following \autoref{code:serial_read_ard_cal} is used for reading the read ou
 
 \begin{table}[H]
 \centering
-\caption{The measurement result with both the original holder and the rubber band holder}
+\caption{Measurement results with both the original holder and the rubber band holder}
 \label{apend:weight_result}
 \begin{tabular}{l|l}
 Force with original metal holder [\si{\newton}] & Force with the rubber hair band [\si{\newton}] \\ \hline
@@ -146,10 +146,10 @@ Force with original metal holder [\si{\newton}] & Force with the rubber hair ban
 \end{tabular}
 \end{table}
 
-The mean force with the rubber hair band is \SI{4.23}{\newton} and the mean force with the original holder is \SI{7.49}{\newton}. The standard diviation of the rubber band is \SI{0.46}{\newton} where the standard diviation of the original holder is \SI{0.15}{\newton}. According to \citep{ANSI_S35} the comfortable force is within \SI{2.5}{\newton} to \SI{5.9}{\newton} and therefore only the \gls{bc} with the rubber band hair band fulfil this chritia 
+The mean force with the rubber hair band is \SI{4.23}{\newton} and the mean force with the original holder is \SI{7.49}{\newton}. The standard deviation of the rubber band measurements is \SI{0.46}{\newton}, while the standard deviation of the original holder is \SI{0.15}{\newton}. According to \citep{ANSI_S35}, the comfortable force lays between \SI{2.5}{\newton} and \SI{5.9}{\newton,} and therefore only the \gls{bc} with the rubber band hair band fulfills this criteria. 
 
 \section*{Conclusion}
 
-It can be concluded that the \gls{bc} with original metal holder excite the comfortable force range but the \gls{bc} with the rubber hair band is within the comfortable force range.
+It can be concluded that the \gls{bc} with original metal holder exceeds the comfortable force range, and therefore will not be used throughout the test, but the \gls{bc} with the rubber hair band is within the comfortable force range, meaning it will be used for test purposes.
 
 
