@@ -1,0 +1,88 @@
+% This file was created by matlab2tikz.
+
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=120mm, 
+height=50mm, 
+at={(5mm,5mm)}, 
+scale only axis,
+xmin=40,
+xmax=60,
+xlabel style={font=\color{white!15!black}},
+xlabel={Data},
+ymin=-1.86273186742165,
+ymax=1.86273186742165,
+ytick={-3.09023230616781,-2.74778138544499,-2.32634787404084,-2.05374891063182,-1.64485362695147,-1.2815515655446,-0.674489750196082,0,0.674489750196082,1.2815515655446,1.64485362695147,2.05374891063182,2.32634787404084,2.74778138544499,3.09023230616781},
+yticklabels={{0.001},{0.003},{0.01},{0.02},{0.05},{0.10},{0.25},{0.50},{0.75},{0.90},{0.95},{0.98},{0.99},{0.997},{0.999}},
+ylabel style={font=\color{white!15!black}},
+ylabel={Probability},
+axis background/.style={fill=white},
+title style={font=\bfseries},
+title={Normal Probability Plot},
+axis x line*=bottom,
+axis y line*=left,
+grid=both,
+grid style={line width=.1pt, draw=gray!10},
+major grid style={line width=.2pt,draw=gray!50}, 
+minor tick num=4,
+legend style={at={(0.045,0.669)}, anchor=south west, legend cell align=left, align=left, draw=white!15!black}
+]
+
+\addplot [color=mycolor2, draw=none, mark=+, mark options={solid, mycolor2}]
+  table[row sep=crcr]{%
+42	-2.10016549284447\\
+44.8	-1.61116916235268\\
+45.7	-1.34516663417664\\
+46	-1.15034938037601\\
+46	-0.991526474677331\\
+47.3	-0.85444739869599\\
+48	-0.731808083859618\\
+48	-0.619306769508776\\
+48	-0.514156100744534\\
+48	-0.414413329600076\\
+48.3	-0.318639363964375\\
+48.8	-0.225707953860159\\
+49	-0.13468979400892\\
+49	-0.0447761766955162\\
+49	0.0447761766955164\\
+49.7	0.13468979400892\\
+50	0.225707953860159\\
+50.7	0.318639363964375\\
+50.7	0.414413329600076\\
+50.7	0.514156100744534\\
+51	0.619306769508776\\
+51	0.731808083859618\\
+51	0.85444739869599\\
+52	0.991526474677331\\
+52	1.15034938037601\\
+52	1.34516663417664\\
+52.7	1.61116916235268\\
+53.3	2.10016549284447\\
+};
+\addlegendentry{Subject}
+
+\addplot [color=mycolor1]
+  table[row sep=crcr]{%
+48	-0.675557426684197\\
+51	0.675557426684197\\
+};
+\addlegendentry{Normal Distribution}
+
+\addplot [color=mycolor1, dashdotted]
+  table[row sep=crcr]{%
+42	-3.37778713342098\\
+53.3	1.71141214759996\\
+};
+%\addlegendentry{data1}
+
+
+
+
+
+\end{axis}
+\end{tikzpicture}%
