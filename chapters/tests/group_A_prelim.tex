@@ -10,9 +10,9 @@
 \begin{tikzpicture}
 
 \begin{axis}[%
-width=4.569in,
-height=3.608in,
-at={(0.766in,0.487in)},
+width=120mm, 
+height=50mm, 
+at={(5mm,5mm)}, 
 scale only axis,
 xmin=-30,
 xmax=60,
@@ -23,6 +23,10 @@ ymax=1,
 ylabel style={font=\color{white!15!black}},
 ylabel={Hit Probability},
 axis background/.style={fill=white},
+grid=both,
+grid style={line width=.1pt, draw=gray!10},
+major grid style={line width=.2pt,draw=gray!50}, 
+minor tick num=4,
 title style={font=\bfseries},
 title={Group A},
 legend style={legend cell align=left, align=left, draw=white!15!black}
