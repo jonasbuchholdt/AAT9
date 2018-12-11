@@ -1,8 +1,8 @@
 \section{\gls{bc} level matching distribution}
-In this section, the distribution for the \gls{bc} level versus \gls{ac} level will be analysed. The analysis is done to verify the distribution of both the initial test, the familiarization test and the matching test part of the \gls{bier} test. Because of the limited number of test subjects, there will be done a fourth analysis where all matching data is merged to one data called Total data. This include also the familiarization and \gls{bier} result although the data is from the same test subjects. The reasons to bring both familiarization and \gls{bier} intro the Total data is because they mostly had a difference matching opinion in the \gls{bier} compare to the familiarization.
+In this section, the distribution for the \gls{bc} level versus \gls{ac} level will be analysed. The analysis is done to verify the distribution of both the initial test, the familiarization test and the matching test part of the \gls{bier} test. Because of the limited number of test subjects, there will be done a fourth analysis where all matching data is merged to one data called Total data. This include also the familiarization and \gls{bier} result although the data is from the same test subjects. The reasons to bring both familiarization and \gls{bier} intro the Total data is because they mostly had small difference matching opinion in the \gls{bier} compare to the familiarization.
 
 
-This analysis will estimate the \gls{pdf} based on the subject data. It is assumed that the the distribution is a Gaussian distribution and therefore the data will be compared to the \gls{pdf} of a Gaussian distribution. The comparing will be done by calculating the \gls{mse} between the subject result and the Gaussian distribution calculated from the subject result mean and variance. The \gls{mse} will be calculated with the MATLAB function \texttt{immse}. In the end the 25 \textsuperscript{th} and 75\textsuperscript{th} percentile will be present. If the Gaussian hypnotises can be concluded to be correct, it can then be assumed that a greater field test will approximate result in the same distribution direction.
+This analysis will estimate the \gls{pdf} based on the subject data. It is assumed that the the distribution is a Gaussian distribution and therefore the data will be compared to the \gls{pdf} of a Gaussian \gls{pdf} and \gls{cum} . The comparing will be done by calculating the \gls{mse} between the subject result and the Gaussian distribution calculated from the subject result mean and variance. The \gls{mse} will be calculated with the MATLAB function \texttt{immse}. In the end the 25 \textsuperscript{th} and 75\textsuperscript{th} percentile will be present. If the Gaussian hypnotises can be concluded to be correct, it can then be assumed that a greater field test will approximate result in the same distribution direction.
 
 To calculate the \gls{pdf} of the data, the input for the function have to be defined based on the subject data. The input samples for calculating the  \gls{pdf} will be the average matching level for every subjects average matching level, and the variance will be calculated based on the average matching level for every subject. The following \autoref{sec:pdf_of_bc} shows the calculated average and variance. 
 
@@ -38,6 +38,14 @@ The following \autoref{fig:initial_pdf} shows the data for the initial test.
 		\label{fig:initial_pdf}
 \end{figure}
 
+ \begin{figure}[H]
+	\centering
+	\include{chapters/tests/initial_normplot}
+		\caption{The plot shows the Gaussian \gls{pdf} as the blue line with the initial data in \autoref{sec:pdf_of_bc}. The histogram is based on the mean data in \autoref{apend:match_field_init}}
+		\label{fig:initial_normplot}
+\end{figure}
+
+
 It can be seen in \autoref{fig:initial_pdf} that the measured data, which is plotted as a histogram, might be a Gaussian distribution. There is no outliers of the \gls{pdf} and the highest probability lays close to the highest probability of the Gaussian  \gls{pdf} calculated from the data in \autoref{sec:pdf_of_bc}. The calculated \gls{mse} between the data and the Gaussian  \gls{pdf} is $11.835 \cdot 10^{-5}$
 
 The following \autoref{fig:fam_pdf} shows the data for the familiarization test.
@@ -49,6 +57,13 @@ The following \autoref{fig:fam_pdf} shows the data for the familiarization test.
 		\label{fig:fam_pdf}
 \end{figure}
 
+ \begin{figure}[H]
+	\centering
+	\include{chapters/tests/fam_normplot}
+		\caption{The plot shows the Gaussian  \gls{pdf} as the blue line with the initial data in \autoref{sec:pdf_of_bc}. The histogram is based on the mean data in \autoref{apend:matching_in_bier}}
+		\label{fig:fam_normplot}
+\end{figure}
+
 It can be seen in \autoref{fig:fam_pdf} that the measured data, which is plotted as a histogram, might be a Gaussian distribution. There is no outliers of the \gls{pdf} and two the highest probability lays close to the highest probability of the Gaussian  \gls{pdf} calculated from the data in \autoref{sec:pdf_of_bc}, but there is also one histogram bar that have high probability but lays at the high end of the test subject mean. This is be an effect for having few subject. The calculated \gls{mse} between the data and the Gaussian distribution function is $13.311 \cdot 10^{-5}$
 
 The following \autoref{fig:bier_pdf} shows the data for the \gls{bier} test.
@@ -57,6 +72,13 @@ The following \autoref{fig:bier_pdf} shows the data for the \gls{bier} test.
 	\include{chapters/tests/bier_pdf}
 		\caption{The plot shows the Gaussian  \gls{pdf} as the blue line with the initial data in \autoref{sec:pdf_of_bc}. The histogram is based on the mean data in \autoref{apend:matching_in_bier}}
 		\label{fig:bier_pdf}
+\end{figure}
+
+ \begin{figure}[H]
+	\centering
+	\include{chapters/tests/bier_normplot}
+		\caption{The plot shows the Gaussian  \gls{pdf} as the blue line with the initial data in \autoref{sec:pdf_of_bc}. The histogram is based on the mean data in \autoref{apend:matching_in_bier}}
+		\label{fig:bier_normplot}
 \end{figure}
 
 It can be seen in \autoref{fig:bier_pdf} that the measured data for the \gls{bier} test, which is plotted in a the histogram, have the same tendency as in initial test \autoref{fig:fam_pdf} and the familiarization test \autoref{fig:initial_pdf}. The distribution might be a Gaussian distribution. There is no outliers and the highest probability lays close to the highest probability of the Gaussian distribution calculated from the data. The calculated \gls{mse} between the data and the Gaussian distribution function is $13.339 \cdot 10^{-5}$.
@@ -71,6 +93,13 @@ To include more data in the comparison between test subject and the Gaussian \gl
 	\include{chapters/tests/total_pdf}
 		\caption{The plot shows the Gaussian  \gls{pdf} as the blue line with the initial data in \autoref{sec:pdf_of_bc}. The histogram is based on the mean data merge of \autoref{apend:matching_in_bier} and \autoref{apend:match_field_init}}
 		\label{fig:total_pdf}
+\end{figure}
+
+ \begin{figure}[H]
+	\centering
+	\include{chapters/tests/total_normplot}
+		\caption{The plot shows the Gaussian  \gls{pdf} as the blue line with the initial data in \autoref{sec:pdf_of_bc}. The histogram is based on the mean data merge of \autoref{apend:matching_in_bier} and \autoref{apend:match_field_init}}
+		\label{fig:total_normplot}
 \end{figure}
 
 In \autoref{fig:total_pdf}  the measured data for the all subject test together is plotted as a histogram, together with the Gaussian \gls{pdf} calculated from \autoref{sec:pdf_of_bc}. The calculated \gls{mse} between the data and the Gaussian distribution function in this case is $7.7464 \cdot 10^{-5}$. Compare to the data present in the three non merged data, the \gls{mse} converging to a higher Gaussian distribution fit so lower \gls{mse}. There is no outliers and the highest probability lays close to the highest probability of the Gaussian distribution. 
