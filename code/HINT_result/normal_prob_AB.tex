@@ -1,0 +1,92 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=4.521in,
+height=3.566in,
+at={(0.758in,0.481in)},
+scale only axis,
+xmin=-7.9175,
+xmax=22.2175,
+xlabel style={font=\color{white!15!black}},
+xlabel={Data},
+ymin=-1.95996398454005,
+ymax=1.95996398454005,
+ytick={-3.09023230616781,-2.74778138544499,-2.32634787404084,-2.05374891063182,-1.64485362695147,-1.2815515655446,-0.674489750196082,0,0.674489750196082,1.2815515655446,1.64485362695147,2.05374891063182,2.32634787404084,2.74778138544499,3.09023230616781},
+yticklabels={{0.001},{0.003},{0.01},{0.02},{0.05},{0.10},{0.25},{0.50},{0.75},{0.90},{0.95},{0.98},{0.99},{0.997},{0.999}},
+ylabel style={font=\color{white!15!black}},
+ylabel={Probability},
+axis background/.style={fill=white},
+title style={font=\bfseries},
+title={Normal Probability Plot},
+axis x line*=bottom,
+axis y line*=left,
+xmajorgrids,
+ymajorgrids,
+legend style={legend cell align=left, align=left, draw=white!15!black}
+]
+\addplot [color=red, dashdotted]
+  table[row sep=crcr]{%
+-7.1	-1.60913983261065\\
+11.5	1.97529141128853\\
+};
+\addlegendentry{data1}
+
+\addplot [color=red]
+  table[row sep=crcr]{%
+-2.25	-0.674489750196082\\
+4.75	0.674489750196082\\
+};
+\addlegendentry{data2}
+
+\addplot [color=blue, draw=none, mark=+, mark options={solid, blue}]
+  table[row sep=crcr]{%
+-7.1	-1.64485362695147\\
+-3.85	-1.03643338949379\\
+-2.25	-0.674489750196082\\
+-2.2	-0.385320466407568\\
+0.365	-0.125661346855074\\
+1.025	0.125661346855074\\
+2.75	0.385320466407568\\
+4.75	0.674489750196082\\
+11	1.03643338949379\\
+11.5	1.64485362695147\\
+};
+\addlegendentry{data3}
+
+\addplot [color=red, dashdotted]
+  table[row sep=crcr]{%
+-7.2	-1.41900725744005\\
+21.5	1.81998811286491\\
+};
+\addlegendentry{data4}
+
+\addplot [color=red]
+  table[row sep=crcr]{%
+-0.603	-0.674489750196082\\
+11.35	0.674489750196082\\
+};
+\addlegendentry{data5}
+
+\addplot [color=blue, draw=none, mark=+, mark options={solid, blue}]
+  table[row sep=crcr]{%
+-7.2	-1.64485362695147\\
+-1.285	-1.03643338949379\\
+-0.603	-0.674489750196082\\
+0.747	-0.385320466407568\\
+1.145	-0.125661346855074\\
+1.625	0.125661346855074\\
+9.7	0.385320466407568\\
+11.35	0.674489750196082\\
+17.5	1.03643338949379\\
+21.5	1.64485362695147\\
+};
+\addlegendentry{data6}
+
+\end{axis}
+\end{tikzpicture}%
