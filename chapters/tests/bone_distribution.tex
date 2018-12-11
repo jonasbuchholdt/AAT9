@@ -1,9 +1,10 @@
-\section{\gls{bc} probability density function}
-In this section the density for the \gls{bc} level versus \gls{ac} will be analysed. The analysis is done to verify the distribution of both the initial test, the familiarization test and the matching part for the \gls{bier} test. In the end all data will be analysed together because the number of test subject was small. The merge data will be called the Total data.
+\section{\gls{bc} level matching distribution}
+In this section, the distribution for the \gls{bc} level versus \gls{ac} level will be analysed. The analysis is done to verify the distribution of both the initial test, the familiarization test and the matching test part of the \gls{bier} test. Because of the limited number of test subjects, there will be done a fourth analysis where all matching data is merged to one data called Total data. This include also the familiarization and \gls{bier} result although the data is from the same test subjects. The reasons to bring both familiarization and \gls{bier} intro the Total data is because they mostly had a difference matching opinion in the \gls{bier} compare to the familiarization.
 
-This analysis will estimate the \gls{pdf} based on the subject data. It is assumed that the the distribution is a Gaussian distribution and therefore the data will be compared to the \gls{pdf} of a Gaussian distribution. The comparing will be done by calculating the \gls{mse} between the subject result and the Gaussian distribution calculated from the subject result mean and variance. The \gls{mse} will be calculated with the MATLAB function \texttt{immse}. In the end the 25 \textsuperscript{th} and 75\textsuperscript{th} percentile will be present. If the hypnotises is correct, it can then be assumed that a greater field test will approximate result in the same direction.
 
-To calculate the \gls{pdf} of the data, the input for the function have to be defined based on the subject data. The input samples for calculating the  \gls{pdf} will be the average \gls{spl} for every subject, and the variance will be calculated based on the average \gls{spl} for every subject. The following \autoref{sec:pdf_of_bc} shows the calculated average and variance. 
+This analysis will estimate the \gls{pdf} based on the subject data. It is assumed that the the distribution is a Gaussian distribution and therefore the data will be compared to the \gls{pdf} of a Gaussian distribution. The comparing will be done by calculating the \gls{mse} between the subject result and the Gaussian distribution calculated from the subject result mean and variance. The \gls{mse} will be calculated with the MATLAB function \texttt{immse}. In the end the 25 \textsuperscript{th} and 75\textsuperscript{th} percentile will be present. If the Gaussian hypnotises can be concluded to be correct, it can then be assumed that a greater field test will approximate result in the same distribution direction.
+
+To calculate the \gls{pdf} of the data, the input for the function have to be defined based on the subject data. The input samples for calculating the  \gls{pdf} will be the average matching level for every subjects average matching level, and the variance will be calculated based on the average matching level for every subject. The following \autoref{sec:pdf_of_bc} shows the calculated average and variance. 
 
 \begin{table}[H]
 \centering
@@ -25,7 +26,7 @@ f(x_{k}) = \frac{1}{\sqrt{2 \pi \sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
 \end{equation}
 
 
-The following three figurers display the data from the subject test as a histogram and compare it to the assumed Gaussian fit. The Gaussian \gls{pdf} is calculated according to \autoref{eq:pdf_of_bc} with the use of the data in \autoref{sec:pdf_of_bc}.
+The following three figurers display the data from the subject as a histogram and compare it to the assumed calculated test individual Gaussian fit. The Gaussian \gls{pdf} is calculated according to \autoref{eq:pdf_of_bc} with the use of the data in \autoref{sec:pdf_of_bc}.
 
 
 
