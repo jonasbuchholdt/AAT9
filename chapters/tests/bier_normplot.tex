@@ -15,7 +15,7 @@ scale only axis,
 xmin=40,
 xmax=60,
 xlabel style={font=\color{white!15!black}},
-xlabel={Data},
+xlabel={$\mu$ \si{\decibel}},
 ymin=-1.86273186742165,
 ymax=1.86273186742165,
 ytick={-3.09023230616781,-2.74778138544499,-2.32634787404084,-2.05374891063182,-1.64485362695147,-1.2815515655446,-0.674489750196082,0,0.674489750196082,1.2815515655446,1.64485362695147,2.05374891063182,2.32634787404084,2.74778138544499,3.09023230616781},
@@ -34,7 +34,7 @@ minor tick num=4,
 legend style={at={(0.045,0.669)}, anchor=south west, legend cell align=left, align=left, draw=white!15!black}
 ]
 
-\addplot [color=mycolor2, draw=none, mark=+, mark options={solid, mycolor2}]
+\addplot [color=mycolor2, draw=none, mark=*, mark options={solid, mycolor2}]
   table[row sep=crcr]{%
 42	-1.64485362695147\\
 44.8	-1.03643338949379\\
