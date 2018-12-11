@@ -51,13 +51,13 @@ Analysis software   & MATLAB \textsuperscript{\textregistered} R2018b & -       
 
 
 \begin{enumerate}
-\item The materials are set up as in \autoref{fig:appendix:match_meas_system}.
-\item The \gls{bc} is placed on the head according to \autoref{sec:bc_pos} with a rubber hairband.
-\item The \gls{ac} is inserted into the ears.
-\item The Affinity is set to Match_bone_air mode as according to \autoref{apend:aff_bc_ac_match} 
-\item In the match mode the signal is alternating between the \gls{bc} and \gls{ac} automatically with a time step of \SI{2}{\second}.
-\item The  subject indicates the test conductor if the level of the \gls{bc} should be lower, higher or if it is matching the \gls{ac}. It is only the bone that is changed, the air level is fixed.
-\item The test will stop after the level converges to one level. The convergence level is a level that has been matched three times.
+\item Set up material as indicated in \autoref{fig:appendix:match_meas_system}.
+\item Place the \gls{bc} transducer with a rubber hairband according to \autoref{sec:bc_pos}.
+\item Insert headphones into the ears.
+\item Set Affinity to Match_bone_air mode (see \autoref{apend:aff_bc_ac_match}).
+\item Play matching noise alternatively through \gls{ac} and \gls{bc} with a time step of \SI{2}{\second}.
+\item The  subject indicates the conductor of the test if the level of the signal delivered through \gls{bc} should be lower, higher or if it matches the level for the \gls{ac}, since it will be fixed.
+\item After the subject indicates the level is the same, the conductor will modify the level for \gls{bc} until two other matches are obtained in order to get the convergence level.
 \item The matching test is done for every signal in \autoref{apen:test_signals}.
 \end{enumerate}
 
@@ -84,6 +84,5 @@ Bandpass 2        & 41        & 41        & 47        & 43          & 3.46      
 
 In \autoref{apen:match_result} it can be seen that the tone matching relays highly on the frequency and the standard deviation is high for \SI{2}{\kilo\hertz}  and \SI{4}{\kilo\hertz}. All tone matching frequency deviate with a standard deviation of \SI{10.31}{\decibel} and is therefore not feasible for the level matching. The 1/3 octave filtered signal with center frequency at \SI{2}{\kilo\hertz}, the Bandpass 1 and Bandpass 2 do also have a high standard deviation but the averaged of the two bandpass filters is not far from each other. The original signal compared to the Highpassed version of the signal does not differ more than \SI{0.4}{\decibel} and the original signal have the lowest standard deviation. From the present data, the hypothesis that the \gls{hint} noise signal might mask in the \gls{ac} does not hold, and the original signal seems to be the most suitable signal for matching in the \gls{bc} vs \gls{ac} matching test.
 
-\section*{Conclusion}
 It can be concluded that the original signal of the \gls{hint} test is a valid choose over pure tone and filtered \gls{hint} noise test signal.
 

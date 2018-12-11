@@ -1,22 +1,21 @@
 
-\chapter{Field test of matching}
+\chapter{Matching consistency test}
 \label{apend:match_field_init}
-A test was made to evaluated the chosen test signal in \autoref{apend_matching_signals} between \gls{bc} and \gls{ac}. Ti have been chosen that the matching signal for matching \gls{bc} and \gls{ac} is the original noise signal from the \gls{hint} test. It was observed that the average \gls{spl} from the \gls{bc} was \SI{45.3}{\decibel} for matching the \gls{spl} of the \gls{ac}. It was also observed that the standard deviation was \SI{0.58}{\decibel}. The test war based on three subject. To get a more statistical result, the match test is done in a field test with eight subject.
-
+As described in \autoref{apend_matching_signals}, it was needed to evaluate the chosen test signal for the matching phase of \gls{bier}. Once the type of signal was decided, the consistency on the matching results needed to be checked, as the subject pool for the signal decision was not big enough. Therefore, a pilot test only involving level matching with 8 subjects was conducted in order to verify the consistency of the obtained values.
 \section*{Materials and setup}
-To match the perceived level from the \gls{bc} vs \gls{ac}, the following materials are used:
+To match the perceived level from the \gls{bc} vs \gls{ac}, the following materials were used:
 
 
 \begin{table}[H]
 \centering
-\caption{Equipment list}
+\caption{Equipment list for matching test}
 \begin{tabular}{l|l|l|l l}
 Description         	& Model                                        & Serial-no  						& AAU-no \\ \hline
-PC        			 		& MAcbook                                   & W89242W966H  			& -  \\
-RME  					& Fireface UFX                             &  23811948 			 	& 108230 \\
-ETYM$\bar{O}$TIC RESEARCH     	&   ER4S            & -   									& 02049 \\
-Radioear   				&  B81                            & -   									& - \\
-Affinity     				& 2.0                            				& -   									& -  \\
+PC        			 		& Macbook                                   & W89242W966H  			& -  \\
+Audio interface  					& RME Fireface UCX                             &  23811948 			 	& 108230 \\
+Headphones     	&   ETYM$\bar{O}$TIC RESEARCH ER4S            & -   									& 02049 \\
+\gls{bc} transducer   				&  Radioear B81                            & -   									& - \\
+Audio interface     				& Affinity 2.0                            				& -   									& -  \\
 Analysis software   & MATLAB \textsuperscript{\textregistered} R2018b & -          & -     
 \end{tabular}
 \end{table}
@@ -27,7 +26,7 @@ Analysis software   & MATLAB \textsuperscript{\textregistered} R2018b & -       
 \centering
 \def\svgwidth{\columnwidth}
 \input{figures/appendix/match_test.pdf_t}
-\caption{Setup for match test of \gls{bc} vs \gls{ac}.}
+\caption{Setup for match test between \gls{bc} vs \gls{ac}.}
 		\label{fig:appendix:match_meas_system}
 \end{figure}
 
@@ -35,14 +34,14 @@ Analysis software   & MATLAB \textsuperscript{\textregistered} R2018b & -       
 
 
 \begin{enumerate}
-\item The materials are set up as in \autoref{fig:appendix:match_meas_system}.
-\item The \gls{bc} is placed on the head according to \autoref{sec:bc_pos} with a rubber hair band.
-\item The \gls{ac} is putted intro the ears.
-\item The Affinity is set to Match_bone_air mode as according to \autoref{apend:aff_bc_ac_match} 
-\item In the match mode the signal is alternating between the \gls{bc} and \gls{ac} automatic with time step of \SI{2}{\second}.
-\item The  subject shall reply back if the level shall be lower, higher or if it is matching  the \gls{ac}. It is only the bone that is changed, the air level is fixed.
-\item The test will stop after the level convergence to one level. The convergence level is a level that has been matching three times.
-\item The test is repeated two or three times.
+\item Set up material as indicated in \autoref{fig:appendix:match_meas_system}.
+\item Place the \gls{bc} transducer with a rubber hairband according to \autoref{sec:bc_pos}.
+\item Insert headphones into the ears.
+\item Set Affinity to Match_bone_air mode (see \autoref{apend:aff_bc_ac_match}).
+\item Play matching noise alternatively through \gls{ac} and \gls{bc} with a time step of \SI{2}{\second}.
+\item The  subject indicates the conductor of the test if the level of the signal delivered through \gls{bc} should be lower, higher or if it matches the level for the \gls{ac}, since it will be fixed.
+\item After the subject indicates the level is the same, the conductor will modify the level for \gls{bc} until two other matches are obtained in order to get the convergence level.
+\item This procedure will be repeated between 2 and 3 times depending on subject's consistency.
 \end{enumerate}
 
 \section*{Results}
@@ -67,8 +66,6 @@ Total      &             &              &             & 50.2        & 2.5
 \label{apen:match_result_field}
 \end{table}
 
-In \autoref{apen:match_result_field} the average \gls{spl} is calculated for every subject and in the end the average \gls{spl} is calculated from all test subject. The same is done for the standard deviation. It can be denoted in the  \autoref{apen:match_result_field} that the average \gls{spl} is \SI{4.9}{\decibel} higher than the initial test in \autoref{apend_matching_signals} and the standard deviation is \SI{1.92}{\decibel} higher. It was expected that the standard deviation might raise with more subjects, but the significant higher average \gls{spl} not expected. The three subject in the first test     \autoref{apen:match_result_field} was not part of the eight subject in this matching test. The difference might come from the difference in the transfer function of the transducer, that make the perception difference for every subject. For the \gls{bier} the \gls{ac} level of \SI{72}{\decibel} versus the  \gls{bc} level is feasible, since the \gls{bc} level on the Affinity can be up to \SI{60}{\decibel}, which mean that the matching level procedure for the bone should be beneath \SI{60}{\decibel} for every test subject.
+In \autoref{apen:match_result_field} the average level is calculated for every subject and in the end the inter-subject average level is calculated from all test subjects. The same is done for the standard deviation. It can be denoted in \autoref{apen:match_result_field} that the average level is \SI{4.9}{\decibel} higher than the initial test in \autoref{apend_matching_signals} and the standard deviation is \SI{1.92}{\decibel} higher. It was expected that the standard deviation might raise with more subjects, but the significant higher average level was not anticipated. The three subjects in the first test     \autoref{apen:match_result_field} were not part of the subject pool for this matching test. The difference might come from the differences in the transfer function of the transducer, that alters the perception for every subject. For the \gls{bier} the \gls{ac} level of \SI{72}{\decibel} versus the  \gls{bc} level is feasible, since the \gls{bc} level on the Affinity can be up to \SI{60}{\decibel}, which mean that the matching level procedure for the bone should be beneath \SI{60}{\decibel} for every test subject.
 
-
-\section*{Conclusion}
-It can be concluded that the average \gls{spl} is  \SI{4.9}{\decibel} higher that the initial test with more test subject and the standard deviation raises a \SI{1.92}{\decibel}. it can also be concluded that the dynamic range is sufficient, sine there is \SI{9.8}{\decibel} up to the limit \gls{spl} for the \gls{bc} on the Affinity while evaluating from the. The \SI{95.45}{\percent} confidence interval for the eight subject is then  \SI{3.84}{\decibel}, so the height expected average \gls{spl} for one test subject with the \SI{95.45}{\percent} confidence interval is then \SI{54}{\decibel} which is \SI{6}{\decibel} beneath the maximum level of the Affinity. In worse case the dynamic range is at least  \SI{6}{\decibel} for the matching test.
+It can be concluded that the average level is  \SI{4.9}{\decibel} higher that the initial test with more test subjects and the standard deviation raises \SI{1.92}{\decibel}. it can also be concluded that the dynamic range is sufficient, since there are \SI{9.8}{\decibel} up to the limit \gls{spl} for the \gls{bc} on the Affinity. The \SI{95.45}{\percent} confidence interval for the eight subjects is then  \SI{3.84}{\decibel}, so the height expected average \gls{spl} for one test subject with the \SI{95.45}{\percent} confidence interval is then \SI{54}{\decibel} which is \SI{6}{\decibel} beneath the maximum level of the Affinity. In the worst case, the dynamic range is at least  \SI{6}{\decibel} for the matching test.
