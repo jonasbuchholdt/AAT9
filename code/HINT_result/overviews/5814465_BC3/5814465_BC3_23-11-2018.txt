@@ -1,0 +1,25 @@
+Dansk HINT resultatoversigt   
+                     
+       Klientnavn:  5814465_BC3 
+                     
+Klient/journalnr.:  5814465_BC3 
+                     
+         Testdato:  23-11-2018 
+                     
+    Testansvarlig:  Jonas 
+                     
+     SRT-målinger:  Liste (kanal)       SRT    Støj 
+                     test 2 (sep)   -7.8 dB   65 dB 
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    

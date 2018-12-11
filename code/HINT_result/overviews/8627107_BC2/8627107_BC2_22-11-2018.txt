@@ -1,0 +1,25 @@
+Dansk HINT resultatoversigt   
+                     
+       Klientnavn:  8627107_BC2 
+                     
+Klient/journalnr.:  8627107_BC2 
+                     
+         Testdato:  22-11-2018 
+                     
+    Testansvarlig:  Jonas 
+                     
+     SRT-målinger:  Liste (kanal)       SRT    Støj 
+                     test 1 (sep)   0.33 dB   65 dB 
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    

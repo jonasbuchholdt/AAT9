@@ -15,6 +15,8 @@ ssq= var(samples);
 gaussian = (1/sqrt(2*pi*ssq))*exp(-((x-my).^2)/(2*ssq));
 
 figure()
-histogram(samples, 25,'Normalization','probability')
+%histogram(samples, 25,'Normalization','probability')
+histfit(samples)
+%pd = fitdist(samples','Normal')
 hold on
 plot(x,gaussian)

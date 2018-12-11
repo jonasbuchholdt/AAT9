@@ -1,0 +1,25 @@
+Dansk HINT resultatoversigt   
+                     
+       Klientnavn:  9823032_AC2 
+                     
+Klient/journalnr.:  9823032_AC2 
+                     
+         Testdato:  26-11-2018 
+                     
+    Testansvarlig:  Jonas 
+                     
+     SRT-målinger:  Liste (kanal)       SRT    Støj 
+                     test 2 (sep)    2.8 dB   65 dB 
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    

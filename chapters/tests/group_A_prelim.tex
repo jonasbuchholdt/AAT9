@@ -1,0 +1,101 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\definecolor{mycolor1}{rgb}{0.00000,0.44700,0.74100}%
+\definecolor{mycolor2}{rgb}{0.85000,0.32500,0.09800}%
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+width=120mm, 
+height=50mm, 
+at={(5mm,5mm)}, 
+scale only axis,
+xmin=-30,
+xmax=60,
+xlabel style={font=\color{white!15!black}},
+xlabel={SNR [dB]},
+ymin=0,
+ymax=1,
+ylabel style={font=\color{white!15!black}},
+ylabel={Hit Probability},
+axis background/.style={fill=white},
+grid=both,
+grid style={line width=.1pt, draw=gray!10},
+major grid style={line width=.2pt,draw=gray!50}, 
+minor tick num=4,
+title style={font=\bfseries},
+title={Group A},
+legend style={legend cell align=left, align=left, draw=white!15!black}
+]
+\addplot [color=mycolor1]
+  table[row sep=crcr]{%
+-21	0.267436267436267\\
+-18	0.299190787426082\\
+-15	0.321700902583256\\
+-12	0.414691027926322\\
+-9	0.436563720554949\\
+-6	0.436149190315857\\
+-3	0.494428111193677\\
+0	0.482417342690147\\
+3	0.415080163119379\\
+6	0.548985371926549\\
+9	0.552129500298837\\
+12	0.589983164983165\\
+15	0.596593471696671\\
+18	0.551860630292003\\
+21	0.658608058608059\\
+24	0.619312169312169\\
+27	0.630537400145243\\
+30	0.57037037037037\\
+33	0.572089947089947\\
+36	0.525599128540305\\
+39	0.283950617283951\\
+42	0.0666666666666667\\
+45	0.296296296296296\\
+48	0.222222222222222\\
+51	0.222222222222222\\
+54	0.111111111111111\\
+57	0\\
+60	0\\
+};
+\addlegendentry{Air f-avg}
+
+\addplot [color=mycolor2]
+  table[row sep=crcr]{%
+-21	0.216402116402116\\
+-18	0.425132275132275\\
+-15	0.405657451710083\\
+-12	0.397647577549538\\
+-9	0.343807118807119\\
+-6	0.369869890458126\\
+-3	0.44331667826979\\
+0	0.432574107083911\\
+3	0.405417664799816\\
+6	0.42493425274732\\
+9	0.481119509780168\\
+12	0.479222629222629\\
+15	0.505197539191572\\
+18	0.463492063492064\\
+21	0.541757443718228\\
+24	0.676708437761069\\
+27	0.617460317460317\\
+30	0.626577126577126\\
+33	0.564814814814815\\
+36	0.570940170940171\\
+39	0.457407407407407\\
+42	0.194444444444444\\
+45	0.351851851851852\\
+48	0.333333333333333\\
+51	0\\
+54	0.111111111111111\\
+57	0\\
+60	0\\
+};
+\addlegendentry{Bone f-avg}
+
+\end{axis}
+\end{tikzpicture}%
