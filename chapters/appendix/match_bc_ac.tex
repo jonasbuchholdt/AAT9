@@ -1,37 +1,37 @@
 \chapter*{\gls{bc} vs \gls{ac} matching signals}
 \label{apend_matching_signals}
-A test was made to design the matching frequency between \gls{bc} and \gls{ac}. Due to limited time and limited test subject, the matching test is designed to be done with the noise from the \gls{hint} test. Using the noise from the \gls{hint} test a problem arise, the transfer function for \gls{bc} and \gls{ac} is not the same. The transfer function differs mostly in the low frequency below \SI{500}{\hertz} and in the high above \SI{2}{\kilo\hertz}. Therefore the low frequency form the \gls{ac} might work as a masker and the \gls{ac} therefore is higher in level in the frequency of interest. To test this hypothesis, the original noise from the \gls{hint} is compared to filtered versions. The filtered versions will not only be high pass filtering, but there will be many filtered version such that it is possible to compare different frequency content versus matching between \gls{bc} and \gls{ac}. The following \autoref{apen:test_signals} display all chosen filtered version of the \gls{hint} noise. 
+Due to limitations in time and number of test subjects, the matching test was designed to be performed using the noise from the \gls{hint} as a starting point. However, this decision arose a potential issue, since the transfer function for \gls{bc} and \gls{ac} is not the same. The transfer function differs mostly in the low frequency, below \SI{500}{\hertz}, and in the high, above \SI{2}{\kilo\hertz}. Therefore, the low frequency from the \gls{ac} might work as a masker and the \gls{ac} therefore is perceived as louder in level in the frequency range of interest. To test this hypothesis, the original noise's performance from the \gls{hint} is compared to different filtered versions and to pure tones. All selected filtered versions and pure tones used through this test are contained in \autoref{apen:test_signals}. 
 
 
 \begin{table}[H]
 \caption{Test signal description, All filter is 8th order butterworth filters}
 \begin{tabularx}{\textwidth}{l | X l}
 Matching signal       & Description \\ \hline
-Original signal         & The original unfiltered signal from the \gls{hint} test \citep{hint_2011}.      \\
-Highpass        & The original signal filtered with a highpass filter at \SI{400}{\hertz}.           \\
-Bandpass 1        & The original signal filtered with a bandpass filter from \SI{1}{\kilo\hertz} to \SI{2}{\kilo\hertz}.           \\
-Bandpass 2        & The original signal filtered with a bandpass filter from \SI{1}{\kilo\hertz} to \SI{4}{\kilo\hertz}.          \\
-1/3 octave & The original signal filtered with a 1/3 octave filter centred at \SI{2}{\kilo\hertz}.          \\
-\SI{1}{\kilo\hertz}                  & This signal is playing a \SI{1}{\kilo\hertz} tone.      \\
-\SI{2}{\kilo\hertz}                 & This signal is playing a \SI{2}{\kilo\hertz} tone.          \\
-\SI{4}{\kilo\hertz}                 & This signal is playing a \SI{4}{\kilo\hertz} tone.        
+Original signal         & Original unfiltered signal from the \gls{hint} test \citep{hint_2011}.      \\
+Highpass        & Original signal filtered with a highpass filter at \SI{400}{\hertz}.           \\
+Bandpass 1        & Original signal filtered with a bandpass filter from \SI{1}{\kilo\hertz} to \SI{2}{\kilo\hertz}.           \\
+Bandpass 2        & Original signal filtered with a bandpass filter from \SI{1}{\kilo\hertz} to \SI{4}{\kilo\hertz}.          \\
+1/3 octave & Original signal filtered with a 1/3 octave filter centred at \SI{2}{\kilo\hertz}.          \\
+\SI{1}{\kilo\hertz}                  & Pure \SI{1}{\kilo\hertz} tone.      \\
+\SI{2}{\kilo\hertz}                 & Pure \SI{2}{\kilo\hertz} tone.          \\
+\SI{4}{\kilo\hertz}                 & Pure \SI{4}{\kilo\hertz} tone.        
 \end{tabularx}
 \label{apen:test_signals}
 \end{table}
 
 \section*{Materials and setup}
-To match the perceived level from the \gls{bc} vs \gls{ac}, the following materials are used:
+To match the perceived level from the \gls{bc} vs \gls{ac}, the following materials were used:
 
 \begin{table}[H]
 \centering
 \caption{Equipment list}
 \begin{tabular}{l|l|l|l l}
 Description         	& Model                                        & Serial-no  						& AAU-no \\ \hline
-PC        			 		& MAcbook                                   & W89242W966H  			& -  \\
-RME  					& Fireface UFX                             &  23811948 			 	& 108230 \\
-ETYM$\bar{O}$TIC RESEARCH     	&   ER4S            & -   									& 02049 \\
-Radioear   				&  B81                            & -   									& - \\
-Affinity     				& 2.0                            				& -   									& -  \\
+PC        			 		& Macbook                                   & W89242W966H  			& -  \\
+Audio Interface  					& RME Fireface UCX                             &  23811948 			 	& 108230 \\
+Headphones     	&   ETYM$\bar{O}$TIC RESEARCH ER4S            & -   									& 02049 \\
+\gls{bc} transducer   				&  Radioear B81                            & -   									& - \\
+Audio interface     				& Affinity 2.0                            				& -   									& -  \\
 Analysis software   & MATLAB \textsuperscript{\textregistered} R2018b & -          & -     
 \end{tabular}
 \end{table}
@@ -52,18 +52,18 @@ Analysis software   & MATLAB \textsuperscript{\textregistered} R2018b & -       
 
 \begin{enumerate}
 \item The materials are set up as in \autoref{fig:appendix:match_meas_system}.
-\item The \gls{bc} is placed on the head according to \autoref{sec:bc_pos} with a rubber hair band.
-\item The \gls{ac} is putted intro the ears.
+\item The \gls{bc} is placed on the head according to \autoref{sec:bc_pos} with a rubber hairband.
+\item The \gls{ac} is inserted into the ears.
 \item The Affinity is set to Match_bone_air mode as according to \autoref{apend:aff_bc_ac_match} 
-\item In the match mode the signal is alternating between the \gls{bc} and \gls{ac} automatic with time step of \SI{2}{\second}.
-\item The  subject shall reply back if the level shall be lower, higher or if it is matching the \gls{ac}. It is only the bone that is changed, the air level is fixed.
-\item The test will stop after the level convergence to one level. The convergence level is a level that has been matching three times.
+\item In the match mode the signal is alternating between the \gls{bc} and \gls{ac} automatically with a time step of \SI{2}{\second}.
+\item The  subject indicates the test conductor if the level of the \gls{bc} should be lower, higher or if it is matching the \gls{ac}. It is only the bone that is changed, the air level is fixed.
+\item The test will stop after the level converges to one level. The convergence level is a level that has been matched three times.
 \item The matching test is done for every signal in \autoref{apen:test_signals}.
 \end{enumerate}
 
 \section*{Results}
 
-The result is as following \autoref{apen:match_result} for three subject. 
+The results for three subjects are as depicted in \autoref{apen:match_result}. 
 
 \begin{table}[H]
 \centering
@@ -82,7 +82,7 @@ Bandpass 2        & 41        & 41        & 47        & 43          & 3.46      
 \label{apen:match_result}
 \end{table}
 
-In \autoref{apen:match_result} it can be seen that the tone matching relay highly on the frequency and the standard deviation is high for \SI{2}{\kilo\hertz}  and \SI{4}{\kilo\hertz}. All tone matching frequency deviate with a standard deviation of \SI{10.31}{\decibel} and is therefore not feasible for the \gls{hint} test. The 1/3 octave filtered signal with center frequency at \SI{2}{\kilo\hertz}, the Bandpass 1 and Bandpass 2 do also have a high standard deviation but the averaged of the two bandpass filters is not far from each other. The original signal compare to the Highpassed version of the signal does not differ more than \SI{0.4}{\decibel} and the original signal have the lowest standard deviation. From the present data, the hypothesis that the \gls{hint} noise signal might mask in the \gls{ac} does not hold, and the original signal seems to be the most suitable signal for matching in the \gls{bc} vs \gls{ac} matching test.
+In \autoref{apen:match_result} it can be seen that the tone matching relays highly on the frequency and the standard deviation is high for \SI{2}{\kilo\hertz}  and \SI{4}{\kilo\hertz}. All tone matching frequency deviate with a standard deviation of \SI{10.31}{\decibel} and is therefore not feasible for the level matching. The 1/3 octave filtered signal with center frequency at \SI{2}{\kilo\hertz}, the Bandpass 1 and Bandpass 2 do also have a high standard deviation but the averaged of the two bandpass filters is not far from each other. The original signal compared to the Highpassed version of the signal does not differ more than \SI{0.4}{\decibel} and the original signal have the lowest standard deviation. From the present data, the hypothesis that the \gls{hint} noise signal might mask in the \gls{ac} does not hold, and the original signal seems to be the most suitable signal for matching in the \gls{bc} vs \gls{ac} matching test.
 
 \section*{Conclusion}
 It can be concluded that the original signal of the \gls{hint} test is a valid choose over pure tone and filtered \gls{hint} noise test signal.
