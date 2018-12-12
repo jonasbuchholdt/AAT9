@@ -30,8 +30,20 @@ grid=both,
 grid style={line width=.1pt, draw=gray!10},
 major grid style={line width=.2pt,draw=gray!50}, 
 minor tick num=4,
-legend style={at={(0.045,0.669)}, anchor=south west, legend cell align=left, align=left, draw=white!15!black}
+legend style={legend cell align=left, align=left, draw=white!15!black} %at={(0.045,0.669)}, anchor=south west, 
+legend entries={Gaussian Fit, Subject Data}
+legend pos=south east
 ]
+
+\addlegendimage{mycolor1},
+\addlegendimage{only marks,mycolor2},
+
+\addplot [color=mycolor1]
+  table[row sep=crcr]{%
+48	-0.675557426684197\\
+51	0.675557426684197\\
+};
+%\addlegendentry{Normal Distribution}
 
 \addplot [color=mycolor2, draw=none, mark=*, mark options={solid, mycolor2}]
   table[row sep=crcr]{%
@@ -64,14 +76,9 @@ legend style={at={(0.045,0.669)}, anchor=south west, legend cell align=left, ali
 52.7	1.61116916235268\\
 53.3	2.10016549284447\\
 };
-\addlegendentry{Subject}
+%\addlegendentry{Subject}
 
-\addplot [color=mycolor1]
-  table[row sep=crcr]{%
-48	-0.675557426684197\\
-51	0.675557426684197\\
-};
-\addlegendentry{Normal Distribution}
+
 
 \addplot [color=mycolor1, dashdotted]
   table[row sep=crcr]{%
