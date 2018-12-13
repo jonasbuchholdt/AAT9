@@ -4,14 +4,39 @@
 This section is divided intro two parts. One parts where the noise is chosen and one part where the method is examined with pilots.
 
 
-\subsection{The noise}
+\subsection{The transducer relating method}
+
 This section described how the \gls{ace} is related to the \gls{bct} in the subject test. The main issue with the frequency response of the \gls{bct} is that the the sound is not \gls{ac} but \gls{bc}, so the \gls{bct} level cannot be described as \gls{spl}. The chosen \gls{bct} belongs to a Hearing Aid Analyzer named Affinity 2.0 \citep{affinity_20} which also can be used as preamp for the \gls{bct} and the \gls{ace} in two inputs, CD1 and CD2. Since the given \gls{hint} is a MATLAB program, the Affinity will be used as a preamp for the \gls{bct}. The Affinity is not only for bone but do also have  \gls{ace} posibility. Therefore the Affinity is used as a preamp for both the \gls{ace} and the \gls{bct}. 
 
 
 To relate the \gls{ace} and \gls{bct} the CD1 and CD2 input frequency response of single tone is measured. This is done to to verify the input and output relation such that it is known if the Affinity change the frequency response for the belonging \gls{bct} as it is necessary according to its datasheet \citep{radioear_b81}. In  \autoref{append:affinity_bc_calibration} it is found out that the Affinity have a linear frequency response, and therefore the \gls{bct} is not adapted for the needed frequency equalization as standardized in ISO 389-3 \citep{iso_389-3}. The standard ISO 389-3 \citep{iso_389-3} also only standardize for pure tone and not wide band frequency content which is contained in speech. Those the relating between the input to the \gls{bct} and the basilar membrane exaltation is uncertain. The solution is relating the \gls{bct} to the \gls{ace} by perceived level matching test between the transducers for every subject. The test method is described in \autoref{sec:test_description}.
 
 
-\subsection{noise chose}
+\subsection{Matching signal chose}
+This section design the matching signal for \gls{ace} and \gls{bct} relation. There is several option of choosing the matching signal but tonal match can not be used because the transfer function for both transducer is very difference \citep{microPro_er4},  \citep{radioear_b81}. The tonal match only correspond to its frequency and therefore over a broad band frequency spectrum the loudness will not match. To match the level in the speech frequency range a \gls{ssn} is chosen. The chosen \gls{ssn} is the given noise from the MATLAB \gls{hint} test. The differences in the low frequency for the transducer might introduce masking, because the \gls{ace} goes much lower in frequency that the \gls{bct}. To test this hypotheses, a test is made in \autoref{apend_matching_signals}. The is also done with other frequency band for the \gls{ssn} and in the end with pure tone to confirm the problem with difference transfer function. The test is done according to the test method described in \autoref{sec:test_description}. The following \autoref{sec:match_result_diff} shows the result of three test subject where the mean is calculated.
+
+\begin{table}[H]
+\centering
+\caption{Test result of matching test for different noise spectrum and pure tone. The specification of each noise can be founded in \autoref{apen:match_result}}
+\begin{tabular}{l|lll|ll}
+Matching test in \si{\decibel}       & 1\textsuperscript{st}  Subject & 1\textsuperscript{nd}  Subject & 3\textsuperscript{rd}  Subject & $\mu$ & $\sigma$ \\ \hline
+Original \gls{ssn}         & 46        & 45        & 45        & 45.3        & 0.58               \\
+Highpass         & 47        & 44        & 46        & 45.7        & 1.53               \\
+Bandpass 1         & 38        & 40        & 45        & 41          & 3.61               \\
+Bandpass 2        & 41        & 41        & 47        & 43          & 3.46               \\
+1/3 octave & 57        & 50        & 60+       & 55.7        & 5.13               \\
+\SI{1}{\kilo\hertz}                   & 34        & 32        & 36        & 34          & 2                  \\
+\SI{2}{\kilo\hertz}                  & 45        & 51        & 60+       & 52          & 7.55               \\
+\SI{4}{\kilo\hertz}                  & 47        & 49        & 59        & 51.7        &  6.43                 
+\end{tabular}
+\label{sec:match_result_diff}
+\end{table}
+
+
+It can be seen in \autoref{sec:match_result_diff} that the difference between Original \gls{ssn} and and the highpassed \gls{ssn} is very small 
+
+
+
 
 econdly using the \gls{hint} \gls{ssn} \citep{nilsson_95} to match level of \gls{bct} to the level of \gls{ace} for every subject by a perceived level matching test.
 
