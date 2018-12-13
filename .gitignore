@@ -246,3 +246,6 @@ TSWLatexianTemp*
 
 # The master pdf
 master.pdf
+
+AirResult.mat
+BoneResult.mat
