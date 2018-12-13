@@ -1,6 +1,6 @@
 \section{\gls{bier}: \gls{srt} Analysis}
 
-It is assumed, that the loudness matching (AUTOREF SECTION HERE) is a legit way to provide the same \gls{snr} for both conductors when conducting \gls{bier}.
+It is assumed, that the loudness matching part of \gls{bier} (AUTOREF SECTION HERE) is a legit way to provide the same \gls{snr} for both conductors when conducting \gls{bier}.
 In order to determine, if under this assumption there is a statistically significant difference in intelligibility between \gls{ac} and \gls{bc}, a paired-sample t-Test is performed.
 For this test to be viable, it has to be assumed, that both the \gls{srt} for \gls{ac} and \gls{bc} are normally distributed. Hence the distribution of the difference between the two also has to be normally distributed. 
 This can be checked by means of a Lilliefors test.
@@ -8,7 +8,8 @@ The Lilliefors test checks the null hypothesis, that the input data is coming fr
 In the given context, the intrasubject difference between the the \gls{ac} \gls{srt} and the \gls{bc} \gls{srt} (see  is tested.
 The population mean and variance are estimated based on the input data. The null hypothesis is rejected or confirmed, based on the discrepancy between the Gaussian \gls{cdf}, that is derived from the estimated mean and variance and the empirical distribution.
 This procedure is conveniently implemented in the MATLAB\textsuperscript{\textregistered} function \texttt{lillietest}.
-The null hypothesis, that the intrasubject \gls{srt} difference is normally distributed, is not rejected at a \SI{5}{\percent} significance level based on the data at hand.
+The null hypothesis, that the intrasubject \gls{srt} difference is normally distributed, is not rejected at a \SI{5}{\percent} significance level based on the data at hand.\\
+
 
 
  
