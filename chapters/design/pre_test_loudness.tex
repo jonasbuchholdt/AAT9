@@ -1,17 +1,23 @@
 
 \section{Loudness matching between \gls{bct} and \gls{ace}}
-
 \label{sec:loudness_match}
 This section is divided intro two parts. One parts where the noise is chosen and one part where the method is examined with pilots.
 
 
 \subsection{The noise}
-This section described how the \gls{ace} is related to the \gls{bct} in the subject test. The main issue with calibrating of the \gls{bct} is that the the sound is not \gls{ac} but \gls{bc}, so the \gls{bct} level cannot be described as \gls{spl}. Therefore the relation between \gls{ace} and \gls{bct} is founded another way than the \gls{spl}. There is at least two ways of relating the \gls{bct} with the \gls{ace} while using the Affinity. First option is using the standardized calibration of the \gls{bct} to the hearing threshold and assume linearity in the used level range. Secondly using the \gls{hint} \gls{ssn} \citep{nilsson_95} to match level of \gls{bct} to the level of \gls{ace} for every subject by a perceived level matching test.
+This section described how the \gls{ace} is related to the \gls{bct} in the subject test. The main issue with the frequency response of the \gls{bct} is that the the sound is not \gls{ac} but \gls{bc}, so the \gls{bct} level cannot be described as \gls{spl}. The chosen \gls{bct} belongs to a Hearing Aid Analyzer named Affinity 2.0 \citep{affinity_20} which also can be used as preamp for the \gls{bct} and the \gls{ace} in two inputs, CD1 and CD2. Since the given \gls{hint} is a MATLAB program, the Affinity will be used as a preamp for the \gls{bct}. The Affinity is not only for bone but do also have  \gls{ace} posibility. Therefore the Affinity is used as a preamp for both the \gls{ace} and the \gls{bct}. 
 
-In the subject test the subject based method is chosen. The resent for chosen the subject based method is that the standard ISO 389-3 \citep{iso_389-3} only describe calibration with pure tone and the Affinity do not have any calibration for \gls{bct} while using external input on CD1 or CD2 \autoref{append:affinity_bc_calibration}. Therefore an external calibrating unit between the sound card and the Affinity input is needed, but since a full frequency spectrum calibration standard is not defined, this option is discarded.
+
+To relate the \gls{ace} and \gls{bct} the CD1 and CD2 input frequency response of single tone is measured. This is done to to verify the input and output relation such that it is known if the Affinity change the frequency response for the belonging \gls{bct} as it is necessary according to its datasheet \citep{radioear_b81}. In  \autoref{append:affinity_bc_calibration} it is found out that the Affinity have a linear frequency response, and therefore the \gls{bct} is not adapted for the needed frequency equalization as standardized in ISO 389-3 \citep{iso_389-3}. The standard ISO 389-3 \citep{iso_389-3} also only standardize for pure tone and not wide band frequency content which is contained in speech. Those the relating between the input to the \gls{bct} and the basilar membrane exaltation is uncertain. The solution is relating the \gls{bct} to the \gls{ace} by perceived level matching test between the transducers for every subject. The test method is described in \autoref{sec:test_description}.
+
+
+\subsection{noise chose}
+
+econdly using the \gls{hint} \gls{ssn} \citep{nilsson_95} to match level of \gls{bct} to the level of \gls{ace} for every subject by a perceived level matching test.
 
 In order to decide which type of signal should be used during this matching phase, a test with several signals was performed 
 (see \autoref{apend_matching_signals}).
+
 
 
 \subsection{Pilot test}
