@@ -5,7 +5,7 @@ In \citep[p. 11]{cote_2011}, the author defines intelligibility as \enquote{the 
 The approach to acquiring data in order to evaluate intelligibility, may have a substantial influence on the outcome of the assessment.
 Recalling from autorefsec:problem_statement, the goal of the investigations is assessing whether there is a difference in intelligibility between \gls{ac} and \gls{bc} speech signals during the presence of ambient noise. 
 
-According to \citep{arl_us_army}, there are three basic priniciples, that are being employed for intelligibility assessment:
+According to \citep{arl_us_army}, there are three basic priniciples that are being employed for intelligibility assessment:
 \begin{itemize}
 \item \textit{Speech intelligibility rating scales}: Listeners grade the perceived quality subjectively using a verbal or numeric scale.
 \item \textit{Perceptual intelligibility tests}:  Test signals, which can be comprised of phonemes, syllables, words, sentences or paragraphs, are presented to subjects. The score is evaluated based upon how much information they recognized.
@@ -24,27 +24,27 @@ The following section will outline some perceptual speech intelligibility tests,
 
 \subsection{\gls{cat}}\label{ssec:cat}
 The \gls{cat} is a speech intelligibility test, that has been developed specifically to test communication systems in context with military applications. The test items are so called callsigns, which are a combination of 18 selected elements from the International Radiotelephony Spelling Alphabet and seven numerical digits, resulting in a total of 126 test items.
-Typically, when performing this test, subjects are presented a test item (e.g. Bravo Six) and then type in, what they heard on a computer (e.g. B 6). This procedure is repeated with other test items and the test score is evaluated based on how many items have been identified correctly.
+Typically, when performing this test, subjects are presented a test item (e.g. Bravo Six) and then type in what they heard on a computer (e.g. B 6). This procedure is repeated with other test items and the test score is evaluated based on how many items have been identified correctly.
 This can be done under different noisy conditions in order to evaluate the suitability of a communication system for a given application.
 The execution of the test and test results, that have been obtained with different kinds of noise, are described in \citep{rao_2006}.
 Contextualising the \gls{cat} with the project at hand, there are benefits and drawbacks. A general advantage of the \gls{cat} is its viability for an automated conducting and scoring due to the type of responses given by the subjects. The nature of the test items makes it possible to get a larger number of responses from a subject in a given time span when compared to sentence based tests.
 This is important when designing the test, because of time constraints (see \autoref{sec:test_design}).
-The limited set of test items is also paralleled by drawbacks. As the test has been specifically designed for military personnel familiar with the test items, subjects, that do not have this background are likely to perform comparably, unless they are extensively familiarized with the test items, which is time intensive. There is a high likelihood of at least partial repetitions of test items when running the test. If the subjects are not familiarized sufficiently with the test items, a \enquote{learning experience} menaces to pose an uncontrollable influence on the results.
+The limited set of test items is also paralleled by drawbacks. As the test has been specifically designed for military personnel familiar with the test items, subjects that do not have this background are unlikely to perform comparably, unless they are extensively familiarized with the test items. There is a high likelihood of at least partial repetitions of test items when running the test. If the subjects are not familiarized sufficiently with the test items, a \enquote{learning experience} menaces to pose an uncontrollable influence on the results.
 
 \subsection{\gls{hint}}\label{ssec:hint}
 The \gls{hint} was introduced as a measure to assess hearing loss by \citep{nilsson_95} and has been adapted to Danish by \citep{hint_2011}.
-The premiss is to evaluate speech intelligibility based on \gls{ssrt} measurements. 
+The premise is to evaluate speech intelligibility based on sentence speech reception threshold measurements. 
 A sentence and noise are played simultaneously. The subjects are instructed to repeat what they have heard as soon as the playback stops. 
-Depending on whether the sentence has been repeated correctly, the \gls{snr} is adjusted by manipulating the gain of the speech playback and another within a list consisting of a number of sentences, another one is played back. This means, measurings \gls{ssrt} is an adaptive procedure.
+Depending on whether the sentence has been repeated correctly, the \gls{snr} is adjusted by manipulating the gain of the speech playback and from within a list consisting of a number of sentences, another one is played back, meaning that measuring \gls{ssrt} is an adaptive procedure.
 For scoring the repeated sentences, minor variations in articles and verb tenses are accepted as a correct repetition.
 The result of the \gls{hint} is compiled in a single number, the \gls{srtn}.
 The \gls{srtn} is defined as the \gls{snr}, at which the listeners are most likely to correctly repeat \SI{50}{\percent} of the sentences, that they have been presented.
-The sentence material used to conduct the \gls{hint} in American English were originally adapted from \citep{bench_bamford_79}. 
+%The sentence material used to conduct the \gls{hint} in American English was originally adapted from \citep{bench_bamford_79}. 
 Generally, sentences are required to be relatively short and to be \enquote{natural}, meaning they could occur in a normal conversation.
 When compiling a list of sentences, those are chosen such that the lists end up phonetically balanced. 
 The sentence material used to conduct the \gls{hint} in American English were originally adapted from \citep{bench_bamford_79}.
 The number of syllables in one sentence is six to seven for the American English \gls{hint} according to \citep{nilsson_95}.
-The Danish \gls{hint} sentences were adapted from the so called conversational language understanding evaluation, which was published as \citep{nielsen_dau_09}. In that article, it is stated, that, amongst other criteria, sentences should consist of eight to nine syllables, and single words do not contain more than four syllables.
+The Danish \gls{hint} sentences were adapted from the so called conversational language understanding evaluation, which was published as \citep{nielsen_dau_09}. In that article, it is stated, that, amongst other criteria, sentences should consist of eight to nine syllables, and that single words should not contain more than four syllables.
 The material consists of ten lists of phonetically balanced sentences and three lists for familiarisation.
 Given are examples of a sentence from each the American English and the Danish \gls{hint} material:
 \begin{quote}
@@ -53,10 +53,10 @@ Somebody stole the money.
 \begin{quote}
 Hendes penge var gået tabt.
 \end{quote}
-A partly automated implementation of the Danish \gls{hint} in MATLAB\textsuperscript{\textregistered} is available from the author of \citep{hint_2011}. The program provides a graphical interface, in which the operator can choose, which sentence lists to play, set the noise level, play back sentences and keep track of whether the sentence was repeated correctly. The gain of the speech playback is adjusted automatically based on the assessment of the former sentence from the operator.
-An advantage of the \gls{hint} over other perceptual intelligibility tests is, that the test material represents everyday conversations rather well.
-There are also drawbacks. The amount of sentence lists for the tests is limited. It has been shown, that there is a significant learning effect, when lists are retested \citep[p. 205 f.]{hint_2011}.
-Also, both the subject and must be native speakers of the language the test is conducted in. Having a human operator as a judge introduces the possibility of judgement errors.
+A partly automated implementation of the Danish \gls{hint} in MATLAB\textsuperscript{\textregistered} is available from the author of \citep{hint_2011}. The program provides a graphical interface, in which the operator can choose which sentence lists to play, set the noise level, play back sentences and keep track of whether the sentence was repeated correctly or not. The gain of the speech playback is adjusted automatically based on the assessment of the former sentence from the operator.
+An advantage of the \gls{hint} over other perceptual intelligibility tests is that the test material represents everyday conversations rather well.
+There are also drawbacks. The amount of sentence lists for the tests is limited. It has been shown that there is a significant learning effect when lists are retested \citep[p. 205 f.]{hint_2011}.
+Also, both the subject and the test conductor must be native speakers of the language the test is conducted in. Having a human operator as a judge introduces the possibility of judgement errors.
 
 \subsection{\gls{mrt}}\label{ssec:mrt}
 The \gls{mrt} was originally described in \citep{mrt_63} and has been standardised in \citep{ansi_s3.2}. The goal of developing the test was establishing a reliable, relatively quick way of testing a communication channel with untrained test subjects.
