@@ -13,7 +13,8 @@ To relate the \gls{ace} and \gls{bct} the CD1 and CD2 input frequency response o
 
 
 \subsection{Matching signal chose}
-This section design the matching signal for \gls{ace} and \gls{bct} relation. There is several option of choosing the matching signal but tonal match can not be used because the transfer function for both transducer is very difference \citep{microPro_er4},  \citep{radioear_b81}. The tonal match only correspond to its frequency and therefore over a broad band frequency spectrum the loudness will not match. To match the level in the speech frequency range a \gls{ssn} is chosen. The chosen \gls{ssn} is the given noise from the MATLAB \gls{hint} test. The differences in the low frequency for the transducer might introduce masking, because the \gls{ace} goes much lower in frequency that the \gls{bct}. To test this hypotheses, a test is made in \autoref{apend_matching_signals}. The is also done with other frequency band for the \gls{ssn} and in the end with pure tone to confirm the problem with difference transfer function. The test is done according to the test method described in \autoref{sec:test_description}. The following \autoref{sec:match_result_diff} shows the result of three test subject where the mean is calculated.
+\label{sec:match_sig_cho}
+This section design the matching signal for \gls{ace} and \gls{bct} relation. There is several option of choosing the matching signal but tonal match can not be used because the transfer function for both transducer is very difference \citep{microPro_er4},  \citep{radioear_b81}. The tonal match only correspond to its frequency and therefore over a broad band frequency spectrum the loudness will not match. To match the level in the speech frequency range a \gls{ssn} is chosen. The chosen \gls{ssn} is the given noise from the MATLAB \gls{hint} test. The differences in the low frequency for the transducer might introduce that the \gls{ace} is perceived louder and therefore the perceived match with the \gls{bct} might be to high. To test this hypotheses, a test is made in \autoref{apend_matching_signals}. The is also done with other frequency band for the \gls{ssn} and in the end with pure tone to confirm the problem with difference transfer function. The test is done according to the test method described in \autoref{sec:test_description}. The following \autoref{sec:match_result_diff} shows the result of three test subject where the mean is calculated.
 
 \begin{table}[H]
 \centering
@@ -33,19 +34,28 @@ Bandpass 2        & 41        & 41        & 47        & 43          & 3.46      
 \end{table}
 
 
-It can be seen in \autoref{sec:match_result_diff} that the difference between Original \gls{ssn} and and the highpassed \gls{ssn} is very small 
-
-
-
-
-econdly using the \gls{hint} \gls{ssn} \citep{nilsson_95} to match level of \gls{bct} to the level of \gls{ace} for every subject by a perceived level matching test.
-
-In order to decide which type of signal should be used during this matching phase, a test with several signals was performed 
-(see \autoref{apend_matching_signals}).
+It can be seen in \autoref{sec:match_result_diff} that the difference between original \gls{ssn} and and the highpassed \gls{ssn} is very small. The hypotheses that the low frequency makes a higher \gls{bct} level match is rejected for the measured data. All banpass filtering of the noise was ether not as consistent that the original \gls{ssn}. The pure tone also have high standard diviation and tha perceived level is much difference than the Original \gls{ssn}. The chosen matching noise the the subject test is the original \gls{ssn}
 
 
 
 \subsection{Pilot test}
+This section evaluate the chosen \gls{ssn} for \gls{ace} and \gls{bct} matching. The evaluation is done by a pilot test with subject. The test is done according to the matching description in \autoref{sec:test_description} but with only one match test after the familiarization round. Only the the non familiarization matching is reported. The result for the pilot test is shown in \autoref{sec:match_result_field} and the corresponding appending of the test is founded in \autoref{apend:match_field_init}.
 
+\begin{table}[H]
+\centering
+\caption{Test result for pilot level matching}
+\begin{tabular}{l|lll|ll}
+Matching test in \si{\decibel}   & 1\textsuperscript{st} trial & 2\textsuperscript{nd} trial & 3\textsuperscript{rd} trial & $\mu$ & $\sigma$ \\ \hline
+Subject 1  & 48          & 48           & 48          & 48          & 0                  \\
+Subject 2  & 52          & 50           & 50          & 50.7        & 1.15               \\
+Sbuject 3  & 52          & 52           & 52          & 52          & 0                  \\
+Subject 4  & 46          & 46           & ND          & 46          & 0                  \\
+Subject 5  & 50          & 48           & ND          & 49          & 1.41               \\
+Subject 6  & 52          & 50           & ND          & 51          & 1.41               \\
+Subject 7  & 52          & 48           & ND          & 50          & 2.83               \\
+Subject 8  & 56          & 52           & 52          & 53.3        & 2.31             
+\end{tabular}
+\label{sec:match_result_field}
+\end{table}
 
-
+It can be seen in the \autoref{sec:match_result_field} that the 
