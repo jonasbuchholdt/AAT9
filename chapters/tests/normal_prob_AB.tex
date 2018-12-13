@@ -28,16 +28,22 @@ axis x line*=bottom,
 axis y line*=left,
 xmajorgrids,
 ymajorgrids,
-legend style={legend cell align=left, align=left, draw=white!15!black}
-]
-
-
+legend style={legend cell align=left, align=left, draw=white!15!black},
+legend entries={\gls{ac} Gaussian Fit,
+                \gls{ac} Subject Data,
+                \gls{bc} Gaussian Fit,
+                \gls{bc} Subject Data},
+legend pos=south east]
+\addlegendimage{mycolor1}
+\addlegendimage{only marks,mycolor2}
+\addlegendimage{mycolor3}
+\addlegendimage{only marks, mycolor4}
 \addplot [color=mycolor1]
   table[row sep=crcr]{%
 -2.25	-0.674489750196082\\
 4.75	0.674489750196082\\
 };
-\addlegendentry{\gls{ac}, Gaussian Fit}
+
 
 \addplot [color=mycolor2, draw=none, mark=*, mark options={solid, mycolor2}]
   table[row sep=crcr]{%
@@ -52,7 +58,8 @@ legend style={legend cell align=left, align=left, draw=white!15!black}
 11	1.03643338949379\\
 11.5	1.64485362695147\\
 };
-\addlegendentry{\gls{ac}, Subject Data}
+
+
 
 
 
@@ -61,7 +68,7 @@ legend style={legend cell align=left, align=left, draw=white!15!black}
 -0.603	-0.674489750196082\\
 11.35	0.674489750196082\\
 };
-\addlegendentry{\gls{bc}, Gaussian Fit}
+
 
 \addplot [color=mycolor4, draw=none, mark=*, mark options={solid, mycolor4}]
   table[row sep=crcr]{%
@@ -76,7 +83,8 @@ legend style={legend cell align=left, align=left, draw=white!15!black}
 17.5	1.03643338949379\\
 21.5	1.64485362695147\\
 };
-\addlegendentry{\gls{bc}, Subject Data}
+
+
 \addplot [color=mycolor3, dashdotted]
   table[row sep=crcr]{%
 -7.2	-1.41900725744005\\
