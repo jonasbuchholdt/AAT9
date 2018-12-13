@@ -117,9 +117,13 @@ option = struct;
 options.sigmoidName = 'norm';
 options.expType = 'YesNo';
 options.fixedPars = NaN(5,1);
-%options.fixedPars(1) = 0.5;
-options.fixedPars(3) = 0;
-options.fixedPars(4) = 0;
+options.fixedPars(1) = 0.5;  % threshold
+%options.fixedPars(3) = 0;     % lapse
+options.fixedPars(4) = 0;     % guess rate
+
+% (2) width
+% (5) eta
+
 
 resulta = psignifit(psydataa,options)
 resultb = psignifit(psydatab,options)
