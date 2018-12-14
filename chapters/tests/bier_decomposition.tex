@@ -22,12 +22,7 @@ The null hypothesis of the test is, that the difference between the observation 
 The \matlab function \texttt{ttest} has been applied to the available data from \autoref{tab:srtn}. The null hypothesis can be rejected with a $p$-value of 0.0644. This does reach the commonly apllied significance level of $\alpha=$\SI{5}{\percent}.\\
 A normal probability plot of the \gls{srtn} is depicted in \autoref{fig:srtn_normal}. The lines in plot correspond to the normal distribution, that has been derived from estimating mean and variance from the available observations. 
 The points depict those observations. Points being close to their corresponding lines indicate, that a normal distribution is likely to underlay the observations. The datapoints in \autoref{fig:srtn_normal} can be considered reasonably close to the corresponding normal distributions, however the number of points is small.\\
-\begin{figure}[H]
-\centering
-\include{chapters/tests/normal_prob_AB}
-\caption{Bone Air Thing}
-\label{fig:srtn_normal}
-\end{figure}
+\plot{chapters/tests/normal_prob_AB}{Bone Air Thing}{fig:srtn_normal}
 For the paired-sample t-test to be viable, it has to be assumed, that the pairs of observations are normally distributed. Hence the distribution of the difference between the two also has to be normally distributed. 
 This can be checked by means of a Lilliefors test.
 The Lilliefors test checks the null hypothesis, that the input data is coming from a normally distributed population. 
@@ -75,13 +70,7 @@ The results are presented in \autoref{fig:srtn_psych}.
 
 
 %The fit has been performed with the \matlab toolbox \texttt{psignifit 4}. The methods, that the toolbox is based on, is described in \citep{schuett_16}.
-\begin{figure}[H] 
-\centering
-\include{chapters/tests/psych_03}
-\caption{Psychometric functions for sentence intelligibility with presentation via \gls{ace} and \gls{bct}. The size of the points corresponds to the number of observations per bin.}
-\label{fig:srtn_psych}
-\end{figure}
-
+\plot{chapters/tests/psych_03}{Psychometric functions for sentence intelligibility with presentation via \gls{ace} and \gls{bct}. The size of the points corresponds to the number of observations per bin}{fig:srtn_psych}
 
 %To quantify the slope of a psychometric function, a width can be defined as the difference between the stimulus levels (in this case \gls{snr}s), at which the function reaches values of $0.05$ and $0.95$. The width of the \gls{ac} psychometric function is \SI{10.4}{\decibel}, the width of the \gls{bc} psychometric function is \SI{18.7}{\decibel}.
 

@@ -9,10 +9,7 @@
 \begin{tikzpicture}
 
 \begin{axis}[%
-width=120mm, 
-height=74mm, 
-at={(5mm,5mm)}, 
-scale only axis,
+\plotsettings
 xmin=-14,
 xmax=14,
 tick align=outside,
@@ -22,13 +19,6 @@ ymin=0,
 ymax=1,
 ylabel style={font=\color{white!15!black}},
 ylabel={Proportion of Correct Responses},
-axis background/.style={fill=white},
-axis x line*=bottom,
-axis y line*=left,
-grid=both,
-grid style={line width=.1pt, draw=gray!10},
-major grid style={line width=.2pt,draw=gray!50}, 
-minor tick num=4,
 legend style={legend cell align=left, align=left, draw=white!15!black},
 legend entries={\gls{ac} Psychometric Function,
                 \gls{ac} Data,

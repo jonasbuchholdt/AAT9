@@ -8,23 +8,14 @@ This section will analyse speech intelligibility with respect to communication. 
 One on the most important acoustics factors in human speech is the glottal organ, which makes the fundamental frequency of the voice, $f_0$. The fundamental frequency is not the same for every person, so we will refer to its mean from this point onwards. However, this mean differs between male and female subjects, as well as between different types of communication e.g. talking, yelling or singing. For males, the mean fundamental frequency for conversational speech is \SI{120}{\hertz}, whereas for females it is \SI{200}{\hertz}. The fact that the fundamental frequency is in the low frequency region does not mean that the transmitted sound has only low frequency components. 
 The pathway followed by sound from the glottal organ to the mouth can be represented with a unique transfer function, which heavily impacts on the frequency response \citep{pulkki2015}, and that can vary between subjects. The following \autoref{fig:speech_system} shows the pathway for the soudwaves to propagate from the glottal to the lips.
 
- \begin{figure}[H]
-	\centering
-		\includegraphics[width=1\textwidth]{glottal}
-		\caption{Speech generation pathway from glottals to lips \citep{pulkki2015}}
-		\label{fig:speech_system}
-\end{figure}
+
+\fig{glottal}{Speech generation pathway from glottals to lips \citep{pulkki2015}}{fig:speech_system}
 
 \subsection{Speech frequency range}
 
 As stated before, the transfer function for this system is individual dependent, or more specifically, throat, mouth and nose dependent. The mean length for the throat from the glottal organ to the lips is \SI{17}{\centi\meter} for males and \SI{14}{\centi\meter} for females. While generating speech, glottal oscillations are mixed with "silent" airflow in the throat, which makes turbulences in the transfer of the speech soundwave. This can generate noises and explosive transient-like sounds in the speech output. Another factor to take into account is the position of the lips, which act like a radiation filter, e.g. when pronouncing ''O'' the lips have to be shaped in a specific way, otherwise the generated sound won't be correct. The nose's status also affects the generated sound. For example, generated voice changes if the nose is blocked compared to opened. All these factors for the speech make the frequency range of speech to start below \SI{100}{\hertz} and go upon several \si{\kilo\hertz} \citep{pulkki2015}. The following \autoref{fig:speech_transfer_system} shows a signal block diagram for the speech transfer function.
 
- \begin{figure}[H]
-	\centering
-		\includegraphics[width=1\textwidth]{speech_transfer}
-		\caption{The figure shows a block diagram for the speech transfer function \citep{pulkki2015}}
-		\label{fig:speech_transfer_system}
-\end{figure}
+\fig{speech_transfer}{The figure shows a block diagram for the speech transfer function \citep{pulkki2015}}{fig:speech_transfer_system}
 
 \subsection{Intelligibility and Speech Power}
 
@@ -34,12 +25,8 @@ Speech intelligibility is a measure of how much of a message has been extracted 
 
 Most of the speech power is distributed near the fundamental frequency of the voice, but for speech intelligibility measurements, it was tested that taking out this area would only affect intelligibility by lowering it by a factor below \SI{5}{\percent}. Therefore, when listening to speech, the frequency of the voice might not be observed as its fundamental frequency, but much higher. In fact, \SI{60}{\percent} of the speech intelligibility lays in only \SI{5}{\percent} of the speech power spectrum \citep{arl_us_army}. The spectral centroid of the speech intelligibility frequency varies between different languages, but the deviation is not large. For the English language, the centroid is found at \SI{1.5}{\kilo\hertz} \citep{arl_us_army}. The following \autoref{fig:speech_intelligibility} shows the power and intelligibility in octaves. 
 
- \begin{figure}[H]
-	\centering
-		\includegraphics[width=1\textwidth]{speech_intelligibility}
-		\caption{The figure shows the power and intelligibility in octave  \citep{arl_us_army}}
-		\label{fig:speech_intelligibility}
-\end{figure}
+
+\fig{speech_intelligibility}{The figure shows the power and intelligibility in octave  \citep{arl_us_army}}{fig:speech_intelligibility}
 
 As it can be seen in \autoref{fig:speech_intelligibility}, the frequency range can be further limited between \SI{355}{\hertz} and \SI{5.68}{\kilo\hertz} because of the outer low frequency limit of the \SI{500}{\hertz} octave band and the upper outer high frequency limit for the \SI{4}{\kilo\hertz} octave band. 
 

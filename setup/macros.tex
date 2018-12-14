@@ -369,6 +369,51 @@ Description & Model & Serial-no & AAU-no \\ \hline
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tilføjer kommando \starteq, \stopequp og \equp{variable}{test}{is unit}{}
+% Bruges til forklaringer af ligninger.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tilføjer figur
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\fig}[3]{
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\textwidth]{#1}
+\caption{#2}
+\label{#3}
+\end{figure}}%
+
+\newcommand{\plot}[3]{
+ \begin{figure}[H]
+	\centering
+	\include{#1}
+		\caption{#2}
+		\label{#3}
+\end{figure}}
+
+\newcommand{\plotsettings}[0]{
+width=120mm, 
+height=74mm, 
+at={(5mm,5mm)}, 
+scale only axis,
+grid=both,
+grid style={line width=.1pt, draw=gray!10},
+major grid style={line width=.2pt,draw=gray!50}, 
+minor tick num=4,
+axis x line*=bottom,
+axis y line*=left,
+axis background/.style={fill=white},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tilføjer figur
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Tilføjer kommando \hyph
 % Bruges til bindestreger i ord så de stadig kan deles korrekt af Latex.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

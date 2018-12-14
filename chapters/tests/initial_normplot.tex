@@ -7,10 +7,7 @@
 \begin{tikzpicture}
 
 \begin{axis}[%
-width=120mm, 
-height=50mm, 
-at={(5mm,5mm)}, 
-scale only axis,
+\plotsettings
 xmin=40,
 xmax=60,
 xlabel style={font=\color{white!15!black}},
@@ -21,15 +18,8 @@ ytick={-3.09023230616781,-2.74778138544499,-2.32634787404084,-2.05374891063182,-
 yticklabels={{0.001},{0.003},{0.01},{0.02},{0.05},{0.10},{0.25},{0.50},{0.75},{0.90},{0.95},{0.98},{0.99},{0.997},{0.999}},
 ylabel style={font=\color{white!15!black}},
 ylabel={Probability},
-axis background/.style={fill=white},
 title style={font=\bfseries},
 title={Normal Probability Plot},
-axis x line*=bottom,
-axis y line*=left,
-grid=both,
-grid style={line width=.1pt, draw=gray!10},
-major grid style={line width=.2pt,draw=gray!50}, 
-minor tick num=4,
 legend style={at={(0.045,0.669)}, anchor=south west, legend cell align=left, align=left, draw=white!15!black}
 ]
 

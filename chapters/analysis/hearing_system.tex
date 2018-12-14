@@ -5,12 +5,8 @@ The term \textit{auditory system} refers to the sensory system for the perceptio
 \section{Air Conduction of Sound}
 \label{sec:ear_functions}
 The typical way to stimulate the nerve cells on the basilar membrane, and therefore perceive sound, is via \gls{ac}. The pathway from airborne wave outside the ear to the cochlea can be divided into three sections(\autoref{fig:hearing_system}). 
- \begin{figure}[H]
-	\centering
-		\includegraphics[width=1\textwidth]{anatomy-of-ear.jpg}
-		\caption{Breakdown of the different ear parts.}
-		\label{fig:hearing_system}
-\end{figure}
+
+\fig{anatomy-of-ear.jpg}{Breakdown of the different ear parts.}{fig:hearing_system}
 
 In the first section, the sound wave is travelling through the outer ear, which consists of the pinna and the ear canal.The shape of the pinna differs amongst the population. A unique transfer function is attributable to the pinna. Combining the influence of the pinna, with that of the ear canal and the torso, the resulting transfer function is referred to as \gls{hrtf}. It has to be noted, that \gls{hrtf} are dependent on the incidence direction of sound.% An individual's brain is conditioned to the exact \gls{hrtf} of that person. Presenting sounds with another \gls{hrtf} to a person will initially lead to confusion, but over time the brain can adapt a new \gls{hrtf} if necessary. 
 After sound has entered the outer ear and has been modified by the \gls{hrtf}, it reaches the tympanic membrane, also called the eardrum. It is set into motiong according to the air pressure variation in the ear canal and transmits sound into the middle ear.
@@ -25,12 +21,9 @@ Vibrations of the oval window cause a wave travelling in the cochlea fluid. Thos
 \section{Bone Conduction of Sound}\label{sec:bonepaths}
 At the moment there is not a general delimited definiton of what \gls{bc} means, but it is mostly accepted as the sound transmission through the bones of the skull. However, \gls{bc} is not only limited to bones, since it usually also involves transmission through soft tissue and cartilage. Therefore, it can be identified as the transmission of sound energy through the body (bones, soft tissue and cartilage). 
 \gls{bc}, although being performed in a localised way, involves the outer, middle and inner ear, as well as the bones surrounding the hearing apparatus and both its fluids and \gls{csf} \citep{puria_2013}.
- \begin{figure}[H]
-	\centering
-		\includegraphics[width=1\textwidth]{more-on-the-vestibular-system-of-anatomy-of-cochlear-aqueduct.jpg}
-		\caption{Detail of middle and inner ear}
-		\label{fig:hearing_system_detail}
-\end{figure}
+ 
+\fig{more-on-the-vestibular-system-of-anatomy-of-cochlear-aqueduct.jpg}{Detail of middle and inner ear}{fig:hearing_system_detail}
+
 Stenfelt's \citep[section 6.1.1]{puria_2013} starts with the following quote: \enquote{One of the quintessential questions about BC hearing is the end organ for
 transforming BC vibration in the skull to neural code}. From this quote, we can infer, that the determination of the endpoint for \gls{bc} is not an easy task and could be the pinnacle in fully understanding \gls{bc} sound transmission.
 
@@ -47,12 +40,11 @@ When analysing \gls{bc} propagation, we have to take into account three main fac
 \item Between \SI{1}{\kilo\hertz} and \SI{2}{\kilo\hertz}: at \SI{1}{\kilo\hertz}, the first free resonance of the skull appears \citep{hakansson_1994} and the motion transitions from mass-spring system to a system dominated by wave transmission.
 \item Above \SI{2}{\kilo\hertz}: when reaching this range, wave transmission dominates the skull vibration pattern completely, with differences between the cranial vault and the skull base (Fig \ref{fig:skull_vibration_pattern}c).
 \end{enumerate}
-\begin{figure}[H]
-	\centering
-		\includegraphics[width=1\textwidth]{skull_vibration_pattern.pdf}
-		\caption{Two-dimensional illustration of the vibration modes of the human skull at frequencies between 0.1 and 10 kHz. The thick arrows indicate the stimulation position and the thin arrows indicate the response directions. The rigid body response at the lowest frequencies is illustrated in (a), while the response at frequencies between approximately 0.3–1.0 kHz that is similar to a massspring system is shown in (b), where three sections of the skull move sequentially in opposite directions. In (c) the vibration responses for frequencies above 2 kHz is illustrated differently for the skull base and the cranial vault: at the skull base longitudinal wave propagation dominates the response while a mixture of vibration modes including bending waves is present at the cranial vault. Image source: \citep{puria_2013}}
-		\label{fig:skull_vibration_pattern}
-\end{figure}
+
+
+
+\fig{skull_vibration_pattern.pdf}{Two-dimensional illustration of the vibration modes of the human skull at frequencies between 0.1 and 10 kHz. The thick arrows indicate the stimulation position and the thin arrows indicate the response directions. The rigid body response at the lowest frequencies is illustrated in (a), while the response at frequencies between approximately 0.3–1.0 kHz that is similar to a massspring system is shown in (b), where three sections of the skull move sequentially in opposite directions. In (c) the vibration responses for frequencies above 2 kHz is illustrated differently for the skull base and the cranial vault: at the skull base longitudinal wave propagation dominates the response while a mixture of vibration modes including bending waves is present at the cranial vault. Image source: \citep{puria_2013}}{fig:skull_vibration_pattern}
+
 \item \textbf{Skin and soft tissue}: generally, \gls{bc} transducers are placed pressed on skin-covered bone, meaning that the sound transmission will be affected by the presence of skin and soft tissue between the transducer and the bone. This often means that the sound transmission is attenuated when the skin is present, with an increase of up to \SI{20}{\decibel} in the acceleration threshold level. The threshold level shift caused by the skin is generally not frequency depended and stays mostly the same from \SI{250}{\hertz} to \SI{8}{\kilo\hertz} \citep{hakansson_1985}.
 \item \textbf{Position of the transducer}: the stimulation area is one of the key points in terms of increasing the sensitivity to \gls{bc} sound. A good sensitivity can be achieved by positioning the stimuli close to the cochlea, which usually leads to the mastoid being selected as stimulation area. The reason for the improved sensitivity in this area could be related to the in-line position of the bone with regards to the petrous bone encapsulating the cochlea, or it could involve any of the skull bone structures \citep{puria_2013}. Therefore, further testing will be performed in order to identify the best position for our study case.
 \end{itemize}
@@ -69,12 +61,7 @@ Early theories suggested that there were two main pathways dominating the \gls{b
 
 These pathways can work independently, but all of them contribute to the quality of the signal received by the cochlea. A failure in one of the pathways leads to a decrease in the quality of the received stimuli. In  \autoref{fig:hearing_system_pathway}, the relation between \gls{bc} and \gls{ac} stimuli is depicted, clearly showing how \gls{bc} stimulation can generate \gls{ac}-like responses in the outer, middle and inner ear.
 
- \begin{figure}[H]
-	\centering
-		\includegraphics[width=1\textwidth]{ovidweb}
-		\caption{Transmission paths for \gls{ac} and \gls{bc}, image source:  \citep{stenfelt_2005}}
-		\label{fig:hearing_system_pathway}
-\end{figure}
+\fig{ovidweb}{Transmission paths for \gls{ac} and \gls{bc}, image source:  \citep{stenfelt_2005}}{fig:hearing_system_pathway}
 
 \subsection*{Outer ear}
 
