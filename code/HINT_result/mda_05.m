@@ -129,7 +129,7 @@ resulta = psignifit(psydataa,options)
 resultb = psignifit(psydatab,options)
 
 %% plotting stuff
-close all
+%close all
 figure()
 %median(ASNR(:,u))
 for u = 1:length(subjects)
