@@ -293,6 +293,16 @@ hi-fi-forstærker%
 \AtBeginDocument{\mathcode`\_=\string"8000 }% Makes underscore active only in math mode
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Defind counter
+% Bruges til forklaringer af ligninger og equpment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcounter{firstexplain}% Holder styr på om det er den første symbolforklaring
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Defind counter
+% Bruges til forklaringer af ligninger og equpment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Tilføjer kommando \startexplain, \stopexplain og \explain{variable}{test}{is unit}
@@ -317,7 +327,7 @@ hi-fi-forstærker%
 %}%
 
 
-\newcounter{firstexplain}% Holder styr på om det er den første symbolforklaring
+
 
 \def\startexplain{\setcounter{firstexplain}{1}{\noindent}{\par\noindent}\begin{tabular}{@{}p{.06\columnwidth}p{.04\columnwidth}@{}p{.72\columnwidth}@{\hskip.04\columnwidth}p{.02\columnwidth}@{}}}%
 
@@ -335,8 +345,27 @@ hi-fi-forstærker%
 % Bruges til forklaringer af ligninger.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tilføjer kommando \starteq, \stopequp og \equp{variable}{test}{is unit}{}
+% Bruges til forklaringer af ligninger.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+\def\startequipment{\setcounter{firstexplain}{1}{\noindent}{\par\noindent}
+\begin{table}[h]
+\caption{Equipment list}
+\begin{tabular}{@{}p{.23\columnwidth}|p{.40\columnwidth}@{}|p{.20\columnwidth}@{}|p{.10\columnwidth}@{}}}%
+
+\def\stopequipment{\end{tabular}
+\end{table}\\[10pt]}%
+
+\newcommand{\equipment}[4]{\ifthenelse{\thefirstexplain=1}{
+Description & Model & Serial-no & AAU-no \\ \hline
+	#1 & #2 & #3 & #4 \\ \setcounter{firstexplain}{0}
+	}{%	
+	#1 & #2 & #3 & #4\\ %
+	}%
+}%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
