@@ -51,7 +51,7 @@ The psychometric function can be expressed as follows:
 \startexplain
     \explain{$\psi$}{is the psychometric function}{}
     \explain{$x$}{corresponds to the stimulus intensity and is denoted on the x-axis of plots of the psychometric function.}{}
-	\explain{$\alpha$}{is parameter of the sigmoid function $F$, that corresponds to a displacement of the graph along the x-axis}{}
+	\explain{$\alpha$}{is parameter of the sigmoid function $F(x;\alpha,\beta)$, that corresponds to a displacement of the graph along the x-axis. It determines the position of the threshold of the psychometric function, which is defined as the $x$ value, at which $F(x;\alpha,\beta)$ has a value $0.5$ .}{}
 	\explain{$\beta$}{is a parameter of the sigmoid function $F$, that corresponds to the slope of the graph}{}
 	\explain{$\gamma$}{is a parameter, corresponds to the lower bound of the curve and therefore the probability of a correct answer at an infinitely low stimulus level. For multiple choice experiments, this parameter is the probability of a correct answer by guessing and is therefore sometimes referred to as the \textit{guessing rate}}{}
 	\explain{$\lambda$}{is a parameter, that corresponds to the upper bound of the curve. It corresponds to a rate, at which subjects respond incorrectly regardless of stimulus intensity. It is often referred to as \textit{lapse}.}{}
@@ -60,17 +60,50 @@ The psychometric function can be expressed as follows:
 When deriving the psychometric functions from the responses given by subjects during the \gls{hint} part of the \gls{bier}, the stimulus variable $x$ corresponds to the \gls{snr}, at which the sentences have been presented during the test.
 The absolute difference in average \gls{srtn} has been discussed previously (see \autoref{sec:result_srt}). Hence, the parameter of interest when estimating psychometric functions is their slope, not their threshold.
 This allows for a normation to be applied on the data before estimating psychometric functions.
+For the set of responses collected from a given subject with a given transducer, the average \gls{srtn} for that particular person with that transducer is subtracted from the \gls{snr}s, that have been tested.
+The result of this normation is set responses centered around a level of \SI{0}{\decibel} normed \gls{snr}.
+Due to the \gls{hint} being an adaptive procedure and the normation, the normed \gls{snr}s, at which data is available, are not consistent.
+In order to determine the proportion of correct responses for the available range normed \gls{snr}, bins are introduced.
+The bin size is \SI{1}{\decibel} and the bins are centered around integer normed \gls{snr} values. 
+The average performance of all subjects with a given transducer is then calculated by dividing the number of correct responses by the total number of stimuli presented in that bin.\\
+With this preprocessing applied to the data, input data for the estimation of the psychometric function is available in the form of the performance, the number of trials and the normed \gls{snr} for every bin.
+Some of the parameters of the psychometric functions can be fixed by making assumptions. It is assumed, that there exists a \gls{snr}, at which it is impossible for subjects to repeat the presented sentence correctly. Hence the guessing rate $\gamma$ is fixed at a value of 0.
+The \gls{srtn} is defined as \gls{snr}, at which subjects have a \SI{50}{\percent} chance of correctly repeating a presented sentence. Because the input data for the estimation of the psychometric function has been normed with the \gls{srtn}, it is assumed, that the threshold if the psychometric function is at a normed \gls{snr} of \SI{0}{\decibel}. This value is also fixed. 
+With the formerly described input data and assumptions, psychometric functions for sentence presentation with \gls{ace} and \gls{bct} were derived by means of the \matlab toolbox \texttt{psignifit 4}. The methods, that the toolbox is based on, are described in \citep{schuett_16}. A cumulative Gaussian function has been used as the sigmoid $F$.
+The results are presented in \autoref{fig:srtn_psych}.
 
 
-%An overview on the background of the psychometric function is given in \citep{wichmann_01}.
 
 %The fit has been performed with the \matlab toolbox \texttt{psignifit 4}. The methods, that the toolbox is based on, is described in \citep{schuett_16}.
 \begin{figure}[H] 
 \centering
 \include{chapters/tests/psych_03}
-\caption{Psychometric functions for \gls{ace} and \gls{bct}.}
+\caption{Psychometric functions for sentence intelligibility with presentation via \gls{ace} and \gls{bct}. The size of the points corresponds to the number of observations per bin.}
 \label{fig:srtn_psych}
 \end{figure}
 
 
+%To quantify the slope of a psychometric function, a width can be defined as the difference between the stimulus levels (in this case \gls{snr}s), at which the function reaches values of $0.05$ and $0.95$. The width of the \gls{ac} psychometric function is \SI{10.4}{\decibel}, the width of the \gls{bc} psychometric function is \SI{18.7}{\decibel}.
+
+%The lapse $\lambda$ has been free during the fit of the psychometric function. The resulting values are $\lambda = 0$ for \gls{ac} and $\lambda = 0.009$.
+
+Parameters derived from the psychometric functions are listed in \autoref{tab:psych}. The width is defined  as the difference between stimulus levels, at which the function reaches given values. 
+It can be seen, that for \gls{bc} is shallower than for \gls{ac}.
+The size of the dots in \autoref{fig:srtn_psych} corresponds to the number of observations that has resulted in the value that they display. The biggest dots appear close to the threshold at the normed \gls{snr} \SI{0}{\decibel}.
+The dots, that correspond to the \gls{ac} psychometric function are tendentially closer to their respective graph, than the dots, that correspond to the \gls{bc} psychometric function.
+This is reflected in the confidence interval of the values for the $00.5$ to $0.95$ width in \autoref{tab:psych}. The interval corresponding to \gls{bc} is larger than the one corresponding to \gls{ac}. 
+
+
+
+\begin{table}[H]
+\caption{Properties of the psychometric functions.}
+\label{tab:psych}
+\centering
+\begin{tabular}{l|rrrrlr}
+\multirow{2}{*}{Parameter} & \multicolumn{2}{l}{Width [\si{\decibel}] (CI\textsubscript{\SI{95}{\percent}})} & \multicolumn{1}{l}{Width [\si{\decibel}]} & \multicolumn{1}{l}{Slope}   & \multicolumn{2}{l}{\multirow{2}{*}{Lapse (CI\textsubscript{\SI{95}{\percent}})}} \\
+                           & \multicolumn{2}{c}{0.05 - 0.95}                                                 & \multicolumn{1}{c}{0.1 - 0.9}             & \multicolumn{1}{c}{SNR = 0} & \multicolumn{2}{l}{}                                                             \\ \hline
+\gls{ac}         & 10.4                               & (8.2 - 13.6)                                & 8.1                                       & 0.1257                      & \multicolumn{1}{r}{0}                       & (0.0000 - 0.0747)                  \\
+\gls{bc}         & 18.7                               & (13.0 - 27.7)                               & 14.8                                      & 0.0697                      & \multicolumn{1}{r}{0.009}                   & (0.0019 - 0.1238)                 
+\end{tabular}
+\end{table}
 
