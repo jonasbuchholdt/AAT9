@@ -49,23 +49,26 @@ The psychometric function can be expressed as follows:
 \psi(x;\alpha,\beta,\gamma,\lambda) = \gamma + (1-\gamma-\lambda) F(x;\alpha,\beta)
 \end{equation}
 \startexplain
-    \explain{$\psi$ is the psychometric function}{}
-    \explain{$x$ corresponds to the stimulus intensity and is denoted on the x-axis of plots of the psychometric function.}{}
-	\explain{$\alpha$ is parameter of the sigmoid function $F$, that corresponds to a displacement of the graph along the x-axis}{}
-	\explain{$\beta$ is a parameter of the sigmoid function $F$, that corresponds to the slope of the graph}{}
-	\explain{$\gamma$ is a parameter, corresponds to the lower bound of the curve and therefore the probability of a correct answer at an infinitely low stimulus level. For multiple choice experiments, this parameter is the probability of a correct answer by guessing and is therefore sometimes referred to as the \textit{guessing rate}}{}
-	\explain{$\lambda$ is a parameter, that corresponds to the upper bound of the curve. It corresponds to a rate, at which subjects respond incorrectly regardless of stimulus intensity. It is often referred to as \textit{lapse}.}{}
-	\explain{Fis a sigmoid function. Common choices include the cumulative Gaussian function, the cumulative Gumbel distribution and the Weibull function.}{}
+    \explain{$\psi$}{is the psychometric function}{}
+    \explain{$x$}{corresponds to the stimulus intensity and is denoted on the x-axis of plots of the psychometric function.}{}
+	\explain{$\alpha$}{is parameter of the sigmoid function $F$, that corresponds to a displacement of the graph along the x-axis}{}
+	\explain{$\beta$}{is a parameter of the sigmoid function $F$, that corresponds to the slope of the graph}{}
+	\explain{$\gamma$}{is a parameter, corresponds to the lower bound of the curve and therefore the probability of a correct answer at an infinitely low stimulus level. For multiple choice experiments, this parameter is the probability of a correct answer by guessing and is therefore sometimes referred to as the \textit{guessing rate}}{}
+	\explain{$\lambda$}{is a parameter, that corresponds to the upper bound of the curve. It corresponds to a rate, at which subjects respond incorrectly regardless of stimulus intensity. It is often referred to as \textit{lapse}.}{}
+	\explain{$F$}{is a sigmoid function. Common choices include the cumulative Gaussian function, the cumulative Gumbel distribution and the Weibull function.}{}
 \stopexplain
+When deriving the psychometric functions from the responses given by subjects during the \gls{hint} part of the \gls{bier}, the stimulus variable $x$ corresponds to the \gls{snr}, at which the sentences have been presented during the test.
+The absolute difference in average \gls{srtn} has been discussed previously (see \autoref{sec:result_srt}). Hence, the parameter of interest when estimating psychometric functions is their slope, not their threshold.
+This allows for a normation to be applied on the data before estimating psychometric functions.
 
 
-An overview on the background of the psychometric function is given in \citep{wichmann_01}.
+%An overview on the background of the psychometric function is given in \citep{wichmann_01}.
 
-The fit has been performed with the \matlab toolbox \texttt{psignifit 4}. The methods, that the toolbox is based on, is described in \citep{schuett_16}.
+%The fit has been performed with the \matlab toolbox \texttt{psignifit 4}. The methods, that the toolbox is based on, is described in \citep{schuett_16}.
 \begin{figure}[H] 
 \centering
 \include{chapters/tests/psych_03}
-\caption{Probability of correct recognition over \gls{snr}, Subject Group A, the x-calibration is questionable}
+\caption{Psychometric functions for \gls{ace} and \gls{bct}.}
 \label{fig:srtn_psych}
 \end{figure}
 
