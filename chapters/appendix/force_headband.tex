@@ -17,7 +17,7 @@ Strain gauge     & -                             & -   & - \\
 Weight     & KERN EMB 500-I GN                             & -   & - \\
 Bold and washers    & -                            & -   & - \\
 Head and torso simulator     & B\&K Type 4128                              & 08453-00   & 1407972 \\
-Analysis software   & MATLAB \textsuperscript{\textregistered} R2018b & -          & -     
+Analysis software   & \matlab R2018b & -          & -     
 \end{tabular}
 \end{table}
 
@@ -35,7 +35,7 @@ To perform the force measurement, an evaluation code example for the Analog devi
 
 \begin{enumerate}
 \item The materials are set up as in \autoref{fig:appendix:force_meas_system}.
-\item A serial read is set up in MATLAB, see \autoref{code:serial_read_ard_init}
+\item A serial read is set up in \matlab, see \autoref{code:serial_read_ard_init}
 \item The strain gauge was placed in water level \autoref{fig:strain_gauge_water}, since the sensor needs to be perpendicular to the force.
 \item  Five weight combinations of bolt and washers were chosen.
 \item  For every chosen combination, the weight of the bolt and washers was measured with a scale.
@@ -60,11 +60,11 @@ To perform the force measurement, an evaluation code example for the Analog devi
 \end{figure}
 
 
-The following \autoref{code:serial_read_ard_init} is used for setting up the serial read in MATLAB.
+The following \autoref{code:serial_read_ard_init} is used for setting up the serial read in \matlab.
 
 \includeCode{serial_read_ard.m}{matlab}{11}{13}{Serial read setup}{code:serial_read_ard_init}{./code/weight_measurement/}
 
-The following \autoref{code:serial_read_ard} is used for serial read in MATLAB.
+The following \autoref{code:serial_read_ard} is used for serial read in \matlab.
 
 \includeCode{serial_read_ard.m}{matlab}{19}{27}{Serial read setup}{code:serial_read_ard}{./code/weight_measurement/}
 
@@ -84,7 +84,7 @@ Weight \si{\gram} & Arduino read out \\ \hline
 \end{tabular}
 \end{table}
 
-The calibration points in \autoref{apend:cal_result} are used in the MATLAB function \texttt{polyfit} with linear least square fitting. The output is two coefficients which can be used in the MATLAB function \texttt{polyval} along with the read out for the weight measurement. 
+The calibration points in \autoref{apend:cal_result} are used in the \matlab function \texttt{polyfit} with linear least square fitting. The output is two coefficients which can be used in the \matlab function \texttt{polyval} along with the read out for the weight measurement. 
 
 
 \section*{Test procedure}
@@ -119,7 +119,7 @@ The calibration points in \autoref{apend:cal_result} are used in the MATLAB func
 \end{figure}
 
 
-The following \autoref{code:serial_read_ard_cal} is used for reading the read out and calculate the force in MATLAB.
+The following \autoref{code:serial_read_ard_cal} is used for reading the read out and calculate the force in \matlab.
 
 \includeCode{serial_read_ard.m}{matlab}{98}{107}{Force measurement}{code:serial_read_ard_cal}{./code/weight_measurement/}
 
