@@ -1,4 +1,4 @@
-\section{\gls{bier}: \gls{srtn} Analysis}
+\section{\gls{bier}: \gls{srtn} Analysis}\label{sec:result_srt}
 
 
 During the \gls{bier} test, a for each of the of the ten subjects four \gls{srtn}s have been measured, evenly split between \gls{ac} and \gls{bc}.
@@ -19,7 +19,7 @@ Avg. \gls{srtn}\textsubscript{,\gls{bc}} & 0.7 & 1.6  & 1.1  & -7.2 & -1.3 & -0.
 \end{table}
 
 The null hypothesis of the test is, that the difference between the observation pairs is normally distributed and zero mean. If the former hypothesis can be rejected, it can be concluded, that there is a statistically significant difference between the mean \gls{srtn} of the two conductors.
-The MATLAB\textsuperscript{\textregistered} function \texttt{ttest} has been applied to the available data from \autoref{tab:srtn}. The null hypothesis can be rejected with a $p$-value of 0.0644. This does reach the commonly apllied significance level of $\alpha=$\SI{5}{\percent}.\\
+The \matlab function \texttt{ttest} has been applied to the available data from \autoref{tab:srtn}. The null hypothesis can be rejected with a $p$-value of 0.0644. This does reach the commonly apllied significance level of $\alpha=$\SI{5}{\percent}.\\
 A normal probability plot of the \gls{srtn} is depicted in \autoref{fig:srtn_normal}. The lines in plot correspond to the normal distribution, that has been derived from estimating mean and variance from the available observations. 
 The points depict those observations. Points being close to their corresponding lines indicate, that a normal distribution is likely to underlay the observations. The datapoints in \autoref{fig:srtn_normal} can be considered reasonably close to the corresponding normal distributions, however the number of points is small.\\
 \begin{figure}[H]
@@ -33,14 +33,35 @@ This can be checked by means of a Lilliefors test.
 The Lilliefors test checks the null hypothesis, that the input data is coming from a normally distributed population. 
 In the given context, the intrasubject difference between the the \gls{ac} \gls{srtn} and the \gls{bc} \gls{srtn} (see  is tested.
 The population mean and variance are estimated based on the input data. The null hypothesis is rejected or confirmed, based on the discrepancy between the Gaussian \gls{cdf}, that is derived from the estimated mean and variance and the empirical distribution.
-This procedure is conveniently implemented in the MATLAB\textsuperscript{\textregistered} function \texttt{lillietest}.
+This procedure is conveniently implemented in the \matlab function \texttt{lillietest}.
 The null hypothesis, that the intrasubject \gls{srtn} difference is normally distributed, is not rejected at a \SI{5}{\percent} significance level based on the data at hand.\\
 
-\section{Psychometric functions derived from \gls{bier}}
+\section{Psychometric functions derived from \gls{bier}}\label{sec:result_psycho}
+
+In the previous \autoref{sec:result_srt}, the \gls{srtn} have been investigated, to assess, whether there is a statistically signifant difference in \gls{srt} between \gls{ace} and \gls{bct}.
+The following section augments the previous statistical investigations by estimating psychometric functions for sentence recognition with \gls{ace} and {bct}.
+Unlike for the previous investigations, there are responses from ten subjects to two lists with 20 sentences each per transducer. This results in a dataset of 400 responses for each of the two psychometric functions.\\
+
+In general, psychometric functions can used to assess data collected from psychophysical experiments, that involve a detection or discrimination task (answers can be categorised in yes/no or right/wrong).
+The psychometric function is a scaled \gls{cdf}, that maps the probability of a correct response over some physical property of the presented stimulus.\citep{wichmann_01}\\
+The psychometric function can be expressed as follows:
+\begin{equation}\label{eq:psycho}
+\psi(x;\alpha,\beta,\gamma,\lambda) = \gamma + (1-\gamma-\lambda) F(x;\alpha,\beta)
+\end{equation}
+\startexplain
+    \explain{$\psi$ is the psychometric function}{}
+    \explain{$x$ corresponds to the stimulus intensity and is denoted on the x-axis of plots of the psychometric function.}{}
+	\explain{$\alpha$ is parameter of the sigmoid function $F$, that corresponds to a displacement of the graph along the x-axis}{}
+	\explain{$\beta$ is a parameter of the sigmoid function $F$, that corresponds to the slope of the graph}{}
+	\explain{$\gamma$ is a parameter, corresponds to the lower bound of the curve and therefore the probability of a correct answer at an infinitely low stimulus level. For multiple choice experiments, this parameter is the probability of a correct answer by guessing and is therefore sometimes referred to as the \textit{guessing rate}}{}
+	\explain{$\lambda$ is a parameter, that corresponds to the upper bound of the curve. It corresponds to a rate, at which subjects respond incorrectly regardless of stimulus intensity. It is often referred to as \textit{lapse}.}{}
+	\explain{Fis a sigmoid function. Common choices include the cumulative Gaussian function, the cumulative Gumbel distribution and the Weibull function.}{}
+\stopexplain
+
 
 An overview on the background of the psychometric function is given in \citep{wichmann_01}.
 
-The fit has been performed with the MATLAB\textsuperscript{\textregistered} toolbox \texttt{psignifit 4}. The methods, that the toolbox is based on, is described in \citep{schuett_16}.
+The fit has been performed with the \matlab toolbox \texttt{psignifit 4}. The methods, that the toolbox is based on, is described in \citep{schuett_16}.
 \begin{figure}[H] 
 \centering
 \include{chapters/tests/psych_03}

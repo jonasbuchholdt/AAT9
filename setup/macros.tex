@@ -295,29 +295,43 @@ hi-fi-forstærker%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Tilføjer kommando \startexplain, \stopexplain og \explain{}{}
+% Tilføjer kommando \startexplain, \stopexplain og \explain{variable}{test}{is unit}
 % Bruges til forklaringer af ligninger.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcounter{firstexplain}% Holder styr på om det er den første symbolforklaring
+%
+%\def\startexplain{%
+%	\setcounter{firstexplain}{1}%
+%	{\noindent}%
+%	{\par\noindent}
+%	\begin{tabular}{@{}p{.06\columnwidth}p{.76\columnwidth}@{\hskip.04\columnwidth}p{.02\columnwidth}@{}}}%
+%\def\stopexplain{\end{tabular}\\[10pt]}%
+%
+%\newcommand{\explain}[2]{%
+%	\ifthenelse{\thefirstexplain=1}{%
+%	Where:\\
+%	&#1&[\ifthenelse{\equal{#2}{}}{\noSIunit}{#2}]\\\setcounter{firstexplain}{0}
+%	}{%
+%	&#1&[\ifthenelse{\equal{#2}{}}{\noSIunit}{#2}]\\%
+%	}%
+%}%
+
+
 \newcounter{firstexplain}% Holder styr på om det er den første symbolforklaring
 
-\def\startexplain{%
-	\setcounter{firstexplain}{1}%
-	{\noindent}%
-	{\par\noindent}
-	\begin{tabular}{@{}p{.06\columnwidth}p{.76\columnwidth}@{\hskip.04\columnwidth}p{.02\columnwidth}@{}}}%
+\def\startexplain{\setcounter{firstexplain}{1}{\noindent}{\par\noindent}\begin{tabular}{@{}p{.06\columnwidth}p{.04\columnwidth}@{}p{.72\columnwidth}@{\hskip.04\columnwidth}p{.02\columnwidth}@{}}}%
+
 \def\stopexplain{\end{tabular}\\[10pt]}%
 
-\newcommand{\explain}[2]{%
-	\ifthenelse{\thefirstexplain=1}{%
-	Where:\\
-	&#1&[\ifthenelse{\equal{#2}{}}{\noSIunit}{#2}]\\\setcounter{firstexplain}{0}
-	}{%
-	&#1&[\ifthenelse{\equal{#2}{}}{\noSIunit}{#2}]\\%
+\newcommand{\explain}[3]{\ifthenelse{\thefirstexplain=1}{Where:\\
+	&#1&#2&[\ifthenelse{\equal{#3}{}}{\noSIunit}{#3}]\\\setcounter{firstexplain}{0}
+	}{%	
+	&#1&#2&[\ifthenelse{\equal{#3}{}}{\noSIunit}{#3}]\\%
 	}%
 }%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Tilføjer kommando \startexplain, \stopexplain og \explain{}{}
+% Tilføjer kommando \startexplain, \stopexplain og \explain{}{}{}
 % Bruges til forklaringer af ligninger.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
