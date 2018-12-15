@@ -1,118 +1,46 @@
 \section{\gls{bc} level matching distribution}
-In this section, the distribution for the \gls{bc} level versus \gls{ac} level will be analysed. The analysis is done to verify the distribution of both the initial test, the familiarization test and the matching test part of the \gls{bier} test. Because of the limited number of test subjects, there will be done a fourth analysis where all matching data is merged to one data called Total data. This include also the familiarization and \gls{bier} result although the data is from the same test subjects. The reasons to bring both familiarization and \gls{bier} intro the Total data is because they mostly had small difference matching opinion in the \gls{bier} compare to the familiarization.
-
-
-This analysis will estimate the data distribution based on the subject data. It is assumed that the the distribution is a Gaussian distribution and therefore the data will be compared to the \gls{pdf} and the \gls{cdf} of a Gaussian distribution. The comparing will be done by calculating the \gls{mse} between the subject result and the \gls{pdf} and as a visualize look at the \gls{cdf} plot. The \gls{mse} will be calculated with the MATLAB function \texttt{immse}. In the end the 25 \textsuperscript{th} and 75\textsuperscript{th} percentile will be present. If the Gaussian hypnotises can be concluded to be correct, it can then be assumed that a greater field test will approximate result in the same distribution.
-
-To calculate the \gls{pdf} and \gls{cdf} based on the subject data, the input for the function have to be defined based on the subject data. The input samples for calculating the  \gls{pdf} will be the average matching level for every subjects average matching level, and the variance will be calculated based on the average matching level for every subject. The following \autoref{sec:pdf_of_bc} shows the calculated average and variance. 
+This section analysis the data for the match test in the \gls{bier}. The analysis is comparing the distribution of the data with the pilot test in \autoref{sec:pilot_test} and with the founding in \citep{STENFELT201385}. The result for the match test is shown in \autoref{sec:match_bier} and the corresponding appendix for the test id founded in \autoref{apend:matching_in_bier}
 
 \begin{table}[H]
 \centering
-\caption{The average and variance.}
-\begin{tabular}{l|ll}
-Matching test                 & $\mu$ & $\sigma^2$ \\ \hline
-Initial                       & 50    & 5.34       \\
-Familiarization of \gls{bier} & 49.48 & 4.604      \\
-\gls{bier}                    & 47.99 & 9.44      \\
-Total                    & 49.10 & 6.82      
+\caption{Test result for the match teat ti the \gls{bier}. * Based on operator experience, the \dB{40} is discarded for the mean calculation, see \autoref{sec:disc_res}}
+\begin{tabular}{llllllllll}
+\multicolumn{1}{l|}{Matching }   & 1\textsuperscript{st}  & 2\textsuperscript{nd}  & 3\textsuperscript{rd}  & 4\textsuperscript{th} & 5\textsuperscript{th}  & \multicolumn{1}{l|}{6\textsuperscript{th} }                &    & &  \\
+\multicolumn{1}{l|}{in \gls{bier} [\si{\decibel}] }   & 1trial & trial &  trial &  trial &  trial & \multicolumn{1}{l|}{trial}                & $\mu$ & $\left \lfloor  \mu \right \rceil$  & $\sigma$ \\ \hline
+\multicolumn{1}{l|}{Subject 1}  & 50    & 52    & 50    & 52    & ND    & \multicolumn{1}{l|}{ND} & 51 & 51 & 1.15  \\
+\multicolumn{1}{l|}{Subject 2}  & 51    & 51    & ND    & ND    & ND    & \multicolumn{1}{l|}{ND} & 51 &  51& 0     \\
+\multicolumn{1}{l|}{Subject 3}  & 45    & 50    & 47    & 47    & 49    & \multicolumn{1}{l|}{50} & 48  & 48 & 2    \\
+\multicolumn{1}{l|}{Subject 4}  & 45    & 50    & 47    & 50    & ND    & \multicolumn{1}{l|}{ND} & 48  &48 & 2.45  \\
+\multicolumn{1}{l|}{Subject 5}  & 43    & 42    & 40    & 43    & ND    & \multicolumn{1}{l|}{ND} & 42  & 43* & 1.41  \\
+\multicolumn{1}{l|}{Subject 6}  & 52    & 53    & 51    & 52    & ND    & \multicolumn{1}{l|}{ND} & 52  & 52 & 0.82  \\
+\multicolumn{1}{l|}{Subject 7}  & 46    & 48    & 45    & 45    & ND    & \multicolumn{1}{l|}{ND} & 46  & 46 & 1.41  \\
+\multicolumn{1}{l|}{Subject 8}  & 50    & 50    & 48    & 47    & ND    & \multicolumn{1}{l|}{ND} & 48.8 & 49 & 1.5   \\
+\multicolumn{1}{l|}{Subject 9}  & 45    & FP    & 47    & 47    & ND    & \multicolumn{1}{l|}{ND} & 46.3 & 46 & 1.15  \\
+\multicolumn{1}{l|}{Subject 10} & 50    & 47    & 47    & 47    & 51    & \multicolumn{1}{l|}{48} & 48.3 & 48 & 1.75 
 \end{tabular}
-\label{sec:pdf_of_bc}
+\label{sec:match_bier} 
 \end{table}
 
- The Gaussian \gls{pdf} is calculated as following \autoref{eq:pdf_of_bc} where the \gls{cdf} plot is calculated by using the MATLAB function \texttt{normplot}
-
-\begin{equation}\label{eq:pdf_of_bc}
-f(x_{k}) = \frac{1}{\sqrt{2 \pi \sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
-\end{equation}
 
 
-The following six figurers display the data from the subject as a histogram to compare with the \gls{pdf} function and as dots to compare with \gls{cdf} function. The Gaussian \gls{pdf} and \gls{cdf} is calculated according to \autoref{eq:pdf_of_bc} with the use of the data in \autoref{sec:pdf_of_bc}.
+From the result in \autoref{sec:match_bier} the standard deviation between subject is calculated to be \SI{2.96}{\decibel} and the mean is \SI{48.1}{\decibel}. The mean and the actual \si{\decibel} for the subject data is not represent the \gls{spl} the subject is exposed to. It is only the \si{\decibel} number the Affinity shows in the display, as explained in \autoref{sec:loudness_match}. Therefore, the mean  \gls{bc} level for every subject correspond to the there perception of the non-weighted \SI{65}{\decibel} \gls{spl} for the \gls{ace}. The following \autoref{sec:matc_compare} compare standard deviation from the pilot test, \gls{bier} and \citep{STENFELT201385}.
+
+\begin{table}[H]
+\centering
+\caption{Standard deviation of the pilot test, \gls{bier} and from the  \citep{STENFELT201385} at \dB{65}}
+\begin{tabular}{l|l}
+Test       & $\sigma$    \\ \hline
+ \citep{STENFELT201385} low frequency        & \dB{7.5}  \\
+   \citep{STENFELT201385}  high frequency       & \dB{7.5}  \\
+Pilot test & \dB{2.3}  \\
+\gls{bier} & \dB{2.96}
+\end{tabular}
+\label{sec:matc_compare}
+\end{table}
+
+As it can be seen in \autoref{sec:matc_compare}, the standard deviation in the \gls{bier} is not fare from the pilot test, and  also under the findings in \citep{STENFELT201385}. 
 
 
-The following \autoref{fig:initial_pdf} and \autoref{fig:initial_normplot} shows the data for the initial test.
-
- \begin{figure}[H]
-	\centering
-	\include{chapters/tests/initial_pdf}
-		\caption{The plot shows the Gaussian \gls{pdf} as the blue line with the initial data in \autoref{sec:pdf_of_bc}. The histogram is based on the mean data in \autoref{apend:match_field_init}}
-		\label{fig:initial_pdf}
-\end{figure}
-
-\plot{chapters/tests/initial_normplot}{The plot shows the Gaussian \gls{cdf} as the blue line with the initial data in \autoref{sec:pdf_of_bc}. The histogram is based on the mean data in \autoref{apend:match_field_init}}{fig:initial_normplot}
-
-It can be seen in \autoref{fig:initial_pdf} and \autoref{fig:initial_normplot} that the measured data, might be a Gaussian distribution. There is no outliers of the \gls{pdf} and the highest probability lays close to the highest probability of the Gaussian \gls{pdf}. It can also be seen that the subject data compare to the \gls{cdf} mostly follows the line. The calculated \gls{mse} between the data and the Gaussian \gls{pdf} is $11.835 \cdot 10^{-5}$
-
-The following \autoref{fig:fam_pdf} and autoref{fig:fam_normplot}  shows the data for the familiarization test.
-
- \begin{figure}[H]
-	\centering
-	\include{chapters/tests/fam_pdf}
-		\caption{The plot shows the Gaussian  \gls{pdf} as the blue line with the initial data in \autoref{sec:pdf_of_bc}. The histogram is based on the mean data in \autoref{apend:matching_in_bier}}
-		\label{fig:fam_pdf}
-\end{figure}
-
- \begin{figure}[H]
-	\centering
-	\include{chapters/tests/fam_normplot}
-		\caption{The plot shows the Gaussian  \gls{pdf} as the blue line with the initial data in \autoref{sec:pdf_of_bc}. The histogram is based on the mean data in \autoref{apend:matching_in_bier}}
-		\label{fig:fam_normplot}
-\end{figure}
-
-It can be seen in \autoref{fig:fam_pdf} and autoref{fig:fam_normplot}  that the measured data might be a Gaussian distribution. There is no outliers of the \gls{pdf} and two the highest probability lays close to the highest probability of the Gaussian \gls{pdf}, but there is also one histogram bar that have high probability but lays at the high end of the test subject mean. It can also be seen that the subject data compare to the \gls{cdf} mostly follows the line. The calculated \gls{mse} between the data and the Gaussian distribution function is $13.311 \cdot 10^{-5}$
-
-The following \autoref{fig:bier_pdf} and \autoref{fig:bier_normplot} shows the data for the \gls{bier} test.
- \begin{figure}[H]
-	\centering
-	\include{chapters/tests/bier_pdf}
-		\caption{The plot shows the Gaussian  \gls{pdf} as the blue line with the initial data in \autoref{sec:pdf_of_bc}. The histogram is based on the mean data in \autoref{apend:matching_in_bier}}
-		\label{fig:bier_pdf}
-\end{figure}
-
- \begin{figure}[H]
-	\centering
-	\include{chapters/tests/bier_normplot}
-		\caption{The plot shows the Gaussian  \gls{pdf} as the blue line with the initial data in \autoref{sec:pdf_of_bc}. The histogram is based on the mean data in \autoref{apend:matching_in_bier}}
-		\label{fig:bier_normplot}
-\end{figure}
-
-It can be seen in \autoref{fig:bier_pdf} and \autoref{fig:bier_normplot} that the measured data for the \gls{bier} test have the same tendency as in initial test \autoref{fig:fam_pdf} and the familiarization test \autoref{fig:initial_pdf}. The distribution might be a Gaussian distribution. There is no outliers and the highest probability lays close to the highest probability of the Gaussian distribution.  It can also be seen that the subject data compare to the \gls{cdf} mostly follows the line. The calculated \gls{mse} between the data and the Gaussian distribution function is $13.339 \cdot 10^{-5}$.
-
-
-
-To include more data in the comparison between test subject and the Gaussian \gls{pdf}, all present subject data is merged to one data file, where the mean and variance is calculated. The following figure \autoref{fig:total_pdf} and \autoref{fig:total_normplot} shows the merged subject data compared with the Gaussian \gls{pdf}.
-
-
- \begin{figure}[H]
-	\centering
-	\include{chapters/tests/total_pdf}
-		\caption{The plot shows the Gaussian  \gls{pdf} as the blue line with the initial data in \autoref{sec:pdf_of_bc}. The histogram is based on the mean data merge of \autoref{apend:matching_in_bier} and \autoref{apend:match_field_init}}
-		\label{fig:total_pdf}
-\end{figure}
-
- \begin{figure}[H]
-	\centering
-	\include{chapters/tests/total_normplot}
-		\caption{The plot shows the Gaussian  \gls{pdf} as the blue line with the initial data in \autoref{sec:pdf_of_bc}. The histogram is based on the mean data merge of \autoref{apend:matching_in_bier} and \autoref{apend:match_field_init}}
-		\label{fig:total_normplot}
-\end{figure}
-
-It can be seen in \autoref{fig:total_pdf} and \autoref{fig:total_normplot} that the measured data for the total data have the same tendency as all data separated. The calculated \gls{mse} between the data and the Gaussian distribution function in this case is $7.7464 \cdot 10^{-5}$ and it can also be seen that the subject data compare to the \gls{cdf} mostly follows the line. Compare to the data present in the three non merged data, the \gls{mse} converging to a higher Gaussian distribution fit so lower \gls{mse}. There is no outliers and the highest probability lays close to the highest probability of the Gaussian distribution. 
-
-To present the 25 \textsuperscript{th} and 75 \textsuperscript{th} percentile, the median of the total data and the \SI{99.3}{\percent} coverage a boxplot is calculated and visualized in \autoref{fig:total_box}.
-
- \begin{figure}[H]
-	\centering
-	\include{chapters/tests/box_total}
-		\caption{The plot shows a box and whisker plot of the data merge of \autoref{apend:matching_in_bier} and \autoref{apend:match_field_init}}
-		\label{fig:total_box}
-\end{figure}
-
-
-In \autoref{fig:total_box} it can be seen that there is only one outliers from the \SI{99.3}{\percent} coverage, the 25 \textsuperscript{th} percentile lies at \SI{48}{\decibel} and the 75 \textsuperscript{th} percentile lies at \SI{51}{\decibel}. From the data in the initial test and the familiarization the subject data do have a uniformly distribution within the subject mean range, but by analyse the total data and the boxplot, the Gaussian hypnotises can be assumed.
-
-
-\section{Conclusion}
-It can be concluded that the matching part for the \gls{bier} test might converge to a normal distribution by observing the \gls{mse} and locking at the boxplot. It can also be concluded that with the measured subject the mean level for the \gls{bc} is \SI{49.1}{\decibel} to match the air and the variance level is \SI{6.82}{\decibel}. The standard deviation of the subject data is \SI{2.61}{\decibel} and the \SI{50}{\percent} of the subject result lies within \SI{48}{\decibel} to \SI{51}{\decibel}.
 
 
 

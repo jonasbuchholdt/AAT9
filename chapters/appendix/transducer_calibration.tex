@@ -1,4 +1,5 @@
-\chapter{Test a guitars frequency area}
+\chapter{Calibration of \gls{ace} and \gls{acs}}
+\label{append:cal_of_transducer}
 In this appendix the calibration of the \gls{ace} and \gls{acs} is done. Furthermore the insertion loss of the \gls{ace} is calculated in \nicefrac{1}{3}-octave.
 
 \section*{Materials and setup}
@@ -45,21 +46,34 @@ The calibration materials and setup are as following:
 
 \begin{table}[H]
 \centering
-\caption{Insertion loss}
+\caption{Insertion loss for both left and right \gls{ace} in \si{\decibel}}
 \begin{tabular}{l|llllllll}
-Frequency        & \hz{20}     & \SI{25}{\hertz} & \SI{32}{\hertz} & \SI{40}{\hertz} & \SI{50}{\hertz} & \SI{63}{\hertz} & \SI{80}{\hertz} & \SI{100}{\hertz} \\ \hline
-Insertion loss L & 2.2 & 2.5    & 0.6    & 1.1    & 0.1    & 4.2     & 13.4   & 36.9    \\
-Insertion loss R & 4.6        & 3.8     & 1.6     & 1.9    & 0.3     & 5.6    & 16.9   & 29.1    \\
+Frequency        & \Hz{20}     & \SI{25}{\hertz} & \SI{32}{\hertz} & \SI{40}{\hertz} & \SI{50}{\hertz} & \SI{63}{\hertz} & \SI{80}{\hertz} & \SI{100}{\hertz} \\ \hline
+\dif L [\si{\decibel}]& 2.2 & 2.5    & 0.6    & 1.1    & 0.1    & 4.2     & 13.4   & 36.9    \\
+\dif R [\si{\decibel}]& 4.6        & 3.8     & 1.6     & 1.9    & 0.3     & 5.6    & 16.9   & 29.1    \\
 Frequency        & \SI{125}{\hertz}          & \SI{160}{\hertz}      & \SI{200}{\hertz}      & \SI{250}{\hertz}      & \SI{315}{\hertz}      & \SI{400}{\hertz}      & \SI{500}{\hertz}      & \SI{630}{\hertz}       \\
-Insertion loss L & 27.2       & 26.9    & 20.1   & 20.1   & 19.5   & 24.3    & 22.8   & 23.8    \\
-Insertion loss R & 29.7       & 24.2   & 23.4   & 19.2    & 18.4    & 25.2    & 31.0   & 30.7    \\
+\dif L [\si{\decibel}]& 27.2       & 26.9    & 20.1   & 20.1   & 19.5   & 24.3    & 22.8   & 23.8    \\
+\dif R [\si{\decibel}]& 29.7       & 24.2   & 23.4   & 19.2    & 18.4    & 25.2    & 31.0   & 30.7    \\
 Frequency        & \SI{800}{\hertz}          & \SI{1}{\kilo\hertz}        & \SI{1.25}{\kilo\hertz}     & \SI{1.6}{\kilo\hertz}      & \SI{2}{\kilo\hertz}        & \SI{2.5}{\kilo\hertz}      & \SI{3.15}{\kilo\hertz}     & \SI{4}{\kilo\hertz}         \\
-Insertion loss L & 30.4      & 29.6   & 34.5    & 41.1   & 36.4   & 40.0    & 40.4    & 38.8    \\
-Insertion loss R & 31.2       & 33.7   & 38.1  & 43.0   & 43.1    & 38.9    & 38.8   & 37.1     \\
-Frequency        & \SI{5}{\kilo\hertz}            & \SI{6.3}{\kilo\hertz}      & \SI{8}{\kilo\hertz}        & \SI{10}{\kilo\hertz}       & \SI{12.5}{\kilo\hertz}     & \SI{16}{\kilo\hertz}       &                 & Total            \\
-Insertion loss L & 36.5       & 37.5    & 29.3   & 28.5   & 34.0    & 6.1    &                 & 30.2    \\
-Insertion loss R & 37.1       & 39.2  & 39.0    & 34.5    & 23.4    & 5.3     &                 & 31.8   
+\dif L [\si{\decibel}]& 30.4      & 29.6   & 34.5    & 41.1   & 36.4   & 40.0    & 40.4    & 38.8    \\
+\dif R [\si{\decibel}]& 31.2       & 33.7   & 38.1  & 43.0   & 43.1    & 38.9    & 38.8   & 37.1     \\
+Frequency        & \SI{5}{\kilo\hertz}            & \SI{6.3}{\kilo\hertz}      & \SI{8}{\kilo\hertz}        & \SI{10}{\kilo\hertz}       & \SI{12.5}{\kilo\hertz}     & \SI{16}{\kilo\hertz}       &                 &           \\
+\dif L [\si{\decibel}]& 36.5       & 37.5    & 29.3   & 28.5   & 34.0    & 6.1    &                 &    \\
+\dif R [\si{\decibel}]& 37.1       & 39.2  & 39.0    & 34.5    & 23.4    & 5.3     &                 &   
 \end{tabular}
 \label{append:ins_loss}
 \end{table}
+
+\begin{table}[H]
+\centering
+\caption{The average \gls{spl} for the \gls{ace} and \gls{acs} between the two head and torso ear.}
+\begin{tabular}{l|l}
+Transducet        & \gls{spl}  \\ \hline
+\gls{ace} & \dB{65.10} \\
+\gls{acs} & \dB{63.87}
+\end{tabular}
+\label{append:trans_spl}
+\end{table}
+
+
 

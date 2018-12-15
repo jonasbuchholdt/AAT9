@@ -432,22 +432,35 @@ axis background/.style={fill=white},
 	\texttt{#1$_{2}$}
 }%
 
-\newcommand{\db}[1]{%
+\newcommand{\dB}[1]{%
 	\SI{#1}{\decibel}
 }%
 
-\newcommand{\hz}[1]{%
+
+\newcommand{\Hz}[1]{%
 	\SI{#1}{\hertz}
 }%
 
-\newcommand{\khz}[1]{%
+\newcommand{\kHz}[1]{%
 	\SI{#1}{\kilo\hertz}
+}%
+
+\newcommand{\dif}[0]{%
+	$\Delta$
 }%
 
 \newcommand{\greyrow}{%
 	\rowcolor{lightGrey}
 }%
 
+\newcommand{\calnumber}[1]{%
+\def\variable{5}
+\ifnum#1>1
+    TRUE
+  \else
+    FALSE
+\fi
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Tilføjer kommando \citeref
