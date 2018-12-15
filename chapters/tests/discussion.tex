@@ -1,2 +1,49 @@
-\section{Discussion}
-Hier könnte Ihre Werbung stehen.
+\section{Discussion: Results}\label{sec:disc_res}
+\citep{hint_2011} reports a normative \gls{srtn} of \SI{-2.5}{\decibel} and a normative standard deviation of \SI{0.87}{\decibel} for the Danish \gls{hint}. The results from the study at hand (see \autoref{sec:res_srt}) have an average \gls{srtn} of \SI{1.6}{\decibel} and a standard deviation of \SI{6.09}{\decibel} for the \gls{ace} and average \gls{srtn} of \SI{5.4}{\decibel} and a standard deviation of \SI{9.15}{\decibel} for the \gls{bct}.
+These values differ from those reported by \citep{hint_2011}, which is likely to be due to the deviations in the presentation of noise and speech, that the \gls{bier} has compared to the Danish \gls{hint} (see test procedure part ??).
+The most notably, the noise, that is played back during \gls{hint}, is shaped by the insertion loss of the \gls{ace} (see \autoref{append:cal_of_transducer}). This leads to different masking characteristics of the noise. 
+\autoref{tab:combined_data} has been compiled to ease up reading the following section, which will further elaborate on the results of the \gls{bier}.
+When looking at the \gls{srtn} of the ten subjects, there appears to be a relatively consistent set of results for subjects 1 to 6, with the \gls{srtn} values for either \gls{ac} or \gls{bc} ranging from \SIrange{-7.2}{2.8}{\decibel}. 
+Opposed to that, subjects seven to ten seem to struggle with either \gls{bc} (subjects 8 and 10), or both \gls{ac} and \gls{bc} (subjects 7 and 9), which expresses itself in double digit \gls{srtn} values for at least one of the two transducers. 
+Interestingly, the \gls{srtn}\textsubscript{,BC} is more than \SI{10}{\decibel} higher compared to \gls{srtn}\textsubscript{,AC} for subjects 7, 8 and 10. Opposed to that, for subject 9, the \gls{srtn}\textsubscript{,BC} is \SI{1.3}{\decibel} higher than the corresponding \gls{srtn}\textsubscript{,AC}.
+With the size of the available dataset, only speculations can be made on the reasons for this demeanour.\\
+When taking into account the \gls{bct} playback level, that has been determined during the level matching part of \gls{bier}, subject 10 stands out for having the lowest playback gain of \SI{43}{\decibel} while also exhibiting the largest difference between \gls{srtn}\textsubscript{,AC} and \gls{srtn}\textsubscript{,BC}. 
+The subject has the second highest \gls{srtn}\textsubscript{,BC}, while having a close to average \gls{srtn}\textsubscript{,AC}.
+It could therefore be possible, that subject 10 \enquote{undermatched} the playback gain of the \gls{bct} for some unknown reason, which would at least partly explain the high \gls{srtn}\textsubscript{,BC}.\\
+Explaining subjects exhibiting both comparatively large \gls{srtn}\textsubscript{,AC} and \gls{srtn}\textsubscript{,BC} can be approached by considering the way, that signals are presented.
+The playback of sentences through the \gls{ace} and the \gls{bct} is linked through the loudness matching procedure. The playback level through the \gls{ace} has been set a priori with a calibration procedure with a mannequin (see ??). The \gls{ace} has a double function as the playback device for \gls{ac} sentences and also as an earplug, that occludes the earcanal and attenuates sound, that is played back by the \gls{acs}.
+An insufficient seal between the \gls{ace} and the ear of the subject results not only in a worsening of the playback through the \gls{ace}, but also in less insertion loss of the earplug. Thus, a higher level of noise would impinge on the subject, lowering the actual \gls{snr} at the input of the auditory system.
+This scenario might have applied to subject 9, which exhibits comparatively large \gls{srtn}\textsubscript{,AC} and \gls{srtn}\textsubscript{,BC}. 
+The matched \gls{bct} playback level of \SI{51}{\decibel} is wthin the upper part of the range of measurements, which contradicts the hypothesis, that the playback through the \gls{ace} is severly impaired by a bad fit, but there could still be a reduced attenuation by the earplugs leading to an increase in \gls{srtn} with both transducers.\\
+Subjects 7 and 8, while having absolute \gls{srtn}, that differ by approx. \SI{10}{\decibel}, have a similarly large difference between \gls{srtn}\textsubscript{,AC} and \gls{srtn}\textsubscript{,BC}, with \gls{srtn}\textsubscript{,BC} being higher.
+If this can be accounted to some abnormality during the execution of \gls{bier} or is within distribution of measured is hard to determine.\\
+It is remarkable, that both the lowest (\SI{-7.2}{\decibel}) and the highest \gls{srtn} (\SI{21.5}{\decibel}) have been measured with the \gls{bct}.
+This inevitably begs the question, as to how much of a statistical significance can be attributed to the results, that have been presented.\\
+
+\begin{table}[H]
+\centering
+\caption{Overview: Matching level and average \gls{srtn} of the subjects for \gls{ac} and \gls{bc} obtained with \gls{bier}, \gls{srtn} values are rounded to one digit after the decimal point for representation in the table, not for the underlying calculations, all values in \si{\decibel}. This table consists of the results presented in \autoref{tab: srtn} and ??}
+\label{tab:combined_data}
+\begin{tabular}{l|rrrrrrrrrr}
+Subject     & 1   & 2    & 3    & 4    & 5    & 6    & 7     & 8     & 9    & 10   \\ \hline
+Matching level & 52 & 48  & 48 & 48 & 46 & 49 & 51  & 46   & 51 & 43  \\
+Avg. \gls{srtn}\textsubscript{,\gls{ac}} & 2.8 & 1.0  & -2.3 & -3.8 & -7.1 & -2.2 & 11.5  & 0.4   & 11.0 & 4.8  \\
+Avg. \gls{srtn}\textsubscript{,\gls{bc}} & 0.7 & 1.6  & 1.1  & -7.2 & -1.3 & -0.6 & 21.5  & 11.4  & 9.7  & 17.5 \\
+\gls{srtn}\textsubscript{,AC}-\gls{srtn}\textsubscript{,BC}  & 2.0 & -0.6 & -3.4 & -3.3 & -5.8 & -1.6 & -10.0 & -11.0 & 1.3  & -12.8
+\end{tabular}
+\end{table}
+
+The paired t-test, that is described in \autoref{sec:result_srt} returns a $p$-value of 0.0644. This $p$-value quantifies the probability, that the measured \gls{srtn} have been observed, with the null hypothesis of the being true. The null hypothesis in this case is, that the mean difference between \gls{srtn}\textsubscript{,AC} and \gls{srtn}\textsubscript{,BC} has a value of zero. 
+While this $p$-value is not considered statistically significant when comparing it to common significance level of $\alpha=$\SI{5}{\percent}, it can still be considered a strong hint towards a higher \gls{srtn}  being associated to the \gls{bct} when compared to the \gls{ace} under the conditions in the \gls{bier}.
+Regardless of the statistical significance, the relative \gls{srtn} comparison between \gls{ace} and \gls{bct} hinges on the loudness matching routine, that ultimately determines, what \gls{snr} is assumed to be present during the playback of sentences.
+Some more thoughts on this aspect are elaborated in Discussion Sec Discussion Methods ??.\\
+Through the normation, that is taking place as a prestep to the psychometric function in \autoref{sec:res_psycho}, the influence of the loudness matching is eliminated.
+The width of psychometric functions and correspondingly the slope can be seen as an expression of the reliability of sensory performance \citep{strasburger_01}, with a steeper slope indicating a more reliable estimation and therefore being preferable.
+The 0.05 - 0.95 width of the psychometric function derived from stimulus presentation via the \gls{ace} is estimated as \SI{10.4}{\decibel}, with a \SI{95}{\percent} confidence interval ranging from \SIrange{8.2}{13.6}{\decibel}. For the \gls{bct}, the width is estimated as \SI{18.7}{\decibel}, with a confidence interval ranging from \SIrange{13.0}{27.7}{\decibel}, coinciding with the tendency of the \gls{srtn}\textsubscript{,BC} values being spread across a wider range. The confidence intervals overlap, but not by a huge proportion. 
+The width of the \gls{ace} psychometric function can be compared to that of the psychometric function for sentences in CLUE, another \gls{hint}-derived test, from \citep{nielsen_dau_09}. The graph from the latter paper shows an approximated width of \SI{7}{\decibel}. This is narrower, than for \gls{bier} with \gls{ace}, again coinciding with the general tendencies derived from the analysis of \gls{srtn} data.
+Like the formerly discussed \gls{srtn}, the psychometric functions hint towards the \gls{bct} performing inferiorly compared to the \gls{ace} in the given test setup.
+It is however likely, that in practical applications, the margin, by which the \gls{ace} outperforms the \gls{bct}, will not prevent \gls{bc} from being a viable option in particular scenarios.
+Based on such scenarios, the scope of further research may be derived. 
+ 
+
+
