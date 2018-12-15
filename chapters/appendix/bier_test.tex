@@ -1,77 +1,69 @@
-\chapter{Test a guitars frequency area}
-This appendix list all needed equipments for the \gls{bier} 
+\chapter{The \gls{bier} test setup}
+This appendix list all needed equipments for the \gls{bier} and the setup for the match test and \gls{hint}.
 
 \section*{Materials and setup}
-the \gls{bier} materials are as following:
+The \gls{bier} materials and setup are as following:
 
 
 \startequipment
 \equipment{PC}{Macbook}{W89242W966H}{-}
 \equipment{PC}{Dell Latitude E5430}{-}{78316}
-\equipment{Headphones }{ETYM$\bar{O}$TIC RESEARCH ER4S}{-}{02049}
+\equipment{PC}{HP Pavilion Elite HPE}{}{86615}
+\equipment{PC}{TOSHIBA Satellite pro S300-13L}{-}{-}
+\equipment{\gls{ace} }{ETYM$\bar{O}$TIC RESEARCH ER4S}{-}{02049}
+\equipment{\gls{bct} transducer}{Radioear B81}{-}{003764}
+\equipment{Speaker}{FRT Jolly 3a}{040326BO8}{2125-06}
+\equipment{Audio interface}{Interacoustics Affinity 2.0}{-}{108207}
+\equipment{Audio interface}{RME Fireface UCX }{23811948}{108230}
+\equipment{Audio interface}{RME Fireface UFX II}{-}{108227}
+\equipment{Audio interface}{TC Electronic Konnekt 8}{8325267}{56945}
+\stopequipment
+\startequipment
+\equipment{Audio interface}{TC Electronic Konnekt 24D}{8148798}{56943}
+\equipment{Analysis software}{\matlab R2018b}{-}{-}
 \equipment{Medical power supply}{Tholheimer ERT 230}{-}{2176-48 }
+\equipment{Switch for speaker}{Custom made}{-}{-}
+\equipment{Push to talk button}{Custom made}{-}{-}
+\equipment{Microphone}{Shure SM58}{-}{2128-02}
+\equipment{Microphone}{Røde NT1}{-}{-}
+\equipment{Modified Amplifier}{Rotel RB-976MkII}{045-0401386}{33982}
+\equipment{Head and Torso simulator}{B\&K Type 4128}{1407972}{08453-00}
+\equipment{Pogramable Attenuator}{Tucker-Davis Technologies PA5}{-}{61404}
+\equipment{Pogramable Attenuator}{Tucker-Davis Technologies PA5}{-}{56503}
+\equipment{Enhanced Real-time Processor}{Tucker-Davis Technologies RP2.1}{-}{56505}
+\equipment{Measuring Amplifier}{B\&K Type 2636}{-}{08451}
+\equipment{Audiometry Headphone}{Radioear DD65v2}{-}{-}
+\equipment{\gls{acs} transducer}{Radioear SP90A}{Gd13080406}{-}
+\equipment{Calibrator}{B\&k Type 4220}{965532}{-}
 \stopequipment
 
-\fig{spo.png}{test}{appendix:test}
+
+
+\begin{figure}[H]
+	\begin{sideways}
+	\begin{minipage}{\textheight}
+		\centering
+\def\svgwidth{\columnwidth}
+\input{figures/appendix/bier_setup.pdf_t}
+	\end{minipage}
+	\end{sideways}
+\caption{The figure shows the setup for \gls{bct} versus \gls{ace} matching and the \gls{hint} }
+\label{fig:bier_setup}
+\end{figure}
+
+
+\begin{table}[H]
+\centering
+\caption{The playback for match test and \gls{hint} in \gls{bier}}
+\begin{tabular}{l|lll}
+Test playback   & \gls{acs}   & \gls{ace} & \gls{bct} \\ \hline
+Match mode      & Not playing & \gls{ssn} & \gls{ssn} \\
+\gls{hint} mode & \gls{ssn}   & sentences & sentences
+\end{tabular}
+\label{append:playback_bier}
+\end{table}
 
 
 
-%\begin{table}[H]
-%\centering
-%\caption{Equipment list for matching test}
-%\begin{tabu}{| X | X | X | X }
-%Description         	& Model                                        & Serial-no  						& AAU-no \\ \hline
-%PC        			 		& Macbook                                   & W89242W966H  			& -  \\
-%PC & Dell Latitude E5430 & - & 78316 \\  
-%Headphones     	&   ETYM$\bar{O}$TIC RESEARCH ER4S            & -   									& 02049 \\
-%\gls{bc} transducer   				&  Radioear B81                            & -   									& - \\
-%Audio interface     				& Affinity 2.0                            				& -   									& -  \\
-%Analysis software   & \matlab R2018b & -          & -     \\
-%Audio interface & TC Electronic Konnekt 8 &  8325267 & 56945\\    
-%Audio interface  					& RME Fireface UCX                             &  23811948 			 	& 108230 \\
-%Speaker & FRT Jolly 3a  & 040326BO8  &2125-06 \\    
-%Medical power supply & Tholheimer ERT 230  & - & 2176-48 \\    
-%Switch for speaker & Custom made & - & -\\    
-%Push to talk button & Custom made & - & -\\    
-%Microphone & Shure SM58 & - & 2128-02\\    
-%Microphone & Røde  &  & \\    
-%&  &  & \\
-%&  &  & \\
-%&  &  & \\
-%&  &  & \\
-%&  &  & \\
-%&  &  & 
-%\end{tabu}
-%\end{table}
 
-%\begin{figure}[htbp!]
-%\centering
-%\def\svgwidth{\columnwidth}
-%\input{figures/appendix/guitar_frequency_test.pdf_tex}
-%\caption{Setup for measuring frequency area on a guitar.}
-%		\label{fig:appendix:test}
-%\end{figure}
-
-\section*{Test procedure}
-
-
-\begin{enumerate}
-\item The materials are set up as in \autoref{fig:appendix:test}.
-\item 
-\item  
-\item  
-\item 
-\item 
-\end{enumerate}
-
-\section*{Results}
-
-%\begin{figure}[htbp!]
-%	\centering
-%		\includegraphics[width=1\textwidth]{guitar_low_E_neck.pdf}
-%		\caption{Measurement of the low E note on the neck pickup.}
-%		\label{fig:appendix:low_E_neck}
-%\end{figure}
-
-On  \autoref{fig:appendix:low_E_neck} it is seen that the lowest significant frequency is around \SI{80}{\hertz} and the highest significant frequency is around \SI{400}{\hertz}, when playing the low E note on the guitar, using the neck pickup.
 
