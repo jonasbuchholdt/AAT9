@@ -1,5 +1,5 @@
 \chapter{Test a guitars frequency area}
-In this appendix the calibration of the \gls{ace} and \gls{acs} is done.
+In this appendix the calibration of the \gls{ace} and \gls{acs} is done. Furthermore the insertion loss of the \gls{ace} is calculated in \nicefrac{1}{3}-octave.
 
 \section*{Materials and setup}
 The calibration materials and setup are as following:
@@ -19,34 +19,47 @@ The calibration materials and setup are as following:
 \stopequipment
 
 
-\begin{figure}[htbp!]
+\begin{figure}[H]
 \centering
 \def\svgwidth{\columnwidth}
-\input{figures/appendix/guitar_frequency_test.pdf_tex}
-\caption{Setup for measuring frequency area on a guitar.}
-		\label{fig:appendix:test}
+\input{figures/appendix/transducer_calibration.pdf_t}
+\caption{Setup for calibration.}
+		\label{fig:appendix:force_cal_system}
 \end{figure}
 
 \section*{Test procedure}
 
 
 \begin{enumerate}
-\item The materials are set up as in \autoref{fig:appendix:test}.
-\item 
-\item  
-\item  
-\item 
-\item 
+\item The materials are set up as in \autoref{fig:appendix:force_cal_system}.
+\item Both microphone in the B\&K Type 4128 is calibrated as an recording of \SI{30}{\second} for both ear
+\item The \gls{ssn} is played through the \gls{acs} and recorded in \SI{30}{\second}, then the \gls{ssn} is stopped.
+\item The \gls{ace} is plugged intro both ear. 
+\item The \gls{ssn} is first played through the \gls{ace} and recorded in \SI{30}{\second}, then the \gls{ssn} is stopped.
+\item Then the \gls{ssn} is secondly played through the \gls{acs} and recorded in \SI{30}{\second}, then the \gls{ssn} is stopped.
+\item The \nicefrac{1}{3}-octave non-weighted \gls{spl} is calculated for the \gls{acs} with and without plug. 
+\item Then the non-weighted \gls{spl} is calculated for the \gls{ace}.
 \end{enumerate}
 
 \section*{Results}
 
-\begin{figure}[htbp!]
-	\centering
-		\includegraphics[width=1\textwidth]{guitar_low_E_neck.pdf}
-		\caption{Measurement of the low E note on the neck pickup.}
-		\label{fig:appendix:low_E_neck}
-\end{figure}
-
-On  \autoref{fig:appendix:low_E_neck} it is seen that the lowest significant frequency is around \SI{80}{\hertz} and the highest significant frequency is around \SI{400}{\hertz}, when playing the low E note on the guitar, using the neck pickup.
+\begin{table}[H]
+\centering
+\caption{Insertion loss}
+\begin{tabular}{l|llllllll}
+Frequency        & \hz{20}     & \SI{25}{\hertz} & \SI{32}{\hertz} & \SI{40}{\hertz} & \SI{50}{\hertz} & \SI{63}{\hertz} & \SI{80}{\hertz} & \SI{100}{\hertz} \\ \hline
+Insertion loss L & 2.2 & 2.5    & 0.6    & 1.1    & 0.1    & 4.2     & 13.4   & 36.9    \\
+Insertion loss R & 4.6        & 3.8     & 1.6     & 1.9    & 0.3     & 5.6    & 16.9   & 29.1    \\
+Frequency        & \SI{125}{\hertz}          & \SI{160}{\hertz}      & \SI{200}{\hertz}      & \SI{250}{\hertz}      & \SI{315}{\hertz}      & \SI{400}{\hertz}      & \SI{500}{\hertz}      & \SI{630}{\hertz}       \\
+Insertion loss L & 27.2       & 26.9    & 20.1   & 20.1   & 19.5   & 24.3    & 22.8   & 23.8    \\
+Insertion loss R & 29.7       & 24.2   & 23.4   & 19.2    & 18.4    & 25.2    & 31.0   & 30.7    \\
+Frequency        & \SI{800}{\hertz}          & \SI{1}{\kilo\hertz}        & \SI{1.25}{\kilo\hertz}     & \SI{1.6}{\kilo\hertz}      & \SI{2}{\kilo\hertz}        & \SI{2.5}{\kilo\hertz}      & \SI{3.15}{\kilo\hertz}     & \SI{4}{\kilo\hertz}         \\
+Insertion loss L & 30.4      & 29.6   & 34.5    & 41.1   & 36.4   & 40.0    & 40.4    & 38.8    \\
+Insertion loss R & 31.2       & 33.7   & 38.1  & 43.0   & 43.1    & 38.9    & 38.8   & 37.1     \\
+Frequency        & \SI{5}{\kilo\hertz}            & \SI{6.3}{\kilo\hertz}      & \SI{8}{\kilo\hertz}        & \SI{10}{\kilo\hertz}       & \SI{12.5}{\kilo\hertz}     & \SI{16}{\kilo\hertz}       &                 & Total            \\
+Insertion loss L & 36.5       & 37.5    & 29.3   & 28.5   & 34.0    & 6.1    &                 & 30.2    \\
+Insertion loss R & 37.1       & 39.2  & 39.0    & 34.5    & 23.4    & 5.3     &                 & 31.8   
+\end{tabular}
+\label{append:ins_loss}
+\end{table}
 

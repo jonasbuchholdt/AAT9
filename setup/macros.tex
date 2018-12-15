@@ -421,7 +421,7 @@ axis background/.style={fill=white},
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Tilføjer kommando \hex og \bin
+% Tilføjer kommando \hex og \bin \decibel
 % Bruges til at skrive hexidecimal og binære tal.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\hex}[1]{%
@@ -432,6 +432,17 @@ axis background/.style={fill=white},
 	\texttt{#1$_{2}$}
 }%
 
+\newcommand{\db}[1]{%
+	\SI{#1}{\decibel}
+}%
+
+\newcommand{\hz}[1]{%
+	\SI{#1}{\hertz}
+}%
+
+\newcommand{\khz}[1]{%
+	\SI{#1}{\kilo\hertz}
+}%
 
 \newcommand{\greyrow}{%
 	\rowcolor{lightGrey}
