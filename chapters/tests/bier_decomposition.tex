@@ -2,27 +2,28 @@
 
 
 During the \gls{bier} test, a for each of the of the ten subjects four \gls{srtn}s have been measured, evenly split between \gls{ac} and \gls{bc}.
-The values two values for each conductor for each subject are averaged, resulting in a total of 10 pairs of observations to perform statistics on (see \autoref{tab:srtn}).
+The values two values for each conductor for each subject are averaged, resulting in a total of 10 pairs of observations to perform statistics on.
 It is assumed, that the result of the loudness matching part of \gls{bier} (reference to the LM section here ??) leads to a reliable estimate of the \gls{snr} for the \gls{bct} for the \gls{hint} part of \gls{bier}.
+The average \gls{srtn} are listed in \autoref{tab:srtn}). For \gls{ac}, values are within a range of \SI{-7.1}{\decibel} to \SI{11.5}{\decibel} and result in a total average of \SI{1.6}{\decibel} with a standard deviation of \SI{6.09}{\decibel}. For \gls{bc}, the values are in a larger range from \SI{-7.2}{\decibel} to  \SI{21.5}{\decibel} with a total average of \SI{5.4}{\decibel} and a standard deviation of \SI{9.15}{\decibel}.
 In order to determine, if under this assumption there is a statistically significant difference in intelligibility between \gls{ac} and \gls{bc}, a paired-sample t-Test can be performed.\\
 
 \begin{table}[H]
 \centering
-\caption{Average \gls{srtn} of the subjects for \gls{ac} and \gls{bc} obtained with \gls{bier}, values are rounded to one digit after the decimal point for representation in the table, not for the underlying calculations.}
+\caption{Average \gls{srtn} of the subjects for \gls{ac} and \gls{bc} obtained with \gls{bier}, values are rounded to one digit after the decimal point for representation in the table, not for the underlying calculations, all values in \si{\decibel}}
 \label{tab:srtn}
 \begin{tabular}{l|rrrrrrrrrr}
 Subject     & 1   & 2    & 3    & 4    & 5    & 6    & 7     & 8     & 9    & 10   \\ \hline
 Avg. \gls{srtn}\textsubscript{,\gls{ac}} & 2.8 & 1.0  & -2.3 & -3.8 & -7.1 & -2.2 & 11.5  & 0.4   & 11.0 & 4.8  \\
 Avg. \gls{srtn}\textsubscript{,\gls{bc}} & 0.7 & 1.6  & 1.1  & -7.2 & -1.3 & -0.6 & 21.5  & 11.4  & 9.7  & 17.5 \\
-\gls{srtn}\textsubscript{,AC}-\gls{srtn}\textsubscript{,BC}  & 2.0 & -0.6 & -3.4 & -3.3 & -5.8 & -1.6 & -10.0 & -11.0 & 1.3  & 12.8
+\gls{srtn}\textsubscript{,AC}-\gls{srtn}\textsubscript{,BC}  & 2.0 & -0.6 & -3.4 & -3.3 & -5.8 & -1.6 & -10.0 & -11.0 & 1.3  & -12.8
 \end{tabular}
 \end{table}
 
 The null hypothesis of the test is, that the difference between the observation pairs is normally distributed and zero mean. If the former hypothesis can be rejected, it can be concluded, that there is a statistically significant difference between the mean \gls{srtn} of the two conductors.
-The \matlab function \texttt{ttest} has been applied to the available data from \autoref{tab:srtn}. The null hypothesis can be rejected with a $p$-value of 0.0644. This does reach the commonly apllied significance level of $\alpha=$\SI{5}{\percent}.\\
+The \matlab function \texttt{ttest} has been applied to the available data from \autoref{tab:srtn}. The null hypothesis can be rejected with a $p$-value of 0.0644. This is not within the commonly applied significance level of $\alpha=$\SI{5}{\percent}.\\
 A normal probability plot of the \gls{srtn} is depicted in \autoref{fig:srtn_normal}. The lines in plot correspond to the normal distribution, that has been derived from estimating mean and variance from the available observations. 
 The points depict those observations. Points being close to their corresponding lines indicate, that a normal distribution is likely to underlay the observations. The datapoints in \autoref{fig:srtn_normal} can be considered reasonably close to the corresponding normal distributions, however the number of points is small.\\
-\plot{chapters/tests/normal_prob_AB}{Bone Air Thing}{fig:srtn_normal}
+\plot{chapters/tests/normal_prob_AB}{Normal probability plot, average performance of each subject with each of the tested transducers.}{fig:srtn_normal}
 For the paired-sample t-test to be viable, it has to be assumed, that the pairs of observations are normally distributed. Hence the distribution of the difference between the two also has to be normally distributed. 
 This can be checked by means of a Lilliefors test.
 The Lilliefors test checks the null hypothesis, that the input data is coming from a normally distributed population. 
@@ -47,7 +48,7 @@ The psychometric function can be expressed as follows:
     \explain{$\psi$}{is the psychometric function}{}
     \explain{$x$}{corresponds to the stimulus intensity and is denoted on the x-axis of plots of the psychometric function.}{}
 	\explain{$\alpha$}{is parameter of the sigmoid function $F(x;\alpha,\beta)$, that corresponds to a displacement of the graph along the x-axis. It determines the position of the threshold of the psychometric function, which is defined as the $x$ value, at which $F(x;\alpha,\beta)$ has a value $0.5$ .}{}
-	\explain{$\beta$}{is a parameter of the sigmoid function $F$, that corresponds to the slope of the graph}{}
+	\explain{$\beta$}{is a parameter of the sigmoid function $F(x;\alpha,\beta)$, that corresponds to the slope of the graph}{}
 	\explain{$\gamma$}{is a parameter, corresponds to the lower bound of the curve and therefore the probability of a correct answer at an infinitely low stimulus level. For multiple choice experiments, this parameter is the probability of a correct answer by guessing and is therefore sometimes referred to as the \textit{guessing rate}}{}
 	\explain{$\lambda$}{is a parameter, that corresponds to the upper bound of the curve. It corresponds to a rate, at which subjects respond incorrectly regardless of stimulus intensity. It is often referred to as \textit{lapse}.}{}
 	\explain{$F$}{is a sigmoid function. Common choices include the cumulative Gaussian function, the cumulative Gumbel distribution and the Weibull function.}{}
@@ -89,7 +90,7 @@ This is reflected in the confidence interval of the values for the $00.5$ to $0.
 \label{tab:psych}
 \centering
 \begin{tabular}{l|rrrrlr}
-\multirow{2}{*}{Parameter} & \multicolumn{2}{l}{Width [\si{\decibel}] (CI\textsubscript{\SI{95}{\percent}})} & \multicolumn{1}{l}{Width [\si{\decibel}]} & \multicolumn{1}{l}{Slope}   & \multicolumn{2}{l}{\multirow{2}{*}{Lapse (CI\textsubscript{\SI{95}{\percent}})}} \\
+\multirow{2}{*}{} & \multicolumn{2}{l}{Width [\si{\decibel}] (CI\textsubscript{\SI{95}{\percent}})} & \multicolumn{1}{l}{Width [\si{\decibel}]} & \multicolumn{1}{l}{Slope}   & \multicolumn{2}{l}{\multirow{2}{*}{Lapse (CI\textsubscript{\SI{95}{\percent}})}} \\
                            & \multicolumn{2}{c}{0.05 - 0.95}                                                 & \multicolumn{1}{c}{0.1 - 0.9}             & \multicolumn{1}{c}{SNR = 0} & \multicolumn{2}{l}{}                                                             \\ \hline
 \gls{ac}         & 10.4                               & (8.2 - 13.6)                                & 8.1                                       & 0.1257                      & \multicolumn{1}{r}{0}                       & (0.0000 - 0.0747)                  \\
 \gls{bc}         & 18.7                               & (13.0 - 27.7)                               & 14.8                                      & 0.0697                      & \multicolumn{1}{r}{0.009}                   & (0.0019 - 0.1238)                 
