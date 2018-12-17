@@ -1,1 +1,14 @@
 \section{\gls{snr} Determination}
+The \gls{snr} during the playback of a sentence is the essenential parameter for the \gls{hint} part of the \gls{bier}.
+This section therefore clarifies, at what point in the signal chain the \gls{snr} is calculated and which assumptions have to be made to relate values to the test.\\
+The technical implementation is included in the \matlab program \enquote{Dansk \gls{hint}} by Center for Anvendt Høreforskning, Danmarks Tekniske Universitet, that was used throughout the test.
+In the code, it is assumed, that all of the played back audio files have an \gls{rms}-level of \SI{-26}{\decibel} referenced to the maximum digital amplitude of 1. There is no frequency specific calculation of \gls{snr}.\\
+This is directly applicable to the file, that contains the noise, which is a stationary signal, hence can be characterized by a single value.
+For the sentences, some more information is necessary. The files, which contain the sentences are do not include any amount of silence at the beginning or the end of the sentences, which would have an influence on the \gls{rms}-level.
+While not explicitely stated in \citep{hint_2011}, it appears to be the case, that the recordings of sentences provided with the Dansk \gls{hint} program have undergone a similar equalisation procedure as described in \citep{nielsen_dau_09}. 
+This suspicion establishes itself through a comment in the program code referring to \enquote{the assumed level irrespective of the changes due to intelligibility equalization} and the actual \gls{rms}-levels deviating from \SI{-26}{\decibel} by some margin.
+The equalisation procedure described in that publication involves presenting the sentences to subjects and adjusting the level of the sentence based on the perceived difficulty to understand the sentence.
+Therefore, the \gls{snr} in context of the \gls{hint} does not comply with the classic definition of a ratio between the power of the signal and the power of the noise.
+The transition between assumed digital levels of the played files and the signals reaching in the case of performing \gls{hint} via \gls{ac} is achieved through the calibration procedure described \autoref{sec:cal}. The noise signal is played back, the \gls{spl} received over the whole in a mannequin is adjusted  to be at the same value for playback both over the \gls{acs} and the \gls{ace}. That \gls{spl} is fed back into the \gls{hint} \matlab program.
+From the perspective of program, playing back stimuli at any given \gls{snr} is just a matter of adjusting the difference of the playback levels of the audio files containing the sentence and the noise.\\
+Having to deal with \gls{snr}s, that do not directly relate to the energy of the signals is even more the case for the \gls{bct}. 
