@@ -441,10 +441,6 @@ axis background/.style={fill=white},
 	\SI{#1}{\hertz}
 }%
 
-\newcommand{\kHz}[1]{%
-	\SI{#1}{\kilo\hertz}
-}%
-
 \newcommand{\dif}[0]{%
 	$\Delta$
 }%
@@ -455,10 +451,13 @@ axis background/.style={fill=white},
 
 \newcommand{\calnumber}[1]{%
 \def\variable{5}
-\ifnum#1>1
-    TRUE
+\ifnum#1>999  
+\newcommand{\MYNUMBER}{#1} 
+\pgfmathparse{\MYNUMBER/1000}
+%\pgfmathsetmacro\testnumber{\pgfmathresult}
+    \SI{\pgfmathresult}{\kilo\hertz}%
   \else
-    FALSE
+    \SI{#1}{\hertz}
 \fi
 }
 
