@@ -1,0 +1,68 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+\plotsettings
+xmin=0,
+xmax=20,
+ymin=4,
+ymax=18,
+legend style={legend cell align=left, align=left, draw=white!15!black}
+]
+\addplot [color=mycolor1]
+  table[row sep=crcr]{%
+1	12\\
+2	8\\
+3	12\\
+4	8\\
+5	10.4\\
+6	8.40000000000001\\
+7	6.40000000000001\\
+8	8.40000000000001\\
+9	6.40000000000001\\
+10	8.40000000000001\\
+11	10.4\\
+12	8.40000000000001\\
+13	10.4\\
+14	12.4\\
+15	10.4\\
+16	12.4\\
+17	10.4\\
+18	12.4\\
+19	10.4\\
+20	12.4\\
+};
+\addlegendentry{data1}
+
+\addplot [color=mycolor2]
+  table[row sep=crcr]{%
+1	8\\
+2	4\\
+3	8\\
+4	12\\
+5	9.59999999999999\\
+6	11.6\\
+7	13.6\\
+8	11.6\\
+9	9.59999999999999\\
+10	11.6\\
+11	13.6\\
+12	15.6\\
+13	17.6\\
+14	15.6\\
+15	13.6\\
+16	11.6\\
+17	13.6\\
+18	11.6\\
+19	13.6\\
+20	11.6\\
+};
+\addlegendentry{data2}
+
+\end{axis}
+\end{tikzpicture}%

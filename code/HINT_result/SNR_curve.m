@@ -1,10 +1,10 @@
 clearvars
-%close all
+close all
 %% loading stuff
 % user input, where files for AC and BC are situated (should be folders)
 airDir = 'logs/AC/'; 
 boneDir = 'logs/BC/';
-subjects = [7169829] %9823032 5800904 5814465 8627107 8907521 4842965 7690291 1208596 6259598];
+subjects = [6259598]; %        ];
 S.S7169829 = mean([3.1 2.4; 1.4 0.094],2);
 S.S9823032 = mean([2.8 -0.75; 4 -0.75],2);
 S.S5800904 = mean([-1.8 -2.7;  2.9 -0.61],2);
@@ -109,53 +109,19 @@ psydataa = [psydataa; [tempa1 tempa2 tempa3]];
 psydatab = [psydatab; [tempb1 tempb2 tempb3]];
 end
 
-%% psignifit
-psydataa(psydataa(:,3)==0,:)=[];
-psydatab(psydatab(:,3)==0,:)=[];
-option = struct;
 
-options.sigmoidName = 'norm';
-options.expType = 'YesNo';
-options.fixedPars = NaN(5,1);
-options.fixedPars(1) = 0;  % threshold
-%options.fixedPars(3) = 0;     % lapse
-options.fixedPars(4) = 0;     % guess rate
+plot(ASNR(1:20,u))
+hold on
+plot(ASNR(21:40,u))
 
-% (2) width
-% (5) eta
+matlab2tikz('SNR_c/6259598_AC.tex');
 
-
-resulta = psignifit(psydataa,options)
-resultb = psignifit(psydatab,options)
-
-%% plotting stuff
-%close all
-figure()
-%median(ASNR(:,u))
-for u = 1:length(subjects)
-scatter(binCenters-data(1,u),probSum(:,1,u),'MarkerEdgeColor',[0 0 1],...
-              'MarkerFaceColor',[0 0 1])
-%plot(binCenters-data(1,u),probSum(:,1,u))
-              hold on
-scatter(binCenters-data(2,u),probSum(:,2,u),'MarkerEdgeColor',[1 0 0],...
-              'MarkerFaceColor',[1 0 0])
-%plot(binCenters-data(2,u),probSum(:,2,u))
-end
-legend('Air','Bone')
-xlabel('SNR')
-ylabel('Hit Probability')
-
-%%
 close all
-figure()
-plotOptionsa = struct;
-plotOptionsa.h              = gca;
-plotOptionsb = struct;
-plotOptionsb.g = gca;
-plotPsych(resulta,plotOptionsa);
-xlim([-15 15])
-%hold on
-%%
-figure()
-plotPsych(resultb,plotOptionsb);
-xlim([-15 15])
+
+plot(BSNR(1:20,u))
+hold on
+plot(BSNR(21:40,u))
+
+matlab2tikz('SNR_c/6259598_BC.tex');
+
+close all

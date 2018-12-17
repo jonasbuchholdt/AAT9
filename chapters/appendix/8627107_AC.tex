@@ -1,0 +1,71 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+\definecolor{mycolor1}{rgb}{0.00000,0.44700,0.74100}%
+\definecolor{mycolor2}{rgb}{0.85000,0.32500,0.09800}%
+%
+\begin{tikzpicture}
+
+\begin{axis}[%
+\plotsettings
+xmin=0,
+xmax=20,
+ymin=-12,
+ymax=0,
+legend style={legend cell align=left, align=left, draw=white!15!black}
+]
+\addplot [color=mycolor1]
+  table[row sep=crcr]{%
+1	0\\
+2	-4\\
+3	-8\\
+4	-12\\
+5	-6.4\\
+6	-8.4\\
+7	-6.4\\
+8	-8.4\\
+9	-6.4\\
+10	-8.4\\
+11	-6.4\\
+12	-8.4\\
+13	-6.4\\
+14	-4.4\\
+15	-6.4\\
+16	-8.4\\
+17	-6.4\\
+18	-8.4\\
+19	-10.4\\
+20	-8.4\\
+};
+\addlegendentry{data1}
+
+\addplot [color=mycolor2]
+  table[row sep=crcr]{%
+1	0\\
+2	-4\\
+3	-8\\
+4	-4\\
+5	-4.8\\
+6	-6.8\\
+7	-8.8\\
+8	-6.8\\
+9	-8.8\\
+10	-6.8\\
+11	-4.8\\
+12	-6.8\\
+13	-8.8\\
+14	-6.8\\
+15	-4.8\\
+16	-2.8\\
+17	-4.8\\
+18	-6.8\\
+19	-8.8\\
+20	-10.8\\
+};
+\addlegendentry{data2}
+
+\end{axis}
+\end{tikzpicture}%
