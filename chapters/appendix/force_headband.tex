@@ -40,7 +40,7 @@ To perform the force measurement, an evaluation code example for the Analog devi
 \item  Five weight combinations of bolt and washers were chosen.
 \item  For every chosen combination, the weight of the bolt and washers was measured with a scale.
 \item The same bolt was placed on the strain gauge and the digital number was measured, see \autoref{fig:strain_gauge_weight}, thus relating the sensor output and the scaled weight. 
-\item For every chosen combination, the measurement was done over \SI{30}{second} and the mean was calculated, see \autoref{code:serial_read_ard}. The corresponding mean number to weight is shown in \autoref{apend:cal_result}
+\item For every chosen combination, the measurement was done over \SI{30}{second} and the average was calculated, see \autoref{code:serial_read_ard}. The corresponding average number to weight relation is shown in \autoref{apend:cal_result}
 \end{enumerate}
 
 \begin{figure}[H]
@@ -72,7 +72,7 @@ The result is as following \autoref{apend:cal_result}
 
 \begin{table}[H]
 \centering
-\caption{Mean read out of a specified weight}
+\caption{Average readout of a specific weights}
 \label{apend:cal_result}
 \begin{tabular}{l|l}
 Weight \si{\gram} & Arduino read out \\ \hline
@@ -96,7 +96,7 @@ The calibration points in \autoref{apend:cal_result} are used in the \matlab fun
 \item The force is measured, see \autoref{code:serial_read_ard_cal}.
 \item The rubber hair band and the \gls{bc} are removed from the head and put on again
 \item Repeat force measurement.
-\item  Go through steps 2 to 5 ten times and calculate the mean.
+\item  Go through steps 2 to 5 ten times and calculate the average.
 \item  The test is repeated with the original \gls{bc} metal holder as depicted in \autoref{fig:bc_metal_holder}.
 \end{enumerate}
 
@@ -146,7 +146,7 @@ Force with original metal holder [\si{\newton}] & Force with the rubber hair ban
 \end{tabular}
 \end{table}
 
-The mean force with the rubber hair band is \SI{4.23}{\newton} and the mean force with the original holder is \SI{7.49}{\newton}. The standard deviation of the rubber band measurements is \SI{0.46}{\newton}, while the standard deviation of the original holder is \SI{0.15}{\newton}. According to \citep{ANSI_S35}, the comfortable force lays between \SI{2.5}{\newton} and \SI{5.9}{\newton,} and therefore only the \gls{bc} with the rubber band hair band fulfills this criteria. 
+The average force with the rubber hair band is \SI{4.23}{\newton} and the average force with the original holder is \SI{7.49}{\newton}. The standard deviation of the rubber band measurements is \SI{0.46}{\newton}, while the standard deviation of the original holder is \SI{0.15}{\newton}. According to \citep{ANSI_S35}, the comfortable force lays between \SI{2.5}{\newton} and \SI{5.9}{\newton,} and therefore only the \gls{bc} with the rubber band hair band fulfills this criteria. 
 
 \section*{Conclusion}
 
