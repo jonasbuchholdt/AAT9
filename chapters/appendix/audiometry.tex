@@ -4,35 +4,33 @@
 %  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
 %where you can also make suggestions and rate matlab2tikz.
 %
-\definecolor{mycolor1}{rgb}{0.00000,0.44700,0.74100}%
-\definecolor{mycolor2}{rgb}{0.85000,0.32500,0.09800}%
-\definecolor{mycolor3}{rgb}{0.92900,0.69400,0.12500}%
-\definecolor{mycolor4}{rgb}{0.49400,0.18400,0.55600}%
+%\definecolor{mycolor1}{rgb}{0.00000,0.44700,0.74100}%
+%\definecolor{mycolor2}{rgb}{0.85000,0.32500,0.09800}%
+%\definecolor{mycolor3}{rgb}{0.92900,0.69400,0.12500}%
+%\definecolor{mycolor4}{rgb}{0.49400,0.18400,0.55600}%
 \definecolor{mycolor5}{rgb}{0.46600,0.67400,0.18800}%
 \definecolor{mycolor6}{rgb}{0.30100,0.74500,0.93300}%
 \definecolor{mycolor7}{rgb}{0.63500,0.07800,0.18400}%
 %
 \begin{tikzpicture}
 
+
 \begin{axis}[%
-width=4.521in,
-height=3.566in,
-at={(0.758in,0.481in)},
-scale only axis,
-xmode=log,
-xmin=100,
-xmax=10000,
+\plotsettings
+xmin=490,
+xmax=4100,
 xminorticks=true,
 xlabel style={font=\color{white!15!black}},
 xlabel={Frequency [Hz]},
 y dir=reverse,
 ymin=-10,
-ymax=40,
+ymax=30,
+xmode=log,
 ylabel style={font=\color{white!15!black}},
 ylabel={Hearing Threshold [dBHL]},
-axis background/.style={fill=white},
 legend style={legend cell align=left, align=left, draw=white!15!black}
 ]
+
 \addplot [color=mycolor1, draw=none, mark=o, mark options={solid, mycolor1}]
   table[row sep=crcr]{%
 500	-7.0083025937692\\

@@ -1,0 +1,184 @@
+% This file was created by matlab2tikz.
+%
+%The latest updates can be retrieved from
+%  http://www.mathworks.com/matlabcentral/fileexchange/22022-matlab2tikz-matlab2tikz
+%where you can also make suggestions and rate matlab2tikz.
+%
+%\definecolor{mycolor1}{rgb}{0.00000,0.44700,0.74100}%
+%\definecolor{mycolor2}{rgb}{0.85000,0.32500,0.09800}%
+%\definecolor{mycolor3}{rgb}{0.92900,0.69400,0.12500}%
+%\definecolor{mycolor4}{rgb}{0.49400,0.18400,0.55600}%
+\definecolor{mycolor5}{rgb}{0.46600,0.67400,0.18800}%
+\definecolor{mycolor6}{rgb}{0.30100,0.74500,0.93300}%
+\definecolor{mycolor7}{rgb}{0.63500,0.57800,0.18400}%
+\definecolor{mycolor8}{rgb}{0.23500,0.87800,0.68400}%
+\definecolor{mycolor9}{rgb}{0.13500,0.27800,0.98400}%
+\definecolor{mycolor10}{rgb}{0.03500,0.97800,0.48400}%
+%
+\begin{tikzpicture}
+
+
+\begin{axis}[%
+\plotsettings
+xmin=490,
+xmax=4100,
+xminorticks=true,
+xlabel style={font=\color{white!15!black}},
+xlabel={Frequency [Hz]},
+y dir=reverse,
+ymin=-15,
+ymax=25,
+xmode=log,
+ylabel style={font=\color{white!15!black}},
+ylabel={Hearing Threshold [dBHL]},
+legend style={legend cell align=left, align=left, draw=white!15!black},
+legend entries={Subject 1,
+                Subject 2,
+                Subject 3,
+                Subject 4,
+                Subject 5,
+                Subject 6,
+                Subject 7,
+                Subject 8,
+                Subject 9,
+                Subject 10},
+legend pos=outer north east]
+
+\addlegendimage{dashed, color=mycolor1, mark=o, mark options={solid, mycolor1}}
+\addlegendimage{dashed, color=mycolor2, mark=o, mark options={solid, mycolor2}}
+\addlegendimage{dashed, color=mycolor3,  mark=o, mark options={solid, mycolor3}}
+\addlegendimage{dashed, color=mycolor4,  mark=o, mark options={solid, mycolor4}}
+\addlegendimage{dashed, color=mycolor5,  mark=o, mark options={solid, mycolor5}}
+\addlegendimage{dashed, color=mycolor6,  mark=o, mark options={solid, mycolor6}}
+\addlegendimage{dashed, color=mycolor7,  mark=o, mark options={solid, mycolor7}}
+\addlegendimage{dashed, color=mycolor8,  mark=o, mark options={solid, mycolor8}}
+\addlegendimage{dashed, color=mycolor9,  mark=o, mark options={solid, mycolor9}}
+\addlegendimage{dashed, color=mycolor10,  mark=o, mark options={solid, mycolor10}}
+
+
+\addplot [dashed, color=mycolor1,  mark=o, mark options={solid, mycolor1}]
+  table[row sep=crcr]{%
+500	2.9916974062308\\
+750	0.0535119661115147\\
+1000	1.59921863794237\\
+2000	-1.33255179275476\\
+3000	-7.94573963331257\\
+4000	-4.90213791396305\\
+};
+%\addlegendentry{Subejct 6}
+
+\addplot [dashed, color=mycolor2,  mark=o, mark options={solid, mycolor2}]
+  table[row sep=crcr]{%
+500	7.9916974062308\\
+750	5.05351196611151\\
+1000	1.59921863794237\\
+2000	-6.33255179275476\\
+3000	12.0542603666874\\
+4000	10.097862086037\\
+};
+%\addlegendentry{Subejct 10}
+
+
+
+
+\addplot [dashed, color=mycolor3,  mark=o, mark options={solid, mycolor3}]
+  table[row sep=crcr]{%
+500	-2.0083025937692\\
+750	5.05351196611151\\
+1000	1.59921863794237\\
+2000	-1.33255179275476\\
+3000	-7.94573963331257\\
+4000	10.097862086037\\
+};
+%\addlegendentry{Subject 3}
+
+\addplot [dashed, color=mycolor4,  mark=o, mark options={solid, mycolor4}]
+  table[row sep=crcr]{%
+500	17.9917012209281\\
+750	15.0535157808088\\
+1000	11.5992186379424\\
+2000	-1.33255179275476\\
+3000	-7.94573963331257\\
+4000	-9.90213791396305\\
+};
+%\addlegendentry{Subject 4}
+
+
+\addplot [dashed, color=mycolor5,  mark=o, mark options={solid, mycolor5}]
+  table[row sep=crcr]{%
+500	2.9916974062308\\
+750	5.05351196611151\\
+1000	6.59921863794237\\
+2000	3.66744820724524\\
+3000	-2.94573963331257\\
+4000	-4.90213791396305\\
+};
+%\addlegendentry{Subejct 8}
+
+\addplot [dashed, color=mycolor6,  mark=o, mark options={solid, mycolor6}]
+  table[row sep=crcr]{%
+500	2.9916974062308\\
+750	5.05351196611151\\
+1000	6.59921863794237\\
+2000	3.66744820724524\\
+3000	7.05426036668743\\
+4000	5.09786208603695\\
+};
+%\addlegendentry{Subejct 9}
+
+\addplot [dashed, color=mycolor7,  mark=o, mark options={solid, mycolor7}]
+  table[row sep=crcr]{%
+500	-2.0083025937692\\
+750	0.0535119661115147\\
+1000	-3.40078136205763\\
+2000	-1.33255179275476\\
+3000	-7.94573963331257\\
+4000	5.09786208603695\\
+};
+%\addlegendentry{Subject 2}
+
+
+
+\addplot [dashed, color=mycolor8, mark=o, mark options={solid, mycolor8}]
+  table[row sep=crcr]{%
+500	2.9916974062308\\
+750	5.05351196611151\\
+1000	6.59921863794237\\
+2000	-1.33255179275476\\
+3000	7.05426036668743\\
+4000	0.0978620860369546\\
+};
+%\addlegendentry{Subejct 7}
+
+
+
+\addplot [dashed, color=mycolor9,  mark=o, mark options={solid, mycolor9}]
+  table[row sep=crcr]{%
+500	12.9917012209281\\
+750	0.0535119661115147\\
+1000	6.59921863794237\\
+2000	8.66744820724524\\
+3000	7.05426036668743\\
+4000	15.097862086037\\
+};
+%\addlegendentry{Subject 1}
+
+
+\addplot [dashed, color=mycolor10, mark=o, mark options={solid, mycolor10}]
+  table[row sep=crcr]{%
+500	7.9916974062308\\
+750	5.05351196611151\\
+1000	6.59921863794237\\
+2000	3.66744820724524\\
+3000	2.05426036668743\\
+4000	0.0978620860369546\\
+};
+%\addlegendentry{Subject 5}
+
+
+
+
+
+
+\end{axis}
+\end{tikzpicture}%

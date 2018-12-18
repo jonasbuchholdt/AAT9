@@ -9,7 +9,9 @@
 
 \begin{axis}[%
 \plotsettingslow
-legend style={legend cell align=left, align=left, draw=white!15!black}
+ylabel={SNR [\si{\decibel}]},
+xlabel={Sentence number [1]},
+legend style={legend pos=north east, legend cell align=left, align=left, draw=white!15!black}
 ]
 \addplot [color=mycolor1]
   table[row sep=crcr]{%
@@ -34,7 +36,7 @@ legend style={legend cell align=left, align=left, draw=white!15!black}
 19	0.799999999999997\\
 20	-1.2\\
 };
-\addlegendentry{data1}
+\addlegendentry{presented \gls{snr}, first run}
 
 \addplot [color=mycolor2]
   table[row sep=crcr]{%
@@ -59,7 +61,7 @@ legend style={legend cell align=left, align=left, draw=white!15!black}
 19	0.799999999999997\\
 20	2.8\\
 };
-\addlegendentry{data2}
+\addlegendentry{presented \gls{snr}, second run}
 
 \end{axis}
 \end{tikzpicture}%
