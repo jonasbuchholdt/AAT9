@@ -3,7 +3,7 @@
 Assessing intelligibility is an essential component of the project at hand. 
 In \citep[p. 11]{cote_2011}, the author defines intelligibility as \enquote{the ability to extract the content of the speech signal (\dots) from the recognized phonemes}. Phonemes are commonly defined as the smallest distinctive units of speech.
 The approach to acquiring data in order to evaluate intelligibility, may have a substantial influence on the outcome of the assessment.
-Recalling from autorefsec:problem_statement, the goal of the investigations is assessing whether there is a difference in intelligibility between \gls{ac} and \gls{bc} speech signals during the presence of ambient noise. 
+Recalling from \autoref{sec:problem_statement}, the goal of the investigations is assessing whether there is a difference in intelligibility between \gls{ac} and \gls{bc} speech signals during the presence of ambient noise. 
 
 According to \citep{arl_us_army}, there are three basic priniciples that are being employed for intelligibility assessment:
 \begin{itemize}
@@ -11,16 +11,16 @@ According to \citep{arl_us_army}, there are three basic priniciples that are bei
 \item \textit{Perceptual intelligibility tests}:  Test signals, which can be comprised of phonemes, syllables, words, sentences or paragraphs, are presented to subjects. The score is evaluated based upon how much information they recognized.
 \item \textit{Technical speech intelligibility predictors}: A transmission channel is tested with a specified routine. Parameters like e.g. frequency response or nonlinear behaviour are evaluated in a score, that corresponds to the expected speech intelligibility.
 \end{itemize}
-Prediction methods are commonly employed for predicting the intelligibility sound through a transmission channel, that can either be a communication system or a \gls{pa} of some kind. \citep{iec_60268} describes the calculation of a widespread measure of transmission quality, that is called the \gls{sti}. 
+Prediction methods are commonly employed for predicting the intelligibility sound through a transmission channel, that can either be a communication system or a public address system of some kind. \citep{iec_60268} describes the calculation of a widespread measure of transmission quality, that is called the \gls{sti}. 
 The prediction approach is unsuitable for the given application, because it relies heavily on assumptions about the human sound perception. Those are established well enough for \gls{ac}, but not for \gls{bc}. As this project is investigating differences in the intelligibility of \gls{ac} and \gls{bc} sound, predicting intelligibility, while relying on the available data for \gls{bc} threshold (\citep{iso_389-3}) and the datasheet of the available bone transducer is unlikely to yield valid results.
 Instead, an assessment based on trials with subjects is more promising.
 The inherent problem with speech intelligibility rating based scales with subjective parameters is, that they rely on assessment of the judges, intead of objective data. This may be an advantage when it comes to making a transmission pleasant to the recipient, in the context of the current project however, it introduces difficulties.
 \citep[Sec. 5.1]{arl_us_army} mentions, that training the listeners has an impact on test results. Also, speech intelligibility ratings can be problematic to compare to speech intelligibility scores from different tests. This complicates comparisons with other studies.
-The most suited approach for this project therefore is a perceptual intelligibility test. There are many test methods, some of which will be described in \autoref{sec:methods}. The test can score the intelligibility based on phonemes, syllables, words, sentences or paragraphs. An overview on how to relate scores from tests with phonemes, words and sentences is given in \citep{olsen_1997}.
+The most suited approach for this project therefore is a perceptual intelligibility test. There are many test methods, some of which is described in \autoref{sec:methods}. The test can score the intelligibility based on phonemes, syllables, words, sentences or paragraphs. An overview on how to relate scores from tests with phonemes, words and sentences is given in \citep{olsen_1997}.
 
 
 \section{Test Methods}\label{sec:methods}
-The following section will outline some perceptual speech intelligibility tests, that have been considered for the project at hand. It is not claimed, that this section will be a comprehensive study of every variant of speech intelligibility test. There are a huge number of different test routines used in different coherencies. The tests, that are mentioned, have been chosen based on their feasibility for the the project at hand.
+The following section outlines some perceptual speech intelligibility tests, that have been considered for the project at hand. It is not claimed, that this section will be a comprehensive study of every variant of speech intelligibility test. There are a huge number of different test routines used in different coherencies. The tests, that are mentioned, have been chosen based on their feasibility for the the project at hand.
 
 \subsection{\gls{cat}}\label{ssec:cat}
 The \gls{cat} is a speech intelligibility test, that has been developed specifically to test communication systems in context with military applications. The test items are so called callsigns, which are a combination of 18 selected elements from the International Radiotelephony Spelling Alphabet and seven numerical digits, resulting in a total of 126 test items.
@@ -32,19 +32,19 @@ This is important when designing the test, because of time constraints (see \aut
 The limited set of test items is also paralleled by drawbacks. As the test has been specifically designed for military personnel familiar with the test items, subjects that do not have this background are unlikely to perform comparably, unless they are extensively familiarized with the test items. There is a high likelihood of at least partial repetitions of test items when running the test. If the subjects are not familiarized sufficiently with the test items, a \enquote{learning experience} menaces to pose an uncontrollable influence on the results.
 
 \subsection{\gls{hint}}\label{ssec:hint}
-The \gls{hint} was introduced as a measure to assess hearing loss by \citep{nilsson_95} and has been adapted to Danish by \citep{hint_2011}.
+The \gls{hint} is introduced as a measure to assess hearing loss by \citep{nilsson_95} and has been adapted to Danish by \citep{hint_2011}.
 The premise is to evaluate speech intelligibility based on sentence speech reception threshold measurements. 
 A sentence and noise are played simultaneously. The subjects are instructed to repeat what they have heard as soon as the playback stops. 
 Depending on whether the sentence has been repeated correctly, the \gls{snr} is adjusted by manipulating the gain of the speech playback and from within a list consisting of a number of sentences, another one is played back, meaning that it is an adaptive procedure.
 For scoring the repeated sentences, minor variations in articles and verb tenses are accepted as a correct repetition.
 The result of the \gls{hint} is compiled in a single number, the \gls{srtn}.
-The \gls{srtn} is defined as the \gls{snr}, at which the listeners are most likely to correctly repeat \SI{50}{\percent} of the sentences, that they have been presented.
+The \gls{srtn} is defined as the \gls{snr}, at which the listeners are likely to correctly repeat \SI{50}{\percent} of the sentences, that they have been presented.
 %The sentence material used to conduct the \gls{hint} in American English was originally adapted from \citep{bench_bamford_79}. 
 Generally, sentences are required to be relatively short and to be \enquote{natural}, meaning they could occur in a normal conversation.
 When compiling a list of sentences, those are chosen such that the lists end up phonetically balanced. 
 The sentence material used to conduct the \gls{hint} in American English were originally adapted from \citep{bench_bamford_79}.
 The number of syllables in one sentence is six to seven for the American English \gls{hint} according to \citep{nilsson_95}.
-The Danish \gls{hint} sentences were adapted from the so called conversational language understanding evaluation, which was published as \citep{nielsen_dau_09}. In that article, it is stated, that, amongst other criteria, sentences should consist of eight to nine syllables, and that single words should not contain more than four syllables.
+The Danish \gls{hint} sentences were adapted from the so called conversational language understanding evaluation, which is published in \citep{nielsen_dau_09}. In that article, it is stated, that, amongst other criteria, sentences should consist of eight to nine syllables and that single words should not contain more than four syllables.
 The material consists of ten lists of phonetically balanced sentences and three lists for familiarisation.
 Given are examples of a sentence from each the American English and the Danish \gls{hint} material:
 \begin{quote}
