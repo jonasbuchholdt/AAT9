@@ -1,0 +1,25 @@
+Dansk HINT resultatoversigt   
+                     
+       Klientnavn:  9823032_BC1 
+                     
+Klient/journalnr.:  9823032_BC1 
+                     
+         Testdato:  26-11-2018 
+                     
+    Testansvarlig:  Jonas 
+                     
+     SRT-målinger:  Liste (kanal)       SRT    Støj 
+                     test 6 (sep)      4 dB   65 dB 
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    

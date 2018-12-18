@@ -1,0 +1,25 @@
+Dansk HINT resultatoversigt   
+                     
+       Klientnavn:  7169829 
+                     
+Klient/journalnr.:  7169829 
+                     
+         Testdato:  27-11-2018 
+                     
+    Testansvarlig:  Jonas 
+                     
+     SRT-målinger:  Liste (kanal)       SRT    Støj 
+                     træn 3 (sep)    3.2 dB   65 dB 
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
