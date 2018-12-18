@@ -1,6 +1,6 @@
 \chapter{Calibration analysis of Affinity}
 \label{append:affinity_bc_calibration}
-A test was made to get a view of the Affinity input CD1 and CD2. To decide on the matching between the \gls{ac} and the \gls{bc} it have to be found out if the input CD1 and CD2 is calibrated according to the used \gls{bc} transducer. With calibrating it means that the input voltage relate to a force output of the \gls{bc}. It have been observed in the datasheet for the \gls{bc} that the transducer needs calibration \citep{radioear_b81}. To test if the Affinity 2.0 is calibrated, the input output voltage relation shall change along the frequency to rich the correct force for every frequency since the transfer function of the \gls{bc} does not match the transfer function from the standard 389-3:2016 \citep{iso_389-3}.
+A test was made to get a view of the Affinity inputs CD1 and CD2. To decide on the matching between the \gls{ac} and the \gls{bc} it has to be found out if the inputs CD1 and CD2 are calibrated for the used \gls{bc} transducer, meaning that the input voltage relates to a force output of the \gls{bct}. It has been observed in the datasheet for the \gls{bct} that the transducer needs calibration \citep{radioear_b81}. To test if the Affinity 2.0 is calibrated, the input/output voltage relation shall change along the frequency to reach the correct force for every frequency since the transfer function of the \gls{bct} does not match the transfer function from the standard 389-3:2016 \citep{iso_389-3}.
 
 \section*{Materials and setup}
 To measure the output voltage for difference frequency input, the following materials are used:
@@ -58,7 +58,7 @@ Frequency [\si{\hertz}] & CD1 $V_{rms}$ & CD2 $V_{rms}$ \\ \hline
 \label{tab:append_cal_anal_affinity}
 \end{table}
 
-On  \autoref{tab:append_cal_anal_affinity} it is seen that the  \si{\volt}  for every frequency is the approximately the same, and therefore the Affinity is not calibrated on the CD1 and CD2 input.
+On  \autoref{tab:append_cal_anal_affinity} it is seen that the voltage for every frequency is approximately the same, and therefore the Affinity is not calibrated on the CD1 and CD2 inputs.
 
 \section*{Conclusion}
 It can be concluded that the gain on the Affinity does not match the hearing threshold when the input is from CD1 and CD2. Therefore the \gls{bc} versus \gls{ac} matching can not be done with the hearing level \gls{spl} on the Affinity. Another method has to be developed while using the CD inputs on the Affinity.
