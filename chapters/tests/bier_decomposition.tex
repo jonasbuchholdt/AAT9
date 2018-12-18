@@ -37,7 +37,7 @@ The null hypothesis, that the intrasubject \gls{srtn} difference is normally dis
 \section{Psychometric functions derived from \gls{bier}}\label{sec:result_psycho}
 
 In the previous \autoref{sec:result_srt}, the \gls{srtn} have been investigated to assess whether there is a statistically significant difference in \gls{srt} between \gls{ace} and \gls{bct}.
-The following section augments the previous statistical investigations by estimating psychometric functions for sentence recognition with \gls{ace} and {bct}.
+The following section augments the previous statistical investigations by estimating psychometric functions for sentence recognition with \gls{ace} and \gls{bct}.
 Unlike for the previous investigations, there are responses from ten subjects for two lists with 20 sentences each per transducer. This results in a dataset of 400 responses for each of the two psychometric functions.\\
 
 In general, psychometric functions can used to assess data collected from psychophysical experiments that involve a detection or discrimination task (answers can be categorised in yes/no or right/wrong).
@@ -67,7 +67,7 @@ The average performance of all subjects with a given transducer is then calculat
 With this preprocessing applied to the data, input data for the estimation of the psychometric function is available in the form of the performance, the number of trials and the normed \gls{snr} for every bin.
 Some of the parameters of the psychometric functions can be fixed by making assumptions. It is assumed, that there exists a \gls{snr}, at which it is impossible for subjects to repeat the presented sentence correctly. Hence the guessing rate $\gamma$ is fixed at a value of 0.
 The \gls{srtn} is defined as \gls{snr}, at which subjects have a \SI{50}{\percent} chance of correctly repeating a presented sentence. Because the input data for the estimation of the psychometric function has been normed with the \gls{srtn}, it is assumed, that the threshold if the psychometric function is at a normed \gls{snr} of \SI{0}{\decibel}. This value is also fixed. 
-With the formerly described input data and assumptions, psychometric functions for sentence presentation with \gls{ace} and \gls{bct} were derived by means of the \matlab toolbox \texttt{psignifit 4}. The methods, that the toolbox is based on, are described in \citep{schuett_16}. A cumulative Gaussian function has been used as the sigmoid $F$.
+With the formerly described input data and assumptions, psychometric functions for sentence presentation with \gls{ace} and \gls{bct} were derived by means of the \matlab toolbox \enquote{psignifit 4}. The methods, that the toolbox is based on, are described in \citep{schuett_16}. A cumulative Gaussian function has been used as the sigmoid function $F$.
 The results are presented in \autoref{fig:srtn_psych}.
 
 

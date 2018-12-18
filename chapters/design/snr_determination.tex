@@ -1,7 +1,7 @@
 \section{\gls{snr} Determination}\label{sec:snr_det}
 The \gls{snr} during the playback of a sentence is the essenential parameter for the \gls{hint} part of the \gls{bier}.
 This section therefore clarifies at what point in the signal chain the \gls{snr} is calculated and which assumptions have to be made to relate values to the test.\\
-The technical implementation is included in the \matlab program \enquote{Dansk \gls{hint}} by Center for Anvendt Høreforskning, Danmarks Tekniske Universitet, that was used throughout the test.
+The technical implementation is included in the \matlab program \enquote{Dansk \gls{hint}} by Center for Anvendt Høreforskning, Danmarks Tekniske Universitet, that is used throughout the test.
 In the code, it is assumed that all of the played back audio files have an \gls{rms}-level of \SI{-26}{\decibel} referenced to the maximum digital amplitude of 1. There is no frequency specific calculation of \gls{snr}.\\
 This is directly applicable to the file that contains the noise, which is a stationary signal, hence can be characterized by a single value.
 For the sentences, some more information is necessary. The files which contain the sentences do not include any amount of silence at the beginning nor the end of the sentences, which would have an influence on the \gls{rms}-level.
