@@ -378,10 +378,11 @@ Description & Model & Serial-no & AAU-no \\ \hline
 % Tilføjer figur
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\fig}[3]{
+\newcommand{\fig}[4]{
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\textwidth]{#1}
+	  \captionsetup{width=#4\linewidth}
+\includegraphics[width=#4\textwidth]{#1}
 \caption{#2}
 \label{#3}
 \end{figure}}%
