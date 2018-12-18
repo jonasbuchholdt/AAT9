@@ -1,9 +1,13 @@
 \section{\gls{bc} level matching distribution}
-This section analysis the data for the match test in the \gls{bier}. The analysis is comparing the distribution of the data with the pilot test in \autoref{sec:pilot_test} and with the founding in \citep{STENFELT201385}. The result for the match test is shown in \autoref{sec:match_bier} and the corresponding appendix for the test id founded in \autoref{apend:matching_in_bier}
+This section presents the data from the loudness matching part of the \gls{bier}. 
+Results are compared to the data obtained in the pilot test (\autoref{apend:match_field_init}) and findings in literature.
+
+
+%The analysis is comparing the distribution of the data with the pilot test in \autoref{sec:pilot_test} and with the founding in \citep{STENFELT201385}. The result for the match test is shown in \autoref{sec:match_bier} and the corresponding appendix for the test id found in \autoref{apend:matching_in_bier}
 
 \begin{table}[H]
 \centering
-\caption{Test result for the match teat ti the \gls{bier}. * Based on operator experience, the \dB{40} is discarded for the mean calculation, see \autoref{sec:disc_res}}
+\caption{Playback gain for the matching test in the \gls{bier}. * Based on operator experience, the match at \dB{40} has been discarded for the intrasubject averaging.}
 \begin{tabular}{llllllllll}
 \multicolumn{1}{l|}{Matching }   & 1\textsuperscript{st}  & 2\textsuperscript{nd}  & 3\textsuperscript{rd}  & 4\textsuperscript{th} & 5\textsuperscript{th}  & \multicolumn{1}{l|}{6\textsuperscript{th} }                &    & &  \\
 \multicolumn{1}{l|}{in \gls{bier} [\si{\decibel}] }   & 1trial & trial &  trial &  trial &  trial & \multicolumn{1}{l|}{trial}                & $\mu$ & $\left \lfloor  \mu \right \rceil$  & $\sigma$ \\ \hline
@@ -20,10 +24,25 @@ This section analysis the data for the match test in the \gls{bier}. The analysi
 \end{tabular}
 \label{tab:match_bier} 
 \end{table}
-
-
-
-From the result in \autoref{sec:match_bier} the standard deviation between subject is calculated to be \SI{2.96}{\decibel} and the mean is \SI{48.1}{\decibel}. The mean and the actual \si{\decibel} for the subject data is not represent the \gls{spl} the subject is exposed to. It is only the \si{\decibel} number the Affinity shows in the display, as explained in \autoref{sec:loudness_match}. Therefore, the mean  \gls{bc} level for every subject correspond to the there perception of the non-weighted \SI{65}{\decibel} \gls{spl} for the \gls{ace}. The following \autoref{sec:matc_compare} compare standard deviation from the pilot test, \gls{bier} and \citep{STENFELT201385}.
+\autoref{tab:match_bier} shows the playback gains obtained through the loudness matching procedure. The intersubject average is \SI{48.2}{\decibel} and the standard deviation \SI{2.74}{\decibel}.
+The intersubject standard deviation from the pilot test (\autoref{apend:match_field_init}) is \SI{2.3}{\decibel} and the total average is \SI{50}{\decibel}.
+This means, that compared to the pilots, the standard deviation has slightly increased during \gls{bier} and the average gain has slightly decreased.
+However, the differences are not that big, that they would hint towards problems.
+Literature to compare these results to, is hardly available.
+In \citep{stenfelt_02}, the author is conducting a loudness matching experiment with 23 normal hearing participants between \gls{ac} and \gls{bc} with narrow band noise. Standard deviations are not given in numerical form for the single matching experiments, only for values derived from them, but some of the figures contain individual datapoints.
+From these, the authors of the project at hand have estimated the intersubject standard deviation for Stenfelt's experiment at different frequencies and a presentation level of the \gls{ac} noise of \SI{60}{\decibel} HL. Results are shown in \autoref{tab:stenfelt_std}.
+\begin{table}[H]
+\caption{Standard deviations of narrow band loundness matching at \SI{60}{\decibel} HL, derived from \citep[Fig. 1 b)-c)]{stenfelt_02}.}
+\label{tab:stenfelt_std}
+\centering
+\begin{tabular}{lccccc}
+Frequency [\si{\hertz}]          & 500 & 750 & 1000 & 2000 & 4000 \\
+Standard Deviation [\si{\hertz}] & 4.3 & 3.5 & 3.7  & 4.6  & 6.1 
+\end{tabular}
+\end{table}
+These standard deviations exceed the ones from the matching part of the \gls{bier} and the pilot test. This might be due to the speech shaped noise used in the \gls{bier} having a greater bandwith compared the narrow band noise used in \citep{stenfelt_02}. The wider the bandwith of the stimulus, the more likely might individual charateristics of the listener's skull be to even out.
+\citep{STENFELT201385} is a study, that is about categorical loudness scaling with \gls{ac} and \gls{bc}. While the method is not directly comparable to the loudness matching routine included in the \gls{bier}, some tendencies shown in the study are worth considering. In particular, intersubject deviations in loudness matching are shown, that grow with sensation level
+%From the result in \autoref{sec:match_bier} the standard deviation between subject is calculated to be \SI{2.96}{\decibel} and the mean is \SI{48.1}{\decibel}. The mean and the actual \si{\decibel} for the subject data is not represent the \gls{spl} the subject is exposed to. It is only the \si{\decibel} number the Affinity shows in the display, as explained in \autoref{sec:loudness_match}. Therefore, the mean  \gls{bc} level for every subject correspond to the there perception of the non-weighted \SI{65}{\decibel} \gls{spl} for the \gls{ace}. The following \autoref{sec:matc_compare} compare standard deviation from the pilot test, \gls{bier} and \citep{STENFELT201385}.
 
 \begin{table}[H]
 \centering
@@ -38,7 +57,7 @@ Pilot test & \dB{2.3}  \\
 \label{sec:matc_compare}
 \end{table}
 
-As it can be seen in \autoref{sec:matc_compare}, the standard deviation in the \gls{bier} is not fare from the pilot test, and  also under the findings in \citep{STENFELT201385}. 
+%As it can be seen in \autoref{sec:matc_compare}, the standard deviation in the \gls{bier} is not fare from the pilot test, and  also under the findings in \citep{STENFELT201385}. 
 
 
 
